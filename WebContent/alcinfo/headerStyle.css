@@ -1,0 +1,89 @@
+
+
+<!--
+헤더스타일 -->nav {
+	margin-top: 40px;
+}
+
+#top {
+	background-color: lightgrey;
+	height: 20px;
+	color: white;
+	padding: 10px 10px;
+}
+
+#top a {
+	color: white;
+	font-weight: bold;
+}
+
+#top a:hover {
+	color: rgb(240, 240, 240);
+}
+
+#searchTotal {
+	width: 500px;
+	height: 50px;
+	border: 2.5px solid gray;
+	border-radius: 6px;
+	padding: 8px 10px;
+}
+
+#search {
+	width: 350px;
+	margin-right: 40px;
+	font-size: 20px;
+	border: none;
+}
+
+#button {
+	width: 80px;
+	height: 50px;
+	border: none;
+	border-radius: 6px;
+	background-color: gray;
+	color: white;
+	font-size: 20px;
+}
+
+.catagory {
+	background-color: rgb(034, 200, 211);
+	border-radius: 0px;
+	text-align: center;
+	margin-top: 40px;
+	HEIGHT: 30px;
+	padding: 20px 35px;
+	box-shadow: 0px 0px 10px #c0c0c0;
+}
+
+.catagory a {
+	COLOR: white;
+	text-decoration: none;
+	font-size: 20px;
+	font-weight: bold;
+	margin: 60px;
+}
+
+.catagory a:hover {
+	border-bottom: 3px solid white;
+}
+
+.banner {
+	margin-bottom: 50px;
+}
+.openlm {
+	COLOR: white;
+	text-decoration: none;
+	font-size: 20px;
+	font-weight: bold;
+	background-color : transparent;
+	border : none;
+	margin-left : 60px;
+}
+
+.openlm:hover {
+	border-bottom: 3px solid white;
+	cursor : pointer;
+	margin-bottom : -3px;
+}
+
