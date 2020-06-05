@@ -77,6 +77,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>우리학원 어디?-커뮤니티</title>
 <script>
@@ -118,7 +119,7 @@ function read(num){
 	document.readFrm.submit();
 }
 </script>
-<style>
+ <style>
 #list td {
 	border-bottom: 1px solid lightgray;
 }
@@ -136,10 +137,10 @@ a {
 a:hover {
 	color: gray;
 }
-</style>
+</style> 
 </head>
 <body>
-
+	
 	<jsp:include page="headerSearch.jsp"></jsp:include>
 
 	<div style="display: flex; margin-left: 15%; margin-right: 15%">
@@ -181,7 +182,7 @@ a:hover {
 					</td>
 				</tr>
 			</table>
-			<table>
+			<table class="table table-hover">
 				<tr>
 					<td align="center" colspan="2">
 						<table cellspacing="0" height="80">
@@ -254,20 +255,28 @@ a:hover {
 
 				<tr>
 					<td>
-						<!-- 페이징 및 블럭 Start --> <%if(totalPage>0){%> <!-- 이전 블럭 --> <%if(nowBlock>1){ %>
-						<a href="javascript:block('<%=nowBlock-1%>')">이전으로</a> <%} %> <!-- 페이징 -->
+						<!-- 페이징 및 블럭 Start --> 
+						<%if(totalPage>0){%> <!-- 이전 블럭 -->
+						 <%if(nowBlock>1){ %>
+						<a href="javascript:block('<%=nowBlock-1%>')">이전</a> 
+						<%} %> <!-- 페이징 -->
 						<%
 					int pageStart = (nowBlock-1)*pagePerBlock+1;
 					int pageEnd = (pageStart+pagePerBlock)<totalPage?
-							pageStart+pagePerBlock:totalPage+1;
+						pageStart+pagePerBlock:totalPage+1;
 					for(;pageStart<pageEnd;pageStart++){
-			%> <a href="javascript:pageing('<%=pageStart%>')"> <%if(nowPage==pageStart){%><font
-							color="gray">
-								<%}%> [<%=pageStart%>] <%if(nowPage==pageStart){%>
+						%> 
+						<a href="javascript:pageing('<%=pageStart%>')"> 
+						<%if(nowPage==pageStart){%>
+						<font color="gray">
+								<%}%> [<%=pageStart%>]
+						 <%if(nowPage==pageStart){%>
 						</font>
 							<%}%>
-					</a> <%}//---for%> <!-- 다음 블럭 --> <%if(totalBlock>nowBlock){ %> <a
-						href="javascript:block('<%=nowBlock+1%>')">다음으로</a> <%} %> <%}//---if1%>
+						</a>
+						 <%}//---for%> <!-- 다음 블럭 -->
+						  <%if(totalBlock>nowBlock){ %> 
+						  <a href="javascript:block('<%=nowBlock+1%>')">다음</a> <%} %> <%}//---if1%>
 						<!-- 페이징 및 블럭 End -->
 					</td>
 					
@@ -275,7 +284,7 @@ a:hover {
 					<%if(id==null){ %>
 						onclick="clalert();" href=""
 						<%}else{ %>
-						href="scPost.jsp?pageValue=<%=group %>"
+						href="scPost.jsp?pageValue=<%=group %>" class="btn btn-default"
 						<%} %>>[글쓰기]</a> 
 						<a href="javascript:list()">[처음으로]</a></td>
 				</tr>

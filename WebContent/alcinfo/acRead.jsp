@@ -38,17 +38,17 @@
 	<%@ include file="headerSearch.jsp"%>
 	<br>
 	<br>
-	<form method="post" action="reportReceipt.jsp">
+	
 		<table width="70%" align="center">
 			<tr>
 				<td align="center">
-					<table width="100%" border="1"
-						style="font-size: 20; background: rgb(250, 248, 235);">
+					<table width="100%" style="font-size: 20; background: rgb(250, 248, 235);">
 						<tr>
-							<td width="25%" align="center"><img src="img/banner1.jpg"
-								width="100%" height="250"></td>
+							<td width="25%" align="center">
+							<img src="img/banner1.jpg" width="100%" height="250">
+							</td>
 							<td width="60%" height="100%">
-								<table width="100%" border="1" style="font-size: 20;">
+								<table width="100%" style="font-size: 20;">
 									<tr height="50">
 										<td width="30%">학원명</td>
 										<td width="70%"><%=bean.getAc_name()%></td>
@@ -92,18 +92,25 @@
 		</table>
 		<br>
 		<br>
-		<table width="70%" height="300" align="center" border="1">
+		<table width="70%" height="300" align="center" >
 			<tr>
-				<td width="30%" align="center"><jsp:include page="mapJsp.jsp">
-						<jsp:param value="<%=bean.getAc_address()%>" name="address" />
-					</jsp:include></td>
+			
+				<td width="30%" align="center">
+				<div style="border:10px solid #FCBC7E; border-radius:15px; padding:20px">
+					<jsp:include page="mapJsp.jsp">
+					<jsp:param value="<%=bean.getAc_address()%>" name="address" />
+					</jsp:include>
+				</div>
+					</td>
 				<td width="70%" align="center">
-					<jsp:include page="academyAskList.jsp"></jsp:include>
+					<div style="border:10px solid #36ada9; border-radius:15px; padding:20px">
+						<jsp:include page="academyAskList.jsp"></jsp:include>
+					</div>
 				</td>
 			</tr>
 		</table>
 		<br>
-	</form>
+	
 </body>
 <%@ include file="footer.jsp"%>
 </html>

@@ -5,7 +5,6 @@
 		request.setCharacterEncoding("euc-kr");	
 		String address=request.getParameter("address");
 		
-		out.print(address);
 %>
 
 <!DOCTYPE html>
