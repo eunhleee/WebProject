@@ -5,6 +5,7 @@
 <% 	
 		request.setCharacterEncoding("utf-8");
 	   	String pageValue=request.getParameter("pageValue");
+	   	String id = (String) session.getAttribute("idKey");
 %>
 <!DOCTYPE html>
 <html>
@@ -16,6 +17,11 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css" />
     <link rel="stylesheet" href="cards-gallery.css">
+<script>
+	function insertLesson() {
+		location.href = "leInsert.jsp?id=<%=id%>";
+	}
+</script>
 <style>
 #total{
 width:100%;
@@ -81,7 +87,7 @@ margin-bottom:50px;
 <td id="td"><a href="LessonMain.jsp?pageValue=사회">사회</a></td>
 <td id="td"><a href="LessonMain.jsp?pageValue=과학">과학</a></td>
 <td id="td"><a href="LessonMain.jsp?pageValue=영어">영어</a></td>
-<td id="insert"><a href="">등록</a></td>
+<td id="insert"><a href="javascript:insertLesson()">등록</a></td>
 </tr>
 </table>
 </div>

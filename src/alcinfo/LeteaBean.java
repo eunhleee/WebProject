@@ -21,6 +21,7 @@ public class LeteaBean {
 	private String mdate;
 	private String imgname;
 	private String etc;
+	private int grade;
 	
 	public String getEtc() {
 		return etc;
@@ -142,6 +143,12 @@ public class LeteaBean {
 	}
 	public void setImgname(String imgname) {
 		this.imgname = imgname;
+	}
+	public int getGrade() {
+		return grade;
+	}
+	public void setGrade(int grade) {
+		this.grade = grade;
 	}
 	
 }
