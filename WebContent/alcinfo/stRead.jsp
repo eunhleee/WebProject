@@ -95,13 +95,12 @@ function graph(){
 		<table width="70%" align="center">
 			<tr>
 				<td align="center">
-					<table width="100%" border="1"
-						style="font-size: 20; background: rgb(250, 248, 235);">
+					<table width="100%" style="font-size: 20; background: rgb(250, 248, 235);">
 						<tr>
-							<td width="25%" align="center"><img src="img/banner1.jpg"
-								width="100%" height="250"></td>
+							<td width="25%" align="center">
+							<img src="img/banner1.jpg" width="100%" height="250"></td>
 							<td width="60%" height="100%">
-								<table width="100%" border="1" style="font-size: 20;">
+								<table width="100%" style="font-size: 20;">
 									<tr height="40">
 										<td width="30%">학생명 / 성별</td>
 										<td width="70%"><%=stbean.getName()%> / <%=stbean.getGender() %></td>
@@ -156,14 +155,18 @@ function graph(){
 		</table>
 		<br>
 		<br>
-		<table width="70%" height="300" align="center" border="1">
+		<table width="70%" height="280" align="center" >
 			<tr>
 				<td width="30%" align="center">
+				<div style="border:10px solid #FCBC7E; border-radius:15px; padding:20px">
 				<button type="button" id="btn" onclick="graph()" >그래프 보기</button>
-				<div id="column_chart_div1" style="height: 500px;"></div>
+				<div id="column_chart_div1" style="height: 440px;"></div>
+				</div>
 				</td>
 				<td width="70%" align="center">
+					<div style="border:10px solid #36ada9; border-radius:15px; padding:20px">
 						<jsp:include page="studentAskList.jsp?stunum=<%=stunum %>"/>
+					</div>
 				</td>
 			</tr>
 		</table>

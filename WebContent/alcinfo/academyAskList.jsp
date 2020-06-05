@@ -156,7 +156,6 @@ a:hover {
 						<td width="150">평 점</td>
 						<td width="280">제 목</td>
 						<td width="100">닉 네 임</td>
-						
 						<td width="150">날 짜</td>
 						<td width="100">조회수</td>
 					</tr>
@@ -168,10 +167,8 @@ a:hover {
 						if (vlist.isEmpty()) {
 					%>
 					<tr>
-						<td align="center" colspan="5" rowspan="5">
-							<%
-								out.println("등록된 게시물이 없습니다.");
-							%>
+						<td align="center" colspan="5" height="210">
+							<p>등록된 게시글이 없습니다.</p>
 						</td>
 					</tr>
 
@@ -189,7 +186,7 @@ a:hover {
 								int count = bean.getAc_count();
 					%>
 					<tr id="list">
-							<td align="center"><%=star%></a></td>
+							<td align="center"><%=star%></td>
 						<td align="center"><a href=""><%=content%></a></td>
 						<td align="center"><a href=""><%=nick%></a></td>
 						<td align="center"><%=date%></td>

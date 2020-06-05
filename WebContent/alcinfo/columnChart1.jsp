@@ -6,5 +6,6 @@
 		request.setCharacterEncoding("utf-8");
 		String id=request.getParameter("id");
 		JSONArray array=mgr.getCountStudent(id);
+		out.print(id);
 %>
 <%=array%>

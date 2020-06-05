@@ -27,11 +27,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Team Read</title>
-<link href="style.css" rel="stylesheet" type="text/css">
 
-
+<script src="../js/jquery-3.3.1.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://www.gstatic.com/charts/loader.js"></script>
 <script>
@@ -55,11 +54,9 @@
 			var elem = document.getElementById("myButton2");
 			location.href="deleteStudentProc.jsp?id=<%=id%>&num=<%=lebean.getNum()%>";
 		}
+		
 		google.charts.load('current',{packages:['bar']});
-		google.charts.setOnLoadCallback(drawChart);
-		google.charts.setOnLoadCallback(function(){
-			setInterval(columnChart1(),30000);
-			}); 
+	
 		
 		function columnChart1(arrayList) {
 			// 실 데이터를 가진 데이터테이블 객체를 반환하는 메소드
@@ -73,14 +70,16 @@
 			// 차트를 그릴 영역인 div 객체를 가져옴
 			var objDiv = document.getElementById('column_chart_div1');
 			// 인자로 전달한 div 객체의 영역에 컬럼차트를 그릴수 있는 차트객체를 반환
-			var chart = new google.charts.Bar(objDiv);
+			var chart = new google.visualization.ColumnChart(objDiv);
 			// 차트객체에 데이터테이블과 옵션 객체를 인자로 전달하여 차트 그리는 메소드
-			chart.draw(dataTable,google.charts.Bar.convertOptions(options));
+			chart.draw(dataTable, options);
+			/* var chart = new google.charts.Bar(objDiv);
+			// 차트객체에 데이터테이블과 옵션 객체를 인자로 전달하여 차트 그리는 메소드
+			chart.draw(dataTable,google.charts.Bar.convertOptions(options)); */
 	} // drawColumnChart1()의 끝
 	
 	
 	function graph(){
-		
 		$.ajax({
 		url:'columnChart1.jsp?id=<%=id%>',
 		success:function(result){
@@ -105,13 +104,13 @@
 		<table width="70%" align="center">
 			<tr>
 				<td align="center">
-					<table width="100%" border="1"
-						style="font-size: 20; background: rgb(250, 248, 235);">
+					<table width="100%" style="font-size: 20; background: rgb(250, 248, 235);">
 						<tr>
-							<td width="25%" align="center"><img src="img/banner1.jpg"
-								width="100%" height="250"></td>
+							<td width="25%" align="center">
+							<img src="img/banner1.jpg"	width="100%" height="250">
+							</td>
 							<td width="60%" height="100%">
-								<table width="100%" border="1" style="font-size: 20;">
+								<table width="100%"  style="font-size: 20;">
 									<tr height="40">
 										<td width="30%">선생님명 / 성별</td>
 										<td width="70%"><%=lebean.getName()%> / <%=lebean.getGender() %></td>
@@ -172,14 +171,18 @@
 		</table>
 		<br>
 		<br>
-		<table width="70%" height="300" align="center" border="1">
+		<table width="70%" height="280" align="center">
 			<tr>
 				<td width="30%" align="center">
+				<div style="border:10px solid #FCBC7E; border-radius:15px; padding:20px">
 				<button type="button" id="btn" onclick="graph()" >그래프 보기</button>
-				<div id="column_chart_div1"  style="height: 500px;"></div>
+				<div id="column_chart_div1"  style="height: 440px;"></div>
+				</div>
 				</td>
 				<td width="70%" align="center">
+				<div style="border:10px solid #36ada9; border-radius:15px; padding:20px">
 					<jsp:include page="lessonAskList.jsp"></jsp:include>
+					</div>
 				</td>
 			</tr>
 		</table>

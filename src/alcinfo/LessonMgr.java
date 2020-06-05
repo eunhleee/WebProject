@@ -256,6 +256,7 @@ public class LessonMgr {
 	}
 	
 	
+	@SuppressWarnings("unchecked")
 	public JSONArray getCountStudent(String id) {
 		Connection con = null;
 		PreparedStatement pstmt = null;

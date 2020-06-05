@@ -141,8 +141,7 @@ a:hover {
 						<option value="30">30개 보기</option>
 					</select>
 				</form> <script>
-					document.npFrm.numPerPage.value =
-				<%=numPerPage%>
+					document.npFrm.numPerPage.value =<%=numPerPage%>
 					
 				</script>
 			</td>
@@ -168,10 +167,8 @@ a:hover {
 						if (vlist.isEmpty()) {
 					%>
 					<tr>
-						<td align="center" colspan="5">
-							<%
-								out.println("등록된 게시물이 없습니다.");
-							%>
+						<td align="center" colspan="5" height="210">
+							<p>등록된 게시글이 없습니다.</p>
 						</td>
 					</tr>
 

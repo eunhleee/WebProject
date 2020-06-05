@@ -102,7 +102,7 @@
 					</jsp:include>
 				</div>
 					</td>
-				<td width="70%" align="center">
+				<td width="70%"  align="center">
 					<div style="border:10px solid #36ada9; border-radius:15px; padding:20px">
 						<jsp:include page="academyAskList.jsp"></jsp:include>
 					</div>
