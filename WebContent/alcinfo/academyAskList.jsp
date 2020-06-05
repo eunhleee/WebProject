@@ -168,7 +168,7 @@ a:hover {
 						if (vlist.isEmpty()) {
 					%>
 					<tr>
-						<td align="center" colspan="5">
+						<td align="center" colspan="5" rowspan="5">
 							<%
 								out.println("등록된 게시물이 없습니다.");
 							%>
