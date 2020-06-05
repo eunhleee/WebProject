@@ -38,7 +38,7 @@
 	
 	function moveQnA(){
 			url = "le_QnA.jsp?lq_lnum="+<%=lebean.getNum()%>;
-			window.open(url, "Le_QnA", "width=800, height=500, top=200, left=400");
+			window.open(url, "Le_QnA", "width=360, height=300, top=300, left=300");
 			
 		}
 		
@@ -88,7 +88,10 @@
 		}
 		});
 	}
-
+	function goReport() {
+		url = "reportReceiptLInf.jsp?stopid="+<%=id%>;
+		window.open(url, "GoReport", "width=360, height=300, top=200, left=300");
+	}
 		
 	
 
@@ -150,8 +153,8 @@
 											style="font-size: 20;" onclick="moveQnA();"></td>
 									</tr>
 									<tr>
-										<td><input type="submit" value="잘못된정보 신고하기"
-											style="font-size: 20;"></td>
+										<td><input type="button" value="잘못된정보 신고하기"
+											style="font-size: 20;" onclick="goReport();"></td>
 									</tr>
 									<tr>
 										<td><input type="button" value="신청하기" id="myButton1"
