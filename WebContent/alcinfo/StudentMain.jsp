@@ -6,6 +6,7 @@
 <%
  	request.setCharacterEncoding("utf-8");
 	String pageValue=request.getParameter("pageValue");
+	String id = (String) session.getAttribute("idKey");
  %>
 <!DOCTYPE html>
 <html>
@@ -19,6 +20,11 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css" />
 <link rel="stylesheet" href="cards-gallery.css">
+<script>
+ 	function insertStudent(){
+ 		location.href="stInsert.jsp?id=<%=id%>"; // 등록할 페이지	
+ 	}	
+</script>
 <style>
 #total {
 	width: 100%;
@@ -85,17 +91,12 @@
 				<td id="td"><a href="StudentMain.jsp?pageValue=사회">사회</a></td>
 				<td id="td"><a href="StudentMain.jsp?pageValue=과학">과학</a></td>
 				<td id="td"><a href="StudentMain.jsp?pageValue=영어">영어</a></td>
-				<td id="insert"><a href="">등록</a></td>
+				<td id="insert"><a href="javascript:insertStudent();">등록</a></td>
 			</tr>
 		</table>
 	</div>
 
-
 	<jsp:include page="StudentList.jsp?pageValue=<%=pageValue %>"></jsp:include>
-
-
-
-
 
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
