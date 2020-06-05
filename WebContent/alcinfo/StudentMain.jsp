@@ -95,7 +95,7 @@
 			</tr>
 		</table>
 	</div>
-
+ 
 	<jsp:include page="StudentList.jsp?pageValue=<%=pageValue %>"></jsp:include>
 
 	<script

@@ -67,4 +67,60 @@ public class LeteaMgr {
 		}
 		return bean;
 	}
+	
+	//선생님 정보 확인
+	public LeteaBean getLetea(String id) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		LeteaBean lebean = new LeteaBean();
+		try {
+			con = pool.getConnection();
+			sql = "SELECT imgname, name, gender, substr(address,1,instr(address,'구 ')+1) address, phone, class, school_name, school_grade, grade from letea where id = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				lebean.setImgname(rs.getString("imgname"));
+				lebean.setName(rs.getString("name"));
+				lebean.setGender(rs.getString("gender"));
+				lebean.setAddress(rs.getString("address"));
+				lebean.setPhone(rs.getString("phone"));
+				lebean.setLeclass(rs.getString("class"));
+				lebean.setSchool_name(rs.getString("school_name"));
+				lebean.setSchool_grade(rs.getString("school_grade"));
+				lebean.setGrade(rs.getInt("grade"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt, rs);
+		}
+		return lebean;
+	}	
+	
+	//선생님 정보 등록하기
+	public boolean insertLetea(String id, int student, String etc) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String sql = null;
+		boolean flag = false;
+		try {
+			con = pool.getConnection();
+			sql = "insert lesson(id, student, etc) value(?,?,?)";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setInt(2, student);
+			pstmt.setString(3, etc);
+			if(pstmt.executeUpdate()==1) {
+				flag = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt);
+		}
+		return flag;
+	}
 }

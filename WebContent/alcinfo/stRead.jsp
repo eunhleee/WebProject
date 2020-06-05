@@ -1,4 +1,5 @@
 <!-- 학생의 정보창 -->
+<%@page import="alcinfo.MemberBean"%>
 <%@page import="java.util.Vector"%>
 <%@page import="alcinfo.StudentBean"%>
 <%@page import="alcinfo.LeteaBean"%>
@@ -7,12 +8,16 @@
 	pageEncoding="UTF-8"%>
 <jsp:useBean id="mgr" class="alcinfo.StudentMgr" />
 <jsp:useBean id="Lmgr" class="alcinfo.LeteaMgr" />
+<jsp:useBean id="Rmgr" class="alcinfo.ReportMgr" />
 
 <%
 	request.setCharacterEncoding("UTF-8");
 	int stunum = 0;
 	String url = "StudentMain.jsp";
 	StudentBean stbean = null;
+	int num=Integer.parseInt(request.getParameter("stunum"));
+	MemberBean mbean=Rmgr.getStuId(num);
+	System.out.println("학생의 아이디는"+mbean.getId());
 
 	if(request.getParameter("stunum") == null) {
 		//response.sendRedirect(url);
@@ -23,7 +28,6 @@
 		//한준씨 getStudent 메소드 수정함
 		stbean = mgr.getStudent(stunum);
 		stbean.setNum(stunum);
-		
 		
 		%>
 <!DOCTYPE html>
@@ -81,7 +85,11 @@ function graph(){
 	
 }
 
-
+function goReport() {
+	url = "reportReceiptLInf.jsp?stopid="+<%=mbean.getId()%>;
+	window.open(url, "GoReport", "width=360, height=300, top=200, left=300");
+}
+	
 
 
 </script>
