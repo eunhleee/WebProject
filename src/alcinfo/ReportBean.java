@@ -14,6 +14,13 @@ public class ReportBean {
 	private String email;
 	private int grade; 
 	private String mdate;
+	private String kind;
+	public String getKind() {
+		return kind;
+	}
+	public void setKind(String kind) {
+		this.kind = kind;
+	}
 	public String getMdate() {
 		return mdate;
 	}

@@ -2,8 +2,7 @@ package alcinfo;
 
 import java.sql.Connection;
 
-
-
+import java.io.File;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,19 +10,57 @@ import java.util.Vector;
 
 import alcinfo.DBConnectionMgr;
 import alcinfo.ReportMgr;
-
+import javax.servlet.http.HttpServletRequest;
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 public class ReportMgr {
 	private DBConnectionMgr pool;
-	
-	public ReportMgr() {
+	//private static final String  SAVEFOLDER = "C:/Jsp/myapp/WebContent/photoBlog/photo/";
+
+	private final String  SAVEFOLDER = "C:/Jsp/WebProject/WebContent/alcinfo/img/";
+	private final String ENCTYPE = "EUC-KR";
+	private int MAXSIZE = 5*1024*1024;
+	 public ReportMgr() {
 		pool = DBConnectionMgr.getInstance();
+
 	}
+	// img update : 
+		public void insertPBlog(HttpServletRequest req) {
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			String sql = null;
+			MemberBean bean = new MemberBean();
+
+			try {
+				con = pool.getConnection();
+				MultipartRequest multi = 
+						new MultipartRequest(req, SAVEFOLDER, MAXSIZE, ENCTYPE,
+								new DefaultFileRenamePolicy());
+				//DefaultFileRenamePolicy() -> 以묐났�뙆�씪紐낆쓣 �쐞�븳 留ㅺ컻蹂��닔
+				String photo = null;
+				//post.jsp(61�씪�씤)�뿉�꽌 file ���엯 �깭洹몄쓽 �씠由꾩씠 photo�씠�떎.
+				if(multi.getFilesystemName("photo")!=null) {
+					photo = multi.getFilesystemName("photo");
+				}
+				con = pool.getConnection();
+				sql = "update member set imgname=? where id=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1,photo);
+				pstmt.setString(2,multi.getParameter("id"));
+				pstmt.executeUpdate();
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				pool.freeConnection(con, pstmt);
+			}
+		}
 	
 	//<!-- 7p 4. -->
 	//<!-- MypeportList.jsp -->
 	//
-	public Vector<ReportBean> MRList(String reid){
+	public Vector<ReportBean> MRList(String keyField, 
+			String keyWord, String reid,int start, int cnt){
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -33,9 +70,23 @@ public class ReportMgr {
 			System.out.println("reid"+reid);
 
 			con = pool.getConnection();
+			if(keyWord.trim().equals("")||keyWord==null) {
+				//
 			sql = "select renum, regroup, retitle, recontent, restate, reid"
-					+ " from report where reid ='"+reid+"'";
+					+ " from report where reid ='"+reid+"' limit ?,?";
 			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, cnt);
+			}else {
+				sql = "select renum, regroup, retitle, recontent, restate, reid"
+						+ " from report where reid ='"+reid+"'"
+								+ " and " +keyField+" like ? limit ?,?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, "%"+keyWord+"%");
+				pstmt.setInt(2, start);
+				pstmt.setInt(3, cnt);
+			}
+
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				ReportBean bean = new ReportBean();
@@ -56,6 +107,82 @@ public class ReportMgr {
 		return vlist;
 	}
 	
+	//Board Total Count : 珥� 寃뚯떆臾쇱닔
+	public int getTotalCount(String keyField, String keyWord, String reid) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		int totalCount = 0;
+		try {
+			con = pool.getConnection();
+			if(keyWord.trim().equals("")||keyWord==null) {
+				//寃��깋�씠 �븘�땶寃쎌슦
+				sql = "select count(*) from report where reid ="+"'"+reid+"'";
+				pstmt = con.prepareStatement(sql);
+				
+			}else {
+				//寃��깋�씤 寃쎌슦
+				sql = "select count(*) from report where " 
+				+ keyField +" like ? and reid = "+"'"+reid+"'";;
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, "%"+keyWord+"%");
+			}
+			rs = pstmt.executeQuery();
+			if(rs.next()) totalCount = rs.getInt(1);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt, rs);
+		}
+		return totalCount;
+	}
+	/*
+	public Vector<ReportBean> MRList(String keyField, 
+			String keyWord, String reid,int start, int cnt){
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		Vector<ReportBean> vlist = new Vector<ReportBean>();
+		try {
+			System.out.println("reid"+reid);
+
+			con = pool.getConnection();
+			if(keyWord.trim().equals("")||keyWord==null) {
+				//
+			sql = "select renum, regroup, retitle, recontent, restate, reid"
+					+ " from report where reid ='"+reid+"'";
+			pstmt = con.prepareStatement(sql);
+
+			}else {
+				sql = "select renum, regroup, retitle, recontent, restate, reid"
+						+ " from report where reid ='"+reid+"'"
+								+ " and " +keyField+" like ?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, "%"+keyWord+"%");
+			}
+
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				ReportBean bean = new ReportBean();
+				bean.setRenum(rs.getInt(1));
+				bean.setRegroup(rs.getString(2));
+				bean.setRetitle(rs.getString(3));
+				bean.setRecontent(rs.getString(4));
+				bean.setRestate(rs.getString(5));
+				bean.setReid(rs.getString(6));
+
+				vlist.addElement(bean);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt, rs);
+		}
+		return vlist;
+	}
+	*///�엫�떆諛깆뾽
 	
 	///////////////////////////////
 	
@@ -85,7 +212,113 @@ public class ReportMgr {
 			pool.freeConnection(con, pstmt);
 			}
 	}
+	//�븰�썝 �옒紐삳맂 �젙蹂� �떊怨�
+	public void rePortAI(ReportBean bean) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String sql = null;
+		try {
+			con = pool.getConnection();
+			sql = "insert into report(regroup,retitle,recontent,reid,stopid,reip,restate,olddate,kind)"
+								+"values(?,?,?,?,?,?,?,now(),?)";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, bean.getRegroup());
+			pstmt.setString(2, bean.getRetitle());
+			pstmt.setString(3, bean.getRecontent());
+			pstmt.setString(4, bean.getReid());
+			pstmt.setString(5, bean.getStopid());
+			pstmt.setString(6, bean.getReip());
+			pstmt.setString(7, bean.getRestate());
+			pstmt.setString(8, bean.getKind());
+
+			pstmt.executeUpdate();		
+			} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt);
+			}
+	}
+	//<!-- reportReceiptLInf.jsp -->
+	//lesson - False Information Reporting
+	public void lISendReport(ReportBean bean) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String sql = null;
+		try {
+			con = pool.getConnection();
+			sql = "insert into report(regroup,retitle,recontent,reid,stopid,reip,restate,kind,olddate)"
+								+"values(?,?,?,?,?,?,?,?,now())";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, bean.getRegroup());
+			pstmt.setString(2, bean.getRetitle());
+			pstmt.setString(3, bean.getRecontent());
+			pstmt.setString(4, bean.getReid());
+			pstmt.setString(5, bean.getStopid());
+			pstmt.setString(6, bean.getReip());
+			pstmt.setString(7, bean.getRestate());
+			pstmt.setString(8, bean.getKind());
+			
+			pstmt.executeUpdate();		
+			} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt);
+			}
+	}
 	
+		//<!-- reportReceiptAInf.jsp -->
+		//
+		public void aISendReport(ReportBean bean) {
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			String sql = null;
+			try {
+				con = pool.getConnection();
+				sql = "insert into report(regroup,retitle,recontent,reid,stopid,reip,restate,kind,olddate)"
+									+"values(?,?,?,?,?,?,?,?,now())";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, bean.getRegroup());
+				pstmt.setString(2, bean.getRetitle());
+				pstmt.setString(3, bean.getRecontent());
+				pstmt.setString(4, bean.getReid());
+				pstmt.setString(5, bean.getStopid());
+				pstmt.setString(6, bean.getReip());
+				pstmt.setString(7, bean.getRestate());
+				pstmt.setString(8, bean.getKind());
+				
+				pstmt.executeUpdate();		
+				} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				pool.freeConnection(con, pstmt);
+				}
+		}
+		
+		
+		//student id get
+		public MemberBean getStuId(int num) {
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String sql = null;
+			MemberBean bean = new MemberBean();
+			String a="";
+			try {
+				con = pool.getConnection();
+				sql = "SELECT id from student where num="+num;
+				pstmt = con.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+
+				if(rs.next()) {
+					bean.setId(rs.getString(1));
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				pool.freeConnection(con, pstmt, rs);
+			}
+			return bean;
+		}
 	//<!-- 18p 12. -->
 	//<!-- MGMemberContol.jsp -->
 	//
