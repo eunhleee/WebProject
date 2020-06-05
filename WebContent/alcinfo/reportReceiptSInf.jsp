@@ -30,7 +30,7 @@
     <div class="content">
     	<form name="repFrm" method="post" action="reportAInfProc.jsp">
 		<table>
-		<tr>
+		<tr> 
 		<td><input type="hidden" name="kind" value="학원"></td>	
 		<td><input type="hidden" name="reid" value="reid"></td>
 		</tr>
