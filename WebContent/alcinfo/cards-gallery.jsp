@@ -46,26 +46,26 @@
 	        %>
 				<div class="col-md-6 col-lg-4">
 					<div class="card border-0 transform-on-hover">
-						<a class="lightbox" href="acRead.jsp?num=<%=num%>"> <img
-							src="img/no_image.jpg" alt="Card Image" class="card-img-top">
+						<a class="lightbox" href="../Academy/acRead.jsp?num=<%=num%>"> <img
+							src="../img/no_image.jpg" alt="Card Image" class="card-img-top">
 						</a>
 						<div class="card-body">
 							<h6>
-								<a href="acRead.jsp?num=<%=num%>"><%=name %></a>
+								<a href="../Academy/acRead.jsp?num=<%=num%>"><%=name %></a>
 							</h6>
 							<p class="text-muted card-text"><%=group2 %>
 								<br>
 								<%=tel %></p>
 						</div>
 						<div align="right" style="margin-right: 20px;">
-							<img src="img/star.png" width="15" height="15"><%=star %>
-							(<%=count %>)
+							<img src="../img/star.png" width="15" height="15"><%=star %>
+							(<%=count%>)
 						</div>
 					</div>
 				</div>
 				<%} %>
 				<div>
-					<a href="AcademyMain.jsp?pageValue=top">학원 더 알아보기</a>
+					<a href="./Academy/AcademyMain.jsp?pageValue=top">학원 더 알아보기</a>
 				</div>
 			</div>
 		</div>
@@ -93,18 +93,18 @@
 	        %>
 				<div class="col-md-6 col-lg-4">
 					<div class="card border-0 transform-on-hover">
-						<a class="lightbox" href="leRead.jsp?num=<%=num%>"> <img
-							src="img/no_image.jpg" alt="Card Image" class="card-img-top">
+						<a class="lightbox" href="./Lesson/leRead.jsp?num=<%=num%>"> <img
+							src="./img/no_image.jpg" alt="Card Image" class="card-img-top">
 						</a>
 						<div class="card-body">
 							<h6>
-								<a href="leRead.jsp?num=<%=num%>"><%=name %></a>
+								<a href="./Lesson/leRead.jsp?num=<%=num%>"><%=name %></a>
 							</h6>
 							<p class="text-muted card-text"><%=leclass %><br>
 								<%=area %></p>
 						</div>
 						<div align="right" style="margin-right: 20px;">
-							<img src="img/star.png" width="15" height="15"><%=star %>
+							<img src="./img/star.png" width="15" height="15"><%=star %>
 							(<%=count %>)
 						</div>
 					</div>
@@ -112,7 +112,7 @@
 				<%} %>
 			</div>
 			<div>
-				<a href="LessonMain.jsp">과외 더 알아보기</a>
+				<a href="Lesson/LessonMain.jsp">과외 더 알아보기</a>
 			</div>
 		</div>
 	</section>

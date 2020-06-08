@@ -15,6 +15,20 @@ public class ReportBean {
 	private int grade; 
 	private String mdate;
 	private String kind;
+	private int conum;
+	private int depth;
+	public int getConum() {
+		return conum;
+	}
+	public void setConum(int conum) {
+		this.conum = conum;
+	}
+	public int getDepth() {
+		return depth;
+	}
+	public void setDepth(int depth) {
+		this.depth = depth;
+	}
 	public String getKind() {
 		return kind;
 	}

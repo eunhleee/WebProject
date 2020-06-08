@@ -18,8 +18,8 @@ public class ReportMgr {
 	private DBConnectionMgr pool;
 	//private static final String  SAVEFOLDER = "C:/Jsp/myapp/WebContent/photoBlog/photo/";
 
-	private final String  SAVEFOLDER = "C:/Jsp/WebProject/WebContent/alcinfo/img/";
-	private final String ENCTYPE = "EUC-KR";
+	private final String  SAVEFOLDER = "C:/WebPro/WebProject/WebContent/alcinfo/photo/";
+	private final String ENCTYPE = "UTF-8";
 	private int MAXSIZE = 5*1024*1024;
 	 public ReportMgr() {
 		pool = DBConnectionMgr.getInstance();
@@ -230,6 +230,67 @@ public class ReportMgr {
 			pstmt.setString(6, bean.getReip());
 			pstmt.setString(7, bean.getRestate());
 			pstmt.setString(8, bean.getKind());
+
+			pstmt.executeUpdate();		
+			} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt);
+			}
+	}
+	
+	//report bulletin board 
+	public void reportBoard(ReportBean bean) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String sql = null;
+		try {
+			con = pool.getConnection();
+			sql = "insert into report(regroup,retitle,recontent,reid,stopid,reip,restate,olddate,kind,renum)"
+								+"values(?,?,?,?,?,?,?,now(),?,?)";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, bean.getRegroup());
+			pstmt.setString(2, bean.getRetitle());
+			pstmt.setString(3, bean.getRecontent());
+			pstmt.setString(4, bean.getReid());
+			pstmt.setString(5, bean.getStopid());
+			pstmt.setString(6, bean.getReip());
+			pstmt.setString(7, bean.getRestate());
+			pstmt.setString(8, bean.getKind());
+			pstmt.setInt(9, bean.getRenum());
+
+			pstmt.executeUpdate();		
+			} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt);
+			}
+	}
+	
+	
+	
+	///
+	
+	public void reportBoardcom(ReportBean bean) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String sql = null;
+		try {
+			con = pool.getConnection();
+			sql = "insert into report(regroup,retitle,recontent,reid,stopid,reip,restate,olddate,kind,renum,conum,depth)"
+								+"values(?,?,?,?,?,?,?,now(),?,?,?,?)";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, bean.getRegroup());
+			pstmt.setString(2, bean.getRetitle());
+			pstmt.setString(3, bean.getRecontent());
+			pstmt.setString(4, bean.getReid());
+			pstmt.setString(5, bean.getStopid());
+			pstmt.setString(6, bean.getReip());
+			pstmt.setString(7, bean.getRestate());
+			pstmt.setString(8, bean.getKind());
+			pstmt.setInt(9, bean.getRenum());
+			pstmt.setInt(10,bean.getConum());
+			pstmt.setInt(11,bean.getDepth());
 
 			pstmt.executeUpdate();		
 			} catch (Exception e) {

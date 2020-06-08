@@ -136,7 +136,7 @@
 
 	<div id="top" align="center">
 		<span> ※과도한 사교육은 안좋아아아아아아아앙.&nbsp;&nbsp; <a
-			href="custCenter.jsp?cust_page=ccBestBoard.jsp"> 고객센터</a>
+			href="./CS/custCenter.jsp?cust_page=ccBestBoard.jsp"> 고객센터</a>
 		</span>
 
 	</div>
@@ -146,7 +146,7 @@
 				<tr>
 					<td>
 						<div>
-							<a href="cards-gallery.jsp"><img src="img/home.png"
+							<a href="../alcinfo/cards-gallery.jsp"><img src="../img/home.png"
 								width="80px" style="margin-right: 30px"></a>
 						</div>
 					</td>
@@ -164,10 +164,10 @@
 
 
 		<div class="catagory" align="center">
-			<a href="AcademyMain.jsp?pageValue=top">학원</a> 
-			<a	href="LessonMain.jsp?pageValue=top">과외선생님</a> 
-			<a	href="StudentMain.jsp?pageValue=count">학생</a> 
-			<a	href="communityList.jsp?pageValue=free">커뮤니티</a>
+			<a href="../Academy/AcademyMain.jsp?pageValue=top">학원</a> 
+			<a	href="../Lesson/LessonMain.jsp?pageValue=top">과외선생님</a> 
+			<a	href="../Student/StudentMain.jsp?pageValue=count">학생</a> 
+			<a	href="../Community/communityList.jsp?pageValue=free">커뮤니티</a>
 			<% if(session.getAttribute("idKey")==null){%>
 			<input type="button" onclick="openloginSelect();" class="openlm" value="로그인">
 			<%}else{ %>
@@ -178,7 +178,7 @@
 	</div>
 
 	<div class="banner" align="center">
-		<a href=""><img src="img/banner<%=random%>.jpg"></a>
+		<a href=""><img src="../img/banner<%=random%>.jpg"></a>
 	</div>
 
 </body>

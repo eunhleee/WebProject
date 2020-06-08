@@ -23,7 +23,7 @@ private DBConnectionMgr pool;
 		Vector<SCommentBean> vlist = new Vector<>();
 		try {
 			con = pool.getConnection();
-			sql = "select num, stuc_nick, stuc_content, stuc_regdate, stuc_conum, stuc_depth "
+			sql = "select num, stuc_nick, stuc_content, stuc_regdate, stuc_conum, stuc_depth,stuc_id "
 					+ "from scomment where stuc_pnum=? order by stuc_conum, num";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, num);
@@ -36,6 +36,8 @@ private DBConnectionMgr pool;
 				bean.setStuc_regdate(rs.getString("stuc_regdate"));
 				bean.setStuc_conum(rs.getInt("stuc_conum"));
 				bean.setStuc_depth(rs.getInt("stuc_depth"));
+				bean.setStuc_id(rs.getString("stuc_id"));
+
 				vlist.addElement(bean);
 			}
 		} catch (Exception e) {
@@ -116,7 +118,7 @@ private DBConnectionMgr pool;
 		}
 	}
 	
-	//Comment and C's Reply All Delete (댓글 삭제할 때 대댓글까지 전부 삭제)
+	//Comment and C's Reply All Delete (�뙎湲� �궘�젣�븷 �븣 ���뙎湲�源뚯� �쟾遺� �궘�젣)
 	public void deleteAllSCReply(int num) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -181,7 +183,7 @@ private DBConnectionMgr pool;
 		}
 	}
 	
-	// 로그인 된 회원 닉네임
+	// 濡쒓렇�씤 �맂 �쉶�썝 �땳�꽕�엫
 	public String memberNick(String id) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
