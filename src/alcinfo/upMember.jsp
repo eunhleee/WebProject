@@ -59,7 +59,7 @@
 </script>
 </head>
 <body>
-<%@ include file="../alcinfo/mainHeader.jsp"%>
+<%@ include file="/alcinfo/mainHeader.jsp"%>
 <div id="insertMember" class="insertMember1" align="center">
 	<form name="imFrm" class="im-content" method="post" action="../alcinfo/upmemberProc.jsp">
 		<table style="margin-left:10px;">
@@ -240,6 +240,6 @@
 		</table>
 	</form>
 </div>
-<%@ include file="../alcinfo/footer.jsp"%>
+<%@ include file="/alcinfo/footer.jsp"%>
 </body>
 </html>

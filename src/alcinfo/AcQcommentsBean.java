@@ -7,6 +7,9 @@ public class AcQcommentsBean {
 	public String acq_content;
 	public String acq_ip;
 	public String acq_regdate;
+	public int acq_conum;
+	public int acq_depth;
+	
 	public int getNum() {
 		return num;
 	}
@@ -42,6 +45,18 @@ public class AcQcommentsBean {
 	}
 	public void setAcq_regdate(String acq_regdate) {
 		this.acq_regdate = acq_regdate;
+	}
+	public int getAcq_conum() {
+		return acq_conum;
+	}
+	public void setAcq_conum(int acq_conum) {
+		this.acq_conum = acq_conum;
+	}
+	public int getAcq_depth() {
+		return acq_depth;
+	}
+	public void setAcq_depth(int acq_depth) {
+		this.acq_depth = acq_depth;
 	}
 	
 }

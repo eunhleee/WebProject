@@ -1,4 +1,4 @@
-<!--학원 문의 게시글 -->
+<!-- 학원 문의 리스트 출력 -->
 <%@page import="alcinfo.UtilMgr"%>
 <%@page import="alcinfo.AcqueryBean"%>
 <%@page import="java.util.Vector"%>
@@ -7,6 +7,7 @@
 <jsp:useBean id="mgr" class="alcinfo.AcqueryMgr"></jsp:useBean>
 <%
 	request.setCharacterEncoding("UTF-8");
+	String loginid = (String)session.getAttribute("idKey");
 	int ac_num=UtilMgr.parseInt(request,"ac_num");
 	//검색에 필요한 변수
 
@@ -82,7 +83,7 @@
 		document.readFrm.submit();
 	}
 	function list() {//[처음으로]를 누르면 게시글의 처음 페이지로 돌아감
-		document.listFrm.action = "ac_QnA.jsp?ac_num=<%=ac_num %>";
+		document.listFrm.action = "ac_QnA.jsp?ac_num=<%=ac_num%>";
 		document.listFrm.submit();
 	}
 	function numPerFn(numPerPage) {
@@ -93,8 +94,11 @@
 	//기존 조건 : keyField,keyWord,nowPage,numPerPage
 	function read(num) {
 		document.readFrm.num.value = num;
-		document.readFrm.action = "read.jsp";
+		document.readFrm.action = "ac_QnARead.jsp";
 		document.readFrm.submit();
+	}
+	function acqnaalert() {
+		alert("로그인 후 이용가능합니다.");
 	}
 </script>
 <style>
@@ -187,18 +191,24 @@ a:hover {
 								String id = bean.getAc_id();
 								String date = bean.getAc_date();
 								int count = bean.getAc_count();
+								int ccount = mgr.acqccount(num);
 					%>
 					<tr id="list">
-						<td align="center"><%=i + 1%></td>
+						<td align="center"><%=totalRecord-start-i%></td>
 						<td align="center"><%=subject%></td>
-						<td align="center"><a href=""><%=title%></a></td>
+						<td align="center">
+						<a href="javascript:read('<%=num%>')"><%=title%></a>
+						<% if(ccount>0) { %>
+							<font color="red">[<%=ccount%>]</font>
+						<% } %>
+						</td>
 						<td align="center"><a href=""><%=id%></a></td>
 						<td align="center"><%=date%></td>
 						<td align="center"><%=count%></td>
 					</tr>
 
 					<%
-						}
+							}
 						}
 					%>
 
@@ -250,7 +260,13 @@ a:hover {
  %>
 				<!-- 페이징 및 블럭 End -->
 			</td>
-			<td align="right"><a href="post.jsp">[글쓰기]</a> <a
+			<td align="right"><a 
+			<% if(loginid==null) { %>
+			href="" onclick="acqnaalert()"
+			<% } else { %>
+			href="ac_QnAPost.jsp?ac_num=<%=ac_num%>"
+			<% } %>
+			>[글쓰기]</a> <a
 				href="javascript:list()">[처음으로]</a></td>
 		</tr>
 	</table>
@@ -267,7 +283,7 @@ a:hover {
 						<option value="ac_content">내 용</option>
 						<option value="ac_id">아 이 디</option>
 				</select> <input size="16" name="keyWord">
-				<input type="hidden" name="ac_num" value="<%=ac_num %>">
+				<input type="hidden" name="ac_num" value="<%=ac_num%>">
 				 <input type="button" value="찾기" onClick="javascript:check()"> 
 				 <input type="hidden" name="nowPage" value="1"></td>
 			</tr>
@@ -285,9 +301,8 @@ a:hover {
 		<input type="hidden" name="keyField" value="<%=keyField%>"> 
 		<input type="hidden" name="keyWord" value="<%=keyWord%>">
 		<input type="hidden" name="ac_num" value="<%=ac_num %>">
+		<input type="hidden" name="num">
 	</form>
-
-
 
 </body>
 
