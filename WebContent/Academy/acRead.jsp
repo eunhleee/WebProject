@@ -42,10 +42,6 @@
 	<%@ include file="../alcinfo/headerSearch.jsp"%>
 	<br>
 	<br>
-<!-- <<<<<<< HEAD
-=======
-	
->>>>>>> branch 'master' of https://github.com/eunhleee/WebProject.git -->
 		<table width="70%" align="center">
 			<tr>
 				<td align="center">

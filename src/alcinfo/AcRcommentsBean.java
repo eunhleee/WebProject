@@ -8,6 +8,10 @@ public class AcRcommentsBean {
 	public String acr_content;
 	public String acr_ip;
 	public String acr_regdate;
+	public int acr_conum;
+	public int acr_depth;
+	
+	
 	public int getNum() {
 		return num;
 	}
@@ -49,6 +53,18 @@ public class AcRcommentsBean {
 	}
 	public void setAcr_regdate(String acr_regdate) {
 		this.acr_regdate = acr_regdate;
+	}
+	public int getAcr_conum() {
+		return acr_conum;
+	}
+	public void setAcr_conum(int acr_conum) {
+		this.acr_conum = acr_conum;
+	}
+	public int getAcr_depth() {
+		return acr_depth;
+	}
+	public void setAcr_depth(int acr_depth) {
+		this.acr_depth = acr_depth;
 	}
 	
 }

@@ -93,7 +93,7 @@
 	//list.jsp에서 read.jsp로 요청이 될때 기존에 조건
 	//기존 조건 : keyField,keyWord,nowPage,numPerPage
 	function read(num) {
-		document.readFrm.num.value = num;
+		document.readFrm.acrnum.value = num;
 		document.readFrm.action = "ac_ReviewRead.jsp";
 		document.readFrm.submit();
 	}
@@ -185,13 +185,19 @@ a:hover {
 								int num = acbean.getNum();
 								String title = acbean.getAc_name();
 								String nick = acbean.getAc_nickname();
-								float star = acbean.getAc_star();
+								Double star = acbean.getAc_star();
 								String date = acbean.getAc_date();
 								int count = acbean.getAc_count();
+								int ccount = mgr.acrccount(num);
 					%>
-					<tr id="list">
+						<tr id="list">
 							<td align="center"><%=star%></td>
-						<td align="center"><a href="javascript:read('<%=num%>')"><%=title%></a></td>
+						<td align="center">
+						<a href="javascript:read('<%=num%>')"><%=title%></a>
+						<% if(ccount>0) { %>
+							<font color="red">[<%=ccount%>]</font>
+						<% } %>
+						</td>
 						<td align="center"><a href=""><%=nick%></a></td>
 						<td align="center"><%=date%></td>
 						<td align="center"><%=count%></td>
@@ -289,8 +295,8 @@ a:hover {
 		<input type="hidden" name="numPerPage" value="<%=numPerPage%>"> 
 		<input type="hidden" name="keyField" value="<%=keyField%>"> 
 		<input type="hidden" name="keyWord" value="<%=keyWord%>"> 
-		<input type="hidden" name="num">
-		<input type="hidden" name="acnum" value="<%=ac_serialnum%>">
+		<input type="hidden" name="acrnum">
+		<input type="hidden" name="num" value="<%=ac_serialnum%>">
 	</form>
 
 
