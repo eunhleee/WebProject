@@ -12,14 +12,15 @@
 	String id = "";
 	String url = "LessonMain.jsp";
 	LessonBean lebean = null;
+	int num = UtilMgr.parseInt(request, "num"); // 조회수 증가
 	
 	if(request.getParameter("id") == null) {
 		response.sendRedirect(url);
-	
 	} else {
 		id = request.getParameter("id");
 		lebean = mgr.getLesson(id);
 		session.setAttribute("lebean", lebean);
+		mgr.upLeCount(num); // 조회수 증가
 		
 		lebean.setId(id);
 		  System.out.println("선생님아이디는"+id);
