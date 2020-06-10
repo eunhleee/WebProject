@@ -63,7 +63,8 @@ public class LequeryMgr {
 			con = pool.getConnection();
 			if(keyWord.trim().equals("")||keyWord==null) {
 				//占싯삼옙占쏙옙 占싣닌곤옙占�
-				sql = "select num, lq_lnum,lq_title,lq_subject,lq_content,lq_ip,lq_id,lq_date,lq_count from lequery where lq_lnum=? limit ?,?";
+				sql = "select num, lq_lnum,lq_title,lq_subject,lq_content,lq_ip,lq_id,lq_date,"
+						+ "lq_count from lequery where lq_lnum=? order by num desc limit ?,?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, lq_lnum);
 				pstmt.setInt(2, start);
@@ -73,8 +74,9 @@ public class LequeryMgr {
 			}
 			else {
 			//占싯삼옙占쏙옙 占쏙옙占�
-			sql = "select  num, lq_lnum,lq_title,lq_subject,lq_content,lq_ip,lq_id,lq_date,lq_count from lequery where lq_lnum=? and "+keyField+" like ? "
-				+ "limit ?,?";
+			sql = "select  num, lq_lnum,lq_title,lq_subject,lq_content,lq_ip,lq_id,lq_date,"
+					+ "lq_count from lequery where lq_lnum=? and "+keyField+" like ? "
+				+ "order by num desc limit ?,?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, lq_lnum);
 			pstmt.setString(2, "%"+keyWord+"%");
@@ -170,7 +172,7 @@ public class LequeryMgr {
 		String sql = null;
 		try {
 			con = pool.getConnection();
-			sql = "update lequery set le_count = le_count +1 where num = ?";
+			sql = "update lequery set lq_count = lq_count +1 where num = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			pstmt.executeUpdate();
@@ -206,7 +208,7 @@ public class LequeryMgr {
 		String sql = null;
 		try {
 			con = pool.getConnection();
-			sql = "update lequery set le_title=?, le_subject=?, le_content=? where num=?";
+			sql = "update lequery set lq_title=?, lq_subject=?, lq_content=? where num=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, bean.getLq_title());
 			pstmt.setString(2, bean.getLq_subject());

@@ -40,7 +40,7 @@
 								 <input type="submit" value="확인">
 								 <input type="reset" value="다시쓰기">
 								 <input type="button" value="취소"
-								 onClick="javascript:location.href='../alcinfo/ac_QnA.jsp?ac_num=<%=ac_num%>'">
+								 onClick="javascript:location.href='ac_QnA.jsp?ac_num=<%=ac_num%>'">
 							</td>
 						</tr>
 					</table>

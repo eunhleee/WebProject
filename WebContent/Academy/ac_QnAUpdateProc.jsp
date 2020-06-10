@@ -12,7 +12,7 @@
 	String keyWord = request.getParameter("keyWord");
 	int num = Integer.parseInt(request.getParameter("num"));
 	int acqnum = Integer.parseInt(request.getParameter("ac_num"));
-	bean.setAc_num(num);
+	bean.setNum(num);
 	bean.setAc_title(request.getParameter("acqtitle"));
 	bean.setAc_subject(request.getParameter("acqsubject"));
 	bean.setAc_content(request.getParameter("acqcontent"));

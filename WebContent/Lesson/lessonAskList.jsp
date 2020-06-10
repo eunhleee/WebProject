@@ -181,7 +181,7 @@ a:hover {
 								int lnum = bean.getNum();
 								String content = bean.getLr_content();
 								String nick = bean.getLr_nick();
-								float star = bean.getLr_star();
+								double star = bean.getLr_star();
 								String date = bean.getLr_date();
 								int count = bean.getLr_count();
 					%>

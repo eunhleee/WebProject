@@ -38,7 +38,7 @@
 	
 	function moveQnA(){
 			url = "le_QnA.jsp?lq_lnum="+<%=lebean.getNum()%>;
-			window.open(url, "Le_QnA", "width=360, height=300, top=300, left=300");
+			window.open(url, "Le_QnA", "width=800, height=500, top=200, left=400");
 			
 		}
 		

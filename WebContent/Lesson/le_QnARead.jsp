@@ -1,12 +1,12 @@
-<!-- ac_QnARead.jsp -->
+<!-- le_QnARead.jsp -->
 <%@page import="alcinfo.UtilMgr"%>
-<%@page import="alcinfo.AcqueryBean"%>
-<%@page import="alcinfo.AcQcommentsBean"%>
+<%@page import="alcinfo.LequeryBean"%>
+<%@page import="alcinfo.LeQcommentsBean"%>
 <%@page import="java.util.Vector"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<jsp:useBean id="acqmgr" class="alcinfo.AcqueryMgr"/>
-<jsp:useBean id="acqcmgr" class="alcinfo.AcQcommentsMgr"/>
+<jsp:useBean id="leqmgr" class="alcinfo.LequeryMgr"/>
+<jsp:useBean id="leqcmgr" class="alcinfo.LeQcommentsMgr"/>
 <%
 	request.setCharacterEncoding("UTF-8");
 	//read.jsp?nowPage=1&numPerPage=10&keyField=&keyWord=&num=3
@@ -15,46 +15,46 @@
 	String keyField = request.getParameter("keyField");	
 	String keyWord = request.getParameter("keyWord");
 	int num = UtilMgr.parseInt(request, "num");
-	int acnum = UtilMgr.parseInt(request, "ac_num");
+	int lq_lnum = UtilMgr.parseInt(request, "lq_lnum");
 	String loginid = (String)session.getAttribute("idKey");
 	
 	String flag = request.getParameter("flag");
 	if(flag!=null) {
 		if(flag.equals("insert")) {
-			AcQcommentsBean acqbean = new AcQcommentsBean();
-			acqbean.setAcq_num(num);
-			acqbean.setAcq_id(request.getParameter("cid"));
-			acqbean.setAcq_content(request.getParameter("comment"));
-			acqbean.setAcq_ip(request.getParameter("ip"));
-			acqcmgr.insertAcQComment(acqbean);
+			LeQcommentsBean leqbean = new LeQcommentsBean();
+			leqbean.setLeq_num(num);
+			leqbean.setLeq_id(request.getParameter("cid"));
+			leqbean.setLeq_content(request.getParameter("comment"));
+			leqbean.setLeq_ip(request.getParameter("ip"));
+			leqcmgr.insertLeQComment(leqbean);
 		} else if(flag.equals("insert1")) {
-			AcQcommentsBean acqrbean = new AcQcommentsBean();
-			acqrbean.setAcq_num(num);
-			acqrbean.setAcq_id(request.getParameter("cid"));
-			acqrbean.setAcq_content(request.getParameter("comment"));
-			acqrbean.setAcq_ip(request.getParameter("ip"));
-			acqrbean.setAcq_conum(UtilMgr.parseInt(request, "conum"));
-			acqcmgr.insertAcQCReply(acqrbean);
+			LeQcommentsBean leqbean = new LeQcommentsBean();
+			leqbean.setLeq_num(num);
+			leqbean.setLeq_id(request.getParameter("cid"));
+			leqbean.setLeq_content(request.getParameter("comment"));
+			leqbean.setLeq_ip(request.getParameter("ip"));
+			leqbean.setLeq_conum(UtilMgr.parseInt(request, "conum"));
+			leqcmgr.insertLeQCReply(leqbean);
 		} else if(flag.equals("del1")) {
-			acqcmgr.deleteAllAcQCReply(UtilMgr.parseInt(request, "conum"));
+			leqcmgr.deleteAllLeQCReply(UtilMgr.parseInt(request, "conum"));
 		} else if(flag.equals("del2")) {
 // 			요청한 댓글 삭제
-			acqcmgr.deleteAcQComment(UtilMgr.parseInt(request, "cnum"));
+			leqcmgr.deleteLeQComment(UtilMgr.parseInt(request, "cnum"));
 		}
 	} else {
 // 		조회수 증가 : list.jsp 게시물 읽어옴
-		acqmgr.AcQupCount(num);
+		leqmgr.LeQupCount(num);
 	}
 	
-	AcqueryBean bean = acqmgr.getQuery(num);
-	String id = bean.getAc_id();
-	String title = bean.getAc_title();
-	String subject = bean.getAc_subject();
-	String regdate = bean.getAc_date();
-	String content = bean.getAc_content();
-	String ip = bean.getAc_ip();
-	int count = bean.getAc_count();
-	int ccount = acqmgr.acqccount(num);
+	LequeryBean bean = leqmgr.getQuery(num);
+	String id = bean.getLq_id();
+	String title = bean.getLq_title();
+	String subject = bean.getLq_subject();
+	String regdate = bean.getLq_date();
+	String content = bean.getLq_content();
+	String ip = bean.getLq_ip();
+	int count = bean.getLq_count();
+	int ccount = leqmgr.leqccount(num);
 	//읽어온 게시물을 수정 및 삭제를 위해 세션저장
 	session.setAttribute("bean", bean);
 %>
@@ -66,7 +66,7 @@
 <title>우리학원 어디?-학원 문의 게시판</title>
 <script>
 function list() {
-	location.href="ac_QnA.jsp?ac_num=<%=acnum%>";
+	location.href="le_QnA.jsp?lq_lnum=<%=lq_lnum%>";
 }
 function cInsert() {
 	if(document.cFrm.comment.value==""){
@@ -109,7 +109,7 @@ a:hover {
 	cursor : pointer;
 }
 
-.acqReply {
+.leqReply {
 	display: none;
 }
 
@@ -196,19 +196,19 @@ a:hover {
 		 <hr/>
   			<!-- 댓글 List Start -->
 			  <%
-			  	Vector<AcQcommentsBean> cvlist = acqcmgr.getAcQComment(num);
+			  	Vector<LeQcommentsBean> cvlist = leqcmgr.getLeQComment(num);
 			      	if(!cvlist.isEmpty()){
 			  %>
 				 <table>
 				 <%
 					 	for(int i=0;i<cvlist.size();i++){
-					 		AcQcommentsBean acqcbean = cvlist.get(i);
-	 		 	 			int cnum = acqcbean.getNum();
-	 		 	 			String cid = acqcbean.getAcq_id();
-	 		 	 			String comment = acqcbean.getAcq_content();
-	 		 	 			String cregdate = acqcbean.getAcq_regdate();
-	 		 	 			int conum = acqcbean.getAcq_conum();
-	 		 	 			int depth = acqcbean.getAcq_depth();
+					 		LeQcommentsBean leqcbean = cvlist.get(i);
+	 		 	 			int cnum = leqcbean.getNum();
+	 		 	 			String cid = leqcbean.getLeq_id();
+	 		 	 			String comment = leqcbean.getLeq_content();
+	 		 	 			String cregdate = leqcbean.getLeq_regdate();
+	 		 	 			int conum = leqcbean.getLeq_conum();
+	 		 	 			int depth = leqcbean.getLeq_depth();
 	 		 	 			
 			 				String dstyle = "";
 	 		 	 			if(depth==1) {
@@ -236,29 +236,29 @@ a:hover {
 						<td <%=dstyle%> colspan="3">
 						<%=cregdate%>
 						<% if(loginid!=null) { %>
-						<a onclick="onacqReply<%=i%>();">답글쓰기</a>
+						<a onclick="onleqReply<%=i%>();">답글쓰기</a>
 						<% } %>
 						
 						<!-- 답글쓰기 Start -->
 						
 						<script>
-						 	function onacqReply<%=i%>() {
-						 		document.getElementById("acqReply<%=i%>").style.display = 'block';
+						 	function onleqReply<%=i%>() {
+						 		document.getElementById("leqReply<%=i%>").style.display = 'block';
 						 	}
-						 	function offacqReply<%=i%>() {
-						 		document.getElementById("acqReply<%=i%>").style.display = 'none';
+						 	function offleqReply<%=i%>() {
+						 		document.getElementById("leqReply<%=i%>").style.display = 'none';
 						 	}
 						 	function rInsert<%=i%>() {
-						 		if(document.acqFrm<%=i%>.comment.value==""){
+						 		if(document.leqFrm<%=i%>.comment.value==""){
 						 			alert("댓글을 입력하세요.");
-						 			document.acqFrm<%=i%>.comment.focus();
+						 			document.leqFrm<%=i%>.comment.focus();
 						 			return;
 						 		}
-						 		document.acqFrm<%=i%>.submit();
+						 		document.leqFrm<%=i%>.submit();
 						 	}
 				 		</script>
-						<div id="acqReply<%=i%>" class="acqReply">
-							<form method="post" name="acqFrm<%=i%>">
+						<div id="leqReply<%=i%>" class="leqReply">
+							<form method="post" name="leqFrm<%=i%>">
 								<table>
 									<tr align="center">
 										<td width="50">아이디</td>
@@ -307,19 +307,19 @@ a:hover {
 		 <% 
 		 if(loginid!=null) {
 			 if(loginid.equals(id)) { %>
-			 | <a href="ac_QnAUpdate.jsp?num=<%=num%>&ac_num=<%=acnum%>&numPerPage=<%=numPerPage%>&nowPage=<%=nowPage%>&keyField=<%=keyField%>&keyWord=<%=keyWord%>" >수 정</a> |
-			 <a href="ac_QnADelete.jsp?nowPage=<%=nowPage%>&num=<%=num%>&ac_num=<%=acnum%>">삭 제</a> 
+			 | <a href="le_QnAUpdate.jsp?num=<%=num%>&lq_lnum=<%=lq_lnum%>&numPerPage=<%=numPerPage%>&nowPage=<%=nowPage%>&keyField=<%=keyField%>&keyWord=<%=keyWord%>" >수 정</a> |
+			 <a href="le_QnADelete.jsp?nowPage=<%=nowPage%>&num=<%=num%>&lq_lnum=<%=lq_lnum%>">삭 제</a> 
 		 <% }
 		 } %>
 		 ]<br/>
 		  </td>
 		 </tr>
 		</table>
-		
+
 		<form name="listFrm" method="post" action="ac_QnA.jsp">
 			<input type="hidden" name="nowPage" value="<%=nowPage%>">
 			<input type="hidden" name="numPerPage" value="<%=numPerPage%>">
-			<input type="hidden" name="ac_num" value="<%=acnum%>">
+			<input type="hidden" name="lq_lnum" value="<%=lq_lnum%>">
 			<%if(!(keyWord==null||keyWord.equals(""))){%>
 			<input type="hidden" name="keyField" value="<%=keyField%>">
 			<input type="hidden" name="keyWord" value="<%=keyWord%>">
