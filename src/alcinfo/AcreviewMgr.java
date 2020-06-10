@@ -107,7 +107,7 @@ public class AcreviewMgr {
 		return vlist; 
 	}
 	
-	// �븰�썝 由щ럭 湲��벐湲�
+	// 리뷰 글쓰기
 	public void insertAcr(AcreviewBean bean) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -133,7 +133,7 @@ public class AcreviewMgr {
 		}
 	}
 	
-	// 湲�蹂닿린 (�븳 媛쒖쓽 寃뚯떆臾�, 紐⑤뱺 而щ읆 由ы꽩)
+	// 한 개의 리뷰 가져오기(모든 컬럼 리턴)
 	public AcreviewBean getReview(int num) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -167,7 +167,7 @@ public class AcreviewMgr {
 		return bean;
 	}
 	
-	// 寃뚯떆湲� 議고쉶�닔 利앷�
+	// 조회수 증가
 	public void AcrupCount(int num) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -185,7 +185,7 @@ public class AcreviewMgr {
 		}
 	}
 	
-	// 寃뚯떆湲� �궘�젣
+	// 리뷰 삭제
 	public void deleteAcr(int num) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -203,7 +203,7 @@ public class AcreviewMgr {
 		}
 	}
 	
-	// 寃뚯떆湲� �닔�젙
+	// 리뷰 수정
 	public void updateAcr(AcreviewBean bean) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -224,7 +224,7 @@ public class AcreviewMgr {
 		}
 	}
 	
-	// �븯�굹�쓽 寃뚯떆湲� �뙎湲� 媛��닔
+	// 한 개의 리뷰 댓글 갯수
 	public int acrccount(int num) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -246,7 +246,7 @@ public class AcreviewMgr {
 		return acrccount;
 	}
 	
-	// 濡쒓렇�씤 �맂 �쉶�썝 �땳�꽕�엫
+	// 닉네임 찾기
 	public String memberNick(String id) {
 		Connection con = null;
 		PreparedStatement pstmt = null;

@@ -1,4 +1,4 @@
-//12.°ú¿Ü¹®ÀÇ±Û ´ñ±Ûµðºñ
+//12.ï¿½ï¿½ï¿½Ü¹ï¿½ï¿½Ç±ï¿½ ï¿½ï¿½Ûµï¿½ï¿½
 //leQcomments
 package alcinfo;
 
@@ -9,6 +9,21 @@ public class LeQcommentsBean {
 	private String leq_content;
 	private String leq_ip;
 	private String leq_regdate;
+	private int leq_conum;
+	private int leq_depth;
+	
+	public int getLeq_conum() {
+		return leq_conum;
+	}
+	public void setLeq_conum(int leq_conum) {
+		this.leq_conum = leq_conum;
+	}
+	public int getLeq_depth() {
+		return leq_depth;
+	}
+	public void setLeq_depth(int leq_depth) {
+		this.leq_depth = leq_depth;
+	}
 	public int getNum() {
 		return num;
 	}

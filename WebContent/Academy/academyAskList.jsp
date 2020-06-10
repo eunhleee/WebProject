@@ -70,6 +70,7 @@
 			document.acsearchFrm.keyWord.focus();
 			return;
 		}
+		document.acsearchFrm.action = "acRead.jsp";
 		document.acsearchFrm.submit();
 	}
 	function pageing(page) {
@@ -282,6 +283,7 @@ a:hover {
 					<input size="16" name="keyWord"> 
 					<input type="button" value="찾기" onClick="javascript:accheck()"> 
 					<input type="hidden" name="nowPage" value="1">
+					<input type="hidden" name="num" value="<%=ac_serialnum%>">
 				</td>
 			</tr>
 		</table>
