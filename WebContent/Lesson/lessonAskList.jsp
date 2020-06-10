@@ -63,13 +63,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>학원 후기 게시판</title>
 <script>
-	function check() {
-		if (document.searchFrm.keyWord.value == "") {
+	function lecheck() {
+		if (document.lesearchFrm.keyWord.value == "") {
 			alert("검색어를 입력하세요.");
-			document.searchFrm.keyWord.focus();
+			document.lesearchFrm.keyWord.focus();
 			return;
 		}
-		document.searchFrm.submit();
+		document.lesearchFrm.submit();
 	}
 	function pageing(page) {
 		document.readFrm.nowPage.value = page;
@@ -246,25 +246,28 @@ a:hover {
  %>
 				<!-- 페이징 및 블럭 End -->
 			</td>
-			<td align="right"><a href="post.jsp">[글쓰기]</a> <a
-				href="javascript:list()">[처음으로]</a></td>
+			<td align="right">
+				<a href="post.jsp">[글쓰기]</a> 
+				<a href="javascript:list()">[처음으로]</a>
+			</td>
 		</tr>
 	</table>
 
 
 	<hr width="800" align="center">
-	<form name="searchFrm">
+	<form name="lesearchFrm">
 		<table width="600" cellpadding="4" cellspacing="0">
 			<tr>
-				<td align="center" valign="bottom"><select name="keyField"
-					size="1">
-						<option value="sc_title">제 목</option>
-						<option value="sc_subject">과 목</option>
-						<option value="sc_content">내 용</option>
-						<option value="sc_nick">닉 네 임</option>
-				</select> <input size="16" name="keyWord"> <input type="button"
-					value="찾기" onClick="javascript:check()"> <input
-					type="hidden" name="nowPage" value="1"></td>
+				<td align="center" valign="bottom">
+				<select name="keyField" size="1">
+					<option value="sc_title">제 목</option>
+					<option value="sc_subject">과 목</option>
+					<option value="sc_content">내 용</option>
+					<option value="sc_nick">닉 네 임</option>
+				</select> 
+				<input size="16" name="keyWord"> 
+				<input type="button" value="찾기" onClick="javascript:lecheck()"> 
+				<input type="hidden" name="nowPage" value="1"></td>
 			</tr>
 		</table>
 	</form>
@@ -275,11 +278,11 @@ a:hover {
 	</form>
 
 	<form name="readFrm">
-		<input type="hidden" name="nowPage" value="<%=nowPage%>"> <input
-			type="hidden" name="numPerPage" value="<%=numPerPage%>"> <input
-			type="hidden" name="keyField" value="<%=keyField%>"> <input
-			type="hidden" name="keyWord" value="<%=keyWord%>"> <input
-			type="hidden" name="num">
+		<input type="hidden" name="nowPage" value="<%=nowPage%>"> 
+		<input type="hidden" name="numPerPage" value="<%=numPerPage%>"> 
+		<input type="hidden" name="keyField" value="<%=keyField%>"> 
+		<input type="hidden" name="keyWord" value="<%=keyWord%>"> 
+		<input type="hidden" name="num">
 	</form>
 
 

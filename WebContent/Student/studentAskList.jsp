@@ -63,13 +63,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>학생 문의 게시판</title>
 <script>
-	function check() {
-		if (document.searchFrm.keyWord.value == "") {
+	function stcheck() {
+		if (document.stsearchFrm.keyWord.value == "") {
 			alert("검색어를 입력하세요.");
-			document.searchFrm.keyWord.focus();
+			document.stsearchFrm.keyWord.focus();
 			return;
 		}
-		document.searchFrm.submit();
+		document.stsearchFrm.submit();
 	}
 	function pageing(page) {
 		document.readFrm.nowPage.value = page;
@@ -242,7 +242,7 @@ a:hover {
 			</table>
 
 	<hr width="900" align="center">
-	<form name="searchFrm"  >
+	<form name="stsearchFrm"  >
 		<table width="600" cellpadding="4" cellspacing="0">
 			<tr>
 				<td align="center" valign="bottom">
@@ -253,7 +253,7 @@ a:hover {
 				</select> 
 				<input size="16" name="keyWord"> 
 				<input type="hidden" name="stunum" value="<%=stunum %>">
-				<input type="submit" value="찾기" onClick="javascript:check()"> 
+				<input type="submit" value="찾기" onClick="javascript:stcheck()"> 
 				<input type="hidden" name="nowPage" value="1">
 				
 				</td>

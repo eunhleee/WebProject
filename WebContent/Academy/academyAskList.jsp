@@ -64,13 +64,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>학원 후기 게시판</title>
 <script>
-	function check() {
-		if (document.searchFrm.keyWord.value == "") {
+	function accheck() {
+		if (document.acsearchFrm.keyWord.value == "") {
 			alert("검색어를 입력하세요.");
-			document.searchFrm.keyWord.focus();
+			document.acsearchFrm.keyWord.focus();
 			return;
 		}
-		document.searchFrm.submit();
+		document.acsearchFrm.submit();
 	}
 	function pageing(page) {
 		document.readFrm.nowPage.value = page;
@@ -269,18 +269,20 @@ a:hover {
 
 
 	<hr width="800" align="center">
-	<form name="searchFrm">
+	<form name="acsearchFrm">
 		<table width="600" cellpadding="4" cellspacing="0">
 			<tr>
-				<td align="center" valign="bottom"><select name="keyField"
-					size="1">
+				<td align="center" valign="bottom">
+					<select name="keyField" size="1">
 						<option value="sc_title">제 목</option>
 						<option value="sc_subject">과 목</option>
 						<option value="sc_content">내 용</option>
 						<option value="sc_nick">닉 네 임</option>
-				</select> <input size="16" name="keyWord"> <input type="button"
-					value="찾기" onClick="javascript:check()"> <input
-					type="hidden" name="nowPage" value="1"></td>
+					</select> 
+					<input size="16" name="keyWord"> 
+					<input type="button" value="찾기" onClick="javascript:accheck()"> 
+					<input type="hidden" name="nowPage" value="1">
+				</td>
 			</tr>
 		</table>
 	</form>
