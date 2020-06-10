@@ -81,13 +81,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>우리학원 어디?-커뮤니티</title>
 <script>
-function check() {
-	if(document.searchFrm.keyWord.value==""){
+function sccheck() {
+	if(document.scsearchFrm.keyWord.value==""){
 		alert("검색어를 입력하세요.");
-		document.searchFrm.keyWord.focus();
+		document.scsearchFrm.keyWord.focus();
 		return;
 	}
-	document.searchFrm.submit();
+	document.scsearchFrm.submit();
 }
 function pageing(page) {
 	document.readFrm.nowPage.value = page;
@@ -99,7 +99,7 @@ function block(block) {
 	document.readFrm.submit();
 }
 function list(){//[처음으로]를 누르면 게시글의 처음 페이지로 돌아감
-	document.listFrm.action="communityList.jsp";
+	document.listFrm.action="communityList.jsp?pageValue=<%=group%>";
 	document.listFrm.submit();
 }
 function numPerFn(numPerPage){
@@ -228,7 +228,7 @@ a:hover {
 								<td align="center"><%=totalRecord-start-i%></td>
 								<td align="center"><a href="javascript:read('<%=num%>')"><%=title%></a>
 									<% if(filename!=null) { %>
-										<img src="../alcinfo/img/icon_file1.png">
+										<img src="../img/icon_file1.png">
 									<% } %>
 									<% if(ccount>0) { %>
 										<font color="red">[<%=ccount%>]</font>
@@ -292,18 +292,20 @@ a:hover {
 
 
 			<hr width="750">
-			<form name="searchFrm" >
+			<form name="scsearchFrm" >
 				<table width="600" cellpadding="4" cellspacing="0">
 					<tr>
-						<td align="center" valign="bottom"><select name="keyField"
-							size="1">
+						<td align="center" valign="bottom">
+							<select name="keyField" size="1">
 								<option value="sc_title">제 목</option>
 								<option value="sc_content">내 용</option>
 								<option value="sc_nick">닉 네 임</option>
-						</select>
-						 <input size="16" name="keyWord">
-						  <input type="submit" 	value="찾기" onClick="javascript:check()"> <input
-							type="hidden" name="nowPage" value="1"></td>
+							</select>
+							<input size="16" name="keyWord">
+							<input type="submit" value="찾기" onClick="javascript:sccheck()"> 
+							<input type="hidden" name="nowPage" value="1">
+							<input type="hidden" name="pageValue" value="<%=group%>">
+						</td>
 					</tr>
 				</table>
 			</form>
@@ -316,10 +318,10 @@ a:hover {
 			<form name="readFrm">
 				<input type="hidden" name="nowPage" value="<%=nowPage%>"> 
 				<input type="hidden" name="numPerPage" value="<%=numPerPage%>">
-				 <input type="hidden" name="keyField" value="<%=keyField%>"> 
-				 <input type="hidden" name="keyWord" value="<%=keyWord%>">
-				 <input type="hidden" name="pageValue" value="<%=group%>">
-				  <input type="hidden" name="num">
+				<input type="hidden" name="keyField" value="<%=keyField%>"> 
+				<input type="hidden" name="keyWord" value="<%=keyWord%>">
+				<input type="hidden" name="pageValue" value="<%=group%>">
+				<input type="hidden" name="num">
 			</form>
 		</div>
 	</div>

@@ -173,7 +173,7 @@ public class SCommunityMgr {
 						+ " like ? and " + "sc_group=? order by num desc " + "limit ?,?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, "%" + keyWord + "%");
-				pstmt.setString(2, "group");
+				pstmt.setString(2, group);
 				pstmt.setInt(3, start);
 				pstmt.setInt(4, cnt);
 
