@@ -60,7 +60,7 @@ public class AcreviewMgr {
 			con = pool.getConnection();
 			if(keyWord.trim().equals("")||keyWord==null) {
 				//占싯삼옙占쏙옙 占싣닌곤옙占�
-				sql = "select num,ac_serialnum,ac_name,ac_content,ac_ip,ac_star,ac_nickname,ac_id,"
+				sql = "select num,ac_serialnum,ac_title,ac_content,ac_ip,ac_star,ac_nickname,ac_id,"
 						+ "ac_date,ac_count from acreview where ac_serialnum=? order by num desc "
 						+ "limit ?,?";
 				pstmt = con.prepareStatement(sql);
@@ -72,7 +72,7 @@ public class AcreviewMgr {
 			}
 			else {
 			//占싯삼옙占쏙옙 占쏙옙占�
-			sql = "select num,ac_serialnum,ac_name,ac_content,ac_ip,ac_star,ac_nickname,ac_id,"
+			sql = "select num,ac_serialnum,ac_title,ac_content,ac_ip,ac_star,ac_nickname,ac_id,"
 					+ "ac_date,ac_count from acreview where ac_serialnum=? and "+keyField+" like ? "
 					+ "order by num desc limit ?,?";
 			pstmt = con.prepareStatement(sql);
@@ -88,7 +88,7 @@ public class AcreviewMgr {
 				AcreviewBean bean = new AcreviewBean();
 				bean.setNum(rs.getInt("num"));
 				bean.setAc_serialnum(rs.getInt("ac_serialnum"));
-				bean.setAc_name(rs.getString("ac_name"));
+				bean.setAc_title(rs.getString("ac_title"));
 				bean.setAc_content(rs.getString("ac_content"));
 				bean.setAc_ip(rs.getString("ac_ip"));
 				bean.setAc_star(rs.getDouble("ac_star"));
@@ -114,12 +114,12 @@ public class AcreviewMgr {
 		String sql = null;
 		try {
 			con = pool.getConnection();
-			sql = "insert acreview(ac_serialnum,ac_name,ac_content,ac_ip,ac_star,"
+			sql = "insert acreview(ac_serialnum,ac_title,ac_content,ac_ip,ac_star,"
 					+ "ac_nickname,ac_id,ac_date) "
 					+ "values(?,?,?,?,?,?,?,now())";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, bean.getAc_serialnum());
-			pstmt.setString(2, bean.getAc_name());
+			pstmt.setString(2, bean.getAc_title());
 			pstmt.setString(3, bean.getAc_content());
 			pstmt.setString(4, bean.getAc_ip());
 			pstmt.setDouble(5, bean.getAc_star());
@@ -142,7 +142,7 @@ public class AcreviewMgr {
 		AcreviewBean bean = new AcreviewBean();
 		try {
 			con = pool.getConnection();
-			sql = "select num,ac_serialnum,ac_name,ac_content,ac_ip,ac_star,ac_nickname,"
+			sql = "select num,ac_serialnum,ac_title,ac_content,ac_ip,ac_star,ac_nickname,"
 					+ "ac_id,ac_date,ac_count from acreview where num=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, num);
@@ -150,7 +150,7 @@ public class AcreviewMgr {
 			if(rs.next()) {
 				bean.setNum(rs.getInt("num"));
 				bean.setAc_serialnum(rs.getInt("ac_serialnum"));
-				bean.setAc_name(rs.getString("ac_name"));
+				bean.setAc_title(rs.getString("ac_title"));
 				bean.setAc_content(rs.getString("ac_content"));
 				bean.setAc_ip(rs.getString("ac_ip"));
 				bean.setAc_star(rs.getDouble("ac_star"));
@@ -210,9 +210,9 @@ public class AcreviewMgr {
 		String sql = null;
 		try {
 			con = pool.getConnection();
-			sql = "update acreview set ac_name=?, ac_star=?, ac_content=? where num=?";
+			sql = "update acreview set ac_title=?, ac_star=?, ac_content=? where num=?";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, bean.getAc_name());
+			pstmt.setString(1, bean.getAc_title());
 			pstmt.setDouble(2, bean.getAc_star());
 			pstmt.setString(3, bean.getAc_content());
 			pstmt.setInt(4, bean.getNum());

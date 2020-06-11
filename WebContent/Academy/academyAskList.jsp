@@ -184,7 +184,7 @@ a:hover {
 							for (int i = 0; i < listsize; i++) {
 								AcreviewBean acbean = vlist.get(i);
 								int num = acbean.getNum();
-								String title = acbean.getAc_name();
+								String title = acbean.getAc_title();
 								String nick = acbean.getAc_nickname();
 								Double star = acbean.getAc_star();
 								String date = acbean.getAc_date();

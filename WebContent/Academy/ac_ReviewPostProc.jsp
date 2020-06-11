@@ -9,7 +9,7 @@
 	int acnum = Integer.parseInt(request.getParameter("acnum"));
 	bean.setAc_serialnum(acnum);
 	bean.setAc_id(request.getParameter("acqid"));
-	bean.setAc_name(request.getParameter("acrtitle"));
+	bean.setAc_title(request.getParameter("acrtitle"));
 	bean.setAc_star(Double.parseDouble(request.getParameter("acrstar")));
 	bean.setAc_content(request.getParameter("acrcontent"));
 	bean.setAc_ip(request.getParameter("acqip"));

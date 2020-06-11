@@ -52,7 +52,7 @@
 	
 	AcreviewBean arbean = acrmgr.getReview(acrnum);
 	String id = arbean.getAc_id();
-	String name = arbean.getAc_name();
+	String title = arbean.getAc_title();
 	String nickname = arbean.getAc_nickname();
 	Double star = arbean.getAc_star();
 	String regdate = arbean.getAc_date();
@@ -209,7 +209,7 @@ a:hover {
 		 </tr>
 		   <tr> 
 		    <td align="center" bgcolor="#DDDDDD"> 제 목</td>
-		    <td bgcolor="#FFFFE8" colspan="3"><%=name%></td>
+		    <td bgcolor="#FFFFE8" colspan="3"><%=title%></td>
 		   </tr>
 		   <tr> 
 		    <td align="center" bgcolor="#DDDDDD"> 평 점</td>
