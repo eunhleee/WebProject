@@ -21,11 +21,7 @@
 <html>
 <head>
 <link href="../login/idpwdstyle.css" rel="stylesheet" type="text/css">
-<!-- <script type="text/javascript" src="../login/script.js"></script>
- -->
-
-<!--  <script type="text/JavaScript" src="http://code.jquery.com/jquery-1.7.min.js"></script>
- --><script type="text/JavaScript" src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script type="text/JavaScript" src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript">
 function inputCheck(){
 	
@@ -154,7 +150,7 @@ function win_close(){
 				<td>
 					<table border="1" class="insertMt">
 						<tr>
-				<img src="../alcinfo/photo/<%=bean.getImgname()%>" width="380" height="300" margin-bottom="5px"><br/>
+				<img src="../img/<%=bean.getImgname()%>" width="380" height="300" margin-bottom="5px"><br/>
 				<input type="button" onclick="imgcheck();" value="이미지수정"></td>
 			</tr>
 						<tr>
@@ -210,31 +206,26 @@ function win_close(){
 							<td width="260px">
 							
 								<input type="text" style="width:85px; height:32px;"
-									placeholder="년(4자)" name="imbirthy" maxlength="8" 
+									placeholder="년(4자)" name="imbirthy" maxlength="4" 
 									value="<%=bean.getBirth().substring(0,4)%>">
 							  
 								<select name="imbirthm" style="width:82px; height:32px">
-									<option value="월">월</option>
-									<option value="<%=to%>" selected><%=to%></option>											
-									
-									<% for(int i=1; i<13; i++) { 
+									<option value="월">월</option>									
+									<% for(int i=1; i<=12; i++) { 
 										if(i==to){
 											%>
-											
-										<option value="<%=i%>" selected><%=i%></option>											
+											<option value="<%=i%>" selected><%=i%></option>
 										<%	
 										i++;
 										}
 										if( i<10) {
 									%>	
-										<option value="0<%=i%>" selected><%=i%></option>
+										<option value="0<%=i%>"><%=i%></option>
 									<%	
-										
 										} else {
 									%>
-										<option value="<%=i%>" selected><%=i%></option>
-									<% 										i++; } %>
-										
+										<option value="<%=i%>"><%=i%></option>
+									<% 	} %>	
 									<% } %>
 								</select>
 								<select name="imbirthd" style="width:82px; height:32px">

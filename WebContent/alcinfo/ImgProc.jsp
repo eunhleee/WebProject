@@ -41,10 +41,7 @@ String id="1111";
 				<p>
 					<input type="file" name="photo" id="id_photo" required="required">
 				</p>
-				<p>
-					<textarea name="message" cols="50" rows="5"
-						placeholder="message 등록해 주세요."></textarea>
-				</p>
+				
 				<input type="hidden" value="<%=id%>" name="id"> 
 				<input type="button" value="저장" onclick="send()">
 			</form>
