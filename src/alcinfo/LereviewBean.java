@@ -9,10 +9,17 @@ public class LereviewBean {
 	private String lr_title;
 	private String lr_content;
 	private String lr_ip;
-	private float lr_star;
+	private double lr_star;
 	private String lr_date;
 	private int lr_count;
+	private String lr_name;
 	
+	public String getLr_name() {
+		return lr_name;
+	}
+	public void setLr_name(String lr_name) {
+		this.lr_name = lr_name;
+	}
 	public int getLr_count() {
 		return lr_count;
 	}
@@ -61,10 +68,10 @@ public class LereviewBean {
 	public void setLr_ip(String lr_ip) {
 		this.lr_ip = lr_ip;
 	}
-	public float getLr_star() {
+	public double getLr_star() {
 		return lr_star;
 	}
-	public void setLr_star(float lr_star) {
+	public void setLr_star(double lr_star) {
 		this.lr_star = lr_star;
 	}
 	public String getLr_date() {

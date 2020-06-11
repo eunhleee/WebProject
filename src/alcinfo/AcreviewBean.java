@@ -6,7 +6,7 @@ public class AcreviewBean {
 	public String ac_title;
 	public String ac_content;
 	public String ac_ip;
-	public float ac_star;
+	public double ac_star;
 	public String ac_nickname;
 	public String ac_id;
 	public String ac_date;
@@ -48,10 +48,10 @@ public class AcreviewBean {
 	public void setAc_ip(String ac_ip) {
 		this.ac_ip = ac_ip;
 	}
-	public float getAc_star() {
+	public double getAc_star() {
 		return ac_star;
 	}
-	public void setAc_star(float ac_star) {
+	public void setAc_star(double ac_star) {
 		this.ac_star = ac_star;
 	}
 	public String getAc_nickname() {

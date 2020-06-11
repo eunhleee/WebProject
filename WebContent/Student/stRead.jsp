@@ -17,7 +17,7 @@
 	StudentBean stbean = null;
 	int num=Integer.parseInt(request.getParameter("stunum"));
 	MemberBean mbean=Rmgr.getStuId(num);
-	System.out.println("학생의 아이디는"+mbean.getId());
+	//System.out.println("학생의 아이디는"+mbean.getId());
 
 	if(request.getParameter("stunum") == null) {
 		//response.sendRedirect(url);
@@ -28,7 +28,7 @@
 		//한준씨 getStudent 메소드 수정함
 		stbean = mgr.getStudent(stunum);
 		stbean.setNum(stunum);
-		
+		mgr.upStCount(num); // 조회수 증가
 		%>
 <!DOCTYPE html>
 <html>
@@ -151,7 +151,7 @@ function goReport() {
 									<tr>
 										<td><input type="button" value="취소하기" id="myButton2"
 											style="font-size: 20;" onclick="deleteT();"></td>
-									</tr>
+									</tr>								
 								</table>
 							</td>
 						</tr>

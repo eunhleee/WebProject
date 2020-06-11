@@ -9,7 +9,21 @@ public class LeRcommentsBean {
 	private String ler_content;
 	private String ler_ip;
 	private String ler_regdate;
+	private int ler_conum;
+	private int ler_depth;
 	
+	public int getLer_conum() {
+		return ler_conum;
+	}
+	public void setLer_conum(int ler_conum) {
+		this.ler_conum = ler_conum;
+	}
+	public int getLer_depth() {
+		return ler_depth;
+	}
+	public void setLer_depth(int ler_depth) {
+		this.ler_depth = ler_depth;
+	}
 	public int getNum() {
 		return num;
 	}

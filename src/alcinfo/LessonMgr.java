@@ -293,6 +293,28 @@ public class LessonMgr {
 
 			return jsonArray;
 	}
-
+	
+	//조회수 증가
+		public void upLeCount(int num) {
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			String sql = null;
+			try {
+				con = pool.getConnection();
+				sql = "update lesson set count = count +1 where num = ?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, num);
+				pstmt.executeUpdate();
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				pool.freeConnection(con, pstmt);
+			}
+		}
 	
 }
+	
+	
+
+	
+

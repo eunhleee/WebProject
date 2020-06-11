@@ -7,6 +7,7 @@
 <jsp:useBean id="mgr" class="alcinfo.LequeryMgr"></jsp:useBean>
 <%
 	request.setCharacterEncoding("UTF-8");
+	String loginid = (String)session.getAttribute("idKey");
 	int lq_lnum=UtilMgr.parseInt(request,"lq_lnum");
 	//검색에 필요한 변수
 
@@ -82,7 +83,7 @@
 		document.readFrm.submit();
 	}
 	function list() {//[처음으로]를 누르면 게시글의 처음 페이지로 돌아감
-		document.listFrm.action = "leRead.jsp?lq_lnum=<%=lq_lnum%>";
+		document.listFrm.action = "le_QnA.jsp?lq_lnum=<%=lq_lnum%>";
 		document.listFrm.submit();
 	}
 	function numPerFn(numPerPage) {
@@ -93,8 +94,11 @@
 	//기존 조건 : keyField,keyWord,nowPage,numPerPage
 	function read(num) {
 		document.readFrm.num.value = num;
-		document.readFrm.action = "read.jsp";
+		document.readFrm.action = "le_QnARead.jsp";
 		document.readFrm.submit();
+	}
+	function leqnaalert() {
+		alert("로그인 후 이용가능합니다.");
 	}
 </script>
 <style>
@@ -187,11 +191,17 @@ a:hover {
 								String id = bean.getLq_id();
 								String date = bean.getLq_date();
 								int count = bean.getLq_count();
+								int ccount = mgr.leqccount(num);
 					%>
 					<tr id="list">
-						<td align="center"><%=i + 1%></td>
+						<td align="center"><%=totalRecord-start-i%></td>
 						<td align="center"><%=subject%></td>
-						<td align="center"><a href=""><%=title%></a></td>
+						<td align="center">
+						<a href="javascript:read('<%=num%>')"><%=title%></a>
+						<% if(ccount>0) { %>
+							<font color="red">[<%=ccount%>]</font>
+						<% } %>
+						</td>
 						<td align="center"><a href=""><%=id%></a></td>
 						<td align="center"><%=date%></td>
 						<td align="center"><%=count%></td>
@@ -250,8 +260,14 @@ a:hover {
  %>
 				<!-- 페이징 및 블럭 End -->
 			</td>
-			<td align="right"><a href="post.jsp">[글쓰기]</a> <a
-				href="javascript:list()">[처음으로]</a></td>
+			<td align="right"><a 
+			<% if(loginid==null) { %>
+			href="javascript:leqnaalert()"
+			<% } else { %>
+			href="le_QnAPost.jsp?lq_lnum=<%=lq_lnum%>"
+			<% } %>
+			>[글쓰기]</a>
+			<a href="javascript:list()">[처음으로]</a></td>
 		</tr>
 	</table>
 
@@ -260,13 +276,14 @@ a:hover {
 	<form name="searchFrm">
 		<table width="600" cellpadding="4" cellspacing="0">
 			<tr>
-				<td align="center" valign="bottom"><select name="keyField"
-					size="1">
-						<option value="lq_title">제 목</option>
-						<option value="lq_subject">과 목</option>
-						<option value="lq_content">내 용</option>
-						<option value="lq_id">아 이 디</option>
-				</select> <input size="16" name="keyWord"> 
+				<td align="center" valign="bottom">
+				<select name="keyField" size="1">
+					<option value="lq_title">제 목</option>
+					<option value="lq_subject">과 목</option>
+					<option value="lq_content">내 용</option>
+					<option value="lq_id">아 이 디</option>
+				</select> 
+				<input size="16" name="keyWord"> 
 				<input type="hidden" name="lq_lnum" value="<%=lq_lnum %>">
 				<input type="button" value="찾기" onClick="javascript:check()"> 
 				<input type="hidden" name="nowPage" value="1">
@@ -284,8 +301,9 @@ a:hover {
 		<input type="hidden" name="nowPage" value="<%=nowPage%>"> 
 		<input type="hidden" name="numPerPage" value="<%=numPerPage%>"> 
 		<input type="hidden" name="keyField" value="<%=keyField%>">
-		 <input	type="hidden" name="keyWord" value="<%=keyWord%>"> 
+		<input type="hidden" name="keyWord" value="<%=keyWord%>"> 
 		<input type="hidden" name="lq_lnum" value="<%=lq_lnum %>">
+		<input type="hidden" name="num">
 	</form>
 
 
