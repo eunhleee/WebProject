@@ -153,7 +153,7 @@ a:hover {
 				<table cellspacing="0" height="80">
 					<tr align="center" id="title">
 						<td width="150">평 점</td>
-						<td width="280">내 용</td>
+						<td width="280">제 목</td>
 						<td width="100">닉 네 임</td>
 						
 						<td width="150">날 짜</td>
@@ -179,15 +179,15 @@ a:hover {
 							for (int i = 0; i < listsize; i++) {
 								LereviewBean bean = vlist.get(i);
 								int lnum = bean.getNum();
-								String content = bean.getLr_content();
+								String title = bean.getLr_title();
 								String nick = bean.getLr_nick();
 								float star = bean.getLr_star();
 								String date = bean.getLr_date();
 								int count = bean.getLr_count();
 					%>
 					<tr id="list">
-							<td align="center"><%=star%></a></td>
-						<td align="center"><a href=""><%=content%></a></td>
+							<td align="center"><%=star%></td>
+						<td align="center"><a href=""><%=title%></a></td>
 						<td align="center"><a href=""><%=nick%></a></td>
 						<td align="center"><%=date%></td>
 						<td align="center"><%=count%></td>

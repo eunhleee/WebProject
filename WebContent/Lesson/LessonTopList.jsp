@@ -9,6 +9,8 @@
 	String sort = request.getParameter("sort");
 %>
 
+
+
 <section class="gallery-block cards-gallery">
 	<div class="container">
 		<div class="heading">

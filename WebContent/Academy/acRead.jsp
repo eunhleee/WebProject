@@ -25,6 +25,7 @@
 <head>
 <meta charset="EUC-KR">
 <title>Team Read</title>
+
 <link href="style.css" rel="stylesheet" type="text/css">
 <script>
 		function moveQnA(){

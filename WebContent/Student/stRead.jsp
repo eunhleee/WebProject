@@ -35,6 +35,7 @@
 <head>
 <meta charset="EUC-KR">
 <title>Team Read</title>
+
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://www.gstatic.com/charts/loader.js"></script>

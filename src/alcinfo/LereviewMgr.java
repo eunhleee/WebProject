@@ -60,7 +60,7 @@ public class LereviewMgr {
 				con = pool.getConnection();
 				if(keyWord.trim().equals("")||keyWord==null) {
 					//�˻��� �ƴѰ��
-					sql = "select num,lr_lnum,lr_nick,lr_id,lr_content,lr_ip,lr_star,lr_date "
+					sql = "select num,lr_lnum,lr_nick,lr_id,lr_title,lr_content,lr_ip,lr_star,lr_date "
 							+ "from lereview "
 							+ " where num=? limit ?,?";
 					pstmt = con.prepareStatement(sql);
@@ -72,7 +72,7 @@ public class LereviewMgr {
 				}
 				else {
 				//�˻��� ���
-				sql = "select num,lr_lnum,lr_nick,lr_id,lr_content,lr_ip,lr_star,lr_date "
+				sql = "select num,lr_lnum,lr_nick,lr_id,lr_title,lr_content,lr_ip,lr_star,lr_date "
 						+ " from lereview where num=? and "+keyField+" like ? "
 					+ " limit ?,?";
 				pstmt = con.prepareStatement(sql);
@@ -90,6 +90,7 @@ public class LereviewMgr {
 					bean.setLr_lnum(rs.getInt("lr_lnum"));
 					bean.setLr_nick(rs.getString("lr_nick"));
 					bean.setLr_id(rs.getString("lr_id"));
+					bean.setLr_title(rs.getString("lr_title"));
 					bean.setLr_content(rs.getString("lr_content"));
 					bean.setLr_ip(rs.getString("lr_ip"));
 					bean.setLr_star(rs.getFloat("lr_star"));

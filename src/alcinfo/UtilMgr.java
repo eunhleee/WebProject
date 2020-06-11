@@ -2,7 +2,6 @@ package alcinfo;
 
 import java.io.File;
 import java.text.NumberFormat;
-import java.util.StringTokenizer;
 
 import javax.servlet.http.HttpServletRequest;
 

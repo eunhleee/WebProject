@@ -3,7 +3,7 @@ package alcinfo;
 public class AcreviewBean {
 	public int num;
 	public int ac_serialnum;
-	public String ac_name;
+	public String ac_title;
 	public String ac_content;
 	public String ac_ip;
 	public float ac_star;
@@ -30,11 +30,11 @@ public class AcreviewBean {
 	public void setAc_serialnum(int ac_serialnum) {
 		this.ac_serialnum = ac_serialnum;
 	}
-	public String getAc_name() {
-		return ac_name;
+	public String getAc_title() {
+		return ac_title;
 	}
-	public void setAc_name(String ac_name) {
-		this.ac_name = ac_name;
+	public void setAc_title(String ac_title) {
+		this.ac_title = ac_title;
 	}
 	public String getAc_content() {
 		return ac_content;

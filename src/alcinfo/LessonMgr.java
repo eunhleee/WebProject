@@ -263,10 +263,12 @@ public class LessonMgr {
 		ResultSet rs = null;
 		String sql = "";
 		JSONArray jsonArray = new JSONArray();
-		JSONArray colNameArray = new JSONArray(); // 컬 타이틀 설정
-		colNameArray.add("날짜");
-		colNameArray.add("인원수");
-		jsonArray.add(colNameArray);
+		/*
+		 * JSONArray colNameArray = new JSONArray(); // 컬 타이틀 설정
+		 * 
+		 * colNameArray.add("날짜"); colNameArray.add("인원수"); jsonArray.add(colNameArray);
+		 */
+		 
 		try {
 			con = pool.getConnection();
 			sql = "select l_date,COUNT(*) from leinsert where l_teacharid=? group by l_date";

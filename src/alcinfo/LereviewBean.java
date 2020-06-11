@@ -6,6 +6,7 @@ public class LereviewBean {
 	private int lr_lnum;
 	private String lr_nick;
 	private String lr_id;
+	private String lr_title;
 	private String lr_content;
 	private String lr_ip;
 	private float lr_star;
@@ -41,6 +42,12 @@ public class LereviewBean {
 	}
 	public void setLr_id(String lr_id) {
 		this.lr_id = lr_id;
+	}
+	public String getLr_title() {
+		return lr_title;
+	}
+	public void setLr_title(String lr_title) {
+		this.lr_title = lr_title;
 	}
 	public String getLr_content() {
 		return lr_content;

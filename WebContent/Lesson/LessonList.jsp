@@ -10,6 +10,11 @@
 	Vector<LessonBean> Lvlist = new Vector<LessonBean>();
 %>
 <html>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css" />
+<link rel="stylesheet" href="../alcinfo/cards-gallery.css">
 <head>
 <style>
 .main {

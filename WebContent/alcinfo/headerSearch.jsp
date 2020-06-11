@@ -9,7 +9,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<link href="../headerStyle.css" rel="stylesheet">
+<link href="../alcinfo/headerStyle.css" rel="stylesheet">
 <script>
 function btnmouseUp(){
 	var button=document.getElementById("button");

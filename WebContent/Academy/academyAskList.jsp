@@ -179,7 +179,7 @@ a:hover {
 							for (int i = 0; i < listsize; i++) {
 								AcreviewBean bean = vlist.get(i);
 								int num = bean.getNum();
-								String content = bean.getAc_content();
+								String title = bean.getAc_title();
 								String nick = bean.getAc_nickname();
 								float star = bean.getAc_star();
 								String date = bean.getAc_date();
@@ -187,7 +187,7 @@ a:hover {
 					%>
 					<tr id="list">
 							<td align="center"><%=star%></td>
-						<td align="center"><a href=""><%=content%></a></td>
+						<td align="center"><a href=""><%=title%></a></td>
 						<td align="center"><a href=""><%=nick%></a></td>
 						<td align="center"><%=date%></td>
 						<td align="center"><%=count%></td>

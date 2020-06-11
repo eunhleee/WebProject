@@ -18,12 +18,13 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css" />
-<link rel="stylesheet" href="../cards-gallery.css">
+<link rel="stylesheet" href="../alcinfo/cards-gallery.css">
 <script>
 	function insertLesson() {
 		location.href = "leInsert.jsp?id=<%=id%>";
 	}
 </script>
+
 <style>
 #total{
 width:100%;

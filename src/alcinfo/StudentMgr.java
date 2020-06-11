@@ -13,7 +13,7 @@ public class StudentMgr {
 		pool=DBConnectionMgr.getInstance();
 	}
 	
-	//��ȸ������ ��ȸ
+	
 		public Vector<StudentBean> getBestBoard(String pageValue){
 			Connection con = null;
 			PreparedStatement pstmt = null;
@@ -34,7 +34,7 @@ public class StudentMgr {
 					pstmt.setString(1, "%"+pageValue+"%");
 				}
 				
-				rs = pstmt.executeQuery();//select ����
+				rs = pstmt.executeQuery();//select 占쏙옙占쏙옙
 				while(rs.next()) {
 					StudentBean bean = new StudentBean();
 					bean.setNum(rs.getInt("num"));
@@ -64,7 +64,7 @@ public class StudentMgr {
 			StudentBean stbean = new StudentBean();
 			try {
 				con = pool.getConnection();
-				sql = "select name,st.id, gender, substr(address,1,instr(address,'로 ')+1) address, phone, class, school_name, school_grade, etc from student st, member me where st.id=me.id and num=?";
+				sql = "select name,st.id, gender, substr(address,1,instr(address,'濡� ')+1) address, phone, class, school_name, school_grade, etc from student st, member me where st.id=me.id and num=?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, num);
 				rs = pstmt.executeQuery();
@@ -98,7 +98,7 @@ public class StudentMgr {
 			try {
 				con = pool.getConnection();
 				if(!keyWord.trim().equals("")||keyWord!=null) {
-					//�˻��� �ƴѰ��
+					//占싯삼옙占쏙옙 占싣닌곤옙占�
 				
 				sql = "select st.num,me.imgname,me.name,st.class,me.school_name,me.school_grade,st.count from student st,member me " + 
 						" where st.id=me.id and ( me.name like ? or st.class like ? or school_name like ?)";
@@ -138,7 +138,7 @@ public class StudentMgr {
 			try {
 				con = pool.getConnection();
 				sql = "insert stinsert(num,stid,teaid,teaname,stclass,state,date )"
-						+ "values(?,?,?,?,?,'신청접수',now())";
+						+ "values(?,?,?,?,?,'�떊泥��젒�닔',now())";
 				pstmt = con.prepareStatement(sql);
 				
 				pstmt.setInt(1, sbean.getNum());
@@ -214,9 +214,9 @@ public class StudentMgr {
 			ResultSet rs = null;
 			String sql = "";
 			JSONArray jsonArray = new JSONArray();
-			JSONArray colNameArray = new JSONArray(); // 컬 타이틀 설정
-			colNameArray.add("날짜");
-			colNameArray.add("인원수");
+			JSONArray colNameArray = new JSONArray(); // 而� ���씠�� �꽕�젙
+			colNameArray.add("�궇吏�");
+			colNameArray.add("�씤�썝�닔");
 			jsonArray.add(colNameArray);
 			try {
 				con = pool.getConnection();

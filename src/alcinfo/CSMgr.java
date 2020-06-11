@@ -1,15 +1,9 @@
 package alcinfo;
 
-import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Vector;
-
-import javax.servlet.http.HttpServletRequest;
-
-import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 public class CSMgr {
 	private DBConnectionMgr pool;
@@ -30,7 +24,7 @@ public class CSMgr {
 		try {
 			con = pool.getConnection();
 			if(keyWord.trim().equals("")||keyWord==null) {
-				//�˻��� �ƴѰ��
+				//占싯삼옙占쏙옙 占싣닌곤옙占�
 				sql = "select num, cc_title,cc_id,cc_regdate,cc_count "
 						+ " from cs  order by cc_count desc limit ?,?";
 				pstmt = con.prepareStatement(sql);
@@ -39,7 +33,7 @@ public class CSMgr {
 	
 			}
 			else {
-			//�˻��� ���
+			//占싯삼옙占쏙옙 占쏙옙占�
 			sql = "select num, cc_title,cc_id,cc_regdate,cc_count from cs where "+keyField+" like ? "
 				+ "limit ?,?";
 			pstmt = con.prepareStatement(sql);
@@ -68,7 +62,7 @@ public class CSMgr {
 		return vlist; 
 	}
 	
-	//Board Total Count:�� �Խù� ��
+	//Board Total Count:占쏙옙 占쌉시뱄옙 占쏙옙
 		public int getTotalCount(String keyField,String keyWord) {
 			Connection con = null;
 			PreparedStatement pstmt = null;
@@ -78,12 +72,12 @@ public class CSMgr {
 			try {
 				con = pool.getConnection();
 				if(keyWord.trim().equals("")||keyWord==null) {
-					//�˻��� �ƴѰ��
+					//占싯삼옙占쏙옙 占싣닌곤옙占�
 					sql = "select count(*) from cs ";
 					pstmt = con.prepareStatement(sql);
 				}
 				else {
-				//�˻��� ���
+				//占싯삼옙占쏙옙 占쏙옙占�
 				sql = "select count(*) from cs where "
 						+keyField+" like ?";
 				pstmt = con.prepareStatement(sql);
