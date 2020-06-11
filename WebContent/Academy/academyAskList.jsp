@@ -1,4 +1,4 @@
-<!-- 학원 후기 리스트 출력 -->
+<!-- 학원 리뷰 리스트 출력 -->
 <%@page import="alcinfo.UtilMgr"%>
 <%@page import="alcinfo.AcreviewBean"%>
 <%@page import="java.util.Vector"%>
@@ -8,6 +8,7 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 	int ac_serialnum=UtilMgr.parseInt(request,"num");
+	String loginid = (String)session.getAttribute("idKey");
 	//검색에 필요한 변수
 
 	int totalRecord = 0;//총게시물수
@@ -63,13 +64,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>학원 후기 게시판</title>
 <script>
-	function check() {
-		if (document.searchFrm.keyWord.value == "") {
+	function accheck() {
+		if (document.acsearchFrm.keyWord.value == "") {
 			alert("검색어를 입력하세요.");
-			document.searchFrm.keyWord.focus();
+			document.acsearchFrm.keyWord.focus();
 			return;
 		}
-		document.searchFrm.submit();
+		document.acsearchFrm.action = "acRead.jsp";
+		document.acsearchFrm.submit();
 	}
 	function pageing(page) {
 		document.readFrm.nowPage.value = page;
@@ -82,7 +84,7 @@
 		document.readFrm.submit();
 	}
 	function list() {//[처음으로]를 누르면 게시글의 처음 페이지로 돌아감
-		document.listFrm.action = "communityList.jsp";
+		document.listFrm.action = "acRead.jsp?num=<%=ac_serialnum%>";
 		document.listFrm.submit();
 	}
 	function numPerFn(numPerPage) {
@@ -92,9 +94,12 @@
 	//list.jsp에서 read.jsp로 요청이 될때 기존에 조건
 	//기존 조건 : keyField,keyWord,nowPage,numPerPage
 	function read(num) {
-		document.readFrm.num.value = num;
-		document.readFrm.action = "read.jsp";
+		document.readFrm.acrnum.value = num;
+		document.readFrm.action = "ac_ReviewRead.jsp";
 		document.readFrm.submit();
+	}
+	function acalert() {
+		alert("로그인 후 이용가능합니다.");
 	}
 </script>
 <style>
@@ -118,9 +123,6 @@ a:hover {
 </style>
 </head>
 <body>
-
-
-
 
 	<!-- 리스트 부분 -->
 
@@ -156,6 +158,7 @@ a:hover {
 						<td width="150">평 점</td>
 						<td width="280">제 목</td>
 						<td width="100">닉 네 임</td>
+						
 						<td width="150">날 짜</td>
 						<td width="100">조회수</td>
 					</tr>
@@ -167,8 +170,10 @@ a:hover {
 						if (vlist.isEmpty()) {
 					%>
 					<tr>
-						<td align="center" colspan="5" height="210">
-							<p>등록된 게시글이 없습니다.</p>
+						<td align="center" colspan="5">
+							<%
+								out.println("등록된 게시물이 없습니다.");
+							%>
 						</td>
 					</tr>
 
@@ -177,24 +182,30 @@ a:hover {
 					<%
 						} else {
 							for (int i = 0; i < listsize; i++) {
-								AcreviewBean bean = vlist.get(i);
-								int num = bean.getNum();
-								String title = bean.getAc_title();
-								String nick = bean.getAc_nickname();
-								double star = bean.getAc_star();
-								String date = bean.getAc_date();
-								int count = bean.getAc_count();
+								AcreviewBean acbean = vlist.get(i);
+								int num = acbean.getNum();
+								String title = acbean.getAc_title();
+								String nick = acbean.getAc_nickname();
+								Double star = acbean.getAc_star();
+								String date = acbean.getAc_date();
+								int count = acbean.getAc_count();
+								int ccount = mgr.acrccount(num);
 					%>
-					<tr id="list">
+						<tr id="list">
 							<td align="center"><%=star%></td>
-						<td align="center"><a href=""><%=title%></a></td>
+						<td align="center">
+						<a href="javascript:read('<%=num%>')"><%=title%></a>
+						<% if(ccount>0) { %>
+							<font color="red">[<%=ccount%>]</font>
+						<% } %>
+						</td>
 						<td align="center"><a href=""><%=nick%></a></td>
 						<td align="center"><%=date%></td>
 						<td align="center"><%=count%></td>
 					</tr>
 
 					<%
-						}
+							}
 						}
 					%>
 
@@ -246,25 +257,34 @@ a:hover {
  %>
 				<!-- 페이징 및 블럭 End -->
 			</td>
-			<td align="right"><a href="post.jsp">[글쓰기]</a> <a
+			<td align="right"><a 
+			<% if(loginid != null) { %>
+			href="ac_ReviewPost.jsp?num=<%=ac_serialnum%>"
+			<% } else { %>
+			href="javascript:acalert()"
+			<% } %>
+			>[글쓰기]</a> <a
 				href="javascript:list()">[처음으로]</a></td>
 		</tr>
 	</table>
 
 
 	<hr width="800" align="center">
-	<form name="searchFrm">
+	<form name="acsearchFrm">
 		<table width="600" cellpadding="4" cellspacing="0">
 			<tr>
-				<td align="center" valign="bottom"><select name="keyField"
-					size="1">
+				<td align="center" valign="bottom">
+					<select name="keyField" size="1">
 						<option value="sc_title">제 목</option>
 						<option value="sc_subject">과 목</option>
 						<option value="sc_content">내 용</option>
 						<option value="sc_nick">닉 네 임</option>
-				</select> <input size="16" name="keyWord"> <input type="button"
-					value="찾기" onClick="javascript:check()"> <input
-					type="hidden" name="nowPage" value="1"></td>
+					</select> 
+					<input size="16" name="keyWord"> 
+					<input type="button" value="찾기" onClick="javascript:accheck()"> 
+					<input type="hidden" name="nowPage" value="1">
+					<input type="hidden" name="num" value="<%=ac_serialnum%>">
+				</td>
 			</tr>
 		</table>
 	</form>
@@ -275,11 +295,12 @@ a:hover {
 	</form>
 
 	<form name="readFrm">
-		<input type="hidden" name="nowPage" value="<%=nowPage%>"> <input
-			type="hidden" name="numPerPage" value="<%=numPerPage%>"> <input
-			type="hidden" name="keyField" value="<%=keyField%>"> <input
-			type="hidden" name="keyWord" value="<%=keyWord%>"> <input
-			type="hidden" name="num">
+		<input type="hidden" name="nowPage" value="<%=nowPage%>">
+		<input type="hidden" name="numPerPage" value="<%=numPerPage%>"> 
+		<input type="hidden" name="keyField" value="<%=keyField%>"> 
+		<input type="hidden" name="keyWord" value="<%=keyWord%>"> 
+		<input type="hidden" name="acrnum">
+		<input type="hidden" name="num" value="<%=ac_serialnum%>">
 	</form>
 
 

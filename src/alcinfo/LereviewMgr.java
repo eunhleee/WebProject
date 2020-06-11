@@ -62,7 +62,7 @@ public class LereviewMgr {
 				//�˻��� �ƴѰ��
 				sql = "select num,lr_lnum,lr_nick,lr_id,lr_content,lr_ip,lr_star,lr_date,lr_count,lr_title "
 						+ "from lereview "
-						+ " where num=? order by num desc limit ?,?";
+						+ " where lr_lnum=? order by num desc limit ?,?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, num);
 				pstmt.setInt(2, start);
@@ -73,7 +73,7 @@ public class LereviewMgr {
 			else {
 			//�˻��� ���
 			sql = "select num,lr_lnum,lr_nick,lr_id,lr_content,lr_ip,lr_star,lr_date,lr_count,lr_title "
-					+ " from lereview where num=? and "+keyField+" like ? "
+					+ " from lereview where lr_lnum=? and "+keyField+" like ? "
 				+ " order by num desc limit ?,?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, num);
@@ -270,5 +270,6 @@ public class LereviewMgr {
 		}
 		return nick;
 	}
+	
 	
 }
