@@ -13,7 +13,7 @@
 	int num = Integer.parseInt(request.getParameter("num"));
 	int acrnum = Integer.parseInt(request.getParameter("acrnum"));
 	bean.setNum(acrnum);
-	bean.setAc_name(request.getParameter("acrtitle"));
+	bean.setAc_title(request.getParameter("acrtitle"));
 	bean.setAc_star(Double.parseDouble(request.getParameter("acrstar")));
 	bean.setAc_content(request.getParameter("acrcontent"));
 	mgr.updateAcr(bean);

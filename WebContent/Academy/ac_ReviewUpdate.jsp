@@ -12,7 +12,7 @@
 	String nowPage = request.getParameter("nowPage");
 	String numPerPage = request.getParameter("numPerPage");
 	AcreviewBean acrbean = (AcreviewBean)session.getAttribute("bean");
-	String title = acrbean.getAc_name();
+	String title = acrbean.getAc_title();
 	Double star = acrbean.getAc_star();
 	String star1 = Double.toString(star);
 	String nick = acrbean.getAc_nickname(); 
