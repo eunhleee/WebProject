@@ -1,11 +1,8 @@
-<<<<<<< HEAD
 <!-- 커뮤니티의 자유게시판 리스트 출력 -->
 
 <%@page import="alcinfo.LeteaBean"%>
 <%@page import="alcinfo.MemberBean"%>
-=======
 <!-- 과외 리뷰 리스트 출력 -->
->>>>>>> branch 'master' of https://github.com/eunhleee/WebProject.git
 <%@page import="alcinfo.UtilMgr"%>
 <%@page import="alcinfo.LereviewBean"%>
 <%@page import="java.util.Vector"%>
@@ -21,17 +18,16 @@
 	String id = request.getParameter("id");
 	String loginid = (String)session.getAttribute("idKey");
 	//검색에 필요한 변수
-	String id=(String) session.getAttribute("idKey");
-	int grade=Loginmgr.getGrade(id);
+	int grade=Loginmgr.getGrade(loginid);
 	
 	String mpoint=null;
 	if(grade==0||grade==1){
-		MemberBean mbean=Memmgr.getInfo(id);
+		MemberBean mbean=Memmgr.getInfo(loginid);
 		mpoint=mbean.getMpoint();
 		
 	}
 	else if(grade==2||grade==3){
-		LeteaBean lbean=Teamgr.getInfo(id);
+		LeteaBean lbean=Teamgr.getInfo(loginid);
 		mpoint=lbean.getMpoint();
 	} 
 	int totalRecord = 0;//총게시물수
@@ -187,7 +183,7 @@ a:hover {
 						<td width="100">조회수</td>
 					</tr>
 					<%
-						if(id==null||mpoint==null){
+						if(loginid==null||mpoint==null){
 					%>
 					<tr>
 						<td align="center" colspan="5" height="210" style="background-color:gray;  opacity: 0.5;">
