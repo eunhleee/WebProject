@@ -51,7 +51,7 @@ IMP.request_pay({
     pay_method : 'card',
     merchant_uid : 'merchant_' + new Date().getTime(),
     name : '<%=title%>',
-    amount : '100',
+    amount : '<%=money%>',
     buyer_email : '<%=email%>',
     buyer_name : '<%=name%>',
     buyer_tel : '<%=phone%>',

@@ -3,6 +3,10 @@
 <%@page import="alcinfo.LeteaBean"%>
 <%@page import="alcinfo.MemberBean"%>
 <!-- 과외 리뷰 리스트 출력 -->
+<%@page import="alcinfo.MemberBean"%>
+
+<!-- 과외 리뷰 리스트 출력 -->
+
 <%@page import="alcinfo.UtilMgr"%>
 <%@page import="alcinfo.LereviewBean"%>
 <%@page import="java.util.Vector"%>
@@ -19,6 +23,7 @@
 	String loginid = (String)session.getAttribute("idKey");
 	//검색에 필요한 변수
 	int grade=Loginmgr.getGrade(loginid);
+	//int grade=Loginmgr.getGrade(id);
 	
 	String mpoint=null;
 	if(grade==0||grade==1){
