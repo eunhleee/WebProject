@@ -36,7 +36,7 @@
 			
 		}
 		function goReport() {
-			url = "../Report/reportReceiptAInf.jsp?stopid=<%=num%>";
+			url = "../Report/reportReceiptAInf.jsp?stopid=<%=num%>&stopurl=../Academy/acRead.jsp?num=<%=num%>";
 			window.open(url, "GoReport", "width=400, height=350, top=200, left=300");
 		}
 </script>

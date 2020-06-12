@@ -17,7 +17,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 public class ReportMgr {
 	private DBConnectionMgr pool;
 
-	private final String  SAVEFOLDER = "C:/WebPro2/WebProject/WebContent/img/";
+	private final String  SAVEFOLDER = "C:/WebPro4/WebProject/WebContent/img/";
 	private final String ENCTYPE = "UTF-8";
 	private int MAXSIZE = 5*1024*1024;
 	 public ReportMgr() {
@@ -212,15 +212,15 @@ public class ReportMgr {
 			pool.freeConnection(con, pstmt);
 			}
 	}
-	//�븰�썝 �옒紐삳맂 �젙蹂� �떊怨�
-	public void rePortAI(ReportBean bean) {
+	//
+	public void rePortSI(ReportBean bean,String url) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		String sql = null;
 		try {
 			con = pool.getConnection();
-			sql = "insert into report(regroup,retitle,recontent,reid,stopid,reip,restate,olddate,kind)"
-								+"values(?,?,?,?,?,?,?,now(),?)";
+			sql = "insert into report(regroup,retitle,recontent,reid,stopid,reip,restate,olddate,kind,stopurl)"
+								+"values(?,?,?,?,?,?,?,now(),?,"+"'"+ url+"'" +")";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, bean.getRegroup());
 			pstmt.setString(2, bean.getRetitle());
@@ -238,7 +238,33 @@ public class ReportMgr {
 			pool.freeConnection(con, pstmt);
 			}
 	}
-	
+	//
+	public void rePortAI(ReportBean bean) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String sql = null;
+		try {
+			con = pool.getConnection();
+			sql = "insert into report(regroup,retitle,recontent,reid,stopid,reip,restate,olddate,kind,stopurl)"
+								+"values(?,?,?,?,?,?,?,now(),?,?)";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, bean.getRegroup());
+			pstmt.setString(2, bean.getRetitle());
+			pstmt.setString(3, bean.getRecontent());
+			pstmt.setString(4, bean.getReid());
+			pstmt.setString(5, bean.getStopid());
+			pstmt.setString(6, bean.getReip());
+			pstmt.setString(7, bean.getRestate());
+			pstmt.setString(8, bean.getKind());
+			pstmt.setString(9, bean.getStopurl());
+
+			pstmt.executeUpdate();		
+			} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt);
+			}
+	}
 	//report bulletin board 
 	public void reportBoard(ReportBean bean) {
 		Connection con = null;
@@ -421,17 +447,22 @@ public class ReportMgr {
 			con = pool.getConnection();
 			if(keyWord.trim().equals("")||keyWord==null) {
 				//
-				sql = "select num,regroup, reid, stopid , retitle, recontent, restate,kind"
-						+ " from report";
+				sql = "select num,regroup, reid, stopid , retitle, recontent, restate,kind,stopurl"
+						+ " from report limit ?,?";
 				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, start);
+				pstmt.setInt(2, cnt);
 			}else {
 				//
-				sql = sql = "select num,regroup, reid, stopid ,  retitle, recontent, restate,kind"
-						+ " from report"
+				sql = sql = "select num,regroup, reid, stopid ,  retitle, recontent, restate,kind,stopurl"
+						+ " from report "
 						+ " where " + keyField 
-						+" like ?";
+						+" like ? limit ?,?";
 				pstmt = con.prepareStatement(sql);
+
 				pstmt.setString(1, "%"+keyWord+"%");
+				pstmt.setInt(2, start);
+				pstmt.setInt(3, cnt);
 			}
 			rs = pstmt.executeQuery();
 			while(rs.next()) { 
@@ -444,6 +475,7 @@ public class ReportMgr {
 				bean.setRecontent(rs.getString(6));
 				bean.setRestate(rs.getString(7));
 				bean.setKind(rs.getString(8));
+				bean.setStopurl(rs.getString(9));
 
 				vlist.addElement(bean);
 			}

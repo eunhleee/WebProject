@@ -1,3 +1,4 @@
+<!-- reportAInfProc.  -->
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%request.setCharacterEncoding("UTF-8");%>
 <jsp:useBean id="mgr" class="alcinfo.ReportMgr"/>
@@ -6,8 +7,10 @@
 <jsp:setProperty property="*" name="bean"/>
 <%
 	String stopid= request.getParameter("stopid").trim();
+	String stopurl= request.getParameter("stopurl").trim();
+
 	mgr.rePortAI(bean);
-	response.sendRedirect("reportReceiptAInf.jsp?stopid="+stopid);
+	response.sendRedirect("reportReceiptAInf.jsp?stopid="+stopid+"&stopurl="+stopurl);
 %>
 <script>
 	alert("여기도착")

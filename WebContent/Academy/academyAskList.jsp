@@ -7,12 +7,9 @@
 <%@page import="alcinfo.LeteaBean"%>
 <%@page import="alcinfo.MemberBean"%>
 
-<<<<<<< HEAD
 <!-- 학원 리뷰 리스트 출력 -->
-=======
 <!-- 학원 리뷰 리스트 출력 -->
 
->>>>>>> branch 'master' of https://github.com/eunhleee/WebProject.git
 <%@page import="alcinfo.UtilMgr"%>
 <%@page import="alcinfo.AcreviewBean"%>
 <%@page import="java.util.Vector"%>
