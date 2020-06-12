@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/alcinfo/scPost")
+@WebServlet("/Community/scPost")
 public class ScPostServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -18,7 +18,7 @@ public class ScPostServlet extends HttpServlet {
 		
 		mgr.insertsc(request,pageValue);
 		
-		response.sendRedirect("../alcinfo/communityList.jsp?pageValue="+pageValue);
+		response.sendRedirect("communityList.jsp?pageValue="+pageValue);
 	}
 
 }
