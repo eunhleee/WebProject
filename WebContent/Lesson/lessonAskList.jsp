@@ -1,7 +1,11 @@
+<<<<<<< HEAD
 <!-- 커뮤니티의 자유게시판 리스트 출력 -->
 
 <%@page import="alcinfo.LeteaBean"%>
 <%@page import="alcinfo.MemberBean"%>
+=======
+<!-- 과외 리뷰 리스트 출력 -->
+>>>>>>> branch 'master' of https://github.com/eunhleee/WebProject.git
 <%@page import="alcinfo.UtilMgr"%>
 <%@page import="alcinfo.LereviewBean"%>
 <%@page import="java.util.Vector"%>
@@ -14,6 +18,8 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 	int num=UtilMgr.parseInt(request,"num");
+	String id = request.getParameter("id");
+	String loginid = (String)session.getAttribute("idKey");
 	//검색에 필요한 변수
 	String id=(String) session.getAttribute("idKey");
 	int grade=Loginmgr.getGrade(id);
@@ -79,7 +85,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>학원 후기 게시판</title>
+<title>과외 후기 게시판</title>
 <script>
 	function lecheck() {
 		if (document.lesearchFrm.keyWord.value == "") {
@@ -100,7 +106,7 @@
 		document.readFrm.submit();
 	}
 	function list() {//[처음으로]를 누르면 게시글의 처음 페이지로 돌아감
-		document.listFrm.action = "communityList.jsp";
+		document.listFrm.action = "leRead.jsp?num=<%=num%>&id=<%=id%>";
 		document.listFrm.submit();
 	}
 	function numPerFn(numPerPage) {
@@ -110,9 +116,12 @@
 	//list.jsp에서 read.jsp로 요청이 될때 기존에 조건
 	//기존 조건 : keyField,keyWord,nowPage,numPerPage
 	function read(num) {
-		document.readFrm.num.value = num;
-		document.readFrm.action = "read.jsp";
+		document.readFrm.lernum.value = num;
+		document.readFrm.action = "le_ReviewRead.jsp";
 		document.readFrm.submit();
+	}
+	function lealert() {
+		alert("로그인 후 이용가능합니다.");
 	}
 </script>
 <style>
@@ -204,17 +213,24 @@ a:hover {
 					<%
 						} else {
 							for (int i = 0; i < listsize; i++) {
-								LereviewBean bean = vlist.get(i);
-								int lnum = bean.getNum();
-								String title = bean.getLr_title();
-								String nick = bean.getLr_nick();
-								double star = bean.getLr_star();
-								String date = bean.getLr_date();
-								int count = bean.getLr_count();
+								LereviewBean le1bean = vlist.get(i);
+								int lnum = le1bean.getNum();
+								String title = le1bean.getLr_title();
+								String content = le1bean.getLr_content();
+								String nick = le1bean.getLr_nick();
+								double star = le1bean.getLr_star();
+								String date = le1bean.getLr_date();
+								int count = le1bean.getLr_count();
+								int ccount = mgr.lerccount(lnum);
 					%>
 					<tr id="list">
-							<td align="center"><%=star%></td>
-						<td align="center"><a href=""><%=title%></a></td>
+							<td align="center"><%=star%></a></td>
+						<td align="center">
+						<a href="javascript:read('<%=lnum%>')"><%=title%></a>
+						<% if(ccount>0) { %>
+							<font color="red">[<%=ccount%>]</font>
+						<% } %>
+						</td>
 						<td align="center"><a href=""><%=nick%></a></td>
 						<td align="center"><%=date%></td>
 						<td align="center"><%=count%></td>
@@ -275,7 +291,13 @@ a:hover {
 				<!-- 페이징 및 블럭 End -->
 			</td>
 			<td align="right">
-				<a href="post.jsp">[글쓰기]</a> 
+				<a 
+				<% if(loginid != null) { %>
+				href="le_ReviewPost.jsp?num=<%=num%>&id=<%=id%>"
+				<% } else { %>
+				href="javascript:lealert()"
+				<% } %>
+				>[글쓰기]</a>
 				<a href="javascript:list()">[처음으로]</a>
 			</td>
 		</tr>
@@ -288,10 +310,10 @@ a:hover {
 			<tr>
 				<td align="center" valign="bottom">
 				<select name="keyField" size="1">
-					<option value="sc_title">제 목</option>
-					<option value="sc_subject">과 목</option>
-					<option value="sc_content">내 용</option>
-					<option value="sc_nick">닉 네 임</option>
+					<option value="lq_name">제 목</option>
+					<option value="lq_subject">과 목</option>
+					<option value="lq_content">내 용</option>
+					<option value="lq_nick">닉 네 임</option>
 				</select> 
 				<input size="16" name="keyWord"> 
 				<input type="button" value="찾기" onClick="javascript:lecheck()"> 
@@ -310,7 +332,10 @@ a:hover {
 		<input type="hidden" name="numPerPage" value="<%=numPerPage%>"> 
 		<input type="hidden" name="keyField" value="<%=keyField%>"> 
 		<input type="hidden" name="keyWord" value="<%=keyWord%>"> 
-		<input type="hidden" name="num">
+		<input type="hidden" name="num" value="<%=num%>">
+		<input type="hidden" name="lernum">
+		<input type="hidden" name="id" value="<%=id%>">
+		
 	</form>
 
 

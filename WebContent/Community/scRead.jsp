@@ -195,7 +195,10 @@ a:hover {
 		    <td align="right">
 		     	조회수  <%=count%>
 		    </td>
+		    
+		  <% if(loginid!=null) {%>		    
 		    <td><input type="button" value="신고" onclick="javascript:goRep();"></td>
+		    <%}%>
 		   </tr>
 		   </table>
 		  </td>

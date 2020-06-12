@@ -7,7 +7,7 @@
 <jsp:useBean id="bean" class="alcinfo.ReportBean" />
 <jsp:setProperty property="*" name="bean" />
 <%
-	boolean result = mgr.updateMgm(bean);
+	boolean result = mgr.MGMUpdate(bean);
 
 	if (result) {
 %>

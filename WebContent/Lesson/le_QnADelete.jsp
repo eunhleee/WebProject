@@ -2,10 +2,10 @@
 <%@page import="alcinfo.UtilMgr"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<% request.setCharacterEncoding("UTF-8"); %>
 <jsp:useBean id="leqmgr" class="alcinfo.LequeryMgr"/>
 <jsp:useBean id="leqcmgr" class="alcinfo.LeQcommentsMgr"/>
 <%
-	request.setCharacterEncoding("UTF-8");
 	String nowPage = request.getParameter("nowPage");
 	int lq_lnum = UtilMgr.parseInt(request, "lq_lnum");
 	int num = UtilMgr.parseInt(request, "num");

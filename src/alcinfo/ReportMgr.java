@@ -16,9 +16,8 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 public class ReportMgr {
 	private DBConnectionMgr pool;
-	//private static final String  SAVEFOLDER = "C:/Jsp/myapp/WebContent/photoBlog/photo/";
 
-	private final String  SAVEFOLDER = "C:/WebPro/WebProject/WebContent/alcinfo/photo/";
+	private final String  SAVEFOLDER = "C:/WebPro2/WebProject/WebContent/img/";
 	private final String ENCTYPE = "UTF-8";
 	private int MAXSIZE = 5*1024*1024;
 	 public ReportMgr() {
@@ -37,9 +36,9 @@ public class ReportMgr {
 				MultipartRequest multi = 
 						new MultipartRequest(req, SAVEFOLDER, MAXSIZE, ENCTYPE,
 								new DefaultFileRenamePolicy());
-				//DefaultFileRenamePolicy() -> 以묐났�뙆�씪紐낆쓣 �쐞�븳 留ㅺ컻蹂��닔
+				//DefaultFileRenamePolicy() -> 
 				String photo = null;
-				//post.jsp(61�씪�씤)�뿉�꽌 file ���엯 �깭洹몄쓽 �씠由꾩씠 photo�씠�떎.
+				//post.jsp
 				if(multi.getFilesystemName("photo")!=null) {
 					photo = multi.getFilesystemName("photo");
 				}
@@ -72,15 +71,15 @@ public class ReportMgr {
 			con = pool.getConnection();
 			if(keyWord.trim().equals("")||keyWord==null) {
 				//
-			sql = "select renum, regroup, retitle, recontent, restate, reid"
-					+ " from report where reid ='"+reid+"' limit ?,?";
+			sql = "select renum, regroup, retitle, recontent, restate, reid,olddate"
+					+ " from report where reid ='"+reid+"' order by olddate desc,recontent limit ?,?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, start);
 			pstmt.setInt(2, cnt);
 			}else {
 				sql = "select renum, regroup, retitle, recontent, restate, reid"
 						+ " from report where reid ='"+reid+"'"
-								+ " and " +keyField+" like ? limit ?,?";
+								+ " and " +keyField+" like ? order by olddate desc,recontent limit ?,?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, "%"+keyWord+"%");
 				pstmt.setInt(2, start);
@@ -96,6 +95,7 @@ public class ReportMgr {
 				bean.setRecontent(rs.getString(4));
 				bean.setRestate(rs.getString(5));
 				bean.setReid(rs.getString(6));
+				bean.setOlddate(rs.getString(7));
 
 				vlist.addElement(bean);
 			}
@@ -411,7 +411,7 @@ public class ReportMgr {
 	
 	// MGMemberControl.jsp
 	public Vector<ReportBean> mGMList(String keyField, 
-			String keyWord){
+			String keyWord, int start, int cnt){
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -421,12 +421,12 @@ public class ReportMgr {
 			con = pool.getConnection();
 			if(keyWord.trim().equals("")||keyWord==null) {
 				//
-				sql = "select num,regroup, reid, stopid ,  retitle, recontent, restate"
+				sql = "select num,regroup, reid, stopid , retitle, recontent, restate,kind"
 						+ " from report";
 				pstmt = con.prepareStatement(sql);
 			}else {
 				//
-				sql = sql = "select num,regroup, reid, stopid ,  retitle, recontent, restate"
+				sql = sql = "select num,regroup, reid, stopid ,  retitle, recontent, restate,kind"
 						+ " from report"
 						+ " where " + keyField 
 						+" like ?";
@@ -443,6 +443,8 @@ public class ReportMgr {
 				bean.setRetitle(rs.getString(5));
 				bean.setRecontent(rs.getString(6));
 				bean.setRestate(rs.getString(7));
+				bean.setKind(rs.getString(8));
+
 				vlist.addElement(bean);
 			}
 			
@@ -484,10 +486,37 @@ public class ReportMgr {
 		}
 		return flag;
 	}
-	
+	public int rgetTotalCount(String keyField, String keyWord) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		int totalCount = 0;
+		try {
+			con = pool.getConnection();
+			if(keyWord.trim().equals("")||keyWord==null) {
+				
+				sql = "select count(*) from report";
+				pstmt = con.prepareStatement(sql);
+				
+			}else {
+				sql = "select count(*) from report where " 
+				+ keyField +" like ?";;
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, "%"+keyWord+"%");
+			}
+			rs = pstmt.executeQuery();
+			if(rs.next()) totalCount = rs.getInt(1);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt, rs);
+		}
+		return totalCount;
+	}
 	////
-		public Vector<ReportBean> SMList(String keyField, 
-			String keyWord){
+	public Vector<ReportBean> SMList(String keyField, 
+			String keyWord,int start, int cnt){
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -505,9 +534,11 @@ public class ReportMgr {
 						+" UNION"
 						+" SELECT NAME,id,email"
 						+" FROM letea) a"
-						+" WHERE report.stopid=a.id";
+						+" WHERE report.stopid=a.id limit ?,?";
 						
 				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, start);
+				pstmt.setInt(2, cnt);
 			}else {
 				//
 				
@@ -520,9 +551,11 @@ public class ReportMgr {
 						+" SELECT NAME,id,email"
 						+" FROM letea) a"
 						+" WHERE report.stopid=a.id and " + keyField 
-						+" like ?";
+						+" like ? limit ?,?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, "%"+keyWord+"%");
+				pstmt.setInt(2, start);
+				pstmt.setInt(3, cnt);
 			
 			}
 			rs = pstmt.executeQuery();
