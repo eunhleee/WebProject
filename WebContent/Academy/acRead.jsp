@@ -6,9 +6,11 @@
 	pageEncoding="UTF-8"%>
 <jsp:useBean id="mgr" class="alcinfo.AcademyMgr" />
 <%
+	
 	request.setCharacterEncoding("UTF-8");
 	int num = 0;
 	String url = "AcademyMain.jsp";
+	String id=(String) session.getAttribute("idKey"); //로그인 여부 확인
 	AcademyBean bean = null;
 	if (request.getParameter("num") == null) {
 		response.sendRedirect(url);
@@ -34,8 +36,8 @@
 			
 		}
 		function goReport() {
-			url = "../Report/reportReceiptAInf.jsp?stopid="+<%=num%>;
-			window.open(url, "GoReport", "width=360, height=300, top=200, left=300");
+			url = "../Report/reportReceiptAInf.jsp?stopid=<%=num%>";
+			window.open(url, "GoReport", "width=400, height=350, top=200, left=300");
 		}
 </script>
 </head>
@@ -107,8 +109,8 @@
 				</div>
 					</td>
 				<td width="70%"  align="center">
-					<div style="border:10px solid #36ada9; border-radius:15px; padding:20px">
-						<jsp:include page="academyAskList.jsp"></jsp:include>
+				<div style="border:10px solid #36ada9; border-radius:15px; padding:20px">
+					<jsp:include page="academyAskList.jsp"></jsp:include>
 					</div>
 				</td>
 			</tr>

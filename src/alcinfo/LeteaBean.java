@@ -17,7 +17,7 @@ public class LeteaBean {
 	private String school_name;
 	private String school_grade;
 	private String state;
-	private int mpoint;
+	private String mpoint;
 	private String mdate;
 	private String imgname;
 	private String etc;
@@ -126,10 +126,10 @@ public class LeteaBean {
 	public void setState(String state) {
 		this.state = state;
 	}
-	public int getMpoint() {
+	public String getMpoint() {
 		return mpoint;
 	}
-	public void setMpoint(int mpoint) {
+	public void setMpoint(String mpoint) {
 		this.mpoint = mpoint;
 	}
 	public String getMdate() {

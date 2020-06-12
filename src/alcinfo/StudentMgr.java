@@ -208,16 +208,14 @@ public class StudentMgr {
 			return flag;
 		}
 		
+		@SuppressWarnings("unchecked")
 		public JSONArray getCountTeachar(int num) {
 			Connection con = null;
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
 			String sql = "";
 			JSONArray jsonArray = new JSONArray();
-			JSONArray colNameArray = new JSONArray(); // 而� ���씠�� �꽕�젙
-			colNameArray.add("�궇吏�");
-			colNameArray.add("�씤�썝�닔");
-			jsonArray.add(colNameArray);
+			
 			try {
 				con = pool.getConnection();
 				sql = "select date,COUNT(*) from stinsert where num=? group by date";

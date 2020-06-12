@@ -1,5 +1,5 @@
 <!-- pwdChange.jsp -->
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" 
     pageEncoding="UTF-8"%>
 <jsp:useBean id="pcmgr" class="member.MemberMgr"/>
 <%

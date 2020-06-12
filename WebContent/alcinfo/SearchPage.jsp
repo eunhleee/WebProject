@@ -27,10 +27,12 @@
 <body>
 
 	<%@ include file="mainHeader.jsp"%>
-
+	
 	<section class="gallery-block cards-gallery">
-
+	<br>
+	
 	<div class="container">
+	<h3>"<%=keyWord %>"에 대한 검색 결과 입니다.</h3><br>
 		<div class="heading">
 			<h2>학원</h2>
 		</div>
@@ -54,19 +56,19 @@
 	        %>
 			<div class="col-md-6 col-lg-4">
 				<div class="card border-0 transform-on-hover">
-					<a class="lightbox" href="acRead.jsp?num=<%=num%>"> <img
-						src="img/no_image.jpg" alt="Card Image" class="card-img-top">
+					<a class="lightbox" href="../Academy/acRead.jsp?num=<%=num%>"> <img
+						src="../img/no_image.jpg" alt="Card Image" class="card-img-top">
 					</a>
 					<div class="card-body">
 						<h6>
-							<a href="acRead.jsp?num=<%=num%>"><%=name %></a>
+							<a href="../Academy/acRead.jsp?num=<%=num%>"><%=name %></a>
 						</h6>
 						<p class="text-muted card-text"><%=group2 %>
 							<br>
 							<%=tel %></p>
 					</div>
 					<div align="right" style="margin-right: 20px;">
-						<img src="img/star.png" width="15" height="15"><%=star %>
+						<img src="../img/star.png" width="15" height="15"><%=star %>
 						(<%=count %>)
 					</div>
 				</div>
@@ -99,19 +101,19 @@
 	        %>
 			<div class="col-md-6 col-lg-4">
 				<div class="card border-0 transform-on-hover">
-					<a class="lightbox" href="leRead.jsp?id=<%=id%>"> <img
-						src="img/no_image.jpg" alt="Card Image" class="card-img-top">
+					<a class="lightbox" href="../Lesson/leRead.jsp?id=<%=id%>&num=<%=num%>"> <img
+						src="../img/no_image.jpg" alt="Card Image" class="card-img-top">
 					</a>
 					<div class="card-body">
 						<h6>
-							<a href="leRead.jsp?id=<%=id%>"><%=name %></a>
+							<a href="../Lesson/leRead.jsp?id=<%=id%>&num=<%=num%>"><%=name %></a>
 						</h6>
 						<p class="text-muted card-text"><%=leclass %>
 							<br>
 							<%=area %></p>
 					</div>
 					<div align="right" style="margin-right: 20px;">
-						<img src="img/star.png" width="15" height="15"><%=star %>
+						<img src="../img/star.png" width="15" height="15"><%=star %>
 						(<%=count %>)
 					</div>
 				</div>
@@ -146,12 +148,12 @@
 	        %>
 			<div class="col-md-6 col-lg-4">
 				<div class="card border-0 transform-on-hover">
-					<a class="lightbox" href="stRead.jsp?num=<%=num%>"> <img
-						src="img/no_image.jpg" alt="Card Image" class="card-img-top">
+					<a class="lightbox" href="../Student/stRead.jsp?num=<%=num%>"> <img
+						src="../img/no_image.jpg" alt="Card Image" class="card-img-top">
 					</a>
 					<div class="card-body">
 						<h6>
-							<a href="stRead.jsp?num=<%=num%>"><%=name %></a>
+							<a href="../Student/stRead.jsp?num=<%=num%>"><%=name %></a>
 						</h6>
 						<p class="text-muted card-text"><%=school_name %>
 							&nbsp;

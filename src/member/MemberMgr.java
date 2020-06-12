@@ -233,6 +233,33 @@ public class MemberMgr {
 		}
 		return flag;
 	}
-	
+	// 사용자 정보 가지고 오기
+		public MemberBean getInfo(String id) {
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String sql = null;
+			MemberBean bean=new MemberBean();
+			try {
+				con = pool.getConnection();
+				sql = "select name,email,phone,address,mpoint from member where id=? ";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, id);
+				
+				rs = pstmt.executeQuery();
+				if(rs.next()) {
+					bean.setName(rs.getString("name"));
+					bean.setEmail(rs.getString("email"));
+					bean.setPhone(rs.getString("phone"));
+					bean.setAddress(rs.getString("address"));
+					bean.setMpoint(rs.getString("mpoint"));
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				pool.freeConnection(con, pstmt);
+			}
+			return bean;
+		}
 	
 }

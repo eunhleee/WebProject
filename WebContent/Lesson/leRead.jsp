@@ -10,9 +10,9 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 	String id = "";
-	String url = "LessonMain.jsp";
+	String url = "LessonMain.jsp?pageValue=top";
 	LessonBean lebean = null;
-	int num = UtilMgr.parseInt(request, "num"); // 조회수 증가
+	int num = UtilMgr.parseInt(request, "num"); 
 	
 	if(request.getParameter("id") == null) {
 		response.sendRedirect(url);
@@ -20,7 +20,7 @@
 		id = request.getParameter("id");
 		lebean = mgr.getLesson(id);
 		session.setAttribute("lebean", lebean);
-		mgr.upLeCount(num); // 조회수 증가
+		mgr.upLeCount(num);
 		
 		lebean.setId(id);
 		  System.out.println("선생님아이디는"+id);
@@ -43,11 +43,9 @@ google.charts.load("current",{packages:['corechart']});
 function columnChart1(arrayList) {
 	// 실 데이터를 가진 데이터테이블 객체를 반환하는 메소드
 	 
-	alert(arrayList);
+	
 	 arrayList = eval('('+arrayList+')');
 
-	 
-/* 	arrayList=[["2015",2],["2020",5]]; */
 	var dataTable = new google.visualization.DataTable();
 	dataTable.addColumn('string','Date');
 	dataTable.addColumn('number','register');
@@ -107,8 +105,8 @@ function graph(){
 	
 	
 	function goReport() {
-		url = "../Report/reportReceiptLInf.jsp?stopid="+<%=id%>;
-		window.open(url, "GoReport", "width=360, height=300, top=200, left=300");
+		url = "../Report/reportReceiptLInf.jsp?stopid=<%=id%>";
+		window.open(url, "GoReport", "width=400, height=350, top=200, left=300");
 	}
 		
 	

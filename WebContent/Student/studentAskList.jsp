@@ -9,7 +9,6 @@
 	request.setCharacterEncoding("UTF-8");
 	int stunum = UtilMgr.parseInt(request, "stunum");
 	//검색에 필요한 변수
-
 	int totalRecord = 0;//총게시물수
 	int numPerPage = 10;//페이지당 레코드 개수(5,10,15,30)
 	int pagePerBlock = 15;//블럭당 페이지 개수
@@ -151,20 +150,17 @@ a:hover {
 						<td width="150">날 짜</td>
 						<td width="100">조회수</td>
 					</tr>
-
-
+					
 					<%
 						Vector<StinqueryBean> vlist = mgr.getBoardList(stunum, keyField, keyWord, start, cnt);
 						int listsize = vlist.size();
 						if (vlist.isEmpty()) {
 					%>
 					<tr>
-						<td align="center" colspan="5" height="210">
+						<td align="center" colspan="6" height="210">
 							<p>등록된 게시글이 없습니다.</p>
 						</td>
 					</tr>
-
-
 
 					<%
 						} else {
@@ -190,6 +186,7 @@ a:hover {
 					<%
 						}
 						}
+					
 					%>
 
 

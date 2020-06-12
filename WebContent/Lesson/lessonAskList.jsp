@@ -1,15 +1,33 @@
 <!-- 커뮤니티의 자유게시판 리스트 출력 -->
+
+<%@page import="alcinfo.LeteaBean"%>
+<%@page import="alcinfo.MemberBean"%>
 <%@page import="alcinfo.UtilMgr"%>
 <%@page import="alcinfo.LereviewBean"%>
 <%@page import="java.util.Vector"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <jsp:useBean id="mgr" class="alcinfo.LereviewMgr"></jsp:useBean>
+<jsp:useBean id="Loginmgr" class="alcinfo.LoginMgr"></jsp:useBean>
+<jsp:useBean id="Memmgr" class="member.MemberMgr"></jsp:useBean>
+<jsp:useBean id="Teamgr" class="alcinfo.LeteaMgr"></jsp:useBean>
 <%
 	request.setCharacterEncoding("UTF-8");
 	int num=UtilMgr.parseInt(request,"num");
 	//검색에 필요한 변수
-
+	String id=(String) session.getAttribute("idKey");
+	int grade=Loginmgr.getGrade(id);
+	
+	String mpoint=null;
+	if(grade==0||grade==1){
+		MemberBean mbean=Memmgr.getInfo(id);
+		mpoint=mbean.getMpoint();
+		
+	}
+	else if(grade==2||grade==3){
+		LeteaBean lbean=Teamgr.getInfo(id);
+		mpoint=lbean.getMpoint();
+	} 
 	int totalRecord = 0;//총게시물수
 	int numPerPage = 10;//페이지당 레코드 개수(5,10,15,30)
 	int pagePerBlock = 15;//블럭당 페이지 개수
@@ -159,7 +177,16 @@ a:hover {
 						<td width="150">날 짜</td>
 						<td width="100">조회수</td>
 					</tr>
-
+					<%
+						if(id==null||mpoint==null){
+					%>
+					<tr>
+						<td align="center" colspan="5" height="210" style="background-color:gray;  opacity: 0.5;">
+							<p style="color:white;">포인트를 구입하시면 <%=totalRecord%> 개의 후기글을 보실 수 있습니다.</p><br>
+							<input type="button" value="포인트 구입하러 가기" onclick="moveToBuyPoint();">
+						</td>
+					</tr>
+					<%}else{ %>
 
 					<%
 						Vector<LereviewBean> vlist = mgr.getBoardList(num,keyField, keyWord, start, cnt);
@@ -196,6 +223,7 @@ a:hover {
 					<%
 						}
 						}
+					}
 					%>
 
 

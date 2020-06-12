@@ -85,19 +85,19 @@
 			%>
 			<div class="col-md-6 col-lg-4">
 				<div class="card border-0 transform-on-hover">
-					<a class="lightbox" href="#"> <img src="//img/no_image.jpg"
+					<a class="lightbox" href="../Academy/acRead.jsp?num=<%=num%>"> <img src="../img/no_image.jpg"
 						alt="Card Image" class="card-img-top">
 					</a>
 					<div class="card-body">
 						<h6>
-							<a href="#"><%=name%></a>
+							<a href="../Academy/acRead.jsp?num=<%=num%>"><%=name%></a>
 						</h6>
 						<p class="text-muted card-text"><%=group2%>
 							<br>
 							<%=tel%></p>
 					</div>
 					<div align="right" style="margin-right: 20px;">
-						<img src="//img/star.png" width="15" height="15"><%=star%>
+						<img src="../img/star.png" width="15" height="15"><%=star%>
 						(<%=count%>)
 					</div>
 				</div>

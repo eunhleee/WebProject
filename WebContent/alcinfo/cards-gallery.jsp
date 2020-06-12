@@ -23,6 +23,7 @@
 	<%@ include file="mainHeader.jsp"%>
 
 	<section class="gallery-block cards-gallery">
+	<br><br>
 		<div class="container">
 			<div class="heading">
 				<h2>학원 BEST</h2>
@@ -85,6 +86,7 @@
 	        		LessonBean Lbean=Lvlist.get(i);
 	        		//le.num,tea.name,tea.class,tea.area,le.star,le.count
 	        		int num=Lbean.getNum();
+	        		String id=Lbean.getId();
 	        		String name=Lbean.getName();
 	        		String leclass=Lbean.getLeclass();
 	        		String area=Lbean.getArea();
@@ -93,18 +95,18 @@
 	        %>
 				<div class="col-md-6 col-lg-4">
 					<div class="card border-0 transform-on-hover">
-						<a class="lightbox" href="./Lesson/leRead.jsp?num=<%=num%>"> <img
-							src="./img/no_image.jpg" alt="Card Image" class="card-img-top">
+						<a class="lightbox" href="../Lesson/leRead.jsp?num=<%=num %>&id=<%=id%>"> <img
+							src="../img/no_image.jpg" alt="Card Image" class="card-img-top">
 						</a>
 						<div class="card-body">
 							<h6>
-								<a href="./Lesson/leRead.jsp?num=<%=num%>"><%=name %></a>
+								<a href="../Lesson/leRead.jsp?num=<%=num%>&id=<%=id%>"><%=name %></a>
 							</h6>
 							<p class="text-muted card-text"><%=leclass %><br>
 								<%=area %></p>
 						</div>
 						<div align="right" style="margin-right: 20px;">
-							<img src="./img/star.png" width="15" height="15"><%=star %>
+							<img src="../img/star.png" width="15" height="15"><%=star %>
 							(<%=count %>)
 						</div>
 					</div>

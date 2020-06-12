@@ -35,12 +35,57 @@
 <head>
 <meta charset="EUC-KR">
 <title>Team Read</title>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 <link href="style.css" rel="stylesheet" type="text/css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://www.gstatic.com/charts/loader.js"></script>
+
 <script>
 
+google.charts.load("current",{packages:['corechart']});
+
+function columnChart1(arrayList) {
+	// 실 데이터를 가진 데이터테이블 객체를 반환하는 메소드
+	 
+	alert(arrayList);
+	 arrayList = eval('('+arrayList+')');
+
+	var dataTable = new google.visualization.DataTable();
+	dataTable.addColumn('string','Date');
+	dataTable.addColumn('number','register');
+	dataTable.addRows(arrayList);
+	// 옵션객체 준비
+	var options = {
+	title: '날짜 별 등록 선생님수',
+	legend: 'top',
+	 colors: ['#FCBC7E']
+	};
+	// 차트를 그릴 영역인 div 객체를 가져옴
+	var objDiv = document.getElementById('column_chart_div1');
+	// 인자로 전달한 div 객체의 영역에 컬럼차트를 그릴수 있는 차트객체를 반환
+	var chart = new google.visualization.ColumnChart(objDiv);
+	// 차트객체에 데이터테이블과 옵션 객체를 인자로 전달하여 차트 그리는 메소드
+	chart.draw(dataTable, options);
+	/* var chart = new google.charts.Bar(objDiv);
+	// 차트객체에 데이터테이블과 옵션 객체를 인자로 전달하여 차트 그리는 메소드
+	chart.draw(dataTable,google.charts.Bar.convertOptions(options)); */
+} // drawColumnChart1()의 끝
+
+function graph(){
+	$.ajax({
+	dataType:"text",
+	
+	url:'columnChart2.jsp?stunum=<%=stunum%>',
+	success:function(result){
+	columnChart1(result);
+	},  
+	error:function(request, error){
+		alert("에러");
+		alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	} 
+	});
+}
 function insert() // no ';' here
 {
     var elem = document.getElementById("myButton1");
@@ -52,43 +97,10 @@ function deleteT(){
 	
 }
 
-google.charts.load('current',{packages:['corechart']});
-google.charts.setOnLoadCallback(drawChart);
-google.charts.setOnLoadCallback(function(){
-	setInterval(columnChart1(),30000);
-	}); 
-
-function columnChart1(arrayList) {
-	// 실 데이터를 가진 데이터테이블 객체를 반환하는 메소드
-	var dataTable = google.visualization.arrayToDataTable(arrayList);
-	// 옵션객체 준비
-	var options = {
-	title: '날짜 별 등록 선생님 수'
-	};
-	// 차트를 그릴 영역인 div 객체를 가져옴
-	var objDiv = document.getElementById('column_chart_div1');
-	// 인자로 전달한 div 객체의 영역에 컬럼차트를 그릴수 있는 차트객체를 반환
-	var chart = new google.charts.Bar(objDiv);
-	// 차트객체에 데이터테이블과 옵션 객체를 인자로 전달하여 차트 그리는 메소드
-	chart.draw(dataTable,google.charts.Bar.convertOptions(options));
-} // drawColumnChart1()의 끝
-
-
-function graph(){
-	
-		$.ajax({
-		url:'columnChart2.jsp?stunum=<%=stunum%>',
-		success:function(result){
-		columnChart1(result);
-		}
-		});
-		document.getElementById("btn").value='그래프 숨기기';
-	
-}
 
 function goReport() {
-	url = "../Report/reportReceiptLInf.jsp?stopid="+<%=mbean.getId()%>;
-	window.open(url, "GoReport", "width=360, height=300, top=200, left=300");
+	url = "../Report/reportReceiptLInf.jsp?stopid=<%=mbean.getId()%>";
+	window.open(url, "GoReport", "width=400, height=350, top=200, left=300");
 }
 	
 
@@ -166,7 +178,7 @@ function goReport() {
 				<td width="30%" align="center">
 				<div style="border:10px solid #FCBC7E; border-radius:15px; padding:20px">
 				<button type="button" id="btn" onclick="graph()" >그래프 보기</button>
-				<div id="column_chart_div1" style="height: 440px;"></div>
+				<div id="column_chart_div1" style="height: 440px; width:300px;"></div>
 				</div>
 				</td>
 				<td width="70%" align="center">

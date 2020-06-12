@@ -2,6 +2,7 @@ package alcinfo;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 public class LoginMgr {
 	DBConnectionMgr pool;
@@ -56,6 +57,29 @@ public class LoginMgr {
 				pool.freeConnection(con, pstmt);
 			}
 			return flag;
+		}
+		
+		public int getGrade(String id) {
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String sql = null;
+			int grade=-1;
+			try {
+				con = pool.getConnection();
+				sql = "select grade from login where id=? ";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, id);
+				rs = pstmt.executeQuery();
+				if(rs.next()) {
+					grade=rs.getInt("grade");
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				pool.freeConnection(con, pstmt, rs);
+			}
+			return grade;
 		}
 		
 }

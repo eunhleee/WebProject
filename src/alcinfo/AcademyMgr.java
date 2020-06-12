@@ -12,7 +12,7 @@ public class AcademyMgr {
 	}
 	
 	
-	//����迭�� ����(����,��ȸ��,�����)�� ���ؼ� ��ȸ
+	
 	public Vector<AcademyBean> getBestBoard(String pageValue,String sort){
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -58,7 +58,7 @@ public class AcademyMgr {
 }
 	
 	
-	//��ȸ������ ��ȸ
+	
 	public Vector<AcademyBean> getCountBoard(){
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -92,7 +92,7 @@ public class AcademyMgr {
 	}
 	return vlist;
 }
-	//�ϳ��� �п� ���� ��������
+	
 		public AcademyBean getAcademy(int num) {
 			Connection con = null;
 			PreparedStatement pstmt = null;
@@ -134,7 +134,7 @@ public class AcademyMgr {
 					pstmt = con.prepareStatement(sql);
 				}
 				else if(!keyWord.trim().equals("")||keyWord!=null) {
-					//�˻��� �ƴѰ��
+					
 				
 				sql = "select num,imgname, ac_name,group2, ac_tel,star,count from academy "
 					+ " where ac_name like ? or ac_address like ? or group1 like ? or group2 like ?";

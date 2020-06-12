@@ -78,7 +78,7 @@
 	border-radius: 0px;
 	text-align: center;
 	margin-top: 40px;
-	HEIGHT: 80px;
+	HEIGHT: 75px;
 	padding: 20px 35px;
 	box-shadow: 0px 0px 10px #c0c0c0;
 }
@@ -135,13 +135,13 @@
 
 
 	<div id="top" align="center">
-		<span> ※과도한 사교육은 안좋아아아아아아아앙.&nbsp;&nbsp; <a
+		<span> ※과도한 사교육은 올바른 교육이 아닙니다.&nbsp;&nbsp; <a
 			href="./CS/custCenter.jsp?cust_page=ccBestBoard.jsp"> 고객센터</a>
 		</span>
 
 	</div>
 	<div align="center">
-		<form name="searchFrm" action="SearchPage.jsp">
+		<form name="searchFrm" action="../alcinfo/SearchPage.jsp">
 			<table style="margin-top: 70px;">
 				<tr>
 					<td>
@@ -168,6 +168,7 @@
 			<a	href="../Lesson/LessonMain.jsp?pageValue=top">과외선생님</a> 
 			<a	href="../Student/StudentMain.jsp?pageValue=count">학생</a> 
 			<a	href="../Community/communityList.jsp?pageValue=free">커뮤니티</a>
+			<a	href="../Payment/buyPoint.jsp" style="color:yellow;"><img src="../img/won.png" width="20" height="20">포인트</a>
 			<% if(session.getAttribute("idKey")==null){%>
 			<input type="button" onclick="openloginSelect();" class="openlm" value="로그인">
 			<%}else{ %>
