@@ -12,7 +12,6 @@
  	String stopurl =request.getParameter("stopurl").trim();
 
 	 num=UtilMgr.parseInt(request,"stopid");
-	System.out.println("여기"+session.getAttribute("idKey")+"stopid는"+stopid);
 %>
 <html>
 <head>

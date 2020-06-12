@@ -97,7 +97,7 @@ function deleteT(){
 	
 }
 
-
+ 
 function goReport() {
 	url = "../Report/reportReceiptSInf.jsp?stopid=<%=stbean.getId()%>&stopurl=../Student/stRead.jsp?stunum=<%=stunum%>";
 	window.open(url, "GoReport", "width=400, height=350, top=200, left=300");
