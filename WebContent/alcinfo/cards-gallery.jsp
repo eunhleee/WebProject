@@ -28,8 +28,8 @@
 			<div class="heading">
 				<h2>학원 BEST</h2>
 			</div>
-			<br>
-			<div class="row">
+			<br>  
+			<div class="row">  
 				<%
 	        	Vector<AcademyBean> Avlist=Amgr.getBestBoard("top","star");
 	        	//int listsize=vlist.size();
