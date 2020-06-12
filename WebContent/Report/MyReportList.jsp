@@ -9,8 +9,11 @@
 <%
 		
 		request.setCharacterEncoding("UTF-8");
-		String reid=(String)session.getAttribute("idKey");
-		int totalRecord = 0;//총게시물수
+/* 		String reid=(String)session.getAttribute("idKey");
+
+ */		
+ 		String reid="1111";
+ 		int totalRecord = 0;//총게시물수
 		int numPerPage = 10;//페이지당 레코드 개수(5,10,15,30)
 		int pagePerBlock = 15;//블럭당 페이지 개수
 		int totalPage = 0;//총 페이지 개수
@@ -58,7 +61,6 @@
 
 <html>
 <head>
-<link rel="stylesheet" sype="text/css" href = "MyReportListStyle.css">
 
 <title>GuestBook</title>
 <script type="text/javascript">
@@ -145,7 +147,7 @@ function numPerFn(numPerPage) {
 </table>
 		<table>
 	<tr>
-		<td align="center" colspan="2">
+		<td align="center" colspan="2" width="1000">
 		<%
 				Vector<ReportBean> vlist = 
 				rMgr.MRList(keyField, keyWord,reid, start, cnt);
@@ -159,6 +161,7 @@ function numPerFn(numPerPage) {
 	<table cellspacing="0">
 
 			<tr>
+				<td width="100">신고날짜</td>
 				<td>글번호</td>
 				<td>글분류</td>
 				<td>제목</td>
@@ -170,6 +173,7 @@ function numPerFn(numPerPage) {
 			ReportBean mbean=vlist.get(i);
 		%>
 			<tr>
+			<td><%=mbean.getOlddate()%></td>
 			<td><%=mbean.getRenum()%></td>
 			<td><%=mbean.getRegroup()%></td>
 			<td><%=mbean.getRetitle()%></td>

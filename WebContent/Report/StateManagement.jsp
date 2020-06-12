@@ -67,12 +67,26 @@
 
 <script type="text/javascript">
 function smupdate(renum,plusdate,num,contents,stopid) {
+	if(contents=="")
+	{
+		alert("사유를 선택해주세요");
+		return;
+
+	}
+	if(plusdate=="")
+		{
+			alert("상태를 선택해주세요");
+			return;
+
+		}
+	else{
 	   document.readFr.renum.value=renum;
 	   document.readFr.plusdate.value=plusdate;
 	   document.readFr.num.value=num;
 	   document.readFr.contents.value=contents;
 	   document.readFr.stopid.value=stopid;
 	   document.readFr.submit();
+	}
 	}
 function scheck() {
 	if(document.searchF.keyWord.value==""){
@@ -188,14 +202,14 @@ function read(num){
 						<td><%=rbean.getStopid()%></td>
 						<td><%=rbean.getName()%></td>
 						<td><select name=contents>
-								<option value="0">선택하세요.
+								<option value="">선택하세요.
 								<option value="사기">사기
 								<option value="도배">도배
 								<option value="욕설">욕설
 								<option value="기타">기타
 						</select></td>
 						<td><select name=plusdate>
-								<option value="0">선택하세요.
+								<option value="">선택하세요.
 								<option value="1">1일
 								<option value="7">7일
 								<option value="30">30일 

@@ -26,8 +26,9 @@
 	String title="부적절한 활동으로 인해 정지되셨습니다.";
 	String content="";
 	if(result){
-		mgr.deleteSM(num);
-		msg="수정하였습니다.";
+/* 		mgr.deleteSM(num);
+ */		
+ 		msg="수정하였습니다.";
 		content=contents+"의 사유로 인해 신고당하셨습니다. 오늘부터 "+plusdate+"일간 계정이 정지됩니다.";
 		GmailSend.send(title, content,mBean.getEmail());
 		
@@ -38,7 +39,7 @@
 		
 %>
 	<script>
-	alert("<%=request.getParameter("num")%>")
+	
 	alert("<%=msg%>")
 	location.href="StateManagement.jsp";
 	</script>

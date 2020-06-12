@@ -16,14 +16,14 @@ public class GmailSend {
 
 	private static class SMTPAuthenticator extends Authenticator {
 		public PasswordAuthentication getPasswordAuthentication() {
-			return new PasswordAuthentication("leej23243", "ps1326erji");
+			return new PasswordAuthentication("team2jo", "it403!@#");
 		}
 	}
 	
 	public static void send(String title, String content, String toEmail) {
 		
 		Properties p = new Properties();
-		p.put("mail.smtp.user", "leej23243@gmail.com"); //���� ������
+		p.put("mail.smtp.user", "team2jo@gmail.com"); //���� ������
 		p.put("mail.smtp.host", "smtp.gmail.com");
 		p.put("mail.smtp.port", "465");
 		p.put("mail.smtp.starttls.enable", "true");
@@ -43,7 +43,7 @@ public class GmailSend {
 			String message = content;
 			msg.setSubject(title);
 			
-			Address fromAddr = new InternetAddress("leej23243@gmail.com"); 
+			Address fromAddr = new InternetAddress("team2jo@gmail.com"); 
 			msg.setFrom(fromAddr);
 			
 			Address toAddr = new InternetAddress(toEmail); 

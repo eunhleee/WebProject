@@ -71,15 +71,15 @@ public class ReportMgr {
 			con = pool.getConnection();
 			if(keyWord.trim().equals("")||keyWord==null) {
 				//
-			sql = "select renum, regroup, retitle, recontent, restate, reid"
-					+ " from report where reid ='"+reid+"' limit ?,?";
+			sql = "select renum, regroup, retitle, recontent, restate, reid,olddate"
+					+ " from report where reid ='"+reid+"' order by olddate desc,recontent limit ?,?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, start);
 			pstmt.setInt(2, cnt);
 			}else {
 				sql = "select renum, regroup, retitle, recontent, restate, reid"
 						+ " from report where reid ='"+reid+"'"
-								+ " and " +keyField+" like ? limit ?,?";
+								+ " and " +keyField+" like ? order by olddate desc,recontent limit ?,?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, "%"+keyWord+"%");
 				pstmt.setInt(2, start);
@@ -95,6 +95,7 @@ public class ReportMgr {
 				bean.setRecontent(rs.getString(4));
 				bean.setRestate(rs.getString(5));
 				bean.setReid(rs.getString(6));
+				bean.setOlddate(rs.getString(7));
 
 				vlist.addElement(bean);
 			}
@@ -420,12 +421,12 @@ public class ReportMgr {
 			con = pool.getConnection();
 			if(keyWord.trim().equals("")||keyWord==null) {
 				//
-				sql = "select num,regroup, reid, stopid ,  retitle, recontent, restate"
+				sql = "select num,regroup, reid, stopid , retitle, recontent, restate,kind"
 						+ " from report";
 				pstmt = con.prepareStatement(sql);
 			}else {
 				//
-				sql = sql = "select num,regroup, reid, stopid ,  retitle, recontent, restate"
+				sql = sql = "select num,regroup, reid, stopid ,  retitle, recontent, restate,kind"
 						+ " from report"
 						+ " where " + keyField 
 						+" like ?";
@@ -442,6 +443,8 @@ public class ReportMgr {
 				bean.setRetitle(rs.getString(5));
 				bean.setRecontent(rs.getString(6));
 				bean.setRestate(rs.getString(7));
+				bean.setKind(rs.getString(8));
+
 				vlist.addElement(bean);
 			}
 			
