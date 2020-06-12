@@ -59,7 +59,7 @@ if (request.getParameter("reload") != null && request.getParameter("reload").equ
 
 <html>
 <head>
-<title>GuestBook</title>
+<title>관리자-신고접수건관리</title>
 <link href="MyReportListStyle.css" rel="stylesheet">
 
 <script type="text/javascript">
@@ -87,7 +87,7 @@ if (request.getParameter("reload") != null && request.getParameter("reload").equ
 		document.readFr.submit();
 	}
 	function list(){//처음으로를 누르면 처음으로 가게 도와주는 함수(24번째줄 참고)
-		document.listFr.action="list.jsp";
+		document.listFr.action="MGMemberControl.jsp";
 		document.listFr.submit();
 		
 	}

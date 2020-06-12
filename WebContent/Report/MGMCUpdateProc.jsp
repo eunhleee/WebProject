@@ -12,14 +12,14 @@
 	if (result) {
 %>
 <script>
-	alert("수정하였습니다.");
+	alert("처리가 완료되었습니다.");
 	location.href = "MGMemberControl.jsp";
 </script>
 <%
 	} else {
 %>
 <script>
-	alert("수정에 실패하였습니다.");
+	alert("처리에 실패 하셨습니다.");
 	history.back();
 </script>
 <%
