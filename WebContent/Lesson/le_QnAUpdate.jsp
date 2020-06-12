@@ -103,7 +103,16 @@ a:hover {
 			 <input type="hidden" name="nowPage" value="<%=nowPage %>">
 			 <input type="hidden" name="num" value="<%=num%>">
 			 <input type="hidden" name="lq_lnum" value="<%=lq_lnum%>">
-			 <input type="hidden" name="numPerPage" value="<%=numPerPage%>">
+			 <input type="hidden" name="nowPage" value="<%=nowPage%>">
+		    <input type="hidden" name="numPerPage" value="<%=numPerPage%>">
+			   <%
+			   	if(!(keyWord==null||keyWord.equals(""))){
+			   %>
+		    <input type="hidden" name="keyField" value="<%=keyField%>">
+		    <input type="hidden" name="keyWord" value="<%=keyWord%>">
+			<%
+				}
+			%>
 			</form>
 		</div>
 	</div>

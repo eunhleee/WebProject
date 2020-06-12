@@ -264,7 +264,9 @@ a:hover {
 			<% if(loginid==null) { %>
 			href="" onclick="acqnaalert()"
 			<% } else { %>
-			href="ac_QnAPost.jsp?ac_num=<%=ac_num%>"
+			href="ac_QnAPost.jsp?ac_num=<%=ac_num%>&numPerPage=<%=numPerPage%>&nowPage=<%=nowPage%><%
+  	 	if(!(keyWord==null||keyWord.equals(""))){
+		     %>&keyField=<%=keyField%>&keyWord=<%=keyWord%><%}%>"
 			<% } %>
 			>[글쓰기]</a> <a
 				href="javascript:list()">[처음으로]</a></td>
@@ -298,8 +300,10 @@ a:hover {
 	<form name="readFrm">
 		<input type="hidden" name="nowPage" value="<%=nowPage%>"> 
 		<input type="hidden" name="numPerPage" value="<%=numPerPage%>"> 
-		<input type="hidden" name="keyField" value="<%=keyField%>"> 
+		<%if(!(keyWord==null||keyWord.equals(""))){%>
+		<input type="hidden" name="keyField" value="<%=keyField%>">
 		<input type="hidden" name="keyWord" value="<%=keyWord%>">
+		<%}%>
 		<input type="hidden" name="ac_num" value="<%=ac_num %>">
 		<input type="hidden" name="num">
 	</form>

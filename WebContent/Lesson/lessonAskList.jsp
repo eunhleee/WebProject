@@ -261,7 +261,9 @@ a:hover {
 			<td align="right">
 				<a 
 				<% if(loginid != null) { %>
-				href="le_ReviewPost.jsp?num=<%=num%>&id=<%=id%>"
+				href="le_ReviewPost.jsp?num=<%=num%>&id=<%=id%>&numPerPage=<%=numPerPage%>&nowPage=<%=nowPage%><%
+  	 	if(!(keyWord==null||keyWord.equals(""))){
+		     %>&keyField=<%=keyField%>&keyWord=<%=keyWord%><%}%>"
 				<% } else { %>
 				href="javascript:lealert()"
 				<% } %>
@@ -298,8 +300,10 @@ a:hover {
 	<form name="readFrm">
 		<input type="hidden" name="nowPage" value="<%=nowPage%>"> 
 		<input type="hidden" name="numPerPage" value="<%=numPerPage%>"> 
-		<input type="hidden" name="keyField" value="<%=keyField%>"> 
-		<input type="hidden" name="keyWord" value="<%=keyWord%>"> 
+		<%if(!(keyWord==null||keyWord.equals(""))){%>
+		<input type="hidden" name="keyField" value="<%=keyField%>">
+		<input type="hidden" name="keyWord" value="<%=keyWord%>">
+		<%}%>
 		<input type="hidden" name="num" value="<%=num%>">
 		<input type="hidden" name="lernum">
 		<input type="hidden" name="id" value="<%=id%>">

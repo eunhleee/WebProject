@@ -11,6 +11,7 @@
 	String numPerPage = request.getParameter("numPerPage");
 	String keyField = request.getParameter("keyField");	
 	String keyWord = request.getParameter("keyWord");
+	
 	AcqueryBean bean = (AcqueryBean)session.getAttribute("bean");
 	String title = bean.getAc_title();
 	String subject = bean.getAc_subject();
@@ -100,10 +101,14 @@ a:hover {
 			</table>
 			 <input type="hidden" name="acqid" value="<%=acqid%>">
 			 <input type="hidden" name="acqip" value="<%=request.getRemoteAddr()%>">
-			 <input type="hidden" name="nowPage" value="<%=nowPage %>">
 			 <input type="hidden" name="num" value="<%=num%>">
 			 <input type="hidden" name="ac_num" value="<%=acnum%>">
+			 <input type="hidden" name="nowPage" value="<%=nowPage%>">
 			 <input type="hidden" name="numPerPage" value="<%=numPerPage%>">
+			 <%if(!(keyWord==null||keyWord.equals(""))){%>
+			<input type="hidden" name="keyField" value="<%=keyField%>">
+			<input type="hidden" name="keyWord" value="<%=keyWord%>">
+			<%}%>
 			</form>
 		</div>
 	</div>

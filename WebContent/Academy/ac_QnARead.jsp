@@ -66,7 +66,9 @@
 <title>우리학원 어디?-학원 문의 게시판</title>
 <script>
 function list() {
-	location.href="ac_QnA.jsp?ac_num=<%=acnum%>";
+	location.href="ac_QnA.jsp?ac_num=<%=acnum%>&numPerPage=<%=numPerPage%>&nowPage=<%=nowPage%><%
+  	 	if(!(keyWord==null||keyWord.equals(""))){
+		     %>&keyField=<%=keyField%>&keyWord=<%=keyWord%><%}%>";
 }
 function cInsert() {
 	if(document.cFrm.comment.value==""){
@@ -307,8 +309,12 @@ a:hover {
 		 <% 
 		 if(loginid!=null) {
 			 if(loginid.equals(id)) { %>
-			 | <a href="ac_QnAUpdate.jsp?num=<%=num%>&ac_num=<%=acnum%>&numPerPage=<%=numPerPage%>&nowPage=<%=nowPage%>&keyField=<%=keyField%>&keyWord=<%=keyWord%>" >수 정</a> |
-			 <a href="ac_QnADelete.jsp?nowPage=<%=nowPage%>&num=<%=num%>&ac_num=<%=acnum%>">삭 제</a> 
+			 | <a href="ac_QnAUpdate.jsp?num=<%=num%>&ac_num=<%=acnum%>&numPerPage=<%=numPerPage%>&nowPage=<%=nowPage%><%
+  	 	if(!(keyWord==null||keyWord.equals(""))){
+		     %>&keyField=<%=keyField%>&keyWord=<%=keyWord%><%}%>" >수 정</a> |
+			 <a href="ac_QnADelete.jsp?num=<%=num%>&numPerPage=<%=numPerPage%>&nowPage=<%=nowPage%><%
+  	 	if(!(keyWord==null||keyWord.equals(""))){
+		     %>&keyField=<%=keyField%>&keyWord=<%=keyWord%><%}%>">삭 제</a> 
 		 <% }
 		 } %>
 		 ]<br/>

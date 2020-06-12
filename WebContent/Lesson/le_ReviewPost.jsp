@@ -9,7 +9,12 @@
 
 <%
 	request.setCharacterEncoding("UTF-8");
+	String nowPage = request.getParameter("nowPage");	
+	String numPerPage = request.getParameter("numPerPage");	
+	String keyField = request.getParameter("keyField");	
+	String keyWord = request.getParameter("keyWord");
 	String loginid = (String)session.getAttribute("idKey");
+	String prevurl = request.getHeader("referer");
 	String id = "";
 	String url = "LessonMain.jsp";
 	LessonBean lebean = null;
@@ -251,7 +256,7 @@ function graph(){
 								 <input type="submit" value="확인">
 								 <input type="reset" value="다시쓰기">
 								 <input type="button" value="취소"
-								 onClick="javascript:location.href='../Academy/leRead.jsp?num=<%=num%>&id=<%=id%>'">
+								 onClick="javascript:location.href='<%=prevurl%>'">
 							</td>
 						</tr>
 					</table>
@@ -262,6 +267,16 @@ function graph(){
 			<input type="hidden" name="id" value="<%=id%>">
 			<input type="hidden" name="lerip" value="<%=request.getRemoteAddr()%>">
 			<input type="hidden" name="num" value="<%=num%>">
+			<input type="hidden" name="nowPage" value="<%=nowPage%>">
+		    <input type="hidden" name="numPerPage" value="<%=numPerPage%>">
+			   <%
+			   	if(!(keyWord==null||keyWord.equals(""))){
+			   %>
+		    <input type="hidden" name="keyField" value="<%=keyField%>">
+		    <input type="hidden" name="keyWord" value="<%=keyWord%>">
+			<%
+				}
+			%>
 			</form>
 				
 				

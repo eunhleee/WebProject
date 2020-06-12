@@ -7,6 +7,10 @@
 <jsp:setProperty property="*" name="bean"/>
 <%
 	int num = Integer.parseInt(request.getParameter("acnum"));
+	String nowPage = request.getParameter("nowPage");	
+	String numPerPage = request.getParameter("numPerPage");	
+	String keyField = request.getParameter("keyField");	
+	String keyWord = request.getParameter("keyWord");
 	bean.setAc_num(num);
 	bean.setAc_title(request.getParameter("acqtitle"));
 	bean.setAc_subject(request.getParameter("acqsubject"));
@@ -16,5 +20,7 @@
 	mgr.insertAcq(bean);
 %>
 <script>
-	location.href = "ac_QnA.jsp?ac_num=<%=num%>";
+	location.href = "ac_QnA.jsp?ac_num=<%=num%>&numPerPage=<%=numPerPage%>&nowPage=<%=nowPage%><%
+  	 	if(!(keyWord==null||keyWord.equals(""))){
+		     %>&keyField=<%=keyField%>&keyWord=<%=keyWord%><%}%>";
 </script>

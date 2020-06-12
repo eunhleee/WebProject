@@ -8,6 +8,7 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 	int stunum = UtilMgr.parseInt(request, "stunum");
+	String loginid = (String)session.getAttribute("idKey");
 	//검색에 필요한 변수
 
 	int totalRecord = 0;//총게시물수
@@ -92,8 +93,11 @@
 	//기존 조건 : keyField,keyWord,nowPage,numPerPage
 	function read(num) {
 		document.readFrm.num.value = num;
-		document.readFrm.action = "read.jsp";
+		document.readFrm.action = "st_QnARead.jsp";
 		document.readFrm.submit();
+	}
+	function stalert() {
+		alert("로그인 후 이용가능합니다.");
 	}
 </script>
 <style>
@@ -177,18 +181,25 @@ a:hover {
 								String ip = bean.getIp();
 								String date = bean.getSt_date();
 								int count = bean.getCount();
+								int ccount = mgr.stqccount(num);
 					%>
 					<tr id="list">
 						<td align="center"><%=totalRecord-start-i%></td>
-						<td align="center"><a href=""><%=title%></a></td>
-						<td align="center"><a href=""><%=content%></a></td>
+						<td align="center">
+						<a href="javascript:read('<%=num%>')"><%=title%></a>
+						<% if(ccount>0) { %>
+							<font color="red">[<%=ccount%>]</font>
+						<% } %>
+						</td>
+						<td align="center"><a href="javascript:read('<%=num%>')">
+						<%=content%></a></td>
 						<td align="center"><a href=""><%=id%></a></td>
 						<td align="center"><%=date%></td>
 						<td align="center"><%=count%></td>
 					</tr>
 
 					<%
-						}
+							}
 						}
 					%>
 
@@ -235,7 +246,15 @@ a:hover {
 				<!-- 페이징 및 블럭 End -->
 					</td>
 					<td align="right">
-						<a href="post.jsp">[글쓰기]</a> 
+						<a 
+						<% if(loginid != null) { %>
+						href="st_QnAPost.jsp?stunum=<%=stunum%>&numPerPage=<%=numPerPage%>&nowPage=<%=nowPage%><%
+  	 	if(!(keyWord==null||keyWord.equals(""))){
+		     %>&keyField=<%=keyField%>&keyWord=<%=keyWord%><%}%>"
+						<% } else { %>
+						href="javascript:stalert()"
+						<% } %>
+						>[글쓰기]</a>	
 						<a href="javascript:list()">[처음으로]</a>
 					</td>
 				</tr>

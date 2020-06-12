@@ -1,24 +1,24 @@
-<!-- le_QnADelete.jsp -->
+<!-- st_QnADelete.jsp -->
 <%@page import="alcinfo.UtilMgr"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <% request.setCharacterEncoding("UTF-8"); %>
-<jsp:useBean id="leqmgr" class="alcinfo.LequeryMgr"/>
-<jsp:useBean id="leqcmgr" class="alcinfo.LeQcommentsMgr"/>
+<jsp:useBean id="stqmgr" class="alcinfo.StinqueryMgr"/>
+<jsp:useBean id="stqcmgr" class="alcinfo.StQcommentsMgr"/>
 <%
 	String nowPage = request.getParameter("nowPage");	
 	String numPerPage = request.getParameter("numPerPage");	
 	String keyField = request.getParameter("keyField");	
 	String keyWord = request.getParameter("keyWord");
-	int lq_lnum = UtilMgr.parseInt(request, "lq_lnum");
+	int stunum = UtilMgr.parseInt(request, "stunum");
 	int num = UtilMgr.parseInt(request, "num");
 	
-	leqcmgr.deleteAllLeQComment(num);
-	leqmgr.deleteLeQ(num);
+	stqcmgr.deleteAllStQComment(num);
+	stqmgr.deleteStQ(num);
 %>
 <script>
 	alert("삭제되었습니다.");
-	location.href = "le_QnA.jsp?lq_lnum=<%=lq_lnum%>&numPerPage=<%=numPerPage%>&nowPage=<%=nowPage%><%
+	location.href = "stRead.jsp?stunum=<%=stunum%>&numPerPage=<%=numPerPage%>&nowPage=<%=nowPage%><%
   	 	if(!(keyWord==null||keyWord.equals(""))){
 		     %>&keyField=<%=keyField%>&keyWord=<%=keyWord%><%}%>";
 </script>

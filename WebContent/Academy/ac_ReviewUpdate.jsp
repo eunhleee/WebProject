@@ -11,6 +11,9 @@
 	int acrnum = UtilMgr.parseInt(request, "acrnum");
 	String nowPage = request.getParameter("nowPage");
 	String numPerPage = request.getParameter("numPerPage");
+	String keyField = request.getParameter("keyField");	
+	String keyWord = request.getParameter("keyWord");
+	
 	AcreviewBean acrbean = (AcreviewBean)session.getAttribute("bean");
 	String title = acrbean.getAc_title();
 	Double star = acrbean.getAc_star();
@@ -180,7 +183,7 @@
 											 <input type="submit" value="확인">
 											 <input type="reset" value="다시쓰기">
 											 <input type="button" value="취소"
-											 onClick="javascript:location.href='../Academy/ac_ReviewRead.jsp?num=<%=num%>&acrnum=<%=acrnum%>'">
+											 onClick="javascript:location.href='<%=request.getHeader("referer")%>'">
 										</td>
 									</tr>
 								</table>
@@ -193,6 +196,14 @@
 						 <input type="hidden" name="num" value="<%=num%>">
 						 <input type='hidden' name="acrnum" value="<%=acrnum%>">
 						 <input type='hidden' name="numPerPage" value="<%=numPerPage%>">
+						 <%
+					  	 	if(!(keyWord==null||keyWord.equals(""))){
+					     %>
+					     <input type="hidden" name="keyField" value="<%=keyField%>">
+					     <input type="hidden" name="keyWord" value="<%=keyWord%>">
+					 	 <%
+							}
+						 %>
 						</form>
 					
 
