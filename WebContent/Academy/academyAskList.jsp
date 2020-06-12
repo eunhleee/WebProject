@@ -6,9 +6,8 @@
 <%@page import="java.text.DateFormat"%>
 <%@page import="alcinfo.LeteaBean"%>
 <%@page import="alcinfo.MemberBean"%>
-=======
+
 <!-- 학원 리뷰 리스트 출력 -->
->>>>>>> branch 'master' of https://github.com/eunhleee/WebProject.git
 <%@page import="alcinfo.UtilMgr"%>
 <%@page import="alcinfo.AcreviewBean"%>
 <%@page import="java.util.Vector"%>
@@ -128,10 +127,9 @@
 
 	function moveToBuyPoint(){
 		location.href="../Payment/buyPoint.jsp";
-=======
+	}
 	function acalert() {
 		alert("로그인 후 이용가능합니다.");
->>>>>>> branch 'master' of https://github.com/eunhleee/WebProject.git
 	}
 </script>
 <style>
