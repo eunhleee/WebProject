@@ -51,15 +51,15 @@ public class PaymentMgr {
 			pstmt.executeUpdate();
 			
 			if(bean.getGrade()==0||bean.getGrade()==1) {
-				sql="update member set mpoint=date_format(date_add(now(),?),'%y-%m-%d') where id=? ";
+				sql="update member set mpoint=date_format(date_add(now(),"+mpoint+"),'%y-%m-%d') where id=? ";
 			}
 			else if(bean.getGrade()==2||bean.getGrade()==3){
-				sql="update letea set mpoint=date_format(date_add(now(),?),'%y-%m-%d') where id=? ";
+				sql="update letea set mpoint=date_format(date_add(now(),"+mpoint+"),'%y-%m-%d') where id=? ";
 			}
 			System.out.println(bean.getId());
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, mpoint);
-			pstmt.setString(2, bean.getId());
+			//pstmt.setString(1, mpoint);
+			pstmt.setString(1, bean.getId());
 			pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
