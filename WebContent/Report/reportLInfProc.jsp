@@ -6,7 +6,9 @@
 <jsp:setProperty property="*" name="bean"/>
 <%
 	String stopid= request.getParameter("stopid").trim();
-	mgr.rePortAI(bean);
-	response.sendRedirect("reportReceiptAInf.jsp?stopid="+stopid);
+	String stopurl= request.getParameter("stopurl").trim();
+
+	mgr.rePortSI(bean,stopurl+"&id="+stopid);
+	response.sendRedirect("reportReceiptLInf.jsp?stopid="+stopid+"&stopurl="+stopurl+"&id="+stopid);
 %>
 

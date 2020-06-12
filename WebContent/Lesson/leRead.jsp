@@ -105,7 +105,7 @@ function graph(){
 	
 	
 	function goReport() {
-		url = "../Report/reportReceiptLInf.jsp?stopid=<%=id%>";
+		url = "../Report/reportReceiptLInf.jsp?stopid=<%=id%>&stopurl=../Lesson/leRead.jsp?num=<%=num%>";
 		window.open(url, "GoReport", "width=400, height=350, top=200, left=300");
 	}
 		
