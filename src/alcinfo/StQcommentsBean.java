@@ -8,7 +8,21 @@ public class StQcommentsBean {
 	private String stq_content;
 	private String stq_ip;
 	private String stq_regdate;
+	private int stq_conum;
+	private int stq_depth;
 	
+	public int getStq_conum() {
+		return stq_conum;
+	}
+	public void setStq_conum(int stq_conum) {
+		this.stq_conum = stq_conum;
+	}
+	public int getStq_depth() {
+		return stq_depth;
+	}
+	public void setStq_depth(int stq_depth) {
+		this.stq_depth = stq_depth;
+	}
 	public int getNum() {
 		return num;
 	}

@@ -1,9 +1,9 @@
-<!-- le_QnAUpdateProc.jsp -->
+<!-- st_QnAUpdateProc.jsp -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <% request.setCharacterEncoding("UTF-8"); %>
-<jsp:useBean id="mgr" class="alcinfo.LequeryMgr"/>
-<jsp:useBean id="bean" class="alcinfo.LequeryBean"/>
+<jsp:useBean id="mgr" class="alcinfo.StinqueryMgr"/>
+<jsp:useBean id="bean" class="alcinfo.StinqueryBean"/>
 <jsp:setProperty property="*" name="bean"/>
 <%
 	String nowPage = request.getParameter("nowPage");	
@@ -11,18 +11,15 @@
 	String keyField = request.getParameter("keyField");	
 	String keyWord = request.getParameter("keyWord");
 	int num = Integer.parseInt(request.getParameter("num"));
-	int lq_lnum = Integer.parseInt(request.getParameter("lq_lnum"));
+	int stunum = Integer.parseInt(request.getParameter("stunum"));
 	bean.setNum(num);
-	bean.setLq_title(request.getParameter("leqtitle"));
-	bean.setLq_subject(request.getParameter("leqsubject"));
-	bean.setLq_content(request.getParameter("leqcontent"));
-	bean.setLq_id(request.getParameter("leqid"));
-	bean.setLq_ip(request.getParameter("leqip"));
-	mgr.updateLeQ(bean);
+	bean.setTitle(request.getParameter("stqtitle"));
+	bean.setContent(request.getParameter("stqcontent"));
+	mgr.updateStQ(bean);
 %>
 <script>
 	alert("수정되었습니다.");
-	location.href = "le_QnARead.jsp?num=<%=num%>&lq_lnum=<%=lq_lnum%>&numPerPage=<%=numPerPage%>&nowPage=<%=nowPage%><%
+	location.href = "st_QnARead.jsp?num=<%=num%>&stunum=<%=stunum%>&numPerPage=<%=numPerPage%>&nowPage=<%=nowPage%><%
   	 	if(!(keyWord==null||keyWord.equals(""))){
 		     %>&keyField=<%=keyField%>&keyWord=<%=keyWord%><%}%>";
 </script>

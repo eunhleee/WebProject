@@ -6,7 +6,10 @@
 <jsp:useBean id="acqmgr" class="alcinfo.AcqueryMgr"/>
 <jsp:useBean id="acqcmgr" class="alcinfo.AcQcommentsMgr"/>
 <%
-	String nowPage = request.getParameter("nowPage");
+	String nowPage = request.getParameter("nowPage");	
+	String numPerPage = request.getParameter("numPerPage");	
+	String keyField = request.getParameter("keyField");	
+	String keyWord = request.getParameter("keyWord");
 	int acnum = UtilMgr.parseInt(request, "ac_num");
 	int num = UtilMgr.parseInt(request, "num");
 	
@@ -15,5 +18,7 @@
 %>
 <script>
 	alert("삭제되었습니다.");
-	location.href = "ac_QnA.jsp?ac_num=<%=acnum%>";
+	location.href = "ac_QnA.jsp?ac_num=<%=acnum%>&numPerPage=<%=numPerPage%>&nowPage=<%=nowPage%><%
+  	 	if(!(keyWord==null||keyWord.equals(""))){
+		     %>&keyField=<%=keyField%>&keyWord=<%=keyWord%><%}%>";
 </script>

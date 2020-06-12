@@ -20,5 +20,7 @@
 %>
 <script>
 	alert("수정되었습니다.");
-	location.href = "ac_ReviewRead.jsp?num=<%=num%>&acrnum=<%=acrnum%>&numPerPage=<%=numPerPage%>&nowPage=<%=nowPage%>&keyField=<%=keyField%>&keyWord=<%=keyWord%>";
+	location.href = "ac_ReviewRead.jsp?num=<%=num%>&acrnum=<%=acrnum%>&numPerPage=<%=numPerPage%>&nowPage=<%=nowPage%><%
+  	 	if(!(keyWord==null||keyWord.equals(""))){
+		     %>&keyField=<%=keyField%>&keyWord=<%=keyWord%><%}%>";
 </script>

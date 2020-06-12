@@ -27,14 +27,16 @@
 		if(flag.equals("insert")) {
 			AcRcommentsBean acrbean = new AcRcommentsBean();
 			acrbean.setAcr_num(acrnum);
-			acrbean.setAcr_id(request.getParameter("cid"));
+			acrbean.setAcr_nick(request.getParameter("cid"));
+			acrbean.setAcr_id(loginid);
 			acrbean.setAcr_content(request.getParameter("comment"));
 			acrbean.setAcr_ip(request.getParameter("ip"));
 			acrcmgr.insertAcrComment(acrbean);
 		} else if(flag.equals("insert1")) {
 			AcRcommentsBean acrrbean = new AcRcommentsBean();
 			acrrbean.setAcr_num(acrnum);
-			acrrbean.setAcr_id(request.getParameter("cid"));
+			acrrbean.setAcr_nick(request.getParameter("cid"));
+			acrrbean.setAcr_id(loginid);
 			acrrbean.setAcr_content(request.getParameter("comment"));
 			acrrbean.setAcr_ip(request.getParameter("ip"));
 			acrrbean.setAcr_conum(UtilMgr.parseInt(request, "conum"));
@@ -97,8 +99,9 @@ a:hover {
 		window.open(url, "Ac_QnA", "width=800, height=500, top=200, left=400");
 		
 	}
-	function list() {//[처음으로]를 누르면 게시글의 처음 페이지로 돌아감
-		location.href = "acRead.jsp?num=<%=num%>";
+	function list() {
+		location.href = "acRead.jsp?num=<%=num%>&numPerPage=<%=numPerPage%>&nowPage=<%=nowPage%><%
+				if(!(keyWord==null||keyWord.equals(""))){%>&keyField=<%=keyField%>&keyWord=<%=keyWord%><%}%>";
 	}
 	function cInsert() {
 		if(document.cFrm.comment.value==""){
@@ -380,8 +383,10 @@ a:hover {
 		 <% 
 		 if(loginNick!=null) {
 			 if(loginNick.equals(nickname)) { %>
-			 | <a href="ac_ReviewUpdate.jsp?num=<%=num%>&acrnum=<%=acrnum%>&numPerPage=<%=numPerPage%>&nowPage=<%=nowPage%>&keyField=<%=keyField%>&keyWord=<%=keyWord%>" >수 정</a> |
-			 <a href="ac_ReviewDelete.jsp?num=<%=num%>&acrnum=<%=acrnum%>">삭 제</a> 
+			 | <a href="ac_ReviewUpdate.jsp?num=<%=num%>&acrnum=<%=acrnum%>&numPerPage=<%=numPerPage%>&nowPage=<%=nowPage%><%
+			 if(!(keyWord==null||keyWord.equals(""))){%>&keyField=<%=keyField%>&keyWord=<%=keyWord%><%}%>" >수 정</a> |
+			 <a href="ac_ReviewDelete.jsp?num=<%=num%>&acrnum=<%=acrnum%>&numPerPage=<%=numPerPage%>&nowPage=<%=nowPage%><%
+			 if(!(keyWord==null||keyWord.equals(""))){%>&keyField=<%=keyField%>&keyWord=<%=keyWord%><%}%>">삭 제</a> 
 		 <% }
 		 } %>
 		 ]<br/>

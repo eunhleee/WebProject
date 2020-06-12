@@ -21,6 +21,7 @@
 	String keyWord = request.getParameter("keyWord");
 	String loginid = (String)session.getAttribute("idKey");
 	String loginNick = lermgr.memberNick(loginid);
+	String prevurl = request.getHeader("referer");
 	
 	String id = request.getParameter("id");
 	int num = UtilMgr.parseInt(request, "num");
@@ -139,8 +140,10 @@ function graph(){
 		window.open(url, "GoReport", "width=360, height=300, top=200, left=300");
 	}
 	
-	function list() {//[처음으로]를 누르면 게시글의 처음 페이지로 돌아감
-		location.href = "leRead.jsp?num=<%=num%>&id=<%=id%>";
+	function list() {
+		location.href = "leRead.jsp?num=<%=num%>&id=<%=id%>&numPerPage=<%=numPerPage%>&nowPage=<%=nowPage%><%
+	  	 	if(!(keyWord==null||keyWord.equals(""))){
+			     %>&keyField=<%=keyField%>&keyWord=<%=keyWord%><%}%>";
 	}
 	function cInsert() {
 		if(document.cFrm.comment.value==""){
@@ -329,7 +332,7 @@ function graph(){
 											 <input type="submit" value="확인">
 											 <input type="reset" value="다시쓰기">
 											 <input type="button" value="취소"
-											 onClick="javascript:location.href='le_ReviewRead.jsp?num=<%=num%>&id=<%=id%>&lernum=<%=lernum%>'">
+											 onClick="javascript:location.href='<%=prevurl%>'">
 										</td>
 									</tr>
 								</table>
@@ -342,7 +345,16 @@ function graph(){
 						 <input type="hidden" name="num" value="<%=num%>">
 						 <input type="hidden" name="id" value="<%=id%>">
 						 <input type='hidden' name="lernum" value="<%=lernum%>">
-						 <input type='hidden' name="numPerPage" value="<%=numPerPage%>">
+						<input type="hidden" name="nowPage" value="<%=nowPage%>">
+					    <input type="hidden" name="numPerPage" value="<%=numPerPage%>">
+						   <%
+						   	if(!(keyWord==null||keyWord.equals(""))){
+						   %>
+					    <input type="hidden" name="keyField" value="<%=keyField%>">
+					    <input type="hidden" name="keyWord" value="<%=keyWord%>">
+						<%
+							}
+						%>
 						</form>
 					
 

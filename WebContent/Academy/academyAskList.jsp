@@ -299,7 +299,9 @@ a:hover {
 			</td>
 			<td align="right"><a 
 			<% if(loginid != null) { %>
-			href="ac_ReviewPost.jsp?num=<%=ac_serialnum%>"
+			href="ac_ReviewPost.jsp?num=<%=ac_serialnum%>&numPerPage=<%=numPerPage%>&nowPage=<%=nowPage%><%
+  	 	if(!(keyWord==null||keyWord.equals(""))){
+		     %>&keyField=<%=keyField%>&keyWord=<%=keyWord%><%}%>"
 			<% } else { %>
 			href="javascript:acalert()"
 			<% } %>
@@ -315,10 +317,10 @@ a:hover {
 			<tr>
 				<td align="center" valign="bottom">
 					<select name="keyField" size="1">
-						<option value="sc_title">제 목</option>
-						<option value="sc_subject">과 목</option>
-						<option value="sc_content">내 용</option>
-						<option value="sc_nick">닉 네 임</option>
+						<option value="ac_title">제 목</option>
+						<option value="ac_subject">과 목</option>
+						<option value="ac_content">내 용</option>
+						<option value="ac_nickname">닉 네 임</option>
 					</select> 
 					<input size="16" name="keyWord"> 
 					<input type="button" value="찾기" onClick="javascript:accheck()"> 

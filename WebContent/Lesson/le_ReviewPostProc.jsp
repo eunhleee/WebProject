@@ -6,6 +6,10 @@
 <jsp:useBean id="bean" class="alcinfo.LereviewBean"/>
 <jsp:setProperty property="*" name="bean"/>
 <%
+	String nowPage = request.getParameter("nowPage");	
+	String numPerPage = request.getParameter("numPerPage");	
+	String keyField = request.getParameter("keyField");	
+	String keyWord = request.getParameter("keyWord");
 	int num = Integer.parseInt(request.getParameter("num"));
 	String id = request.getParameter("id");
 	bean.setLr_lnum(num);
@@ -17,5 +21,7 @@
 	mgr.insertLer(bean);
 %>
 <script>
-	location.href = "leRead.jsp?num=<%=num%>&id=<%=id%>";
+	location.href = "leRead.jsp?num=<%=num%>&id=<%=id%>&numPerPage=<%=numPerPage%>&nowPage=<%=nowPage%><%
+  	 	if(!(keyWord==null||keyWord.equals(""))){
+		     %>&keyField=<%=keyField%>&keyWord=<%=keyWord%><%}%>";
 </script>

@@ -4,8 +4,13 @@
 	pageEncoding="UTF-8"%>
 <%
 	request.setCharacterEncoding("UTF-8");
+	String nowPage = request.getParameter("nowPage");	
+	String numPerPage = request.getParameter("numPerPage");	
+	String keyField = request.getParameter("keyField");	
+	String keyWord = request.getParameter("keyWord");
 	String leqid = (String)session.getAttribute("idKey");
 	int lq_lnum=UtilMgr.parseInt(request,"lq_lnum");
+	String prevurl = request.getHeader("referer");
 %>
 <div align="center"">
 	<br/>
@@ -40,7 +45,7 @@
 						 <input type="submit" value="확인">
 						 <input type="reset" value="다시쓰기">
 						 <input type="button" value="취소"
-						 onClick="javascript:location.href='le_QnA.jsp?lq_lnum=<%=lq_lnum%>'">
+						 onClick="javascript:location.href='<%=prevurl%>'">
 					</td>
 				</tr>
 			</table>
@@ -50,5 +55,15 @@
 	<input type="hidden" name="leqid" value="<%=leqid%>">
 	<input type="hidden" name="leqip" value="<%=request.getRemoteAddr()%>">
 	<input type="hidden" name="lq_lnum" value="<%=lq_lnum%>">
+	<input type="hidden" name="nowPage" value="<%=nowPage%>">
+    <input type="hidden" name="numPerPage" value="<%=numPerPage%>">
+	   <%
+	   	if(!(keyWord==null||keyWord.equals(""))){
+	   %>
+    <input type="hidden" name="keyField" value="<%=keyField%>">
+    <input type="hidden" name="keyWord" value="<%=keyWord%>">
+	<%
+		}
+	%>
 	</form>
 </div>

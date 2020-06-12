@@ -174,8 +174,10 @@ function graph(){
 		window.open(url, "GoReport", "width=360, height=300, top=200, left=300");
 	}
 	
-	function list() {//[처음으로]를 누르면 게시글의 처음 페이지로 돌아감
-		location.href = "leRead.jsp?num=<%=num%>&id=<%=id%>";
+	function list() {
+		location.href = "leRead.jsp?num=<%=num%>&id=<%=id%>&numPerPage=<%=numPerPage%>&nowPage=<%=nowPage%><%
+	  	 	if(!(keyWord==null||keyWord.equals(""))){
+			     %>&keyField=<%=keyField%>&keyWord=<%=keyWord%><%}%>";
 	}
 	function cInsert() {
 		if(document.cFrm.comment.value==""){
@@ -479,8 +481,12 @@ function graph(){
 		 <% 
 		 if(loginNick!=null) {
 			 if(loginNick.equals(nickname)) { %>
-			 | <a href="le_ReviewUpdate.jsp?num=<%=num%>&id=<%=id%>&lernum=<%=lernum%>&numPerPage=<%=numPerPage%>&nowPage=<%=nowPage%>&keyField=<%=keyField%>&keyWord=<%=keyWord%>" >수 정</a> |
-			 <a href="le_ReviewDelete.jsp?num=<%=num%>&id=<%=id%>&lernum=<%=lernum%>">삭 제</a> 
+			 | <a href="le_ReviewUpdate.jsp?num=<%=num%>&id=<%=id%>&lernum=<%=lernum%>&numPerPage=<%=numPerPage%>&nowPage=<%=nowPage%><%
+  	 	if(!(keyWord==null||keyWord.equals(""))){
+		     %>&keyField=<%=keyField%>&keyWord=<%=keyWord%><%}%>" >수 정</a> |
+			 <a href="le_ReviewDelete.jsp?num=<%=num%>&id=<%=id%>&lernum=<%=lernum%>&numPerPage=<%=numPerPage%>&nowPage=<%=nowPage%><%
+  	 	if(!(keyWord==null||keyWord.equals(""))){
+		     %>&keyField=<%=keyField%>&keyWord=<%=keyWord%><%}%>">삭 제</a> 
 		 <% }
 		 } %>
 		 ]<br/>

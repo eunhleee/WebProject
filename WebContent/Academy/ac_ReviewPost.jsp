@@ -6,6 +6,11 @@
 <jsp:useBean id="mgr" class="alcinfo.AcademyMgr" />
 <%
 	request.setCharacterEncoding("UTF-8");
+	String nowPage = request.getParameter("nowPage");
+	String numPerPage = request.getParameter("numPerPage");
+	String keyField = request.getParameter("keyField");	
+	String keyWord = request.getParameter("keyWord");
+	String prevurl = request.getHeader("referer");
 	String id = (String)session.getAttribute("idKey");
 	int num = 0;
 	String url = "AcademyMain.jsp";
@@ -125,17 +130,17 @@
 							<td>평 점</td>
 							<td>
 								<select name="acrstar">
-									<option value="5" selected>5점</option>
+									<option value="5.0" selected>5점</option>
 									<option value="4.5">4.5점</option>
-									<option value="4">4점</option>
+									<option value="4.0">4점</option>
 									<option value="3.5">3.5점</option>
-									<option value="3">3점</option>
+									<option value="3.0">3점</option>
 									<option value="2.5">2.5점</option>
-									<option value="2">2점</option>
+									<option value="2.0">2점</option>
 									<option value="1.5">1.5점</option>
-									<option value="1">1점</option>
+									<option value="1.0">1점</option>
 									<option value="0.5">0.5점</option>
-									<option value="0">0점</option>
+									<option value="0.0">0점</option>
 								</select>
 							</td>
 						</tr>
@@ -149,7 +154,7 @@
 								 <input type="submit" value="확인">
 								 <input type="reset" value="다시쓰기">
 								 <input type="button" value="취소"
-								 onClick="javascript:location.href='../Academy/acRead.jsp?num=<%=num%>'">
+								 onClick="javascript:location.href='<%=prevurl%>';">
 							</td>
 						</tr>
 					</table>
@@ -159,6 +164,16 @@
 			<input type="hidden" name="acqid" value="<%=id%>">
 			<input type="hidden" name="acqip" value="<%=request.getRemoteAddr()%>">
 			<input type="hidden" name="acnum" value="<%=num%>">
+			<input type="hidden" name="nowPage" value="<%=nowPage%>">
+			<input type="hidden" name="numPerPage" value="<%=numPerPage%>"> 
+			<%
+		  	 	if(!(keyWord==null||keyWord.equals(""))){
+		     %>
+		     <input type="hidden" name="keyField" value="<%=keyField%>">
+		     <input type="hidden" name="keyWord" value="<%=keyWord%>">
+		 	 <%
+				}
+			 %>
 			</form>
 		</div>
 
