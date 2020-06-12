@@ -2,11 +2,10 @@
 <%@page import="alcinfo.UtilMgr"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<% request.setCharacterEncoding("UTF-8"); %>
 <jsp:useBean id="acrmgr" class="alcinfo.LereviewMgr"/>
 <jsp:useBean id="acrcmgr" class="alcinfo.LeRcommentsMgr"/>
 <%
-	request.setCharacterEncoding("UTF-8");
-
 	int lernum = UtilMgr.parseInt(request, "lernum");
 	int num = UtilMgr.parseInt(request, "num");
 	String id = request.getParameter("id");

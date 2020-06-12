@@ -2,10 +2,10 @@
 <%@page import="alcinfo.UtilMgr"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<% request.setCharacterEncoding("UTF-8"); %>
 <jsp:useBean id="acqmgr" class="alcinfo.AcqueryMgr"/>
 <jsp:useBean id="acqcmgr" class="alcinfo.AcQcommentsMgr"/>
 <%
-	request.setCharacterEncoding("UTF-8");
 	String nowPage = request.getParameter("nowPage");
 	int acnum = UtilMgr.parseInt(request, "ac_num");
 	int num = UtilMgr.parseInt(request, "num");
