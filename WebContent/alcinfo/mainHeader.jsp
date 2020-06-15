@@ -173,7 +173,7 @@
 			<input type="button" onclick="openloginSelect();" class="openlm" value="로그인">
 			<%}else{ %>
 			<input type="button" onclick="openlogoutProc();" class="openlm" value="로그아웃">
-			<a href="">마이페이지</a>
+			<a href="../alcinfo/upMember.jsp">마이페이지</a>
 			<%} %>
 		</div>
 	</div>

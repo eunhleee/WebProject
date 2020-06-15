@@ -31,14 +31,14 @@
 		if(flag.equals("insert")) {
 			LeRcommentsBean lerbean = new LeRcommentsBean();
 			lerbean.setLer_num(lernum);
-			lerbean.setLer_id(request.getParameter("cid"));
+			lerbean.setLer_id(loginid);
 			lerbean.setLer_content(request.getParameter("comment"));
 			lerbean.setLer_ip(request.getParameter("ip"));
 			lercmgr.insertLerComment(lerbean);
 		} else if(flag.equals("insert1")) {
 			LeRcommentsBean lerrbean = new LeRcommentsBean();
 			lerrbean.setLer_num(lernum);
-			lerrbean.setLer_id(request.getParameter("cid"));
+			lerrbean.setLer_id(loginid);
 			lerrbean.setLer_content(request.getParameter("comment"));
 			lerrbean.setLer_ip(request.getParameter("ip"));
 			lerrbean.setLer_conum(UtilMgr.parseInt(request, "conum"));
@@ -199,7 +199,16 @@ function graph(){
 		}
 	}
 	
+	function goRep() {
+		
+		url = "stQReport.jsp?stopid=<%=id%>&renum=<%=num%>";
+		window.open(url, "GoReport", 'width=360, height=300, top=200, left=300');
+	}
 
+	function goCReport(conum,stuc_depth,stopid) {
+		url = "stQCReport.jsp?conum="+conum+"&stuc_depth="+stuc_depth+"&renum="+<%=num%>+"&stopid="+stopid;
+		window.open(url, "GoReport", "width=360, height=300, top=200, left=300");
+		}
 	
 </script>
 
@@ -383,7 +392,8 @@ function graph(){
 	 		 	 			String cregdate = lercbean.getLer_regdate();
 	 		 	 			int conum = lercbean.getLer_conum();
 	 		 	 			int depth = lercbean.getLer_depth();
-	 		 	 			
+	 		 	 			String stopid=lercbean.getLer_id();
+
 			 				String dstyle = "";
 	 		 	 			if(depth==1) {
 	 		 	 				dstyle = "style=\"padding-left:30px;\"";	
@@ -402,9 +412,14 @@ function graph(){
 							<input type="button" value="삭제"
 							onclick="cDel('<%=conum%>','<%=cnum%>','<%=depth%>')">
 						</td>
-						<% 	
-							}
-						} %>
+			<% 	}%>
+							<td align="left" valign="middle">
+							<input type="button" value="댓글신고"
+							onclick="javascript:goCReport
+							('<%=cnum%>','<%=depth%>','<%=stopid%>')">
+							
+						</td>
+						<%} %>
 					</tr>
 					<tr>
 						<td <%=dstyle%> colspan="3">
