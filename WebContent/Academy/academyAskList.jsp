@@ -1,6 +1,7 @@
 
 <!-- 학원 후기 리스트 출력 -->
 
+<%@page import="java.util.Calendar"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.text.DateFormat"%>
@@ -22,21 +23,32 @@
 	request.setCharacterEncoding("UTF-8");
 	int ac_serialnum=UtilMgr.parseInt(request,"num");
 	String loginid = (String)session.getAttribute("idKey");
-	//검색에 필요한 변수
-	String id=(String) session.getAttribute("idKey");
-	int grade=Loginmgr.getGrade(id);
 	
+	//로그인한 상태인지 회원의 포인트 멤버쉽이 오늘날까지 유효한지 비교하기 위함
+	int grade=Loginmgr.getGrade(loginid);
+	int todaynumber=0,mpointnumber=0;
 	String mpoint=null;
+	if(loginid!=null){
 	if(grade==0||grade==1){
-		MemberBean mbean=Memmgr.getInfo(id);
+		MemberBean mbean=Memmgr.getInfo(loginid);
 		mpoint=mbean.getMpoint();
 		
 	}
 	else if(grade==2||grade==3){
-		LeteaBean lbean=Teamgr.getInfo(id);
+		LeteaBean lbean=Teamgr.getInfo(loginid);
 		mpoint=lbean.getMpoint();
 	} 
 	
+	
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+    Calendar today = Calendar.getInstance();
+ 	String strToday = sdf.format(today.getTime());
+	
+	 todaynumber=Integer.parseInt(strToday);
+	 mpoint=mpoint.replace("-", "");
+	 mpointnumber=Integer.parseInt(mpoint);
+	
+	}
 	
 	int totalRecord = 0;//총게시물수
 	int numPerPage = 10;//페이지당 레코드 개수(5,10,15,30)
@@ -195,7 +207,7 @@ a:hover {
 						<td width="100">조회수</td>
 					</tr>
 					<%
-						if(id==null||mpoint==null){
+						if(loginid==null||mpoint==null||mpointnumber<todaynumber){
 					%>
 					<tr>
 						<td align="center" colspan="5" height="210" style="background-color:gray;  opacity: 0.5;">
@@ -210,7 +222,7 @@ a:hover {
 						if (vlist.isEmpty()) {
 					%>
 					<tr>
-						<td align="center" colspan="5">
+						<td align="center" colspan="5" height="210">
 							<%
 								out.println("등록된 게시물이 없습니다.");
 							%>
@@ -297,16 +309,22 @@ a:hover {
  %>
 				<!-- 페이징 및 블럭 End -->
 			</td>
-			<td align="right"><a 
+			<%
+				if(loginid!=null&&mpoint!=null&&mpointnumber>todaynumber){
+			%>
+			<td align="right">
+			<a 
 			<% if(loginid != null) { %>
 			href="ac_ReviewPost.jsp?num=<%=ac_serialnum%>&numPerPage=<%=numPerPage%>&nowPage=<%=nowPage%><%
   	 	if(!(keyWord==null||keyWord.equals(""))){
 		     %>&keyField=<%=keyField%>&keyWord=<%=keyWord%><%}%>"
 			<% } else { %>
-			href="javascript:acalert()"
+				href="javascript:acalert()"
 			<% } %>
-			>[글쓰기]</a> <a
-				href="javascript:list()">[처음으로]</a></td>
+			>[글쓰기]</a> 
+			<a href="javascript:list()">[처음으로]</a></td>
+			
+			<%} %>
 		</tr>
 	</table>
 

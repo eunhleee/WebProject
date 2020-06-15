@@ -126,7 +126,7 @@ function read(num){
 
 #title td {
 	color: white;
-	background-color: #36ada9;
+	background-color: #F88C65;
 }
 
 a {
@@ -137,6 +137,24 @@ a {
 a:hover {
 	color: gray;
 }
+
+#leftdiv{
+	width: 50px; 
+	text-align: left;
+	flex: 1; 
+	border: 10px solid #FCBC7E; 
+	border-radius:10px;
+	margin-right:20px;
+	padding: 40px 40px;
+ }
+ 
+#rightdiv{
+	width: 800px; 
+	flex: 2; 
+	border: 10px solid #F88C65; 
+	border-radius:10px;
+	padding: 20px 20px;
+}
 </style> 
 </head>
 <body>
@@ -145,8 +163,7 @@ a:hover {
 
 	<div style="display: flex; margin-left: 15%; margin-right: 15%">
 
-		<div
-			style="width: 50px; text-align: left; flex: 1; border: 1px solid black; margin-right: 10%; padding: 40px 40px;">
+		<div id="leftdiv">
 			<h3>커뮤니티</h3>
 			<a href="communityList.jsp?pageValue=free">&#149; 자유게시판</a><br>
 			<a href="communityList.jsp?pageValue=academy">&#149; 학원 Q&A</a><br>
@@ -156,8 +173,7 @@ a:hover {
 		</div>
 
 		<!-- 리스트 부분 -->
-		<div
-			style="width: 800px; flex: 2; border: 1px solid black; padding: 20px 20px;">
+		<div id="rightdiv">
 			
 			<h2><%=category %></h2>
 			<table>

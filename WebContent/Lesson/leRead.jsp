@@ -84,7 +84,7 @@ function graph(){
 	
 	function moveQnA(){
 			url = "le_QnA.jsp?lq_lnum="+<%=lebean.getNum()%>;
-			window.open(url, "Le_QnA", "width=800, height=500, top=200, left=400");
+			window.open(url, "Le_QnA", "width=900, height=500, top=200, left=400");
 			
 		}
 		
@@ -194,9 +194,9 @@ function graph(){
 		<table width="70%" height="280" align="center">
 			<tr>
 				<td width="30%" align="center">
-				<div style="border:10px solid #FCBC7E; border-radius:15px; padding:20px">
+				<div style="border:10px solid #FCBC7E; border-radius:15px; padding:10px">
 				<button type="button" id="btn" onclick="graph()" >그래프 보기</button>
-				<div id="column_chart_div1"  style="height: 440px; width:300px;"></div>
+				<div id="column_chart_div1"  style="height: 440px; width:350px;"></div>
 				</div>
 				</td>
 				<td width="70%" align="center">

@@ -48,7 +48,6 @@ google.charts.load("current",{packages:['corechart']});
 function columnChart1(arrayList) {
 	// 실 데이터를 가진 데이터테이블 객체를 반환하는 메소드
 	 
-	alert(arrayList);
 	 arrayList = eval('('+arrayList+')');
 
 	var dataTable = new google.visualization.DataTable();
