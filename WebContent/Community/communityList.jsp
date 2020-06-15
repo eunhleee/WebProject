@@ -297,11 +297,11 @@ a:hover {
 					<tr>
 						<td align="center" valign="bottom">
 							<select name="keyField" size="1">
-								<option value="sc_title">제 목</option>
-								<option value="sc_content">내 용</option>
-								<option value="sc_nick">닉 네 임</option>
+								<option value="sc_title" <%if(keyField.equals("sc_title")) {%>selected<%} %>>제 목</option>
+								<option value="sc_content" <%if(keyField.equals("sc_content")) {%>selected<%} %>>내 용</option>
+								<option value="sc_nick" <%if(keyField.equals("sc_nick")) {%>selected<%} %>>닉 네 임</option>
 							</select>
-							<input size="16" name="keyWord">
+							<input size="16" name="keyWord" value="<%=keyWord%>">
 							<input type="submit" value="찾기" onClick="javascript:sccheck()"> 
 							<input type="hidden" name="nowPage" value="1">
 							<input type="hidden" name="pageValue" value="<%=group%>">

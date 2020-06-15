@@ -1,12 +1,6 @@
-<!-- 커뮤니티의 자유게시판 리스트 출력 -->
-
+<!-- 과외 리뷰 리스트 출력 -->
 <%@page import="alcinfo.LeteaBean"%>
 <%@page import="alcinfo.MemberBean"%>
-<!-- 과외 리뷰 리스트 출력 -->
-<%@page import="alcinfo.MemberBean"%>
-
-<!-- 과외 리뷰 리스트 출력 -->
-
 <%@page import="alcinfo.UtilMgr"%>
 <%@page import="alcinfo.LereviewBean"%>
 <%@page import="java.util.Vector"%>
@@ -62,7 +56,7 @@
 		keyWord = "";
 	}
 
-	totalRecord = mgr.getTotalCount(keyField, keyWord);
+	totalRecord = mgr.getTotalCount(keyField, keyWord, num);
 	//out.print("totalRecord : " + totalRecord);
 
 	//nowPage 요청 처리
@@ -225,7 +219,7 @@ a:hover {
 								int ccount = mgr.lerccount(lnum);
 					%>
 					<tr id="list">
-							<td align="center"><%=star%></a></td>
+							<td align="center"><%=star%></td>
 						<td align="center">
 						<a href="javascript:read('<%=lnum%>')"><%=title%></a>
 						<% if(ccount>0) { %>
@@ -313,12 +307,11 @@ a:hover {
 			<tr>
 				<td align="center" valign="bottom">
 				<select name="keyField" size="1">
-					<option value="lq_name">제 목</option>
-					<option value="lq_subject">과 목</option>
-					<option value="lq_content">내 용</option>
-					<option value="lq_nick">닉 네 임</option>
+					<option value="lr_title" <%if(keyField.equals("lr_title")) {%>selected<%} %>>제 목</option>
+					<option value="lr_content" <%if(keyField.equals("lr_content")) {%>selected<%} %>>내 용</option>
+					<option value="lr_nick" <%if(keyField.equals("lr_nick")) {%>selected<%} %>>닉 네 임</option>
 				</select> 
-				<input size="16" name="keyWord"> 
+				<input size="16" name="keyWord" value="<%=keyWord%>"> 
 				<input type="button" value="찾기" onClick="javascript:lecheck()"> 
 				<input type="hidden" name="nowPage" value="1"></td>
 			</tr>

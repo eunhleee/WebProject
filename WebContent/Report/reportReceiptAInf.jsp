@@ -1,5 +1,5 @@
 <!-- 13p 7.신고접수창 학원 잘못된 정보-->
-<!-- reportReceipt.jsp -->
+<!-- reportReceiptAInf.jsp -->
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page import ="java.util.*,alcinfo.*"%>
 <jsp:useBean id="rBean" class="alcinfo.MemberBean"/>
@@ -8,18 +8,17 @@
 <%
 		request.setCharacterEncoding("UTF-8");
 	int num=0;
- 	//num = Integer.parseInt(request.getParameter("stopid"));
  	String stopid = request.getParameter("stopid").trim();
+ 	String stopurl =request.getParameter("stopurl").trim();
+
 	 num=UtilMgr.parseInt(request,"stopid");
-	//String stopid=Integer.toString(num);
-	System.out.println("여기"+session.getAttribute("idKey")+"stopid는"+stopid);
 %>
 <html>
 <head>
 <title>잘못된 학원 정보 신고하기</title>
 <script type="text/javascript">
 	function gocheck(){
-		document.repFrm.action="reportAInfProc.jsp?stopid="+stopid;
+		document.repFrm.action="reportAInfProc.jsp?stopid=<%=stopid%>&stopurl=<%=stopurl%>";
 		document.repFrm.submit();
 	}
 </script>

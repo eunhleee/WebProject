@@ -9,7 +9,6 @@
 <jsp:useBean id="sccmgr" class="alcinfo.SCommentMgr"/>
 <%
 	request.setCharacterEncoding("UTF-8");
-	//read.jsp?nowPage=1&numPerPage=10&keyField=&keyWord=&num=3
 	String pageValue=request.getParameter("pageValue");
 	String nowPage = request.getParameter("nowPage");	
 	String numPerPage = request.getParameter("numPerPage");	
@@ -63,6 +62,7 @@
 	int ccount = scmgr.ccount(num);
 	//읽어온 게시물을 수정 및 삭제를 위해 세션저장
 	session.setAttribute("bean", bean);
+	
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">

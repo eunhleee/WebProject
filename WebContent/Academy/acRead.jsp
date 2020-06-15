@@ -36,8 +36,12 @@
 			
 		}
 		function goReport() {
-			url = "../Report/reportReceiptAInf.jsp?stopid=<%=num%>";
+			url = "../Report/reportReceiptAInf.jsp?stopid=<%=num%>&stopurl=../Academy/acRead.jsp?num=<%=num%>";
 			window.open(url, "GoReport", "width=400, height=350, top=200, left=300");
+		}
+		function goErr(){
+			alert("로그인을 해주세요");
+
 		}
 </script>
 </head>
@@ -85,8 +89,11 @@
 											style="font-size: 20;" onclick="moveQnA();"></td>
 									</tr>
 									<tr>
-										<td><input type="submit" value="잘못된정보 신고하기"
-											style="font-size: 20;" onclick="goReport();"></td>
+									<%	if(session.getAttribute("idKey")==null||session.getAttribute("idKey").equals("")){ %>
+									<td><input type="button" value="잘못된정보 신고하기"
+									style="font-size: 20;" onclick="goErr();"></td>
+										<%}else{%><td><input type="submit" value="잘못된정보 신고하기"
+											style="font-size: 20;" onclick="goReport();"></td><%} %>
 											
 									</tr>
 								</table>

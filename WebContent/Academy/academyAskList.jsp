@@ -1,18 +1,11 @@
 
-<!-- 학원 후기 리스트 출력 -->
-
+<!-- 학원 리뷰 리스트 출력 -->
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.text.DateFormat"%>
 <%@page import="alcinfo.LeteaBean"%>
 <%@page import="alcinfo.MemberBean"%>
 
-<<<<<<< HEAD
-<!-- 학원 리뷰 리스트 출력 -->
-=======
-<!-- 학원 리뷰 리스트 출력 -->
-
->>>>>>> branch 'master' of https://github.com/eunhleee/WebProject.git
 <%@page import="alcinfo.UtilMgr"%>
 <%@page import="alcinfo.AcreviewBean"%>
 <%@page import="java.util.Vector"%>
@@ -69,7 +62,7 @@
 		keyWord = "";
 	}
 
-	totalRecord = mgr.getTotalCount(keyField, keyWord);
+	totalRecord = mgr.getTotalCount(keyField, keyWord,ac_serialnum);
 	//out.print("totalRecord : " + totalRecord);
 
 	//nowPage 요청 처리
@@ -321,12 +314,11 @@ a:hover {
 			<tr>
 				<td align="center" valign="bottom">
 					<select name="keyField" size="1">
-						<option value="ac_title">제 목</option>
-						<option value="ac_subject">과 목</option>
-						<option value="ac_content">내 용</option>
-						<option value="ac_nickname">닉 네 임</option>
+						<option value="ac_title" <%if(keyField.equals("ac_title")) {%>selected<%} %>>제 목</option>
+						<option value="ac_content" <%if(keyField.equals("ac_content")) {%>selected<%} %>>내 용</option>
+						<option value="ac_nickname" <%if(keyField.equals("ac_nickname")) {%>selected<%} %>>닉 네 임</option>
 					</select> 
-					<input size="16" name="keyWord"> 
+					<input size="16" name="keyWord" value="<%=keyWord%>"> 
 					<input type="button" value="찾기" onClick="javascript:accheck()"> 
 					<input type="hidden" name="nowPage" value="1">
 					<input type="hidden" name="num" value="<%=ac_serialnum%>">

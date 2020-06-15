@@ -17,6 +17,13 @@ public class ReportBean {
 	private String kind;
 	private int conum;
 	private int depth;
+	private String stopurl;
+	public String getStopurl() {
+		return stopurl;
+	}
+	public void setStopurl(String stopurl) {
+		this.stopurl = stopurl;
+	}
 	public int getConum() {
 		return conum;
 	}
