@@ -10,7 +10,6 @@
 	int renum=UtilMgr.parseInt(request,"renum");
 	int conum=UtilMgr.parseInt(request,"conum");
 	int stuc_depth=UtilMgr.parseInt(request,"stuc_depth");
-
 	 String stopid = request.getParameter("stopid").trim();
 
 %>
