@@ -209,7 +209,16 @@ function graph(){
 		url = "stQCReport.jsp?conum="+conum+"&stuc_depth="+stuc_depth+"&renum="+<%=num%>+"&stopid="+stopid;
 		window.open(url, "GoReport", "width=360, height=300, top=200, left=300");
 		}
-	
+	function goRep() {
+		
+		url = "leLReport.jsp?stopid=<%=id%>&renum=<%=num%>";
+		window.open(url, "GoReport", 'width=360, height=300, top=200, left=300');
+	}
+
+	function goCReport(conum,stuc_depth,stopid) {
+		url = "leLCReport.jsp?conum="+conum+"&stuc_depth="+stuc_depth+"&renum="+<%=num%>+"&stopid="+stopid;
+		window.open(url, "GoReport", "width=360, height=300, top=200, left=300");
+		}
 </script>
 
 </head>
@@ -335,6 +344,9 @@ function graph(){
 		    <td align="right">
 		     	조회수  <%=count%>
 		    </td>
+		     <% if(loginid!=null) {%>		    
+		    <td><input type="button" value="신고" onclick="javascript:goRep();"></td>
+		    <%}%>
 		   </tr>
 		   </table>
 		  </td>
