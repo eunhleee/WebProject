@@ -32,7 +32,7 @@
 <script>
 		function moveQnA(){
 			url = "ac_QnA.jsp?ac_num="+<%=num%>;
-			window.open(url, "Ac_QnA", "width=800, height=500, top=200, left=400");
+			window.open(url, "Ac_QnA", "width=900, height=500, top=200, left=400");
 			
 		}
 		function goReport() {

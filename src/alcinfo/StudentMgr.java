@@ -131,7 +131,7 @@ public class StudentMgr {
 			}
 			return vlist; 
 		}
-		public boolean insertTea(StudentBean sbean,LeteaBean lbean) {
+		public boolean insertTea(StudentBean sbean,LessonBean lbean) {
 			Connection con = null;
 			PreparedStatement pstmt = null;
 			String sql = null;
@@ -139,7 +139,7 @@ public class StudentMgr {
 			try {
 				con = pool.getConnection();
 				sql = "insert stinsert(num,stid,teaid,teaname,stclass,state,date )"
-						+ "values(?,?,?,?,?,'�떊泥��젒�닔',now())";
+						+ "values(?,?,?,?,?,'신청접수',now())";
 				pstmt = con.prepareStatement(sql);
 				
 				pstmt.setInt(1, sbean.getNum());

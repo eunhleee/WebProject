@@ -100,7 +100,32 @@ function goReport() {
 
 
 </script>
-
+<style>
+#inputdiv{
+	margin:10px;
+	width:400px;
+	border:1px solid gray;
+	border-radius: 6px;
+	padding:3px;
+}
+#inputdiv input{
+	width:350px;
+	border:none;
+	font-size:15px;
+}
+#textareadiv{
+	margin:10px;
+	width:400px;
+	border:1px solid gray;
+	border-radius: 6px;
+	padding:3px;
+}
+#textareadiv textarea{
+	border:none;
+	font-size:15px;
+	width:390px;
+}
+</style>
 </head>
 <body>
 	<%@ include file="../alcinfo/headerSearch.jsp"%>
@@ -180,29 +205,31 @@ function goReport() {
 					<div style="border:10px solid #36ada9; border-radius:15px; padding:20px">
 					
 <!-- 글쓰기 Start -->
-
-			<table width="600" cellpadding="3">
-				<tr>
-					<td height="25" align="center">글쓰기</td>
-				</tr>
-			</table>
+		<div style="height:450px;">
+			<h2>문의 하기</h2>	
+			<hr style="border:1px solid #36ada9;">	
 			<br/>
 			<form name="stpostFrm" method="post" action="st_QnAPostProc.jsp">
-			<table width="600" cellpadding="3" align="center" border="1">
+			<table width="600" cellpadding="3" align="center">
 				<tr>
 					<td align=center>
 					<table align="center">
 						<tr>
 							<td>제 목</td>
 							<td>
-							<input name="stqtitle" size="50" maxlength="30"></td>
+							<div id="inputdiv">
+							<input name="stqtitle" size="50" maxlength="30">
+							</div></td>
 						</tr>
 						<tr>
 							<td>내 용</td>
-							<td><textarea name="stqcontent" rows="10" cols="50"></textarea></td>
+							<td>
+							<div id="textareadiv">
+							<textarea name="stqcontent" rows="10" cols="50"></textarea>
+							</div></td>
 						</tr>
 						<tr>
-							<td colspan="2">
+							<td colspan="2" align="center">
 						
 								 <input type="submit" value="확인">
 								 <input type="reset" value="다시쓰기">
@@ -224,7 +251,7 @@ function goReport() {
 			<input type="hidden" name="keyWord" value="<%=keyWord%>">
 			<%}%>
 			</form>
-
+		</div>
 <!-- 글쓰기 End -->
 
 
