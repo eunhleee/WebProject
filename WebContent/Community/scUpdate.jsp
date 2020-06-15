@@ -1,4 +1,4 @@
-<!-- scRead.jsp -->
+<!-- scUpdate.jsp -->
 <%@page import="alcinfo.SCommentBean"%>
 <%@page import="alcinfo.SCommunityBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -10,6 +10,8 @@
 	int num = Integer.parseInt(request.getParameter("num"));
 	String nowPage = request.getParameter("nowPage");
 	String numPerPage = request.getParameter("numPerPage");
+	String keyField = request.getParameter("keyField");	
+	String keyWord = request.getParameter("keyWord");
 	SCommunityBean bean = (SCommunityBean)session.getAttribute("bean");
 	String title = bean.getSc_title();
 	String nick = bean.getSc_nick(); 
@@ -69,7 +71,9 @@ a:hover {
 				</tr>
 			</table>
 			<br/>
-			<form name="scupdateFrm" method="post" action="scUpdate?pageValue=<%=pageValue %>"
+			<form name="scupdateFrm" method="post" action="scUpdate?pageValue=<%=pageValue %>&numPerPage=<%=numPerPage%>&nowPage=<%=nowPage%><%
+  	 	if(!(keyWord==null||keyWord.equals(""))){
+		     %>&keyField=<%=keyField%>&keyWord=<%=keyWord%><%}%>"
 			enctype="multipart/form-data">
 			<table width="600" cellpadding="3" align="center" border="1">
 				<tr>
@@ -104,7 +108,7 @@ a:hover {
 								 <input type="submit" value="확인">
 								 <input type="reset" value="다시쓰기">
 								 <input type="button" value="취소"
-								 onClick="javascript:location.href='../alcinfo/communityList.jsp'">
+								 onClick="javascript:location.href='<%=request.getHeader("referer")%>'">
 							</td>
 						</tr>
 					</table>
@@ -113,9 +117,17 @@ a:hover {
 			</table>
 			 <input type="hidden" name="scid" value="<%=scid%>">
 			 <input type="hidden" name="scip" value="<%=request.getRemoteAddr()%>">
-			 <input type="hidden" name="nowPage" value="<%=nowPage %>">
 			 <input type='hidden' name="num" value="<%=num%>">
-			 <input type='hidden' name="numPerPage" value="<%=numPerPage%>">
+			<input type="hidden" name="nowPage" value="<%=nowPage%>">
+			<input type="hidden" name="numPerPage" value="<%=numPerPage%>"> 
+			<%
+		  	 	if(!(keyWord==null||keyWord.equals(""))){
+		     %>
+		     <input type="hidden" name="keyField" value="<%=keyField%>">
+		     <input type="hidden" name="keyWord" value="<%=keyWord%>">
+		 	 <%
+				}
+			 %>
 			</form>
 		</div>
 	</div>

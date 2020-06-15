@@ -30,12 +30,12 @@ public class LessonMgr {
 			try {
 				con = pool.getConnection();
 				if(pageValue.equals("top")) {
-					sql = "select le.num,le.id,tea.name,tea.class,tea.area,le.star,le.count "
+					sql = "select le.num,le.id,tea.name,le.class,tea.area,le.star,le.count "
 							+ " from lesson le,letea tea where le.id=tea.id order by le.star desc";
 				pstmt = con.prepareStatement(sql);
 				}
 				else {
-					sql = "select le.num,le.id,tea.name,tea.class,tea.area,le.star,le.count "
+					sql = "select le.num,le.id,tea.name,le.class,tea.area,le.star,le.count "
 							+ " from lesson le,letea tea where le.id=tea.id and tea.class like ? order by ?  desc";
 					
 					pstmt = con.prepareStatement(sql);
@@ -50,7 +50,7 @@ public class LessonMgr {
 					bean.setNum(rs.getInt("le.num"));
 					bean.setId(rs.getString("le.id"));
 					bean.setName(rs.getString("tea.name"));
-					bean.setLeclass(rs.getString("tea.class"));
+					bean.setLeclass(rs.getString("le.class"));
 					bean.setArea(rs.getString("tea.area"));
 					bean.setStar(rs.getFloat("le.star"));
 					bean.setCount(rs.getInt("le.count"));
@@ -76,7 +76,7 @@ public class LessonMgr {
 		Vector<LessonBean> vlist= new Vector<LessonBean>();
 		try {
 			con = pool.getConnection();
-			sql = "select le.num,le.id,tea.name,tea.class,tea.area,le.star,le.count "
+			sql = "select le.num,le.id,tea.name,le.class,tea.area,le.star,le.count "
 					+ " from lesson le,letea tea where le.id=tea.id order by le.count desc";
 			pstmt = con.prepareStatement(sql);
 			
@@ -86,7 +86,7 @@ public class LessonMgr {
 				bean.setNum(rs.getInt("le.num"));
 				bean.setId(rs.getString("le.id"));
 				bean.setName(rs.getString("tea.name"));
-				bean.setLeclass(rs.getString("tea.class"));
+				bean.setLeclass(rs.getString("le.class"));
 				bean.setArea(rs.getString("tea.area"));
 				bean.setStar(rs.getFloat("le.star"));
 				bean.setCount(rs.getInt("le.count"));
@@ -144,8 +144,8 @@ public class LessonMgr {
 			if(!keyWord.trim().equals("")||keyWord!=null) {
 				//�˻��� �ƴѰ��
 			
-			sql = "select distinct(le.num),le.id,tea.name,tea.class,tea.area,le.star,le.count " + 
-					"from lesson le,letea tea where le.id=tea.id and( tea.name like ? or tea.class like ? or tea.area like ?)";
+			sql = "select distinct(le.num),le.id,tea.name,le.class,tea.area,le.star,le.count " + 
+					"from lesson le,letea tea where le.id=tea.id and( tea.name like ? or le.class like ? or tea.area like ?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, "%"+keyWord+"%");
 			pstmt.setString(2, "%"+keyWord+"%");
@@ -161,7 +161,7 @@ public class LessonMgr {
 				bean.setNum(rs.getInt("le.num"));
 				bean.setId(rs.getString("le.id"));
 				bean.setName(rs.getString("tea.name"));
-				bean.setLeclass(rs.getString("tea.class"));
+				bean.setLeclass(rs.getString("le.class"));
 				bean.setArea(rs.getString("tea.area"));
 				bean.setStar(rs.getFloat("le.star"));
 				bean.setCount(rs.getInt("le.count"));

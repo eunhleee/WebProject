@@ -21,14 +21,14 @@
 		<div
 			style="width: 50px; text-align: left; flex: 1; border: 1px solid black; margin-right: 10%; padding: 40px 40px;">
 			<h3>고객센터</h3>
-			<a href="custCenter.jsp?cust_page=ccBestBoard.jsp">&#149; 자주 묻는
-				질문</a><br>
-			<br> <a href="">&#149; 질문하기</a>
+			<a href="custCenter.jsp?cust_page=ccBestBoard">&#149; 자주 묻는 질문</a>
+			<br>
+			<br> 
+			<a href="custCenter.jsp?cust_page=ccQuery">&#149; 질문하기</a>
 		</div>
 
 		<!-- 리스트 부분 -->
-		<div
-			style="width: 800px; flex: 2; border: 1px solid black; padding: 20px 20px;">
+		<div style="width: 800px; flex: 2; border: 1px solid black; padding: 20px 20px;">
 			<jsp:include page="ccBestBoard.jsp"></jsp:include>
 		</div>
 	</div>

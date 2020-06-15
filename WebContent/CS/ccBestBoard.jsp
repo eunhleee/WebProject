@@ -7,6 +7,17 @@
 <jsp:useBean id="mgr" class="alcinfo.CSMgr"></jsp:useBean>
 <%
 	request.setCharacterEncoding("UTF-8");
+	String loginid = (String)session.getAttribute("idKey");
+	String category="", group="";
+	
+	if(request.getParameter("cust_page").equals("ccBestBoard")) {
+		category="자주 묻는 질문";
+		group="ccBestBoard";
+	}
+	else if(request.getParameter("cust_page").equals("ccQuery")) {
+		category="질문하기";
+		group="ccQuery";
+	}
 	//검색에 필요한 변수
 
 	int totalRecord = 0;//총게시물수
@@ -36,7 +47,7 @@
 		keyWord = "";
 	}
 
-	totalRecord = mgr.getTotalCount(keyField, keyWord);
+	totalRecord = mgr.getTotalCount(keyField, keyWord, group);
 	//out.print("totalRecord : " + totalRecord);
 
 	//nowPage 요청 처리
@@ -60,15 +71,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>우리학원 어디?-고객센터/자주 묻는 질문</title>
+<title>우리학원 어디?-고객센터</title>
 <script>
-	function check() {
-		if (document.searchFrm.keyWord.value == "") {
+	function cscheck() {
+		if (document.cssearchFrm.keyWord.value == "") {
 			alert("검색어를 입력하세요.");
-			document.searchFrm.keyWord.focus();
+			document.cssearchFrm.keyWord.focus();
 			return;
 		}
-		document.searchFrm.submit();
+		document.cssearchFrm.submit();
 	}
 	function pageing(page) {
 		document.readFrm.nowPage.value = page;
@@ -81,7 +92,7 @@
 		document.readFrm.submit();
 	}
 	function list() {//[처음으로]를 누르면 게시글의 처음 페이지로 돌아감
-		document.listFrm.action = "communityList.jsp";
+		document.listFrm.action = "custCenter.jsp?cust_page=<%=group%>";
 		document.listFrm.submit();
 	}
 	function numPerFn(numPerPage) {
@@ -92,8 +103,11 @@
 	//기존 조건 : keyField,keyWord,nowPage,numPerPage
 	function read(num) {
 		document.readFrm.num.value = num;
-		document.readFrm.action = "read.jsp";
+		document.readFrm.action = "cs_Read.jsp?cust_page=<%=group%>";
 		document.readFrm.submit();
+	}
+	function csalert() {
+		alert("로그인 후 이용가능합니다.");
 	}
 </script>
 <style>
@@ -123,7 +137,7 @@ a:hover {
 
 	<!-- 리스트 부분 -->
 
-	<h2>자주 묻는 질문</h2>
+	<h2><%=category%></h2>
 	<table>
 		<tr>
 			<td width="600">Total : <%=totalRecord%>Articles(<font
@@ -161,7 +175,7 @@ a:hover {
 
 
 					<%
-						Vector<CSBean> vlist = mgr.getBoardList(keyField, keyWord, start, cnt);
+						Vector<CSBean> vlist = mgr.getBoardList(keyField, keyWord, start, cnt, group);
 						int listsize = vlist.size();
 						if (vlist.isEmpty()) {
 					%>
@@ -183,18 +197,28 @@ a:hover {
 								String title = bean.getCc_title();
 								String id = bean.getCc_id();
 								String date = bean.getCc_regdate();
+								String filename = bean.getCc_filename();
 								int count = bean.getCc_count();
+								int ccount = mgr.ccount(num);
 					%>
 					<tr id="list">
-						<td align="center"><%=i + 1%></td>
-						<td align="center"><a href=""><%=title%></a></td>
+						<td align="center"><%=totalRecord-start-i%></td>
+						<td align="center">
+						<a href="javascript:read('<%=num%>')"><%=title%></a>
+							<% if(filename!=null) { %>
+								<img src="../img/icon_file1.png">
+							<% } %>
+							<% if(ccount>0) { %>
+								<font color="red">[<%=ccount%>]</font>
+							<% } %>
+						</td>
 						<td align="center"><a href=""><%=id%></a></td>
 						<td align="center"><%=date%></td>
 						<td align="center"><%=count%></td>
 					</tr>
 
 					<%
-						}
+							}
 						}
 					%>
 
@@ -246,24 +270,42 @@ a:hover {
  %>
 				<!-- 페이징 및 블럭 End -->
 			</td>
-			<td align="right"><a href="post.jsp">[글쓰기]</a> <a
-				href="javascript:list()">[처음으로]</a></td>
+			<td align="right"> 
+			<% if(group.equals("ccBestBoard"))  {
+				 if(mgr.checkM(loginid)==0) {%>
+				 <a href="cs_Post.jsp?cust_page=ccBestBoard&numPerPage=<%=numPerPage%>&nowPage=<%=nowPage%><%
+  	 	if(!(keyWord==null||keyWord.equals(""))){
+		     %>&keyField=<%=keyField%>&keyWord=<%=keyWord%><%}%>">[글쓰기]</a>
+			<%   }
+			   } else if(group.equals("ccQuery")) {
+			     if(loginid==null) {%>
+			     <a href="javascript:csalert()">[글쓰기]</a>
+			<%	 } else {%>
+				 <a href="cs_Post.jsp?cust_page=ccQuery&numPerPage=<%=numPerPage%>&nowPage=<%=nowPage%><%
+  	 	if(!(keyWord==null||keyWord.equals(""))){
+		     %>&keyField=<%=keyField%>&keyWord=<%=keyWord%><%}%>">[글쓰기]</a>
+			<%   }
+			   } %>
+			<a href="javascript:list()">[처음으로]</a></td>
 		</tr>
 	</table>
 
 
 	<hr width="750">
-	<form name="searchFrm">
+	<form name="cssearchFrm">
 		<table width="600" cellpadding="4" cellspacing="0">
 			<tr>
-				<td align="center" valign="bottom"><select name="keyField"
-					size="1">
-						<option value="cc_title">제 목</option>
-						<option value="cc_content">내 용</option>
-						<option value="cc_id">아 이 디</option>
-				</select> <input size="16" name="keyWord">
-				 <input type="submit" 	value="찾기" onClick="javascript:check()"> <input
-					type="hidden" name="nowPage" value="1"></td>
+				<td align="center" valign="bottom">
+				<select name="keyField" size="1">
+					<option value="cc_title" <%if(keyField.equals("cc_title")) {%>selected<%} %>>제 목</option>
+					<option value="cc_content" <%if(keyField.equals("cc_content")) {%>selected<%} %>>내 용</option>
+					<option value="cc_id" <%if(keyField.equals("cc_id")) {%>selected<%} %>>아 이 디</option>
+				</select> 
+				 <input size="16" name="keyWord" value="<%=keyWord%>">
+				 <input type="submit" value="찾기" onClick="javascript:cscheck()"> 
+				 <input type="hidden" name="nowPage" value="1">
+				 <input type="hidden" name="cust_page" value="<%=group%>">
+				 </td>
 			</tr>
 		</table>
 	</form>
@@ -274,11 +316,14 @@ a:hover {
 	</form>
 
 	<form name="readFrm">
-		<input type="hidden" name="nowPage" value="<%=nowPage%>"> <input
-			type="hidden" name="numPerPage" value="<%=numPerPage%>"> <input
-			type="hidden" name="keyField" value="<%=keyField%>"> <input
-			type="hidden" name="keyWord" value="<%=keyWord%>"> <input
-			type="hidden" name="num">
+		<input type="hidden" name="nowPage" value="<%=nowPage%>"> 
+		<input type="hidden" name="numPerPage" value="<%=numPerPage%>"> 
+		<%if(!(keyWord==null||keyWord.equals(""))){%>
+		<input type="hidden" name="keyField" value="<%=keyField%>">
+		<input type="hidden" name="keyWord" value="<%=keyWord%>">
+		<%}%>
+		<input type="hidden" name="cust_page" value="<%=group%>">
+		<input type="hidden" name="num">
 	</form>
 
 

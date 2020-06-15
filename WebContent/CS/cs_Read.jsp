@@ -1,66 +1,58 @@
-<!-- scRead.jsp -->
+<!-- cs_Read.jsp -->
 <%@page import="alcinfo.UtilMgr"%>
-<%@page import="alcinfo.SCommentBean"%>
 <%@page import="java.util.Vector"%>
-<%@page import="alcinfo.SCommunityBean"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<jsp:useBean id="scmgr" class="alcinfo.SCommunityMgr"/>
-<jsp:useBean id="sccmgr" class="alcinfo.SCommentMgr"/>
+<%@page import="alcinfo.CSBean" %>
+<%@page import="alcinfo.CSCommentBean" %>
+<%@page contentType="text/html; charset=utf-8"%>
+<jsp:useBean id="csmgr" class="alcinfo.CSMgr"/>
+<jsp:useBean id="cscmgr" class="alcinfo.CSCommentMgr"/>
 <%
-	request.setCharacterEncoding("UTF-8");
-	//read.jsp?nowPage=1&numPerPage=10&keyField=&keyWord=&num=3
-	String pageValue=request.getParameter("pageValue");
+	request.setCharacterEncoding("utf-8");
+	String cust_page=request.getParameter("cust_page");
 	String nowPage = request.getParameter("nowPage");	
 	String numPerPage = request.getParameter("numPerPage");	
 	String keyField = request.getParameter("keyField");	
 	String keyWord = request.getParameter("keyWord");	
 	int num = UtilMgr.parseInt(request, "num");
 	String loginid = (String)session.getAttribute("idKey");
-	String loginNick = null;
-	if(loginid!=null) {
-		loginNick = sccmgr.memberNick(loginid);
-	}
-	
 	String flag = request.getParameter("flag");
 	if(flag!=null) {
 		if(flag.equals("insert")) {
-			SCommentBean scbean = new SCommentBean();
-			scbean.setNum(num);
-			scbean.setStuc_nick(request.getParameter("cNick"));
-			scbean.setStuc_content(request.getParameter("comment"));
-			scbean.setStuc_ip(request.getParameter("ip"));
-			sccmgr.insertSComment(scbean);
+			CSCommentBean csbean = new CSCommentBean();
+			csbean.setCcr_num(num);
+			csbean.setCcr_id(request.getParameter("cid"));
+			csbean.setCcr_content(request.getParameter("comment"));
+			csbean.setCcr_ip(request.getParameter("ip"));
+			cscmgr.insertCSComment(csbean);
 		} else if(flag.equals("insert1")) {
-			SCommentBean scrbean = new SCommentBean();
-			scrbean.setNum(num);
-			scrbean.setStuc_nick(request.getParameter("cNick"));
-			scrbean.setStuc_content(request.getParameter("comment"));
-			scrbean.setStuc_ip(request.getParameter("ip"));
-			scrbean.setStuc_conum(UtilMgr.parseInt(request, "conum"));
-			sccmgr.insertSCReply(scrbean);
+			CSCommentBean csrbean = new CSCommentBean();
+			csrbean.setCcr_num(num);
+			csrbean.setCcr_id(request.getParameter("cid"));
+			csrbean.setCcr_content(request.getParameter("comment"));
+			csrbean.setCcr_ip(request.getParameter("ip"));
+			csrbean.setCcr_conum(UtilMgr.parseInt(request, "conum"));
+			cscmgr.insertSCReply(csrbean);
 		} else if(flag.equals("del1")) {
-			sccmgr.deleteAllSCReply(UtilMgr.parseInt(request, "conum"));
+			cscmgr.deleteAllCSCReply(UtilMgr.parseInt(request, "conum"));
 		} else if(flag.equals("del2")) {
-// 			요청한 댓글 삭제
-			sccmgr.deleteSComment(UtilMgr.parseInt(request, "cnum"));
+	//			요청한 댓글 삭제
+			cscmgr.deleteCSComment(UtilMgr.parseInt(request, "cnum"));
 		}
 	} else {
-// 		조회수 증가 : list.jsp 게시물 읽어옴
-		scmgr.scupCount(num);
+	//		조회수 증가 : list.jsp 게시물 읽어옴
+		csmgr.csupCount(num);
 	}
 	
-	SCommunityBean bean = scmgr.getBoard(num);
-	String id = bean.getSc_id();
-	String nick = bean.getSc_nick();
-	String title = bean.getSc_title();
-	String regdate = bean.getSc_regdate();
-	String content = bean.getSc_content();
-	String filename = bean.getSc_filename();
-	int filesize = bean.getSc_filesize();
-	String ip = bean.getSc_ip();
-	int count = bean.getSc_count();
-	int ccount = scmgr.ccount(num);
+	CSBean bean = csmgr.getBoard(num);
+	String id = bean.getCc_id();
+	String title = bean.getCc_title();
+	String regdate = bean.getCc_regdate();
+	String content = bean.getCc_content();
+	String filename = bean.getCc_filename();
+	int filesize = bean.getCc_filesize();
+	String ip = bean.getCc_ip();
+	int count = bean.getCc_count();
+	int ccount = csmgr.ccount(num);
 	//읽어온 게시물을 수정 및 삭제를 위해 세션저장
 	session.setAttribute("bean", bean);
 %>
@@ -69,14 +61,36 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>우리학원 어디?-자유게시판</title>
+<title>우리학원 어디?-고객센터</title>
+<style>
+#list td {
+	border-bottom: 1px solid lightgray;
+}
+
+#title td {
+	color: white;
+	background-color: #36ada9;
+}
+
+a {
+	text-decoration: none;
+	color: black;
+}
+
+a:hover {
+	color: gray;
+}
+.csrReply {
+	display:none;
+}
+</style>
 <script>
 function down(filename) {
 	document.downFrm.filename.value=filename;
 	document.downFrm.submit();
 }
 function list() {
-	document.listFrm.action = "communityList.jsp?pageValue=<%=pageValue%>&numPerPage=<%=numPerPage%>&nowPage=<%=nowPage%><%
+	document.listFrm.action = "custCenter.jsp?cust_page=<%=cust_page%>&numPerPage=<%=numPerPage%>&nowPage=<%=nowPage%><%
 		if(!(keyWord==null||keyWord.equals(""))){%>&keyField=<%=keyField%>&keyWord=<%=keyWord%><%}%>";
 	document.listFrm.submit();
 }
@@ -99,61 +113,28 @@ function cDel(conum, cnum, depth) {
 		document.cFrm.submit();
 	}
 }
-
-function goRep() {
-	
-	url = "scReport.jsp?stopid=<%=id%>&renum=<%=num%>";
-	window.open(url, "GoReport", 'width=360, height=300, top=200, left=300');
-}
-
-function goCReport(conum,stuc_depth,stopid) {
-	url = "scCReport.jsp?conum="+conum+"&stuc_depth="+stuc_depth+"&renum="+<%=num%>+"&stopid="+stopid;
-	window.open(url, "GoReport", "width=360, height=300, top=200, left=300");
-	}
 </script>
-<style>
-#list td {
-	border-bottom: 1px solid lightgray;
-}
-
-#title td {
-	color: white;
-	background-color: #36ada9;
-}
-
-a {
-	text-decoration: none;
-	color: black;
-}
-
-a:hover {
-	color: gray;
-	cursor : pointer;
-}
-
-.scReply {
-	display: none;
-}
-
-</style>
 </head>
 <body>
 
 	<jsp:include page="../alcinfo/headerSearch.jsp"></jsp:include>
 
 	<div style="display: flex; margin-left: 15%; margin-right: 15%">
+		<!-- 카테고리 부분 -->
 
 		<div
 			style="width: 50px; text-align: left; flex: 1; border: 1px solid black; margin-right: 10%; padding: 40px 40px;">
-			<h3>커뮤니티</h3>
-			<a href="communityList.jsp?pageValue=free">&#149; 자유게시판</a><br>
-			<a href="communityList.jsp?pageValue=academy">&#149; 학원 Q&A</a><br>
-			<a href="communityList.jsp?pageValue=lesson">&#149; 과외 Q&A</a><br>
+			<h3>고객센터</h3>
+			<a href="custCenter.jsp?cust_page=ccBestBoard">&#149; 자주 묻는 질문</a>
 			<br>
-
+			<br> 
+			<a href="custCenter.jsp?cust_page=ccQuery">&#149; 질문하기</a>
 		</div>
-		<div style="flex:4;">
-		<table align="center" width="75%" cellspacing="3">
+
+<!-- 고객센터 글읽기 Start -->
+		<div style="width: 800px; flex: 2; border: 1px solid black; padding: 20px 20px;">
+			
+			<table align="center" width="75%" cellspacing="3">
 		 <tr>
 		  <td bgcolor="#9CA2EE" height="25" align="center">글읽기
 		  </td>
@@ -211,9 +192,9 @@ a:hover {
 		   <form method="post" name="cFrm">
 				<table>
 					<tr  align="center">
-						<td width="50">닉네임</td>
+						<td width="50">아이디</td>
 						<td align="left">
-							<input name="cNick" size="10" value="<%=loginNick%>" readonly>
+							<input name="cNick" size="10" value="<%=loginid%>" readonly>
 						</td>
 					</tr>
 					<tr align="center">
@@ -244,20 +225,20 @@ a:hover {
 		 <hr/>
   			<!-- 댓글 List Start -->
 			  <%
-			  	Vector<SCommentBean> cvlist = sccmgr.getSComment(num);
+			  	Vector<CSCommentBean> cvlist = cscmgr.getCSComment(num);
 			      	if(!cvlist.isEmpty()){
 			  %>
 				 <table>
 				 <%
 					 	for(int i=0;i<cvlist.size();i++){
-	 		 	 			SCommentBean sccbean = cvlist.get(i);
+	 		 	 			CSCommentBean sccbean = cvlist.get(i);
 	 		 	 			int cnum = sccbean.getNum();
-	 		 	 			String cnick = sccbean.getStuc_nick();
-	 		 	 			String comment = sccbean.getStuc_content();
-	 		 	 			String cregdate = sccbean.getStuc_regdate();
-	 		 	 			int conum = sccbean.getStuc_conum();
-	 		 	 			int depth = sccbean.getStuc_depth();
-	 		 	 			String stopid= sccbean.getStuc_id();
+	 		 	 			String cid = sccbean.getCcr_id();
+	 		 	 			String comment = sccbean.getCcr_content();
+	 		 	 			String cregdate = sccbean.getCcr_regdate();
+	 		 	 			int conum = sccbean.getCcr_conum();
+	 		 	 			int depth = sccbean.getCcr_depth();
+	 		 	 			String stopid= sccbean.getCcr_id();
 			 				String dstyle = "";
 	 		 	 			if(depth==1) {
 	 		 	 				dstyle = "style=\"padding-left:30px;\"";	
@@ -265,13 +246,13 @@ a:hover {
 				 %>
 				 	
 				 	<tr>
-						<td <%=dstyle%> colspan="3" width="600"><b><%=cnick%></b></td>
+						<td <%=dstyle%> colspan="3" width="600"><b><%=cid%></b></td>
 					</tr>
 					<tr>
 						<td <%=dstyle%> colspan="2"><%=comment%></td>
 						<% 
-						if(loginNick!=null) {
-							if(loginNick.equals(cnick)) { %>
+						if(loginid!=null) {
+							if(loginid.equals(cid)) { %>
 						<td align="center" valign="middle">
 							<input type="button" value="삭제"
 							onclick="cDel('<%=conum%>','<%=cnum%>','<%=depth%>')">
@@ -281,7 +262,7 @@ a:hover {
 							<td align="left" valign="middle">
 							<input type="button" value="댓글신고"
 							onclick="javascript:goCReport
-							('<%=sccbean.getNum()%>','<%=sccbean.getStuc_depth()%>','<%=stopid%>')">
+							('<%=sccbean.getNum()%>','<%=sccbean.getCcr_depth()%>','<%=stopid%>')">
 							
 						</td>
 						<%}%>
@@ -291,36 +272,36 @@ a:hover {
 						<td <%=dstyle%> colspan="3">
 						<%=cregdate%>
 						<% if(loginid!=null) { %>
-						<a onclick="onscReply<%=i%>();">답글쓰기</a>  
+						<a onclick="oncsReply<%=i%>();">답글쓰기</a>  
 						<% } %>
 						
 						<!-- 답글쓰기 Start -->
 						
 						<script>
-						 	function onscReply<%=i%>() {
-						 		document.getElementById("scReply<%=i%>").style.display = 'block';
+						 	function oncsReply<%=i%>() {
+						 		document.getElementById("csReply<%=i%>").style.display = 'block';
 						 	}
-						 	function offscReply<%=i%>() {
-						 		document.getElementById("scReply<%=i%>").style.display = 'none';
+						 	function offcsReply<%=i%>() {
+						 		document.getElementById("csReply<%=i%>").style.display = 'none';
 						 	}
 						 	function rInsert<%=i%>() {
-						 		if(document.crFrm<%=i%>.comment.value==""){
+						 		if(document.csFrm<%=i%>.comment.value==""){
 						 			alert("댓글을 입력하세요.");
-						 			document.crFrm<%=i%>.comment.focus();
+						 			document.csFrm<%=i%>.comment.focus();
 						 			return;
 						 		}
-						 		document.crFrm<%=i%>.submit();
+						 		document.csFrm<%=i%>.submit();
 						 	}
 						 
 
 				 		</script>
-						<div id="scReply<%=i%>" class="scReply">
-							<form method="post" name="crFrm<%=i%>">
+						<div id="csReply<%=i%>" class="csReply">
+							<form method="post" name="csFrm<%=i%>">
 								<table>
 									<tr align="center">
-										<td width="50">닉네임</td>
+										<td width="50">아이디</td>
 										<td align="left">
-											<input name="cNick" size="10" value="<%=loginNick%>" readonly>
+											<input name="cid" size="10" value="<%=loginid%>" readonly>
 										</td>
 									</tr>
 									<tr align="center">
@@ -365,8 +346,10 @@ a:hover {
 		 <% 
 		 if(loginid!=null) {
 			 if(loginid.equals(id)) { %>
-			 | <a href="scUpdate.jsp?nowPage=<%=nowPage%>&num=<%=num%>&numPerPage=<%=numPerPage%>&pageValue=<%=pageValue %>" >수 정</a> |
-			 <a href="scDelete.jsp?nowPage=<%=nowPage%>&num=<%=num%>">삭 제</a> 
+			 | <a href="scUpdate.jsp?num=<%=num%>&cust_page=<%=cust_page%>&numPerPage=<%=numPerPage%>&nowPage=<%=nowPage%><%
+			 if(!(keyWord==null||keyWord.equals(""))){%>&keyField=<%=keyField%>&keyWord=<%=keyWord%><%}%>" >수 정</a> |
+			 <a href="scDelete.jsp?num=<%=num%>&cust_page=<%=cust_page%>&numPerPage=<%=numPerPage%>&nowPage=<%=nowPage%><%
+			 if(!(keyWord==null||keyWord.equals(""))){%>&keyField=<%=keyField%>&keyWord=<%=keyWord%><%}%>">삭 제</a> 
 		 <% }
 		 } %>
 		 ]<br/>
@@ -379,7 +362,7 @@ a:hover {
 		</form>
 
 		<form name="listFrm">
-			<input type="hidden" name="pageValue" value="<%=pageValue%>">
+			<input type="hidden" name="cust_page" value="<%=cust_page%>">
 			<input type="hidden" name="nowPage" value="<%=nowPage%>">
 			<input type="hidden" name="numPerPage" value="<%=numPerPage%>">
 			<%if(!(keyWord==null||keyWord.equals(""))){%>
@@ -387,8 +370,11 @@ a:hover {
 			<input type="hidden" name="keyWord" value="<%=keyWord%>">
 			<%}%>
 		</form>
+			
 		</div>
+<!-- 고객센터 글읽기 End -->
+
 	</div>
-	<jsp:include page="../alcinfo/footer.jsp"/>
+	<jsp:include page="../alcinfo/footer.jsp"></jsp:include>
 </body>
 </html>

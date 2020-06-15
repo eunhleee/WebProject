@@ -284,7 +284,9 @@ a:hover {
 					<%if(id==null){ %>
 						onclick="clalert();" href=""
 						<%}else{ %>
-						href="scPost.jsp?pageValue=<%=group %>" class="btn btn-default"
+						href="scPost.jsp?pageValue=<%=group %>&numPerPage=<%=numPerPage%>&nowPage=<%=nowPage%><%
+  	 	if(!(keyWord==null||keyWord.equals(""))){
+		     %>&keyField=<%=keyField%>&keyWord=<%=keyWord%><%}%>" class="btn btn-default"
 						<%} %>>[글쓰기]</a> 
 						<a href="javascript:list()">[처음으로]</a></td>
 				</tr>
@@ -318,8 +320,10 @@ a:hover {
 			<form name="readFrm">
 				<input type="hidden" name="nowPage" value="<%=nowPage%>"> 
 				<input type="hidden" name="numPerPage" value="<%=numPerPage%>">
-				<input type="hidden" name="keyField" value="<%=keyField%>"> 
+				<%if(!(keyWord==null||keyWord.equals(""))){%>
+				<input type="hidden" name="keyField" value="<%=keyField%>">
 				<input type="hidden" name="keyWord" value="<%=keyWord%>">
+				<%}%>
 				<input type="hidden" name="pageValue" value="<%=group%>">
 				<input type="hidden" name="num">
 			</form>
