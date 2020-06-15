@@ -46,7 +46,7 @@ function openlogoutProc(){
 
 	<div id="top" align="center">
 		<span> ※과도한 사교육은 올바른 교육이 아닙니다.&nbsp;&nbsp; <a
-			href="../CS/custCenter.jsp?cust_page=ccBestBoard.jsp">고객센터</a>
+			href="../CS/custCenter.jsp?cust_page=ccBestBoard">고객센터</a>
 		</span>
 
 	</div>

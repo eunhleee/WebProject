@@ -175,7 +175,7 @@ public class LessonMgr {
 				//占싯삼옙占쏙옙 占싣닌곤옙占�
 			
 			sql = "select distinct(le.num),le.id,tea.name,le.class,tea.area,le.star,le.count " + 
-					"from lesson le,letea tea where le.id=tea.id and( tea.name like ? or tea.class like ? or tea.area like ?)";
+					"from lesson le,letea tea where le.id=tea.id and( tea.name like ? or le.class like ? or tea.area like ?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, "%"+keyWord+"%");
 			pstmt.setString(2, "%"+keyWord+"%");

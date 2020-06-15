@@ -22,30 +22,29 @@
 	String id = request.getParameter("id");
 	String loginid = (String)session.getAttribute("idKey");
 	//검색에 필요한 변수
-
 	int grade=Loginmgr.getGrade(loginid);
 	int todaynumber=0,mpointnumber=0;
 	String mpoint=null;
 	if(loginid!=null){
-	if(grade==0||grade==1){
-		MemberBean mbean=Memmgr.getInfo(loginid);
-		mpoint=mbean.getMpoint();
-		
-	}
-	else if(grade==2||grade==3){
-		LeteaBean lbean=Teamgr.getInfo(loginid);
-		mpoint=lbean.getMpoint();
-	} 
-	
-	
-	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-    Calendar today = Calendar.getInstance();
- 	String strToday = sdf.format(today.getTime());
-	
-	 todaynumber=Integer.parseInt(strToday);
-	 mpoint=mpoint.replace("-", "");
-	 mpointnumber=Integer.parseInt(mpoint);
+		if(grade==0||grade==1){
+			MemberBean mbean=Memmgr.getInfo(loginid);
+			mpoint=mbean.getMpoint();
+			
 		}
+		else if(grade==2||grade==3){
+			LeteaBean lbean=Teamgr.getInfo(loginid);
+			mpoint=lbean.getMpoint();
+		} 
+	
+	
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+	    Calendar today = Calendar.getInstance();
+	 	String strToday = sdf.format(today.getTime());
+		
+		 todaynumber=Integer.parseInt(strToday);
+		 mpoint=mpoint.replace("-", "");
+		 mpointnumber=Integer.parseInt(mpoint);
+	}
 	int totalRecord = 0;//총게시물수
 	int numPerPage = 10;//페이지당 레코드 개수(5,10,15,30)
 	int pagePerBlock = 15;//블럭당 페이지 개수

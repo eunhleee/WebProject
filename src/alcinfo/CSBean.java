@@ -11,7 +11,15 @@ public class CSBean {
 	private String cc_filename;	
 	private int cc_filesize;	
 	private int cc_count;		
-	private int cc_secret;
+	private String cc_secret;
+	private String cc_group;
+	
+	public String getCc_group() {
+		return cc_group;
+	}
+	public void setCc_group(String cc_group) {
+		this.cc_group = cc_group;
+	}
 	public int getNum() {
 		return num;
 	}
@@ -72,10 +80,10 @@ public class CSBean {
 	public void setCc_count(int cc_count) {
 		this.cc_count = cc_count;
 	}
-	public int getCc_secret() {
+	public String getCc_secret() {
 		return cc_secret;
 	}
-	public void setCc_secret(int cc_secret) {
+	public void setCc_secret(String cc_secret) {
 		this.cc_secret = cc_secret;
 	}	
 	

@@ -1,7 +1,6 @@
 package alcinfo;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,31 +11,30 @@ import javax.servlet.http.HttpSession;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-
-@WebServlet("/Community/scUpdate")
-public class ScUpdateServlet extends HttpServlet {
+@WebServlet("/csUpdate")
+public class CsUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		String pageValue=request.getParameter("pageValue");
+		String cust_page=request.getParameter("cust_page");
 		String nowPage = request.getParameter("nowPage");
 		String numPerPage = request.getParameter("numPerPage");
 		String keyField = request.getParameter("keyField");	
 		String keyWord = request.getParameter("keyWord");
 		response.setContentType("text/html; charset=UTF-8");
 		HttpSession session = request.getSession();
-		SCommunityBean bean = (SCommunityBean)session.getAttribute("bean");
+		CSBean bean = (CSBean)session.getAttribute("bean");
 		MultipartRequest multi = new MultipartRequest(request, SCommunityMgr.SAVEFOLDER,
 				SCommunityMgr.MAXSIZE, SCommunityMgr.ENCTYPE, new DefaultFileRenamePolicy());
-		SCommunityMgr mgr = new SCommunityMgr();
-		mgr.updatesc(multi);
+		CSMgr mgr = new CSMgr();
+		mgr.updatecs(multi);
 		if(!(keyWord==null||keyWord.equals(""))) {
-			response.sendRedirect("scRead.jsp?num="+bean.getNum()+"&pageValue="+pageValue+
+			response.sendRedirect("cs_Read.jsp?num="+bean.getNum()+"&cust_page="+cust_page+
 					"&nowPage="+nowPage+"&numPerPage="+numPerPage+"&keyField="+keyField+
 					"&keyWord="+keyWord);
 		} else
-			response.sendRedirect("scRead.jsp?num="+bean.getNum()+"&pageValue="+pageValue+
+			response.sendRedirect("cs_Read.jsp?num="+bean.getNum()+"&cust_page="+cust_page+
 					"&nowPage="+nowPage+"&numPerPage="+numPerPage);
 	}
 
