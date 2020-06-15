@@ -13,7 +13,7 @@ public class LereviewMgr {
 		pool = DBConnectionMgr.getInstance();
 	}
 	//Board Total Count:�� �Խù� ��
-	public int getTotalCount(String keyField,String keyWord) {
+	public int getTotalCount(String keyField,String keyWord, int num) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -23,15 +23,17 @@ public class LereviewMgr {
 			con = pool.getConnection();
 			if(keyWord.trim().equals("")||keyWord==null) {
 				//�˻��� �ƴѰ��
-				sql = "select count(*) from lereview ";
+				sql = "select count(*) from lereview where lr_lnum=?";
 				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, num);
 			}
 			else {
 			//�˻��� ���
 			sql = "select count(*) from lereview where "
-					+keyField+" like ?";
+					+keyField+" like ? and lr_lnum=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, "%"+keyWord+"%");
+			pstmt.setInt(2, num);
 			}
 			rs = pstmt.executeQuery();
 			while(rs.next()) {

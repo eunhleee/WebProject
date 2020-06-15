@@ -56,7 +56,7 @@
 		keyWord = "";
 	}
 
-	totalRecord = mgr.getTotalCount(keyField, keyWord);
+	totalRecord = mgr.getTotalCount(keyField, keyWord, num);
 	//out.print("totalRecord : " + totalRecord);
 
 	//nowPage 요청 처리
