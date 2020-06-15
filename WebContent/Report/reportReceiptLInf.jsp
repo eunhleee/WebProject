@@ -1,5 +1,5 @@
-<!-- 13p 7.신고접수창 학원 잘못된 정보-->
-<!-- reportReceipt.jsp -->
+<!-- 13p 7.신고접수창 과외 잘못된 정보-->
+<!-- reportReceiptLint.jsp -->
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page import ="java.util.*,alcinfo.*"%>
 <jsp:useBean id="rBean" class="alcinfo.MemberBean"/>

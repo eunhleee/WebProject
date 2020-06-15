@@ -266,14 +266,14 @@ public class ReportMgr {
 			}
 	}
 	//report bulletin board 
-	public void reportBoard(ReportBean bean) {
+	public void reportBoard(ReportBean bean,String stopurl) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		String sql = null;
 		try {
 			con = pool.getConnection();
-			sql = "insert into report(regroup,retitle,recontent,reid,stopid,reip,restate,olddate,kind,renum)"
-								+"values(?,?,?,?,?,?,?,now(),?,?)";
+			sql = "insert into report(regroup,retitle,recontent,reid,stopid,reip,restate,olddate,kind,renum,stopurl)"
+								+"values(?,?,?,?,?,?,?,now(),?,?,"+"'"+stopurl+"'"+")";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, bean.getRegroup());
 			pstmt.setString(2, bean.getRetitle());
@@ -284,7 +284,6 @@ public class ReportMgr {
 			pstmt.setString(7, bean.getRestate());
 			pstmt.setString(8, bean.getKind());
 			pstmt.setInt(9, bean.getRenum());
-
 			pstmt.executeUpdate();		
 			} catch (Exception e) {
 			e.printStackTrace();
@@ -297,14 +296,14 @@ public class ReportMgr {
 	
 	///
 	
-	public void reportBoardcom(ReportBean bean) {
+	public void reportBoardcom(ReportBean bean,String stopurl) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		String sql = null;
 		try {
 			con = pool.getConnection();
-			sql = "insert into report(regroup,retitle,recontent,reid,stopid,reip,restate,olddate,kind,renum,conum,depth)"
-								+"values(?,?,?,?,?,?,?,now(),?,?,?,?)";
+			sql = "insert into report(regroup,retitle,recontent,reid,stopid,reip,restate,olddate,kind,renum,conum,depth,stopurl)"
+								+"values(?,?,?,?,?,?,?,now(),?,?,?,?,'"+stopurl+"'"+")";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, bean.getRegroup());
 			pstmt.setString(2, bean.getRetitle());

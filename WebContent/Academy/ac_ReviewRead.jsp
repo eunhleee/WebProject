@@ -122,7 +122,16 @@ a:hover {
 			document.cFrm.submit();
 		}
 	}
-	
+	function goRep() {
+		
+		url = "acLReport.jsp?stopid=<%=id%>&renum=<%=num%>";
+		window.open(url, "GoReport", 'width=360, height=300, top=200, left=300');
+	}
+
+	function goCReport(conum,stuc_depth,stopid) {
+		url = "acLCReport.jsp?conum="+conum+"&stuc_depth="+stuc_depth+"&renum="+<%=num%>+"&stopid="+stopid;
+		window.open(url, "GoReport", "width=360, height=300, top=200, left=300");
+		}
 </script>
 </head>
 <body>
@@ -228,6 +237,9 @@ a:hover {
 		    <td align="right">
 		     	조회수  <%=count%>
 		    </td>
+		      <% if(loginid!=null) {%>		    
+		    <td><input type="button" value="신고" onclick="javascript:goRep();"></td>
+		    <%}%>
 		   </tr>
 		   </table>
 		  </td>
@@ -285,7 +297,7 @@ a:hover {
 	 		 	 			String cregdate = acrcbean.getAcr_regdate();
 	 		 	 			int conum = acrcbean.getAcr_conum();
 	 		 	 			int depth = acrcbean.getAcr_depth();
-	 		 	 			
+	 		 	 			String stopid=acrcbean.getAcr_id();
 			 				String dstyle = "";
 	 		 	 			if(depth==1) {
 	 		 	 				dstyle = "style=\"padding-left:30px;\"";	
@@ -304,9 +316,14 @@ a:hover {
 							<input type="button" value="삭제"
 							onclick="cDel('<%=conum%>','<%=cnum%>','<%=depth%>')">
 						</td>
-						<% 	
-							}
-						} %>
+							<% 	} System.out.println("아이디는"+stopid);%>
+							<td align="left" valign="middle">
+							<input type="button" value="댓글신고"
+							onclick="javascript:goCReport
+							('<%=acrcbean.getNum()%>','<%=depth%>','<%=stopid%>')">
+							
+						</td>
+						<%} %>
 					</tr>
 					<tr>
 						<td <%=dstyle%> colspan="3">

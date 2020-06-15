@@ -23,7 +23,7 @@ public class AcRcommentsMgr {
 		try {
 			con = pool.getConnection();
 			sql = "select num,acr_nick,acr_content,acr_regdate,acr_conum,"
-					+ "acr_depth from acrcomments where acr_num=? order by acr_conum, num";
+					+ "acr_depth, acr_id from acrcomments where acr_num=? order by acr_conum, num";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			rs = pstmt.executeQuery();
@@ -35,6 +35,8 @@ public class AcRcommentsMgr {
 				bean.setAcr_regdate(rs.getString("acr_regdate"));
 				bean.setAcr_conum(rs.getInt("acr_conum"));
 				bean.setAcr_depth(rs.getInt("acr_depth"));
+				bean.setAcr_id(rs.getString("acr_id"));
+
 				vlist.addElement(bean);
 			}
 		} catch (Exception e) {
@@ -111,7 +113,7 @@ public class AcRcommentsMgr {
 		}
 	}
 	
-	//Comment and C's Reply All Delete (댓글 삭제할 때 대댓글까지 전부 삭제)
+	//Comment and C's Reply All Delete (�뙎湲� �궘�젣�븷 �븣 ���뙎湲�源뚯� �쟾遺� �궘�젣)
 	public void deleteAllAcrCReply(int num) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -171,7 +173,7 @@ public class AcRcommentsMgr {
 		}
 	}
 	
-	// 로그인 된 회원 닉네임
+	// 濡쒓렇�씤 �맂 �쉶�썝 �땳�꽕�엫
 	public String memberNick(String id) {
 		Connection con = null;
 		PreparedStatement pstmt = null;

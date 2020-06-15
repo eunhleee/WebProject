@@ -102,6 +102,7 @@ if (request.getParameter("reload") != null && request.getParameter("reload").equ
 		document.readFr.action="read.jsp";
 		document.readFr.submit();
 	}
+
 </script>
 </head>
 <body>

@@ -1,6 +1,7 @@
 package alcinfo;
 
 import java.io.File;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,7 +15,7 @@ public class AcqueryMgr {
 		pool=DBConnectionMgr.getInstance();
 	}
 	
-	//Board Total Count:占쏙옙 占쌉시뱄옙 占쏙옙
+	//Board Total Count:
 	public int getTotalCount(int ac_num,String keyField,String keyWord) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -24,13 +25,13 @@ public class AcqueryMgr {
 		try {
 			con = pool.getConnection();
 			if(keyWord.trim().equals("")||keyWord==null) {
-				//占싯삼옙占쏙옙 占싣닌곤옙占�
+				//
 				sql = "select count(*) from acquery where ac_num=?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, ac_num);
 			}
 			else {
-			//占싯삼옙占쏙옙 占쏙옙占�
+			//
 			sql = "select count(*) from acquery where ac_num=? and "
 					+keyField+" like ?";
 			pstmt = con.prepareStatement(sql);
@@ -49,11 +50,11 @@ public class AcqueryMgr {
 		return totalCount;
 	}
 	
-	//Board List:占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙,占싯삼옙 占쏙옙占쏙옙
-	//keyField : 占쏙옙占시옵쇽옙(name,title,content)
-	//keyWord : 占싯삼옙占쏙옙
-	//start : 占쏙옙占쏙옙 占쏙옙호
-	//cnt : 占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쌉시뱄옙 占쏙옙占쏙옙
+	//Board List:
+	//keyField :(name,title,content)
+	//keyWord : 
+	//start : 
+	//cnt : 
 	public Vector<AcqueryBean> getBoardList(int ac_num,String keyField,String keyWord,int start,int cnt){
 		 Connection con = null;
 		PreparedStatement pstmt = null;
@@ -74,7 +75,7 @@ public class AcqueryMgr {
 	
 			}
 			else {
-			//占싯삼옙占쏙옙 占쏙옙占�
+			//
 			sql = "select  num, ac_num,ac_title,ac_subject,ac_content,ac_ip,ac_id,ac_date,ac_count "
 					+ "from acquery where ac_num=? and "+keyField+" like ? order by num desc "
 					+ "limit ?,?";

@@ -1,4 +1,10 @@
 <!-- 과외 리뷰 리스트 출력 -->
+
+
+<!-- 커뮤니티의 자유게시판 리스트 출력 -->
+
+<%@page import="java.util.Calendar"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="alcinfo.LeteaBean"%>
 <%@page import="alcinfo.MemberBean"%>
 <%@page import="alcinfo.UtilMgr"%>
@@ -16,19 +22,30 @@
 	String id = request.getParameter("id");
 	String loginid = (String)session.getAttribute("idKey");
 	//검색에 필요한 변수
-	int grade=Loginmgr.getGrade(loginid);
-	//int grade=Loginmgr.getGrade(id);
 	
+	int grade=Loginmgr.getGrade(loginid);
+	int todaynumber=0,mpointnumber=0;
 	String mpoint=null;
-	if(grade==0||grade==1){
-		MemberBean mbean=Memmgr.getInfo(loginid);
-		mpoint=mbean.getMpoint();
+	if(loginid!=null){
+		if(grade==0||grade==1){
+			MemberBean mbean=Memmgr.getInfo(loginid);
+			mpoint=mbean.getMpoint();
+			
+		}
+		else if(grade==2||grade==3){
+			LeteaBean lbean=Teamgr.getInfo(loginid);
+			mpoint=lbean.getMpoint();
+		} 
+	
+	
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+	    Calendar today = Calendar.getInstance();
+	 	String strToday = sdf.format(today.getTime());
 		
+		 todaynumber=Integer.parseInt(strToday);
+		 mpoint=mpoint.replace("-", "");
+		 mpointnumber=Integer.parseInt(mpoint);
 	}
-	else if(grade==2||grade==3){
-		LeteaBean lbean=Teamgr.getInfo(loginid);
-		mpoint=lbean.getMpoint();
-	} 
 	int totalRecord = 0;//총게시물수
 	int numPerPage = 10;//페이지당 레코드 개수(5,10,15,30)
 	int pagePerBlock = 15;//블럭당 페이지 개수
@@ -76,7 +93,6 @@
 	nowBlock = (int) Math.ceil((double) nowPage / pagePerBlock);
 %>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -182,7 +198,7 @@ a:hover {
 						<td width="100">조회수</td>
 					</tr>
 					<%
-						if(loginid==null||mpoint==null){
+						if(loginid==null||mpoint==null||mpointnumber<todaynumber){
 					%>
 					<tr>
 						<td align="center" colspan="5" height="210" style="background-color:gray;  opacity: 0.5;">
@@ -285,6 +301,9 @@ a:hover {
  %>
 				<!-- 페이징 및 블럭 End -->
 			</td>
+			<%
+				if(loginid!=null&&mpoint!=null&&mpointnumber>todaynumber){
+			%>
 			<td align="right">
 				<a 
 				<% if(loginid != null) { %>
@@ -297,6 +316,7 @@ a:hover {
 				>[글쓰기]</a>
 				<a href="javascript:list()">[처음으로]</a>
 			</td>
+			<%} %>
 		</tr>
 	</table>
 

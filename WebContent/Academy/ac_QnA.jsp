@@ -119,6 +119,12 @@ a {
 a:hover {
 	color: gray;
 }
+
+div{
+	border:8px solid #36ada9;
+	border-radius: 10px;
+	padding:15px;
+}
 </style>
 </head>
 <body>
@@ -127,8 +133,9 @@ a:hover {
 
 
 	<!-- 리스트 부분 -->
-
+<div>
 	<h2>학원 문의 게시판</h2>
+	
 	<table>
 		<tr>
 			<td width="600">Total : <%=totalRecord%>Articles(<font
@@ -268,8 +275,8 @@ a:hover {
   	 	if(!(keyWord==null||keyWord.equals(""))){
 		     %>&keyField=<%=keyField%>&keyWord=<%=keyWord%><%}%>"
 			<% } %>
-			>[글쓰기]</a> <a
-				href="javascript:list()">[처음으로]</a></td>
+			>[글쓰기]</a> 
+			<a href="javascript:list()">[처음으로]</a></td>
 		</tr>
 	</table>
 
@@ -291,6 +298,7 @@ a:hover {
 			</tr>
 		</table>
 	</form>
+	</div>
 	<form name="listFrm" method="post">
 		<input type="hidden" name="reload" value="true">
 		<!-- 요게 중요 -->

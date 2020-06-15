@@ -12,35 +12,69 @@
 	int lq_lnum=UtilMgr.parseInt(request,"lq_lnum");
 	String prevurl = request.getHeader("referer");
 %>
-<div align="center"">
-	<br/>
-	<table width="600" cellpadding="3">
-		<tr>
-			<td height="25" align="center">글쓰기</td>
-		</tr>
-	</table>
+
+<html>
+<head>
+<style>
+#inputdiv{
+	margin:10px;
+	width:400px;
+	border:1px solid gray;
+	border-radius: 6px;
+	padding:3px;
+}
+#inputdiv input{
+	width:350px;
+	border:none;
+	font-size:15px;
+}
+#textareadiv{
+	margin:10px;
+	width:400px;
+	border:1px solid gray;
+	border-radius: 6px;
+	padding:3px;
+}
+#textareadiv textarea{
+	border:none;
+	font-size:15px;
+	width:390px;
+}
+</style>
+</head>
+<body>
+<div style="padding:15px; border:8px solid #F88C65; border-radius: 10px;">
+	<h2>문의 하기</h2>		
 	<br/>
 	<form name="lepostFrm" method="post" action="le_QnAPostProc.jsp">
-	<table width="600" cellpadding="3" align="center" border="1">
+	<table width="600" cellpadding="3">
 		<tr>
-			<td align=center>
-			<table align="center">
+			<td >
+			<table >
 				<tr>
 					<td>제 목</td>
 					<td>
-					<input name="leqtitle" size="50" maxlength="30"></td>
+					<div id="inputdiv">
+					<input name="leqtitle" size="50" maxlength="30">
+					</div>
+					</td>
 				</tr>
 				<tr>
 					<td>과 목</td>
 					<td>
-					<input name="leqsubject" size="50" maxlength="30"></td>
+					<div id="inputdiv">
+					<input name="leqsubject" size="50" maxlength="30">
+					</div></td>
 				</tr>
 				<tr>
 					<td>내 용</td>
-					<td><textarea name="leqcontent" rows="10" cols="50"></textarea></td>
+					<td>
+					<div id="textareadiv">
+					<textarea name="leqcontent" rows="10" cols="50"></textarea>
+					</div></td>
 				</tr>
 				<tr>
-					<td colspan="2">
+					<td colspan="2" align="center">
 				
 						 <input type="submit" value="확인">
 						 <input type="reset" value="다시쓰기">
@@ -67,3 +101,5 @@
 	%>
 	</form>
 </div>
+</body>
+</html>

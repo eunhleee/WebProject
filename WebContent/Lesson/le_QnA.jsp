@@ -119,6 +119,11 @@ a {
 a:hover {
 	color: gray;
 }
+div{
+	border:8px solid #36ada9;
+	border-radius: 10px;
+	padding:15px;
+}
 </style>
 </head>
 <body>
@@ -127,7 +132,7 @@ a:hover {
 
 
 	<!-- 리스트 부분 -->
-
+<div>
 	<h2>과외 문의 게시판</h2>
 	<table>
 		<tr>
@@ -293,6 +298,7 @@ a:hover {
 			</tr>
 		</table>
 	</form>
+	</div>
 	<form name="listFrm" method="post">
 		<input type="hidden" name="reload" value="true">
 		<!-- 요게 중요 -->

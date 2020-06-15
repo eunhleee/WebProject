@@ -21,6 +21,36 @@ public class LessonMgr {
 	 *  float star=Lbean.getStar(); 
 	 *  int count=Lbean.getCount();
 	 */
+	
+	public LessonBean getId(String id){
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		LessonBean bean=new LessonBean();
+		
+		try {
+			con = pool.getConnection();
+			sql = "select tea.name,tea.id,le.class from lesson le, letea tea where le.id=? and le.id=tea.id";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				
+				bean.setName(rs.getString("tea.name"));
+				bean.setId(rs.getString("tea.id"));
+				bean.setLeclass(rs.getString("le.class"));
+				
+			} 
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt, rs);
+		}
+		return bean;
+	}
+	
 	public Vector<LessonBean> getBestBoard(String pageValue,String sort){
 			Connection con = null;
 			PreparedStatement pstmt = null;
@@ -44,7 +74,7 @@ public class LessonMgr {
 					
 				}
 				
-				rs = pstmt.executeQuery();// select ����
+				rs = pstmt.executeQuery();// select 占쏙옙占쏙옙
 				while(rs.next()) {
 					LessonBean bean = new LessonBean();
 					bean.setNum(rs.getInt("le.num"));
@@ -80,7 +110,7 @@ public class LessonMgr {
 					+ " from lesson le,letea tea where le.id=tea.id order by le.count desc";
 			pstmt = con.prepareStatement(sql);
 			
-			rs = pstmt.executeQuery();//select ����
+			rs = pstmt.executeQuery();//select 占쏙옙占쏙옙
 			while(rs.next()) {
 				LessonBean bean = new LessonBean();
 				bean.setNum(rs.getInt("le.num"));
@@ -110,7 +140,7 @@ public class LessonMgr {
 		LessonBean lebean = new LessonBean();
 		try {
 			con = pool.getConnection();
-			sql = "select les.num,let.name,let.gender, let.area, let.phone, let.class, les.student, let.school_name, les.etc from lesson les, letea let where les.id=let.id and les.id = ?";
+			sql = "select les.num,let.name,let.gender, let.area, let.phone, les.class, les.student, let.school_name, les.etc from lesson les, letea let where les.id=let.id and les.id = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
@@ -120,7 +150,7 @@ public class LessonMgr {
 				lebean.setGender(rs.getString("let.gender"));
 				lebean.setArea(rs.getString("let.area"));
 				lebean.setPhone(rs.getString("let.phone"));
-				lebean.setLeclass(rs.getString("let.class"));
+				lebean.setLeclass(rs.getString("les.class"));
 				lebean.setStudent(rs.getInt("les.student"));
 				lebean.setSchool_name(rs.getString("let.school_name"));
 				lebean.setEtc(rs.getString("les.etc"));
@@ -142,7 +172,7 @@ public class LessonMgr {
 		try {
 			con = pool.getConnection();
 			if(!keyWord.trim().equals("")||keyWord!=null) {
-				//�˻��� �ƴѰ��
+				//占싯삼옙占쏙옙 占싣닌곤옙占�
 			
 			sql = "select distinct(le.num),le.id,tea.name,le.class,tea.area,le.star,le.count " + 
 					"from lesson le,letea tea where le.id=tea.id and( tea.name like ? or le.class like ? or tea.area like ?)";
@@ -186,7 +216,7 @@ public class LessonMgr {
 			
 			con = pool.getConnection();
 			sql = "insert leinsert(l_num,l_teacharid,l_stuid,l_stname,l_staddress,l_state,l_date )"
-					+ " values(?,?,?,?,?,'신청접수',now())";
+					+ " values(?,?,?,?,?,'�떊泥��젒�닔',now())";
 			pstmt = con.prepareStatement(sql);
 
 			pstmt.setInt(1, lbean.getNum());
@@ -289,7 +319,7 @@ public class LessonMgr {
 			return jsonArray;
 	}
 	
-	//조회수 증가
+	//議고쉶�닔 利앷�
 		public void upLeCount(int num) {
 			Connection con = null;
 			PreparedStatement pstmt = null;

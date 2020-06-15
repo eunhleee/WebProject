@@ -7,9 +7,10 @@
 <jsp:setProperty name="rBean" property="*"/>
 <%
 		request.setCharacterEncoding("UTF-8");
+	String stopid = request.getParameter("stopid").trim();
+	String stopurl =request.getParameter("stopurl").trim();
 
- 	String stopid = request.getParameter("stopid").trim();
- 	String stopurl =request.getParameter("stopurl").trim();
+
 %>
 <html>
 <head>
@@ -66,5 +67,6 @@
   <!-- //footer -->
 </div>
 <!-- //frame -->
+
 </body>
 </html>

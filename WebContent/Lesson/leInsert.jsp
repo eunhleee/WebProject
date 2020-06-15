@@ -84,7 +84,7 @@
 				</tr>
 					<tr height="35">
 					<td width="30%">과외 가능한 과목</td>
-					<td width="70%"><%=leBean.getLeclass() %></td>
+					<td width="70%"><input name="leclass" type="text" placeholder="가능한 과목을 입력하시오." style="width:300; height:30;"></td>
 				</tr>
 				<tr height="35">
 					<td width="30%">과외중인 학생 수</td>
