@@ -140,13 +140,11 @@ public class LessonMgr {
 		LessonBean lebean = new LessonBean();
 		try {
 			con = pool.getConnection();
-			sql = "select let.imgname,les.num,let.name,let.gender, let.area, let.phone, les.class, les.student, let.school_name, les.etc from lesson les, letea let where les.id=let.id and les.id = ?";
 			sql = "select les.num,let.name,let.gender, let.area, let.phone, les.class, les.student, let.school_name, les.etc from lesson les, letea let where les.id=let.id and les.id = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
-				lebean.setImgname(rs.getString("let.imgname"));
 				lebean.setNum(rs.getInt("les.num"));
 				lebean.setName(rs.getString("let.name"));
 				lebean.setGender(rs.getString("let.gender"));

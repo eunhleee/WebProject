@@ -5,7 +5,6 @@
 
 <%@page import="java.util.Calendar"%>
 <%@page import="java.text.SimpleDateFormat"%>
->>>>>>> branch 'master' of https://github.com/eunhleee/WebProject.git
 <%@page import="alcinfo.LeteaBean"%>
 <%@page import="alcinfo.MemberBean"%>
 <%@page import="alcinfo.UtilMgr"%>
@@ -23,14 +22,7 @@
 	String id = request.getParameter("id");
 	String loginid = (String)session.getAttribute("idKey");
 	//검색에 필요한 변수
-	int grade=Loginmgr.getGrade(loginid);
-	//int grade=Loginmgr.getGrade(id);
-	
-	String mpoint=null;
-	if(grade==0||grade==1){
-		MemberBean mbean=Memmgr.getInfo(loginid);
-		mpoint=mbean.getMpoint();
-		
+
 	int grade=Loginmgr.getGrade(loginid);
 	int todaynumber=0,mpointnumber=0;
 	String mpoint=null;
@@ -164,12 +156,7 @@ a:hover {
 </style>
 </head>
 <body>
-
-
-
-
 	<!-- 리스트 부분 -->
-
 	<h2>선생님 리뷰</h2>
 	<table>
 		<tr>
@@ -226,9 +213,6 @@ a:hover {
 							<p>등록된 게시글이 없습니다.</p>
 						</td>
 					</tr>
-
-
-
 					<%
 						} else {
 							for (int i = 0; i < listsize; i++) {
