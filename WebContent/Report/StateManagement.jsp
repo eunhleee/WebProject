@@ -106,20 +106,13 @@ function block(block) {
 	document.readF.submit();
 }
 function list(){//처음으로를 누르면 처음으로 가게 도와주는 함수(24번째줄 참고)
-	document.listFr.action="list.jsp";
+	document.listFr.action="StateManagement.jsp";
 	document.listFr.submit();
 	
 }
 function numPerFn(numPerPage){//5개보기,10개보기 등등 보기리스트 함수
 	//alert(numPerPage);//보기리스트를 누르면 팝압창생성
 	document.readF.numPerPage.value=numPerPage;
-	document.readF.submit();
-}
-//list.jsp에서 read.jsp로 요청이 될때 기존에 조건
-//기존 조건 : keyField,keyWord,nowPage,numPerPage
-function read(num){
-	document.readF.num.value=num;
-	document.readF.action="read.jsp";
 	document.readF.submit();
 }
 </script>

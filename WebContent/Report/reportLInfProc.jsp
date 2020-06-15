@@ -1,3 +1,5 @@
+<!-- reportLInfProc.  -->
+
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%request.setCharacterEncoding("UTF-8");%>
 <jsp:useBean id="mgr" class="alcinfo.ReportMgr"/>

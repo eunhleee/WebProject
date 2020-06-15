@@ -11,5 +11,9 @@
 	String stopurl =request.getParameter("stopurl").trim();
 
 	mgr.rePortAI(bean);
-	response.sendRedirect("reportReceiptSInf.jsp?stopid="+stopid+"&stopurl="+stopurl);%>
+	response.sendRedirect("reportReceiptSInf.jsp?stopid="+stopid+"&stopurl="+stopurl);
+	%>
+<script type="text/javascript">
+window.close();
+</script>
 
