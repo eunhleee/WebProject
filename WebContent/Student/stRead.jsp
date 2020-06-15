@@ -131,7 +131,7 @@ function goErr(){
 									</tr>
 									<tr height="40">
 										<td width="30%">원하는지역</td>
-										<td width="70%"><%=stbean.getAddress() %> / <%=stbean.getImgname() %></td>
+										<td width="70%"><%=stbean.getAddress() %></td>
 									</tr>
 									<tr height="40">
 										<td width="30%">전화번호</td>
