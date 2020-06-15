@@ -64,11 +64,12 @@ public class StudentMgr {
 			StudentBean stbean = new StudentBean();
 			try {
 				con = pool.getConnection();
-				sql = "select name,st.id, gender, substr(address,1,instr(address,'濡� ')+1) address, phone, class, school_name, school_grade, etc from student st, member me where st.id=me.id and num=?";
+				sql = "select imgname, name,st.id, gender, substr(address,1,instr(address,'濡� ')+1) address, phone, class, school_name, school_grade, etc from student st, member me where st.id=me.id and num=?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, num);
 				rs = pstmt.executeQuery();
 				if(rs.next()) {
+					stbean.setImgname(rs.getString("imgname"));
 					stbean.setName(rs.getString("name"));
 					stbean.setId(rs.getString("st.id"));
 					stbean.setGender(rs.getString("gender"));

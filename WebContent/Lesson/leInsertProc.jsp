@@ -6,9 +6,10 @@
 <jsp:setProperty name="leBean" property="*" />
 <%
 	String id = request.getParameter("id");
+	String leclass = request.getParameter("leclass");
 	int student = Integer.parseInt(request.getParameter("lestudent"));
 	String etc = request.getParameter("leetc");
-	boolean flag = leMgr.insertLetea(id, student, etc);
+	boolean flag = leMgr.insertLetea(id, leclass, student, etc);
 	if(flag){%>
 <script>
 		alert("등록되었습니다.");

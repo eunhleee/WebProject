@@ -17,6 +17,15 @@ public class LessonBean {
 		private String gender;
 		private String phone;
 		private String school_name;
+		private String imgname;
+
+	public String getImgname() {
+			return imgname;
+		}
+
+		public void setImgname(String imgname) {
+			this.imgname = imgname;
+		}
 
 	public String getGender() {
 			return gender;
