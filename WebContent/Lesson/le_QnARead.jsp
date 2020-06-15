@@ -12,7 +12,7 @@
 	//read.jsp?nowPage=1&numPerPage=10&keyField=&keyWord=&num=3
 	String nowPage = request.getParameter("nowPage");	
 	String numPerPage = request.getParameter("numPerPage");	
-	String keyField = request.getParameter("keyField");	
+	String keyField = request.getParameter("keyField");
 	String keyWord = request.getParameter("keyWord");
 	int num = UtilMgr.parseInt(request, "num");
 	int lq_lnum = UtilMgr.parseInt(request, "lq_lnum");

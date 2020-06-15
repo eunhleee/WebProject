@@ -1,5 +1,5 @@
-<!-- 13p 7.신고접수창 학생문의게시판댓글-->
-<!-- stQCReport.jsp -->
+<!-- 13p 7.신고접수창 학원리뷰댓글신고-->
+<!-- acLCReport.jsp -->
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page import ="java.util.*,alcinfo.*"%>
 <jsp:useBean id="rBean" class="alcinfo.MemberBean"/>
@@ -16,7 +16,7 @@
 %>
 <html>
 <head>
-<title>학생문의게시판 댓글 신고하기</title>
+<title>학원리뷰 댓글신고하기</title>
 <script type="text/javascript">
 var stopurl=document.referrer;
 	function singo(){
@@ -36,7 +36,7 @@ var stopurl=document.referrer;
 		} 
 		if(document.repFrm.retitle.value!=""&&document.repFrm.regroup.value!=""&&document.repFrm.recontent.value!=""){ 
 		document.repFrm.stopurl.value=stopurl;
-		document.repFrm.action="stQCReportProc.jsp?stopid=<%=stopid%>&renum=<%=renum%>&conum=<%=conum%>&stuc_depth=<%=stuc_depth%>";
+		document.repFrm.action="acLCReportProc.jsp?stopid=<%=stopid%>&renum=<%=renum%>&conum=<%=conum%>&stuc_depth=<%=stuc_depth%>";
 		document.repFrm.submit();
 
 		} 
@@ -51,7 +51,7 @@ var stopurl=document.referrer;
     	<form name="repFrm" method="post">
 		<table width="300">
 		<tr>
-		<td><input type="hidden" name="kind" value="학생문의게시판댓글"></td>	
+		<td><input type="hidden" name="kind" value="학원리뷰게시판댓글"></td>	
 		<td><input type="hidden" name="reid" value="<%=session.getAttribute("idKey")%>"></td>
 		</tr>
 		<tr>
