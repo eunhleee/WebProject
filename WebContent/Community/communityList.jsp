@@ -22,6 +22,14 @@
 			category="과외 Q&A";
 			group="lesson";
 		}
+		else if(request.getParameter("pageValue").equals("onlyst")){
+			category="학생 전용 게시판";
+			group="onlyst";
+		}
+		else if(request.getParameter("pageValue").equals("onlyte")){
+			category="선생님 전용 게시판";
+			group="onlyte";
+		}
 //검색에 필요한 변수
 		
 		int totalRecord = 0;//총게시물수
@@ -118,6 +126,12 @@ function read(num){
 	document.readFrm.action="scRead.jsp?pageValue=<%=group%>";
 	document.readFrm.submit();
 }
+function clalert1(){
+	alert("학생만 이용가능 합니다.")
+}
+function clalert2(){
+	alert("선생님만 이용가능 합니다.")
+}
 </script>
  <style>
 #list td {
@@ -168,6 +182,19 @@ a:hover {
 			<a href="communityList.jsp?pageValue=free">&#149; 자유게시판</a><br>
 			<a href="communityList.jsp?pageValue=academy">&#149; 학원 Q&A</a><br>
 			<a href="communityList.jsp?pageValue=lesson">&#149; 과외 Q&A</a><br>
+			<a 
+			<%if(mgr.checkM(id)==0||mgr.checkM(id)==1) {%>
+			href="communityList.jsp?pageValue=onlyst"
+			<%} else { %>
+			href="javascript:clalert1()"
+			<%} %>
+			>&#149; 학생 전용 게시판</a><br>
+			<a 
+			<%if(mgr.checkM(id)==0||mgr.checkM(id)==2||mgr.checkM(id)==3) {%>
+			href="communityList.jsp?pageValue=onlyte"
+			<%} else { %>
+			href="javascript:clalert2()"<%} %>
+			>&#149; 선생님 전용 게시판</a><br>
 			<br>
 
 		</div>

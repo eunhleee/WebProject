@@ -384,7 +384,7 @@ public class SCommunityMgr {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = null;
-		int grade = 1;
+		int grade = 5;
 		try {
 			con = pool.getConnection();
 			sql = "select grade from member where id=?";
