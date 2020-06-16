@@ -90,6 +90,19 @@ function cDel(conum, cnum, depth) {
 	}
 }
 
+function goRep() {
+	
+	url = "leQReport.jsp?stopid=<%=id%>&renum=<%=num%>";
+	window.open(url, "GoReport", 'width=360, height=300, top=200, left=300');
+}
+
+function goCReport(conum,stuc_depth,stopid) {
+	url = "leQCReport.jsp?conum="+conum+"&stuc_depth="+stuc_depth+"&renum="+<%=num%>+"&stopid="+stopid;
+	window.open(url, "GoReport", "width=360, height=300, top=200, left=300");
+	}
+
+
+
 </script>
 <style>
 #list td {
@@ -154,6 +167,9 @@ a:hover {
 		    <td align="right">
 		     	조회수  <%=count%>
 		    </td>
+		    <% if(loginid!=null) {%>		    
+		    <td><input type="button" value="신고" onclick="javascript:goRep();"></td>
+		    <%}%>
 		   </tr>
 		   </table>
 		  </td>
@@ -211,7 +227,8 @@ a:hover {
 	 		 	 			String cregdate = leqcbean.getLeq_regdate();
 	 		 	 			int conum = leqcbean.getLeq_conum();
 	 		 	 			int depth = leqcbean.getLeq_depth();
-	 		 	 			
+	 		 	 			String stopid=leqcbean.getLeq_id();
+
 			 				String dstyle = "";
 	 		 	 			if(depth==1) {
 	 		 	 				dstyle = "style=\"padding-left:30px;\"";	
@@ -230,10 +247,14 @@ a:hover {
 							<input type="button" value="삭제"
 							onclick="cDel('<%=conum%>','<%=cnum%>','<%=depth%>')">
 						</td>
-						<% 	
-							}
-						} %>
-					</tr>
+						<% 	}%>
+							<td align="left" valign="middle">
+							<input type="button" value="댓글신고"
+							onclick="javascript:goCReport
+							('<%=cnum%>','<%=depth%>','<%=stopid%>')">
+							
+						</td>
+						<%} %>					</tr>
 					<tr>
 						<td <%=dstyle%> colspan="3">
 						<%=cregdate%>

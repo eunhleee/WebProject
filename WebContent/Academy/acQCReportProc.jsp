@@ -1,6 +1,4 @@
-<!-- acLReportProc.jsp -->
-
-<!-- 학원리뷰 proc -->
+<!-- acQCReportProc.jsp -->
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%request.setCharacterEncoding("UTF-8");%>
 <jsp:useBean id="mgr" class="alcinfo.ReportMgr"/>
@@ -9,6 +7,8 @@
 <jsp:setProperty property="*" name="bean"/>
 <%
    	int renum=UtilMgr.parseInt(request,"renum");
+	int conum=UtilMgr.parseInt(request,"conum");
+	int stuc_depth=UtilMgr.parseInt(request,"stuc_depth");
 	String stopid= request.getParameter("stopid").trim();
 	String t= request.getParameter("stopurl");
 	if(t==null||t.trim().length()==0){
@@ -16,10 +16,8 @@
 	}
 	int count=t.indexOf("/Academy");
 	String stopurl="../"+t.substring(count+1);
-	System.out.println(stopurl);
 
-	mgr.reportBoard(bean,stopurl);
-	response.sendRedirect("acLReport.jsp?stopid="+stopid+"&renum="+renum);
-
+	mgr.reportBoardcom(bean,stopurl);
+	response.sendRedirect("acQCReport.jsp?stopid="+stopid+"&renum="+renum+"&conum="+conum+"&stuc_depth="+stuc_depth);
+	
 %>
-

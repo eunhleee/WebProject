@@ -1,6 +1,6 @@
-<!-- acLReportProc.jsp -->
+<!-- leQReportProc.jsp -->
 
-<!-- 학원리뷰 proc -->
+<!-- 과외문의 proc -->
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%request.setCharacterEncoding("UTF-8");%>
 <jsp:useBean id="mgr" class="alcinfo.ReportMgr"/>
@@ -14,12 +14,12 @@
 	if(t==null||t.trim().length()==0){
 		System.out.println("값이 들어오지 않았습니다.");
 	}
-	int count=t.indexOf("/Academy");
+	int count=t.indexOf("/Lesson");
 	String stopurl="../"+t.substring(count+1);
 	System.out.println(stopurl);
 
 	mgr.reportBoard(bean,stopurl);
-	response.sendRedirect("acLReport.jsp?stopid="+stopid+"&renum="+renum);
+	response.sendRedirect("leQReport.jsp?stopid="+stopid+"&renum="+renum);
 
 %>
 

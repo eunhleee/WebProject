@@ -1,6 +1,6 @@
-<!-- acLReportProc.jsp -->
+<!-- acQReportProc.jsp -->
 
-<!-- 학원리뷰 proc -->
+<!--학원문의글  proc -->
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%request.setCharacterEncoding("UTF-8");%>
 <jsp:useBean id="mgr" class="alcinfo.ReportMgr"/>

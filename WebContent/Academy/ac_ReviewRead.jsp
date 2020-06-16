@@ -316,7 +316,7 @@ a:hover {
 							<input type="button" value="삭제"
 							onclick="cDel('<%=conum%>','<%=cnum%>','<%=depth%>')">
 						</td>
-							<% 	} System.out.println("아이디는"+stopid);%>
+							<% 	}%>
 							<td align="left" valign="middle">
 							<input type="button" value="댓글신고"
 							onclick="javascript:goCReport

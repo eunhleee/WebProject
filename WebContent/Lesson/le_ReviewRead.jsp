@@ -199,8 +199,26 @@ function graph(){
 		}
 	}
 	
+	function goRep() {
+		
+		url = "stQReport.jsp?stopid=<%=id%>&renum=<%=num%>";
+		window.open(url, "GoReport", 'width=360, height=300, top=200, left=300');
+	}
 
-	
+	function goCReport(conum,stuc_depth,stopid) {
+		url = "stQCReport.jsp?conum="+conum+"&stuc_depth="+stuc_depth+"&renum="+<%=num%>+"&stopid="+stopid;
+		window.open(url, "GoReport", "width=360, height=300, top=200, left=300");
+		}
+	function goRep() {
+		
+		url = "leLReport.jsp?stopid=<%=id%>&renum=<%=num%>";
+		window.open(url, "GoReport", 'width=360, height=300, top=200, left=300');
+	}
+
+	function goCReport(conum,stuc_depth,stopid) {
+		url = "leLCReport.jsp?conum="+conum+"&stuc_depth="+stuc_depth+"&renum="+<%=num%>+"&stopid="+stopid;
+		window.open(url, "GoReport", "width=360, height=300, top=200, left=300");
+		}
 </script>
 
 </head>
@@ -326,6 +344,9 @@ function graph(){
 		    <td align="right">
 		     	조회수  <%=count%>
 		    </td>
+		     <% if(loginid!=null) {%>		    
+		    <td><input type="button" value="신고" onclick="javascript:goRep();"></td>
+		    <%}%>
 		   </tr>
 		   </table>
 		  </td>
@@ -383,7 +404,8 @@ function graph(){
 	 		 	 			String cregdate = lercbean.getLer_regdate();
 	 		 	 			int conum = lercbean.getLer_conum();
 	 		 	 			int depth = lercbean.getLer_depth();
-	 		 	 			
+	 		 	 			String stopid=lercbean.getLer_id();
+
 			 				String dstyle = "";
 	 		 	 			if(depth==1) {
 	 		 	 				dstyle = "style=\"padding-left:30px;\"";	
@@ -402,9 +424,14 @@ function graph(){
 							<input type="button" value="삭제"
 							onclick="cDel('<%=conum%>','<%=cnum%>','<%=depth%>')">
 						</td>
-						<% 	
-							}
-						} %>
+			<% 	}%>
+							<td align="left" valign="middle">
+							<input type="button" value="댓글신고"
+							onclick="javascript:goCReport
+							('<%=cnum%>','<%=depth%>','<%=stopid%>')">
+							
+						</td>
+						<%} %>
 					</tr>
 					<tr>
 						<td <%=dstyle%> colspan="3">

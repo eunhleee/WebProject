@@ -23,7 +23,7 @@ public class LeRcommentsMgr {
 		try {
 			con = pool.getConnection();
 			sql = "select num,ler_nick,ler_content,ler_regdate,ler_conum,"
-					+ "ler_depth from lercomments where ler_num=? order by ler_conum, num";
+					+ "ler_depth,ler_id from lercomments where ler_num=? order by ler_conum, num";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			rs = pstmt.executeQuery();
@@ -35,6 +35,8 @@ public class LeRcommentsMgr {
 				bean.setLer_regdate(rs.getString("ler_regdate"));
 				bean.setLer_conum(rs.getInt("ler_conum"));
 				bean.setLer_depth(rs.getInt("ler_depth"));
+				bean.setLer_id(rs.getString("ler_id"));
+
 				vlist.addElement(bean);
 			}
 		} catch (Exception e) {
@@ -111,7 +113,7 @@ public class LeRcommentsMgr {
 		}
 	}
 	
-	//Comment and C's Reply All Delete (댓글 삭제할 때 대댓글까지 전부 삭제)
+	//Comment and C's Reply All Delete (�뙎湲� �궘�젣�븷 �븣 ���뙎湲�源뚯� �쟾遺� �궘�젣)
 	public void deleteAllLerCReply(int num) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -171,7 +173,7 @@ public class LeRcommentsMgr {
 		}
 	}
 	
-	// 로그인 된 회원 닉네임
+	// 濡쒓렇�씤 �맂 �쉶�썝 �땳�꽕�엫
 	public String memberNick(String id) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
