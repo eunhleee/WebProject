@@ -1,8 +1,5 @@
 <!-- 과외 리뷰 리스트 출력 -->
 
-
-<!-- 커뮤니티의 자유게시판 리스트 출력 -->
-
 <%@page import="java.util.Calendar"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="alcinfo.LeteaBean"%>

@@ -84,29 +84,32 @@ public class CSMgr {
 		try {
 			con = pool.getConnection();
 			if(keyWord.trim().equals("")||keyWord==null) {
-				//占싯삼옙占쏙옙 占싣닌곤옙占�
 				sql = "select num, cc_title,cc_id,cc_regdate,cc_count,cc_filename,cc_secret "
-						+ " from cs where cc_group=? and cc_secret is null or cc_id=? "
+						+ " from cs where cc_group=? and cc_secret is null or "
+						+ "cc_group=? and cc_id=? "
 						+ "order by num desc limit ?,?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, group);
-				pstmt.setString(2, id);
-				pstmt.setInt(3, start); 
-				pstmt.setInt(4, cnt);
+				pstmt.setString(2, group);
+				pstmt.setString(3, id);
+				pstmt.setInt(4, start); 
+				pstmt.setInt(5, cnt);
 	
 			}
 			else {
-			//占싯삼옙占쏙옙 占쏙옙占�
 			sql = "select num, cc_title,cc_id,cc_regdate,cc_count,cc_filename,cc_secret "
-					+ "from cs where "+keyField+" like ? and cc_group=? "
-					+ "and cc_secret is null or cc_id=? "
+					+ "from cs "
+					+ "where "+keyField+" like ? and cc_group=? and cc_secret is null or "
+					+ keyField + "like ? and cc_group=? and cc_id=? "
 					+ "order by num desc limit ?,?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, "%"+keyWord+"%");
 			pstmt.setString(2, group);
-			pstmt.setString(3, id);
-			pstmt.setInt(4, start); 
-			pstmt.setInt(5, cnt);
+			pstmt.setString(3, "%"+keyWord+"%");
+			pstmt.setString(4, group);
+			pstmt.setString(5, id);
+			pstmt.setInt(6, start); 
+			pstmt.setInt(7, cnt);
 				 
 			}
 
@@ -142,13 +145,11 @@ public class CSMgr {
 		try {
 			con = pool.getConnection();
 			if(keyWord.trim().equals("")||keyWord==null) {
-				//占싯삼옙占쏙옙 占싣닌곤옙占�
 				sql = "select count(*) from cs where cc_group=?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, group);
 			}
 			else {
-			//占싯삼옙占쏙옙 占쏙옙占�
 			sql = "select count(*) from cs where "
 					+keyField+" like ? and cc_group=?";
 			pstmt = con.prepareStatement(sql);
@@ -176,21 +177,24 @@ public class CSMgr {
 		try {
 			con = pool.getConnection();
 			if(keyWord.trim().equals("")||keyWord==null) {
-				//占싯삼옙占쏙옙 占싣닌곤옙占�
-				sql = "select count(*) from cs where cc_group=? "
-						+ "and cc_secret is null or cc_id=?";
+				sql = "select count(*) from cs "
+						+ "where cc_group=? and cc_secret is null or "
+						+ "cc_group=? and cc_id=?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, group);
-				pstmt.setString(2, id);
+				pstmt.setString(2, group);
+				pstmt.setString(3, id);
 			}
 			else {
-			//占싯삼옙占쏙옙 占쏙옙占�
-			sql = "select count(*) from cs where "+keyField+" like ? and cc_group=? "
-					+ "and cc_secret is null or cc_id=?";
+			sql = "select count(*) from cs "
+					+ "where "+keyField+" like ? and cc_group=? and cc_secret is null or "
+					+keyField+" like ? and cc_group=? and cc_id=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, "%"+keyWord+"%");
 			pstmt.setString(2, group);
-			pstmt.setString(3, id);
+			pstmt.setString(3, "%"+keyWord+"%");
+			pstmt.setString(4, group);
+			pstmt.setString(5, id);
 			}
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
