@@ -173,7 +173,7 @@ a:hover {
 						<td width="100">조회수</td>
 					</tr>
 
-
+					
 					<%
 						Vector<CSBean> vlist = mgr.getBoardList(keyField, keyWord, start, cnt, group);
 						int listsize = vlist.size();

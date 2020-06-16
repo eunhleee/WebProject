@@ -3,12 +3,12 @@
 <%@page import="java.io.FileInputStream"%>
 <%@page import="java.io.BufferedInputStream"%>
 <%@page import="java.io.File"%>
-<%@page import="alcinfo.SCommunityMgr"%>
+<%@page import="alcinfo.CSMgr"%>
 <%
 		request.setCharacterEncoding("UTF-8");
 		try{
 			String filename = request.getParameter("filename");
-			File file = new File(SCommunityMgr.SAVEFOLDER+
+			File file = new File(CSMgr.SAVEFOLDER+
 					File.separator+filename);
 			byte b[] = new byte[(int)file.length()];
 			

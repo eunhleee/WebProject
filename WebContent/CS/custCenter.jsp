@@ -1,5 +1,6 @@
 <!--  고객센터 메인 화면 -->
-<%@page contentType="text/html; charset=utf-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%
 	request.setCharacterEncoding("utf-8");
 	String cust_page = request.getParameter("cust_page");

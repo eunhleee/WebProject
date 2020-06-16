@@ -1,8 +1,8 @@
 <!-- cs_Post.jsp -->
-<!--  고객센터 메인 화면 -->
-<%@page contentType="text/html; charset=utf-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%
-	request.setCharacterEncoding("utf-8");
+	request.setCharacterEncoding("UTF-8");
 	String ccid = (String)session.getAttribute("idKey");
 	String nowPage = request.getParameter("nowPage");
 	String numPerPage = request.getParameter("numPerPage");
@@ -105,7 +105,7 @@ a:hover {
 			</table>
 			<input type="hidden" name="ccid" value="<%=ccid%>">
 			<input type="hidden" name="ccip" value="<%=request.getRemoteAddr()%>">
-			<input type="hidden" name="pageValue" value="<%=cust_page%>">
+			<input type="hidden" name="cust_page" value="<%=cust_page%>">
 			<input type="hidden" name="nowPage" value="<%=nowPage%>">
 			<input type="hidden" name="numPerPage" value="<%=numPerPage%>"> 
 			<%

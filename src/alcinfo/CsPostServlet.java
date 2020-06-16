@@ -28,6 +28,7 @@ public class CsPostServlet extends HttpServlet {
 		} else
 			response.sendRedirect("custCenter.jsp?cust_page="+cust_page+"&nowPage="+
 					nowPage+"&numPerPage="+numPerPage);
+		
 	}
 
 }
