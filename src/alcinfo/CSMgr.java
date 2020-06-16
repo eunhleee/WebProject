@@ -21,6 +21,7 @@ public class CSMgr {
 		pool=DBConnectionMgr.getInstance();
 	}
 	
+	// 고객센터 리스트(관리자모드)
 	public Vector<CSBean> getBoardList(String keyField,String keyWord,int start,int cnt, String group){
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -31,7 +32,7 @@ public class CSMgr {
 			con = pool.getConnection();
 			if(keyWord.trim().equals("")||keyWord==null) {
 				//占싯삼옙占쏙옙 占싣닌곤옙占�
-				sql = "select num, cc_title,cc_id,cc_regdate,cc_count,cc_filename "
+				sql = "select num, cc_title,cc_id,cc_regdate,cc_count,cc_filename,cc_secret "
 						+ " from cs where cc_group=? order by num desc limit ?,?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, group);
@@ -41,7 +42,8 @@ public class CSMgr {
 			}
 			else {
 			//占싯삼옙占쏙옙 占쏙옙占�
-			sql = "select num, cc_title,cc_id,cc_regdate,cc_count,cc_filename from cs where "+keyField+" like ? "
+			sql = "select num, cc_title,cc_id,cc_regdate,cc_count,cc_filename,cc_secret "
+					+ "from cs where "+keyField+" like ? "
 					+ "and cc_group=? order by num desc limit ?,?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, "%"+keyWord+"%");
@@ -60,6 +62,64 @@ public class CSMgr {
 				bean.setCc_regdate(rs.getString("cc_regdate"));
 				bean.setCc_count(rs.getInt("cc_count"));
 				bean.setCc_filename(rs.getString("cc_filename"));
+				bean.setCc_secret(rs.getString("cc_secret"));
+				
+				vlist.addElement(bean);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt, rs);
+		}
+		return vlist; 
+	}
+	
+	// 고객센터 리스트(회원용)
+	public Vector<CSBean> getBoardList1(String keyField,String keyWord,int start,int cnt, String group, String id){
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		Vector<CSBean> vlist=new Vector<CSBean>();
+		try {
+			con = pool.getConnection();
+			if(keyWord.trim().equals("")||keyWord==null) {
+				//占싯삼옙占쏙옙 占싣닌곤옙占�
+				sql = "select num, cc_title,cc_id,cc_regdate,cc_count,cc_filename,cc_secret "
+						+ " from cs where cc_group=? and cc_secret is null or cc_id=? "
+						+ "order by num desc limit ?,?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, group);
+				pstmt.setString(2, id);
+				pstmt.setInt(3, start); 
+				pstmt.setInt(4, cnt);
+	
+			}
+			else {
+			//占싯삼옙占쏙옙 占쏙옙占�
+			sql = "select num, cc_title,cc_id,cc_regdate,cc_count,cc_filename,cc_secret "
+					+ "from cs where "+keyField+" like ? and cc_group=? "
+					+ "and cc_secret is null or cc_id=? "
+					+ "order by num desc limit ?,?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, "%"+keyWord+"%");
+			pstmt.setString(2, group);
+			pstmt.setString(3, id);
+			pstmt.setInt(4, start); 
+			pstmt.setInt(5, cnt);
+				 
+			}
+
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				CSBean bean = new CSBean();
+				bean.setNum(rs.getInt("num"));
+				bean.setCc_title(rs.getString("cc_title"));
+				bean.setCc_id(rs.getString("cc_id"));
+				bean.setCc_regdate(rs.getString("cc_regdate"));
+				bean.setCc_count(rs.getInt("cc_count"));
+				bean.setCc_filename(rs.getString("cc_filename"));
+				bean.setCc_secret(rs.getString("cc_secret"));
 				
 				vlist.addElement(bean);
 			}
@@ -72,6 +132,7 @@ public class CSMgr {
 	}
 	
 	//Board Total Count:占쏙옙 占쌉시뱄옙 占쏙옙
+	//관리자
 	public int getTotalCount(String keyField,String keyWord, String group) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -93,6 +154,43 @@ public class CSMgr {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, "%"+keyWord+"%");
 			pstmt.setString(2, group);
+			}
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				totalCount=rs.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt, rs);
+		}
+		return totalCount;
+	}
+	//일반회원
+	public int getTotalCount1(String keyField,String keyWord, String group, String id) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		int totalCount=0;
+		try {
+			con = pool.getConnection();
+			if(keyWord.trim().equals("")||keyWord==null) {
+				//占싯삼옙占쏙옙 占싣닌곤옙占�
+				sql = "select count(*) from cs where cc_group=? "
+						+ "and cc_secret is null or cc_id=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, group);
+				pstmt.setString(2, id);
+			}
+			else {
+			//占싯삼옙占쏙옙 占쏙옙占�
+			sql = "select count(*) from cs where "+keyField+" like ? and cc_group=? "
+					+ "and cc_secret is null or cc_id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, "%"+keyWord+"%");
+			pstmt.setString(2, group);
+			pstmt.setString(3, id);
 			}
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
