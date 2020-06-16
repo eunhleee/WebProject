@@ -5,7 +5,6 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 	int num = Integer.parseInt(request.getParameter("num"));
-	String ccid = (String)session.getAttribute("idKey");
 	String nowPage = request.getParameter("nowPage");
 	String numPerPage = request.getParameter("numPerPage");
 	String keyField = request.getParameter("keyField");	
@@ -13,7 +12,6 @@
 	String cust_page = request.getParameter("cust_page");
 	CSBean bean = (CSBean)session.getAttribute("bean");
 	String title = bean.getCc_title();
-	String id = bean.getCc_id();
 	String content = bean.getCc_content();
 	String secret = bean.getCc_secret();
 	//scRead.jsp에서 session에 빈즈 단위로 저장 했기 때문에 파일명도 가져 올 수 있다.
@@ -117,7 +115,6 @@ a:hover {
 				</tr>
 			</table>
 			<input type="hidden" name="num" value="<%=num%>">
-			<input type="hidden" name="ccid" value="<%=ccid%>">
 			<input type="hidden" name="ccip" value="<%=request.getRemoteAddr()%>">
 			<input type="hidden" name="cust_page" value="<%=cust_page%>">
 			<input type="hidden" name="nowPage" value="<%=nowPage%>">
