@@ -6,7 +6,11 @@
 <jsp:useBean id="sccmgr" class="alcinfo.SCommentMgr"/>
 <% 
 	request.setCharacterEncoding("UTF-8"); 
-	String nowPage = request.getParameter("nowPage");
+	String pageValue=request.getParameter("pageValue");
+	String nowPage = request.getParameter("nowPage");	
+	String numPerPage = request.getParameter("numPerPage");	
+	String keyField = request.getParameter("keyField");	
+	String keyWord = request.getParameter("keyWord");
 	int num = UtilMgr.parseInt(request, "num");
 
 	sccmgr.deleteAllSComment(num);
@@ -14,5 +18,7 @@
 %>
 <script>
 	alert("삭제되었습니다.");
-	location.href="communityList.jsp";
+	location.href="communityList.jsp?pageValue=<%=pageValue %>&numPerPage=<%=numPerPage%>&nowPage=<%=nowPage%><%
+  	 	if(!(keyWord==null||keyWord.equals(""))){
+		     %>&keyField=<%=keyField%>&keyWord=<%=keyWord%><%}%>";
 </script>

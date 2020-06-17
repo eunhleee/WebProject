@@ -5,9 +5,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <jsp:useBean id="mgr" class="alcinfo.SCommunityMgr"></jsp:useBean>
+
 <%
+		
 		request.setCharacterEncoding("UTF-8");
 		String id=(String )session.getAttribute("idKey");
+	
 		String category="",group="";
 		
 		if(request.getParameter("pageValue").equals("free")){
@@ -21,6 +24,14 @@
 		else if(request.getParameter("pageValue").equals("lesson")){
 			category="과외 Q&A";
 			group="lesson";
+		}
+		else if(request.getParameter("pageValue").equals("onlyst")){
+			category="학생 전용 게시판";
+			group="onlyst";
+		}
+		else if(request.getParameter("pageValue").equals("onlyte")){
+			category="선생님 전용 게시판";
+			group="onlyte";
 		}
 //검색에 필요한 변수
 		
@@ -118,15 +129,23 @@ function read(num){
 	document.readFrm.action="scRead.jsp?pageValue=<%=group%>";
 	document.readFrm.submit();
 }
+function clalert1(){
+	alert("학생만 이용가능 합니다.")
+}
+function clalert2(){
+	alert("선생님만 이용가능 합니다.")
+}
 </script>
  <style>
 #list td {
 	border-bottom: 1px solid lightgray;
+	height:30px;
+	
 }
 
 #title td {
 	color: white;
-	background-color: #36ada9;
+	background-color: #F88C65;
 }
 
 a {
@@ -137,32 +156,89 @@ a {
 a:hover {
 	color: gray;
 }
+#frame{
+	display:flex;
+	margin-left:15%;
+	margin-right:15%;
+}
+
+#leftdiv{
+	flex: 1;
+	width: 40%; 
+	margin-right:50px;
+	border: 10px solid #FCBC7E; 
+	border-radius:10px;
+	padding: 10px 10px;
+	text-align:center;
+	background-color:#FAF8EB;
+	
+	
+ }
+ #rightdiv{
+	flex: 2; 
+	width:60%;
+	border: 10px solid #F88C65; 
+	border-radius:10px;
+	padding:20px 40px;
+}
+ 
+ 
+ #atag {
+ 	margin-left:90px;
+ 	margin-bottom:50px;
+ 	height:40px;
+ 	line-height:40px;
+ 	width:200px;
+ 	display: block;
+ }
+ 
+ 
+ #atag:hover{
+ 	background-color:white;
+ 	border-radius: 10px;
+ }
+ 
+
+
 </style> 
 </head>
 <body>
 	
 	<jsp:include page="../alcinfo/headerSearch.jsp"></jsp:include>
 
-	<div style="display: flex; margin-left: 15%; margin-right: 15%">
+	<div id="frame">
 
-		<div
-			style="width: 50px; text-align: left; flex: 1; border: 1px solid black; margin-right: 10%; padding: 40px 40px;">
+		<div id="leftdiv">
+
 			<h3>커뮤니티</h3>
-			<a href="communityList.jsp?pageValue=free">&#149; 자유게시판</a><br>
-			<a href="communityList.jsp?pageValue=academy">&#149; 학원 Q&A</a><br>
-			<a href="communityList.jsp?pageValue=lesson">&#149; 과외 Q&A</a><br>
+			<div id="atag"><a href="communityList.jsp?pageValue=free">&#149; 자유게시판</a></div>
+			<div id="atag"><a href="communityList.jsp?pageValue=academy">&#149; 학원 Q&A</a></div>
+			<div id="atag"><a href="communityList.jsp?pageValue=lesson">&#149; 과외 Q&A</a></div>
+			<div id="atag"><a 
+			<%if(mgr.checkM(id)==0||mgr.checkM(id)==1) {%>
+			href="communityList.jsp?pageValue=onlyst"
+			<%} else { %>
+			href="javascript:clalert1()"
+			<%} %>
+			>&#149; 학생 전용 게시판</a></div>
+			<div id="atag"><a 
+			<%if(mgr.checkM(id)==0||mgr.checkM(id)==2||mgr.checkM(id)==3) {%>
+			href="communityList.jsp?pageValue=onlyte"
+			<%} else { %>
+			href="javascript:clalert2()"<%} %>
+			>&#149; 선생님 전용 게시판</a></div>
+
 			<br>
 
 		</div>
 
 		<!-- 리스트 부분 -->
-		<div
-			style="width: 800px; flex: 2; border: 1px solid black; padding: 20px 20px;">
+		<div id="rightdiv">
 			
 			<h2><%=category %></h2>
 			<table>
 				<tr>
-					<td width="600">Total : <%=totalRecord%>Articles(<font
+					<td width="600">>Total : <%=totalRecord%>Articles(<font
 						color="red"> <%=nowPage+"/"+totalPage%>Pages
 					</font>)
 					</td>
@@ -226,7 +302,7 @@ a:hover {
 
 							<tr id="list">
 								<td align="center"><%=totalRecord-start-i%></td>
-								<td align="center"><a href="javascript:read('<%=num%>')"><%=title%></a>
+								<td align="left"><a href="javascript:read('<%=num%>')"><%=title%></a>
 									<% if(filename!=null) { %>
 										<img src="../img/icon_file1.png">
 									<% } %>
@@ -284,7 +360,9 @@ a:hover {
 					<%if(id==null){ %>
 						onclick="clalert();" href=""
 						<%}else{ %>
-						href="scPost.jsp?pageValue=<%=group %>" class="btn btn-default"
+						href="scPost.jsp?pageValue=<%=group %>&numPerPage=<%=numPerPage%>&nowPage=<%=nowPage%><%
+  	 	if(!(keyWord==null||keyWord.equals(""))){
+		     %>&keyField=<%=keyField%>&keyWord=<%=keyWord%><%}%>" class="btn btn-default"
 						<%} %>>[글쓰기]</a> 
 						<a href="javascript:list()">[처음으로]</a></td>
 				</tr>
@@ -293,7 +371,7 @@ a:hover {
 
 			<hr width="750">
 			<form name="scsearchFrm" >
-				<table width="600" cellpadding="4" cellspacing="0">
+				<table align="center" cellpadding="4" cellspacing="0">
 					<tr>
 						<td align="center" valign="bottom">
 							<select name="keyField" size="1">
@@ -318,8 +396,10 @@ a:hover {
 			<form name="readFrm">
 				<input type="hidden" name="nowPage" value="<%=nowPage%>"> 
 				<input type="hidden" name="numPerPage" value="<%=numPerPage%>">
-				<input type="hidden" name="keyField" value="<%=keyField%>"> 
+				<%if(!(keyWord==null||keyWord.equals(""))){%>
+				<input type="hidden" name="keyField" value="<%=keyField%>">
 				<input type="hidden" name="keyWord" value="<%=keyWord%>">
+				<%}%>
 				<input type="hidden" name="pageValue" value="<%=group%>">
 				<input type="hidden" name="num">
 			</form>

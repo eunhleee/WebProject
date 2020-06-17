@@ -16,7 +16,7 @@
 %>
 <html>
 <head>
-<title>잘못된 학원 정보 신고하기</title>
+<title>학생문의게시판 댓글 신고하기</title>
 <script type="text/javascript">
 var stopurl=document.referrer;
 	function singo(){

@@ -43,7 +43,7 @@
 </script>
 </head>
 <body>
-	<%@ include file="../alcinfo/headerSearch.jsp"%>
+	
 	<br>
 	<br>
 		<table width="70%" align="center">

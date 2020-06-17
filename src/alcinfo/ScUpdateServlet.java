@@ -13,13 +13,17 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 
-@WebServlet("/alcinfo/scUpdate")
+@WebServlet("/Community/scUpdate")
 public class ScUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		String pageValue=request.getParameter("pageValue");
+		String nowPage = request.getParameter("nowPage");
+		String numPerPage = request.getParameter("numPerPage");
+		String keyField = request.getParameter("keyField");	
+		String keyWord = request.getParameter("keyWord");
 		response.setContentType("text/html; charset=UTF-8");
 		HttpSession session = request.getSession();
 		SCommunityBean bean = (SCommunityBean)session.getAttribute("bean");
@@ -27,10 +31,13 @@ public class ScUpdateServlet extends HttpServlet {
 				SCommunityMgr.MAXSIZE, SCommunityMgr.ENCTYPE, new DefaultFileRenamePolicy());
 		SCommunityMgr mgr = new SCommunityMgr();
 		mgr.updatesc(multi);
-		String nowPage = multi.getParameter("nowPage");
-		String numPerPage = multi.getParameter("numPerPage");
-		response.sendRedirect("../alcinfo/scRead.jsp?nowPage=" + nowPage + "&num=" + bean.getNum()
-				+ "&numPerPage=" + numPerPage+"&pageValue="+pageValue);
+		if(!(keyWord==null||keyWord.equals(""))) {
+			response.sendRedirect("scRead.jsp?num="+bean.getNum()+"&pageValue="+pageValue+
+					"&nowPage="+nowPage+"&numPerPage="+numPerPage+"&keyField="+keyField+
+					"&keyWord="+keyWord);
+		} else
+			response.sendRedirect("scRead.jsp?num="+bean.getNum()+"&pageValue="+pageValue+
+					"&nowPage="+nowPage+"&numPerPage="+numPerPage);
 	}
 
 }

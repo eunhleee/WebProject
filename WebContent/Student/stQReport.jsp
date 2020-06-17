@@ -16,7 +16,6 @@
 <title>학생문의 게시판신고</title>
 <script type="text/javascript">
 	var stopurl=document.referrer;
-	alert(stopurl);
 
 	function gocheck(){
   	if(document.repFrm.retitle.value==""){

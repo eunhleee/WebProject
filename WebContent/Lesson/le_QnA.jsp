@@ -119,6 +119,11 @@ a {
 a:hover {
 	color: gray;
 }
+div{
+	border:8px solid #36ada9;
+	border-radius: 10px;
+	padding:15px;
+}
 </style>
 </head>
 <body>
@@ -127,8 +132,9 @@ a:hover {
 
 
 	<!-- 리스트 부분 -->
-
-	<h2>과외 문의 게시판</h2>
+<div>
+	<h2><img src="../img/book.png" width="30" height="30">&nbsp;과외 문의 게시판</h2>
+	<hr style="border:1px solid #36ada9;">
 	<table>
 		<tr>
 			<td width="600">Total : <%=totalRecord%>Articles(<font
@@ -172,7 +178,7 @@ a:hover {
 						if (vlist.isEmpty()) {
 					%>
 					<tr>
-						<td align="center" colspan="5">
+						<td align="center" colspan="6" height="240">
 							<%
 								out.println("등록된 게시물이 없습니다.");
 							%>
@@ -293,6 +299,7 @@ a:hover {
 			</tr>
 		</table>
 	</form>
+	</div>
 	<form name="listFrm" method="post">
 		<input type="hidden" name="reload" value="true">
 		<!-- 요게 중요 -->

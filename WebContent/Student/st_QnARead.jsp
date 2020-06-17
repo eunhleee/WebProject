@@ -188,7 +188,7 @@ function goCReport(conum,stuc_depth,stopid) {
 
 </head>
 <body>
-	<%@ include file="../alcinfo/headerSearch.jsp"%>
+
 	<br>
 	<br>
 	<form name="cart" action="">
@@ -368,7 +368,7 @@ function goCReport(conum,stuc_depth,stopid) {
 						<td <%=dstyle%> colspan="2"><%=comment%></td>
 						<% 
 						if(loginid!=null) {
-							if(loginid.equals(cid)) { %>
+							if(loginid.equals(cid)||stqmgr.checkM(loginid)==0) { %>
 						<td align="center" valign="middle">
 							<input type="button" value="삭제"
 							onclick="cDel('<%=conum%>','<%=cnum%>','<%=depth%>')">
@@ -456,7 +456,7 @@ function goCReport(conum,stuc_depth,stopid) {
 		 [ <a href="javascript:list();" >리스트</a>
 		 <% 
 		 if(loginid!=null) {
-			 if(loginid.equals(id)) { %>
+			 if(loginid.equals(id)||stqmgr.checkM(loginid)==0) { %>
 			 | <a href="st_QnAUpdate.jsp?num=<%=num%>&stunum=<%=stunum%>&numPerPage=<%=numPerPage%>&nowPage=<%=nowPage%><%
   	 	if(!(keyWord==null||keyWord.equals(""))){
 		     %>&keyField=<%=keyField%>&keyWord=<%=keyWord%><%}%>" >수 정</a> |

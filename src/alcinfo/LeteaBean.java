@@ -12,7 +12,6 @@ public class LeteaBean {
 	private String phone;
 	private String address;
 	private String area;
-	private String leclass;
 	private int student;
 	private String school_name;
 	private String school_grade;
@@ -95,12 +94,7 @@ public class LeteaBean {
 	public void setArea(String area) {
 		this.area = area;
 	}
-	public String getLeclass() {
-		return leclass;
-	}
-	public void setLeclass(String leclass) {
-		this.leclass = leclass;
-	}
+
 	public int getStudent() {
 		return student;
 	}

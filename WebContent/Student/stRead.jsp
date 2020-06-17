@@ -48,7 +48,6 @@ google.charts.load("current",{packages:['corechart']});
 function columnChart1(arrayList) {
 	// 실 데이터를 가진 데이터테이블 객체를 반환하는 메소드
 	 
-	alert(arrayList);
 	 arrayList = eval('('+arrayList+')');
 
 	var dataTable = new google.visualization.DataTable();
@@ -99,8 +98,8 @@ function deleteT(){
 
  
 function goReport() {
-	url = "../Report/reportReceiptSInf.jsp?stopid=<%=stbean.getId()%>&stopurl=../Student/stRead.jsp?stunum=<%=stunum%>";
-	window.open(url, "GoReport", "width=400, height=350, top=200, left=300");
+	url = "../Report/reportReceiptSInf.jsp?stopid=<%=mbean.getId()%>&stopurl=../Student/stRead.jsp?stunum=<%=stunum%>";
+	window.open(url, "GoReport", "width=900, height=560, top=200, left=300");
 }
 	
 function goErr(){

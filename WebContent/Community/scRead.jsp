@@ -76,7 +76,8 @@ function down(filename) {
 	document.downFrm.submit();
 }
 function list() {
-	document.listFrm.action = "communityList.jsp";
+	document.listFrm.action = "communityList.jsp?pageValue=<%=pageValue%>&numPerPage=<%=numPerPage%>&nowPage=<%=nowPage%><%
+		if(!(keyWord==null||keyWord.equals(""))){%>&keyField=<%=keyField%>&keyWord=<%=keyWord%><%}%>";
 	document.listFrm.submit();
 }
 function cInsert() {
@@ -270,7 +271,7 @@ a:hover {
 						<td <%=dstyle%> colspan="2"><%=comment%></td>
 						<% 
 						if(loginNick!=null) {
-							if(loginNick.equals(cnick)) { %>
+							if(loginNick.equals(cnick)||scmgr.checkM(loginid)==0) { %>
 						<td align="center" valign="middle">
 							<input type="button" value="삭제"
 							onclick="cDel('<%=conum%>','<%=cnum%>','<%=depth%>')">
@@ -363,7 +364,7 @@ a:hover {
 		 [ <a href="javascript:list()" >리스트</a>
 		 <% 
 		 if(loginid!=null) {
-			 if(loginid.equals(id)) { %>
+			 if(loginid.equals(id)||scmgr.checkM(loginid)==0) { %>
 			 | <a href="scUpdate.jsp?nowPage=<%=nowPage%>&num=<%=num%>&numPerPage=<%=numPerPage%>&pageValue=<%=pageValue %>" >수 정</a> |
 			 <a href="scDelete.jsp?nowPage=<%=nowPage%>&num=<%=num%>">삭 제</a> 
 		 <% }

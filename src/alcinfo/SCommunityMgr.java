@@ -50,76 +50,7 @@ public class SCommunityMgr {
 		return vlist;
 	}
 
-	public void insertBoard(HttpServletRequest req) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		String sql = null;
-		try {
-
-			File dir = new File(SAVEFOLDER);
-			if (!dir.exists()) {
-				dir.mkdirs();
-			}
-			MultipartRequest multi = new MultipartRequest(req, SAVEFOLDER, MAXSIZE, ENCTYPE,
-					new DefaultFileRenamePolicy());
-			String filename = null;
-			int filesize = 0;
-			if (multi.getFilesystemName("filename") != null) {
-				filename = multi.getFilesystemName("filename");
-				filesize = (int) multi.getFile("filename").length();
-			}
-
-			String content = multi.getParameter("content");
-			String contentType = multi.getParameter("contentType");
-			if (contentType.equals("TEXT")) {
-				UtilMgr.replace(content, "<", "&lt;");
-			}
-
-			int ref = getMaxNum() + 1;
-			con = pool.getConnection();
-			sql = "insert tblBoard(name,content,subject,ref,pos,depth,";
-			sql += "regdate,pass,count,ip,filename,filesize)";
-			sql += "values(?, ?, ?, ?, 0, 0, now(), ?, 0, ?, ?, ?)";
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, multi.getParameter("name"));
-			pstmt.setString(2, content);
-			pstmt.setString(3, multi.getParameter("subject"));
-			pstmt.setInt(4, ref);
-			pstmt.setString(5, multi.getParameter("pass"));
-			pstmt.setString(6, multi.getParameter("ip"));
-			pstmt.setString(7, filename);
-			pstmt.setInt(8, filesize);
-			pstmt.executeUpdate();
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			pool.freeConnection(con, pstmt);
-		}
-	}
-
-	public int getMaxNum() {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		String sql = null;
-		int maxNum = 0;
-		try {
-			con = pool.getConnection();
-			sql = "select max(num) from tblBoard";
-			pstmt = con.prepareStatement(sql);
-
-			rs = pstmt.executeQuery();
-			if (rs.next())
-				maxNum = rs.getInt(1);
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			pool.freeConnection(con, pstmt, rs);
-		}
-		return maxNum;
-	}
-
-	public int getTotalCount(String keyField, String keyWord, String group) {
+		public int getTotalCount(String keyField, String keyWord, String group) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -377,6 +308,27 @@ public class SCommunityMgr {
 		} finally {
 			pool.freeConnection(con, pstmt);
 		}
+	}
+	
+	public int checkM(String id) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		int grade = 5;
+		try {
+			con = pool.getConnection();
+			sql = "select grade from member where id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) grade = rs.getInt(1);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt, rs);
+		}
+		return grade;
 	}
 
 }

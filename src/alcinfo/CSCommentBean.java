@@ -7,6 +7,21 @@ public class CSCommentBean {
 	private String ccr_content;  
 	private String ccr_ip;		
 	private String ccr_regdate;
+	private int ccr_conum;
+	private int ccr_depth;
+	
+	public int getCcr_conum() {
+		return ccr_conum;
+	}
+	public void setCcr_conum(int ccr_conum) {
+		this.ccr_conum = ccr_conum;
+	}
+	public int getCcr_depth() {
+		return ccr_depth;
+	}
+	public void setCcr_depth(int ccr_depth) {
+		this.ccr_depth = ccr_depth;
+	}
 	public int getNum() {
 		return num;
 	}

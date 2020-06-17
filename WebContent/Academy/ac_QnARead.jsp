@@ -89,7 +89,16 @@ function cDel(conum, cnum, depth) {
 		document.cFrm.submit();
 	}
 }
+function goRep() {
+	
+	url = "acQReport.jsp?stopid=<%=id%>&renum=<%=num%>";
+	window.open(url, "GoReport", 'width=360, height=300, top=200, left=300');
+}
 
+function goCReport(conum,stuc_depth,stopid) {
+	url = "acQCReport.jsp?conum="+conum+"&stuc_depth="+stuc_depth+"&renum="+<%=num%>+"&stopid="+stopid;
+	window.open(url, "GoReport", "width=360, height=300, top=200, left=300");
+	}
 </script>
 <style>
 #list td {
@@ -154,6 +163,9 @@ a:hover {
 		    <td align="right">
 		     	조회수  <%=count%>
 		    </td>
+		     <% if(loginid!=null) {%>		    
+		    <td><input type="button" value="신고" onclick="javascript:goRep();"></td>
+		    <%}%>
 		   </tr>
 		   </table>
 		  </td>
@@ -211,7 +223,8 @@ a:hover {
 	 		 	 			String cregdate = acqcbean.getAcq_regdate();
 	 		 	 			int conum = acqcbean.getAcq_conum();
 	 		 	 			int depth = acqcbean.getAcq_depth();
-	 		 	 			
+	 		 	 			String stopid=acqcbean.getAcq_id();
+
 			 				String dstyle = "";
 	 		 	 			if(depth==1) {
 	 		 	 				dstyle = "style=\"padding-left:30px;\"";	
@@ -225,14 +238,19 @@ a:hover {
 						<td <%=dstyle%> colspan="2"><%=comment%></td>
 						<% 
 						if(loginid!=null) {
-							if(loginid.equals(cid)) { %>
+							if(loginid.equals(cid) || acqmgr.checkM(loginid)==0) { %>
 						<td align="center" valign="middle">
 							<input type="button" value="삭제"
 							onclick="cDel('<%=conum%>','<%=cnum%>','<%=depth%>')">
 						</td>
-						<% 	
-							}
-						} %>
+						<% 	} %>
+							<td align="left" valign="middle">
+							<input type="button" value="댓글신고"
+							onclick="javascript:goCReport
+							('<%=cnum%>','<%=depth%>','<%=stopid%>')">
+							
+						</td>
+						<%} %>
 					</tr>
 					<tr>
 						<td <%=dstyle%> colspan="3">
@@ -308,7 +326,7 @@ a:hover {
 		 [ <a href="javascript:list();" >리스트</a>
 		 <% 
 		 if(loginid!=null) {
-			 if(loginid.equals(id)) { %>
+			 if(loginid.equals(id) || acqmgr.checkM(loginid)==0) { %>
 			 | <a href="ac_QnAUpdate.jsp?num=<%=num%>&ac_num=<%=acnum%>&numPerPage=<%=numPerPage%>&nowPage=<%=nowPage%><%
   	 	if(!(keyWord==null||keyWord.equals(""))){
 		     %>&keyField=<%=keyField%>&keyWord=<%=keyWord%><%}%>" >수 정</a> |
