@@ -209,10 +209,10 @@ a:hover {
 	<div id="frame">
 		<div id="leftdiv">
 			<h3>커뮤니티</h3>
-			<a href="communityList.jsp?pageValue=free">&#149; 자유게시판</a><br>
-			<a href="communityList.jsp?pageValue=academy">&#149; 학원 Q&A</a><br>
-			<a href="communityList.jsp?pageValue=lesson">&#149; 과외 Q&A</a><br>
-			<a 
+			<div id="atag"><a href="communityList.jsp?pageValue=free">&#149; 자유게시판</a></div>
+			<div id="atag"><a href="communityList.jsp?pageValue=academy">&#149; 학원 Q&A</a></div>
+			<div id="atag"><a href="communityList.jsp?pageValue=lesson">&#149; 과외 Q&A</a></div>
+			<div id="atag"><a 
 			<%if(mgr.checkM(id)==0||mgr.checkM(id)==1) {%>
 			href="communityList.jsp?pageValue=onlyst"
 			<%} else { %>
@@ -224,9 +224,9 @@ a:hover {
 			href="communityList.jsp?pageValue=onlyte"
 			<%} else { %>
 			href="javascript:clalert2()"<%} %>
-			>&#149; 선생님 전용 게시판</a><br>
+			>&#149; 선생님 전용 게시판</a></div>
 			
-
+	
 		</div>
 
 		<!-- 리스트 부분 -->
