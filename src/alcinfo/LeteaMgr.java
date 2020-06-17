@@ -67,7 +67,8 @@ public class LeteaMgr {
 		return bean;
 	}
 	
-	//선생님 정보 확인
+	
+	//�꽑�깮�떂 �젙蹂� �솗�씤
 	public LeteaBean getLetea(String id) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -76,7 +77,9 @@ public class LeteaMgr {
 		LeteaBean lebean = new LeteaBean();
 		try {
 			con = pool.getConnection();
-			sql = "SELECT imgname, name, gender, substr(address,1,instr(address,'구 ')+1) address, phone,school_name, school_grade, grade from letea where id = ?";
+
+			sql = "SELECT imgname, name, gender, substr(address,1,instr(address,'援� ')+1) address, phone, school_name, school_grade, grade from letea where id = ?";
+
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
@@ -98,19 +101,20 @@ public class LeteaMgr {
 		return lebean;
 	}	
 	
-	//선생님 정보 등록하기
-	public boolean insertLetea(String id, int student, String etc) {
+	//�꽑�깮�떂 �젙蹂� �벑濡앺븯湲�
+	public boolean insertLetea(String id, String leclass, int student, String etc) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		String sql = null;
 		boolean flag = false;
 		try {
 			con = pool.getConnection();
-			sql = "insert lesson(id, student, etc) value(?,?,?)";
+			sql = "insert lesson(id, class, student, etc) value(?,?,?,?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
-			pstmt.setInt(2, student);
-			pstmt.setString(3, etc);
+			pstmt.setString(2, leclass);
+			pstmt.setInt(3, student);
+			pstmt.setString(4, etc);
 			if(pstmt.executeUpdate()==1) {
 				flag = true;
 			}
@@ -121,7 +125,7 @@ public class LeteaMgr {
 		}
 		return flag;
 	}
-	// 사용자 정보 가지고 오기
+	// �궗�슜�옄 �젙蹂� 媛�吏�怨� �삤湲�
 			public LeteaBean getInfo(String id) {
 				Connection con = null;
 				PreparedStatement pstmt = null;

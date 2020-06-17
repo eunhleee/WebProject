@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/alcinfo/scPost")
+@WebServlet("/Community/scPost")
 public class ScPostServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -15,10 +15,20 @@ public class ScPostServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		SCommunityMgr mgr = new SCommunityMgr();
 		String pageValue=request.getParameter("pageValue");
+		String nowPage = request.getParameter("nowPage");
+		String numPerPage = request.getParameter("numPerPage");
+		String keyField = request.getParameter("keyField");	
+		String keyWord = request.getParameter("keyWord");
 		
 		mgr.insertsc(request,pageValue);
+		if(!(keyWord==null||keyWord.equals(""))) {
+			response.sendRedirect("communityList.jsp?pageValue="+pageValue+"&nowPage="+
+					nowPage+"&numPerPage="+numPerPage+"&keyField="+keyField+
+					"&keyWord="+keyWord);
+		} else
+			response.sendRedirect("communityList.jsp?pageValue="+pageValue+"&nowPage="+
+					nowPage+"&numPerPage="+numPerPage);
 		
-		response.sendRedirect("../alcinfo/communityList.jsp?pageValue="+pageValue);
 	}
 
 }

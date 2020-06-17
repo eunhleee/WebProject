@@ -13,7 +13,7 @@ public class AcreviewMgr {
 	}
 	
 	//Board Total Count:占쏙옙 占쌉시뱄옙 占쏙옙
-	public int getTotalCount(String keyField,String keyWord) {
+	public int getTotalCount(String keyField,String keyWord, int num) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -23,15 +23,17 @@ public class AcreviewMgr {
 			con = pool.getConnection();
 			if(keyWord.trim().equals("")||keyWord==null) {
 				//占싯삼옙占쏙옙 占싣닌곤옙占�
-				sql = "select count(*) from acreview ";
+				sql = "select count(*) from acreview where ac_serialnum=?";
 				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, num);
 			}
 			else {
 			//占싯삼옙占쏙옙 占쏙옙占�
 			sql = "select count(*) from acreview where "
-					+keyField+" like ?";
+					+keyField+" like ? and ac_serialnum=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, "%"+keyWord+"%");
+			pstmt.setInt(2, num);
 			}
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
@@ -271,4 +273,24 @@ public class AcreviewMgr {
 		return nick;
 	}
 	
+	public int checkM(String id) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		int grade = 1;
+		try {
+			con = pool.getConnection();
+			sql = "select grade from member where id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) grade = rs.getInt(1);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt, rs);
+		}
+		return grade;
+	}
 }

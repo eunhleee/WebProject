@@ -51,7 +51,7 @@ function openlogoutProc(){
 
 	<div id="top" align="center">
 		<span> ※과도한 사교육은 올바른 교육이 아닙니다.&nbsp;&nbsp; <a
-			href="../CS/custCenter.jsp?cust_page=ccBestBoard.jsp">고객센터</a>
+			href="../CS/custCenter.jsp?cust_page=ccBestBoard">고객센터</a>
 		</span>
 
 	</div>
@@ -89,7 +89,7 @@ function openlogoutProc(){
 			<input type="button" onclick="openloginSelect();" class="openlm" value="로그인">
 			<%}else{ %>
 			<input type="button" onclick="openlogoutProc();" class="openlm" value="로그아웃">
-			<a href="">마이페이지</a>
+			<a href="../alcinfo/upMember.jsp">마이페이지</a>
 			<%} %>
 		</div>
 	</div>

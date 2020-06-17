@@ -1,13 +1,9 @@
-
-<!-- 커뮤니티의 자유게시판 리스트 출력 -->
+<!-- 과외 리뷰 리스트 출력 -->
 
 <%@page import="java.util.Calendar"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="alcinfo.LeteaBean"%>
 <%@page import="alcinfo.MemberBean"%>
-
-<!-- 과외 리뷰 리스트 출력 -->
-
 <%@page import="alcinfo.UtilMgr"%>
 <%@page import="alcinfo.LereviewBean"%>
 <%@page import="java.util.Vector"%>
@@ -27,25 +23,24 @@
 	int todaynumber=0,mpointnumber=0;
 	String mpoint=null;
 	if(loginid!=null){
-	if(grade==0||grade==1){
-		MemberBean mbean=Memmgr.getInfo(loginid);
-		mpoint=mbean.getMpoint();
+		if(grade==0||grade==1){
+			MemberBean mbean=Memmgr.getInfo(loginid);
+			mpoint=mbean.getMpoint();
+			
+		}
+		else if(grade==2||grade==3){
+			LeteaBean lbean=Teamgr.getInfo(loginid);
+			mpoint=lbean.getMpoint();
+		} 
+	
+	
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+	    Calendar today = Calendar.getInstance();
+	 	String strToday = sdf.format(today.getTime());
 		
-	}
-	else if(grade==2||grade==3){
-		LeteaBean lbean=Teamgr.getInfo(loginid);
-		mpoint=lbean.getMpoint();
-	} 
-	
-	
-	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-    Calendar today = Calendar.getInstance();
- 	String strToday = sdf.format(today.getTime());
-	
-	 todaynumber=Integer.parseInt(strToday);
-	 mpoint=mpoint.replace("-", "");
-	 mpointnumber=Integer.parseInt(mpoint);
-	
+		 todaynumber=Integer.parseInt(strToday);
+		 mpoint=mpoint.replace("-", "");
+		 mpointnumber=Integer.parseInt(mpoint);
 	}
 	int totalRecord = 0;//총게시물수
 	int numPerPage = 10;//페이지당 레코드 개수(5,10,15,30)
@@ -74,7 +69,7 @@
 		keyWord = "";
 	}
 
-	totalRecord = mgr.getTotalCount(keyField, keyWord);
+	totalRecord = mgr.getTotalCount(keyField, keyWord, num);
 	//out.print("totalRecord : " + totalRecord);
 
 	//nowPage 요청 처리
@@ -94,7 +89,6 @@
 	nowBlock = (int) Math.ceil((double) nowPage / pagePerBlock);
 %>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -167,12 +161,7 @@ a:hover {
 </style>
 </head>
 <body>
-
-
-
-
 	<!-- 리스트 부분 -->
-
 	<h2>선생님 리뷰</h2>
 	<table>
 		<tr>
@@ -229,9 +218,6 @@ a:hover {
 							<p>등록된 게시글이 없습니다.</p>
 						</td>
 					</tr>
-
-
-
 					<%
 						} else {
 							for (int i = 0; i < listsize; i++) {
@@ -246,7 +232,7 @@ a:hover {
 								int ccount = mgr.lerccount(lnum);
 					%>
 					<tr id="list">
-							<td align="center"><%=star%></a></td>
+							<td align="center"><%=star%></td>
 						<td align="center">
 						<a href="javascript:read('<%=lnum%>')"><%=title%></a>
 						<% if(ccount>0) { %>
@@ -338,12 +324,11 @@ a:hover {
 			<tr>
 				<td align="center" valign="bottom">
 				<select name="keyField" size="1">
-					<option value="lq_name">제 목</option>
-					<option value="lq_subject">과 목</option>
-					<option value="lq_content">내 용</option>
-					<option value="lq_nick">닉 네 임</option>
+					<option value="lr_title" <%if(keyField.equals("lr_title")) {%>selected<%} %>>제 목</option>
+					<option value="lr_content" <%if(keyField.equals("lr_content")) {%>selected<%} %>>내 용</option>
+					<option value="lr_nick" <%if(keyField.equals("lr_nick")) {%>selected<%} %>>닉 네 임</option>
 				</select> 
-				<input size="16" name="keyWord"> 
+				<input size="16" name="keyWord" value="<%=keyWord%>"> 
 				<input type="button" value="찾기" onClick="javascript:lecheck()"> 
 				<input type="hidden" name="nowPage" value="1"></td>
 			</tr>

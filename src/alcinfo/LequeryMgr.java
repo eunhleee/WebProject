@@ -12,7 +12,7 @@ public class LequeryMgr {
 		pool=DBConnectionMgr.getInstance();
 	}
 	
-	//Board Total Count:占쏙옙 占쌉시뱄옙 占쏙옙
+	//Board Total Count:
 	public int getTotalCount(int lq_lnum,String keyField,String keyWord) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -22,14 +22,14 @@ public class LequeryMgr {
 		try {
 			con = pool.getConnection();
 			if(keyWord.trim().equals("")||keyWord==null) {
-				//占싯삼옙占쏙옙 占싣닌곤옙占�
+				//
 				sql = "select count(*) from lequery where lq_lnum=?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, lq_lnum);
 				
 			}
 			else {
-			//占싯삼옙占쏙옙 占쏙옙占�
+			//
 			sql = "select count(*) from lequery where lq_lnum=? and "
 					+keyField+" like ?";
 			pstmt = con.prepareStatement(sql);
@@ -48,11 +48,11 @@ public class LequeryMgr {
 		return totalCount;
 	}
 	
-	//Board List:占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙,占싯삼옙 占쏙옙占쏙옙
-	//keyField : 占쏙옙占시옵쇽옙(name,title,content)
-	//keyWord : 占싯삼옙占쏙옙
-	//start : 占쏙옙占쏙옙 占쏙옙호
-	//cnt : 占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쌉시뱄옙 占쏙옙占쏙옙
+	//Board List:
+	//keyField :(name,title,content)
+	//keyWord :
+	//start :
+	//cnt :
 	public Vector<LequeryBean> getBoardList(int lq_lnum,String keyField,String keyWord,int start,int cnt){
 		 Connection con = null;
 		PreparedStatement pstmt = null;
@@ -62,7 +62,7 @@ public class LequeryMgr {
 		try {
 			con = pool.getConnection();
 			if(keyWord.trim().equals("")||keyWord==null) {
-				//占싯삼옙占쏙옙 占싣닌곤옙占�
+				//
 				sql = "select num, lq_lnum,lq_title,lq_subject,lq_content,lq_ip,lq_id,lq_date,"
 						+ "lq_count from lequery where lq_lnum=? order by num desc limit ?,?";
 				pstmt = con.prepareStatement(sql);
@@ -73,7 +73,7 @@ public class LequeryMgr {
 	
 			}
 			else {
-			//占싯삼옙占쏙옙 占쏙옙占�
+			//
 			sql = "select  num, lq_lnum,lq_title,lq_subject,lq_content,lq_ip,lq_id,lq_date,"
 					+ "lq_count from lequery where lq_lnum=? and "+keyField+" like ? "
 				+ "order by num desc limit ?,?";
@@ -108,7 +108,7 @@ public class LequeryMgr {
 		return vlist; 
 	}
 	
-	// 학원 문의 글쓰기
+	// 
 	public void insertLeq(LequeryBean bean) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -132,7 +132,7 @@ public class LequeryMgr {
 		}
 	}
 	
-	// 글보기 (한 개의 게시물, 모든 컬럼 리턴)
+	// 
 	public LequeryBean getQuery(int num) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -165,7 +165,7 @@ public class LequeryMgr {
 		return bean;
 	}
 	
-	// 게시글 조회수 증가
+	// 
 	public void LeQupCount(int num) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -183,7 +183,7 @@ public class LequeryMgr {
 		}
 	}
 	
-	// 게시글 삭제
+	// 
 	public void deleteLeQ(int num) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -201,7 +201,7 @@ public class LequeryMgr {
 		}
 	}
 	
-	// 게시글 수정
+	// 
 	public void updateLeQ(LequeryBean bean) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -222,7 +222,7 @@ public class LequeryMgr {
 		}
 	}
 	
-	// 하나의 게시글 댓글 갯수
+	// 
 	public int leqccount(int num) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -242,6 +242,27 @@ public class LequeryMgr {
 			pool.freeConnection(con, pstmt, rs);
 		}
 		return leqccount;
+	}
+	
+	public int checkM(String id) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		int grade = 1;
+		try {
+			con = pool.getConnection();
+			sql = "select grade from member where id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) grade = rs.getInt(1);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt, rs);
+		}
+		return grade;
 	}
 }
 

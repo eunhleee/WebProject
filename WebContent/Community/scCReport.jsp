@@ -11,7 +11,6 @@
 	int conum=UtilMgr.parseInt(request,"conum");
 	int stuc_depth=UtilMgr.parseInt(request,"stuc_depth");
 
-	System.out.println(conum+"renum은"+renum);
 	 String stopid = request.getParameter("stopid").trim();
 
 %>
@@ -20,8 +19,25 @@
 <title>잘못된 학원 정보 신고하기</title>
 <script type="text/javascript">
 	function singo(){
-		document.repFrm.action="scCReportProc.jsp?stopid="+<%=stopid%>+"&renum="+<%=renum%>
-		+"&conum="+<%=conum%>+"&stuc_depth="+stuc_depth;
+		if(document.repFrm.retitle.value==""){
+			alert("제목을 입력 하세요");
+			return;
+		}
+		 if(document.repFrm.regroup.value=="")
+		{
+			alert("신고분류를 선택하세요");
+			return;
+
+		}
+		if(document.repFrm.recontent.value==""){
+			alert("내용을 입력 하세요");
+			return;
+		} 
+		if(document.repFrm.retitle.value!=""&&document.repFrm.regroup.value!=""&&document.repFrm.recontent.value!=""){
+		 	var stopurl=document.referrer
+			document.repFrm.stopurl.value=stopurl;
+		document.repFrm.action="scCReportProc.jsp?stopid=<%=stopid%>&renum=<%=renum%>&conum=<%=conum%>&stuc_depth=<%=stuc_depth%>";
+	}
 		document.repFrm.submit();
 	}
 </script>
@@ -30,10 +46,10 @@
 <body>
 <div class="frame">
     <div class="content">
-    	<form name="repFrm" method="post" action="scCReportProc.jsp">
+    	<form name="repFrm" method="post">
 		<table width="300">
 		<tr>
-		<td><input type="hidden" name="kind" value="커뮤니티게시판"></td>	
+		<td><input type="hidden" name="kind" value="커뮤니티게시판댓글"></td>	
 		<td><input type="hidden" name="reid" value="<%=session.getAttribute("idKey")%>"></td>
 		</tr>
 		<tr>
@@ -61,12 +77,11 @@
 		<input type="hidden" name="reip" value="<%=request.getRemoteAddr()%>">
 
 		</td>
-		<td><input type="hidden" name="restate" value="접수중">
-		<td><input type="hidden" name="renum" value="<%=renum%>">
-		<td><input type="hidden" name="conum" value="<%=conum%>">
-		<td><input type="hidden" name="stuc_depth" value="<%=stuc_depth%>">
-		
-		</td>
+		<td><input type="hidden" name="restate" value="접수중"></td>
+		<td><input type="hidden" name="renum" value="<%=renum%>"></td>
+		<td><input type="hidden" name="conum" value="<%=conum%>"></td>
+		<td><input type="hidden" name="stuc_depth" value="<%=stuc_depth%>"></td>
+		<td><input type="hidden" name="stopurl"></td>
 		</tr>
 		</table>
 		</form>

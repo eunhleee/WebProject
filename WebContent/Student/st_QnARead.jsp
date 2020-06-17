@@ -173,13 +173,22 @@ function cDel(conum, cnum, depth) {
 		document.cFrm.submit();
 	}
 }
+function goRep() {
+	
+	url = "stQReport.jsp?stopid=<%=id%>&renum=<%=stunum%>";
+	window.open(url, "GoReport", 'width=360, height=300, top=200, left=300');
+}
 
+function goCReport(conum,stuc_depth,stopid) {
+	url = "stQCReport.jsp?conum="+conum+"&stuc_depth="+stuc_depth+"&renum="+<%=stunum%>+"&stopid="+stopid;
+	window.open(url, "GoReport", "width=360, height=300, top=200, left=300");
+	}
 
 </script>
 
 </head>
 <body>
-	<%@ include file="../alcinfo/headerSearch.jsp"%>
+
 	<br>
 	<br>
 	<form name="cart" action="">
@@ -285,6 +294,9 @@ function cDel(conum, cnum, depth) {
 		    <td align="right">
 		     	조회수  <%=count%>
 		    </td>
+		    <% if(loginid!=null) {%>		    
+		    <td><input type="button" value="신고" onclick="javascript:goRep();"></td>
+		    <%}%>
 		   </tr>
 		   </table>
 		  </td>
@@ -342,7 +354,7 @@ function cDel(conum, cnum, depth) {
 	 		 	 			String cregdate = acrcbean.getStq_regdate();
 	 		 	 			int conum = acrcbean.getStq_conum();
 	 		 	 			int depth = acrcbean.getStq_depth();
-	 		 	 			
+	 		 	 			String stopid=acrcbean.getStq_id();
 			 				String dstyle = "";
 	 		 	 			if(depth==1) {
 	 		 	 				dstyle = "style=\"padding-left:30px;\"";	
@@ -356,14 +368,19 @@ function cDel(conum, cnum, depth) {
 						<td <%=dstyle%> colspan="2"><%=comment%></td>
 						<% 
 						if(loginid!=null) {
-							if(loginid.equals(cid)) { %>
+							if(loginid.equals(cid)||stqmgr.checkM(loginid)==0) { %>
 						<td align="center" valign="middle">
 							<input type="button" value="삭제"
 							onclick="cDel('<%=conum%>','<%=cnum%>','<%=depth%>')">
 						</td>
-						<% 	
-							}
-						} %>
+						<% 	}%>
+							<td align="left" valign="middle">
+							<input type="button" value="댓글신고"
+							onclick="javascript:goCReport
+							('<%=acrcbean.getNum()%>','<%=acrcbean.getStq_depth()%>','<%=stopid%>')">
+							
+						</td>
+						<%} %>
 					</tr>
 					<tr>
 						<td <%=dstyle%> colspan="3">
@@ -439,7 +456,7 @@ function cDel(conum, cnum, depth) {
 		 [ <a href="javascript:list();" >리스트</a>
 		 <% 
 		 if(loginid!=null) {
-			 if(loginid.equals(id)) { %>
+			 if(loginid.equals(id)||stqmgr.checkM(loginid)==0) { %>
 			 | <a href="st_QnAUpdate.jsp?num=<%=num%>&stunum=<%=stunum%>&numPerPage=<%=numPerPage%>&nowPage=<%=nowPage%><%
   	 	if(!(keyWord==null||keyWord.equals(""))){
 		     %>&keyField=<%=keyField%>&keyWord=<%=keyWord%><%}%>" >수 정</a> |

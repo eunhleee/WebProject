@@ -1,4 +1,4 @@
-<!-- 커뮤니티의 자유게시판 리스트 출력 -->
+<!-- 과외 문의 리스트 출력 -->
 <%@page import="alcinfo.UtilMgr"%>
 <%@page import="alcinfo.LequeryBean"%>
 <%@page import="java.util.Vector"%>
@@ -286,12 +286,12 @@ div{
 			<tr>
 				<td align="center" valign="bottom">
 				<select name="keyField" size="1">
-					<option value="lq_title">제 목</option>
-					<option value="lq_subject">과 목</option>
-					<option value="lq_content">내 용</option>
-					<option value="lq_id">아 이 디</option>
+					<option value="lq_title" <%if(keyField.equals("lq_title")) {%>selected<%} %>>제 목</option>
+					<option value="lq_subject" <%if(keyField.equals("lq_subject")) {%>selected<%} %>>과 목</option>
+					<option value="lq_content" <%if(keyField.equals("lq_content")) {%>selected<%} %>>내 용</option>
+					<option value="lq_id" <%if(keyField.equals("lq_id")) {%>selected<%} %>>아 이 디</option>
 				</select> 
-				<input size="16" name="keyWord"> 
+				<input size="16" name="keyWord" value="<%=keyWord%>"> 
 				<input type="hidden" name="lq_lnum" value="<%=lq_lnum %>">
 				<input type="button" value="찾기" onClick="javascript:check()"> 
 				<input type="hidden" name="nowPage" value="1">

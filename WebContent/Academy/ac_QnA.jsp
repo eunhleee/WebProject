@@ -287,11 +287,11 @@ div{
 			<tr>
 				<td align="center" valign="bottom"><select name="keyField"
 					size="1">
-						<option value="ac_title">제 목</option>
-						<option value="ac_subject">과 목</option>
-						<option value="ac_content">내 용</option>
-						<option value="ac_id">아 이 디</option>
-				</select> <input size="16" name="keyWord">
+						<option value="ac_title" <%if(keyField.equals("ac_title")) {%>selected<%} %>>제 목</option>
+						<option value="ac_subject" <%if(keyField.equals("ac_subject")) {%>selected<%} %>>과 목</option>
+						<option value="ac_content" <%if(keyField.equals("ac_content")) {%>selected<%} %>>내 용</option>
+						<option value="ac_id" <%if(keyField.equals("ac_id")) {%>selected<%} %>>아 이 디</option>
+				</select> <input size="16" name="keyWord" value="<%=keyWord%>">
 				<input type="hidden" name="ac_num" value="<%=ac_num%>">
 				 <input type="button" value="찾기" onClick="javascript:check()"> 
 				 <input type="hidden" name="nowPage" value="1"></td>

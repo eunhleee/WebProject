@@ -74,7 +74,7 @@ public class LessonMgr {
 					
 				}
 				
-				rs = pstmt.executeQuery();// select ����
+				rs = pstmt.executeQuery();// select 占쏙옙占쏙옙
 				while(rs.next()) {
 					LessonBean bean = new LessonBean();
 					bean.setNum(rs.getInt("le.num"));
@@ -110,7 +110,7 @@ public class LessonMgr {
 					+ " from lesson le,letea tea where le.id=tea.id order by le.count desc";
 			pstmt = con.prepareStatement(sql);
 			
-			rs = pstmt.executeQuery();//select ����
+			rs = pstmt.executeQuery();//select 占쏙옙占쏙옙
 			while(rs.next()) {
 				LessonBean bean = new LessonBean();
 				bean.setNum(rs.getInt("le.num"));
@@ -172,10 +172,10 @@ public class LessonMgr {
 		try {
 			con = pool.getConnection();
 			if(!keyWord.trim().equals("")||keyWord!=null) {
-				//�˻��� �ƴѰ��
+				//占싯삼옙占쏙옙 占싣닌곤옙占�
 			
 			sql = "select distinct(le.num),le.id,tea.name,le.class,tea.area,le.star,le.count " + 
-					"from lesson le,letea tea where le.id=tea.id and( tea.name like ? or tea.class like ? or tea.area like ?)";
+					"from lesson le,letea tea where le.id=tea.id and( tea.name like ? or le.class like ? or tea.area like ?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, "%"+keyWord+"%");
 			pstmt.setString(2, "%"+keyWord+"%");
@@ -216,7 +216,7 @@ public class LessonMgr {
 			
 			con = pool.getConnection();
 			sql = "insert leinsert(l_num,l_teacharid,l_stuid,l_stname,l_staddress,l_state,l_date )"
-					+ " values(?,?,?,?,?,'신청접수',now())";
+					+ " values(?,?,?,?,?,'�떊泥��젒�닔',now())";
 			pstmt = con.prepareStatement(sql);
 
 			pstmt.setInt(1, lbean.getNum());
@@ -319,7 +319,7 @@ public class LessonMgr {
 			return jsonArray;
 	}
 	
-	//조회수 증가
+	//議고쉶�닔 利앷�
 		public void upLeCount(int num) {
 			Connection con = null;
 			PreparedStatement pstmt = null;

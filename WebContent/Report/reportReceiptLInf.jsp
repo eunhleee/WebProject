@@ -1,5 +1,4 @@
-<!-- 13p 7.신고접수창 학원 잘못된 정보-->
-<!-- reportReceipt.jsp -->
+
 <%@page import="java.text.SimpleDateFormat"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page import ="java.util.*,alcinfo.*"%>
@@ -8,22 +7,23 @@
 <jsp:setProperty name="rBean" property="*"/>
 <%
 	request.setCharacterEncoding("UTF-8");
-//	int num=0;
- 	//num = Integer.parseInt(request.getParameter("stopid"));
  	String stopid = request.getParameter("stopid").trim();
+	String stopurl =request.getParameter("stopurl").trim();
+
 	// num=UtilMgr.parseInt(request,"stopid");
 	//String stopid=Integer.toString(num);
 	String id =(String)session.getAttribute("idKey");
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     Calendar today = Calendar.getInstance();
  	String strToday = sdf.format(today.getTime());
+
 %>
 <html>
 <head>
 <title>잘못된 과외정보 신고하기</title>
 <script type="text/javascript">
 	function gocheck(){
-		document.repFrm.action="reportAInfProc.jsp?stopid="+stopid;
+		document.repFrm.action="reportLInfProc.jsp?stopid=<%=stopid%>&stopurl=<%=stopurl%>&id=<%=stopid%>";
 		document.repFrm.submit();
 	}
 </script>

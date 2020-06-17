@@ -25,6 +25,14 @@
 			category="과외 Q&A";
 			group="lesson";
 		}
+		else if(request.getParameter("pageValue").equals("onlyst")){
+			category="학생 전용 게시판";
+			group="onlyst";
+		}
+		else if(request.getParameter("pageValue").equals("onlyte")){
+			category="선생님 전용 게시판";
+			group="onlyte";
+		}
 //검색에 필요한 변수
 		
 		int totalRecord = 0;//총게시물수
@@ -121,6 +129,12 @@ function read(num){
 	document.readFrm.action="scRead.jsp?pageValue=<%=group%>";
 	document.readFrm.submit();
 }
+function clalert1(){
+	alert("학생만 이용가능 합니다.")
+}
+function clalert2(){
+	alert("선생님만 이용가능 합니다.")
+}
 </script>
  <style>
 #list td {
@@ -195,10 +209,25 @@ a:hover {
 	<div id="frame">
 
 		<div id="leftdiv">
-			<h3>커뮤니티</h3><br><br>
+
+			<h3>커뮤니티</h3>
 			<div id="atag"><a href="communityList.jsp?pageValue=free">&#149; 자유게시판</a></div>
 			<div id="atag"><a href="communityList.jsp?pageValue=academy">&#149; 학원 Q&A</a></div>
 			<div id="atag"><a href="communityList.jsp?pageValue=lesson">&#149; 과외 Q&A</a></div>
+			<div id="atag"><a 
+			<%if(mgr.checkM(id)==0||mgr.checkM(id)==1) {%>
+			href="communityList.jsp?pageValue=onlyst"
+			<%} else { %>
+			href="javascript:clalert1()"
+			<%} %>
+			>&#149; 학생 전용 게시판</a></div>
+			<div id="atag"><a 
+			<%if(mgr.checkM(id)==0||mgr.checkM(id)==2||mgr.checkM(id)==3) {%>
+			href="communityList.jsp?pageValue=onlyte"
+			<%} else { %>
+			href="javascript:clalert2()"<%} %>
+			>&#149; 선생님 전용 게시판</a></div>
+
 			<br>
 
 		</div>
@@ -331,7 +360,9 @@ a:hover {
 					<%if(id==null){ %>
 						onclick="clalert();" href=""
 						<%}else{ %>
-						href="scPost.jsp?pageValue=<%=group %>" class="btn btn-default"
+						href="scPost.jsp?pageValue=<%=group %>&numPerPage=<%=numPerPage%>&nowPage=<%=nowPage%><%
+  	 	if(!(keyWord==null||keyWord.equals(""))){
+		     %>&keyField=<%=keyField%>&keyWord=<%=keyWord%><%}%>" class="btn btn-default"
 						<%} %>>[글쓰기]</a> 
 						<a href="javascript:list()">[처음으로]</a></td>
 				</tr>
@@ -344,11 +375,11 @@ a:hover {
 					<tr>
 						<td align="center" valign="bottom">
 							<select name="keyField" size="1">
-								<option value="sc_title">제 목</option>
-								<option value="sc_content">내 용</option>
-								<option value="sc_nick">닉 네 임</option>
+								<option value="sc_title" <%if(keyField.equals("sc_title")) {%>selected<%} %>>제 목</option>
+								<option value="sc_content" <%if(keyField.equals("sc_content")) {%>selected<%} %>>내 용</option>
+								<option value="sc_nick" <%if(keyField.equals("sc_nick")) {%>selected<%} %>>닉 네 임</option>
 							</select>
-							<input size="16" name="keyWord">
+							<input size="16" name="keyWord" value="<%=keyWord%>">
 							<input type="submit" value="찾기" onClick="javascript:sccheck()"> 
 							<input type="hidden" name="nowPage" value="1">
 							<input type="hidden" name="pageValue" value="<%=group%>">
@@ -365,8 +396,10 @@ a:hover {
 			<form name="readFrm">
 				<input type="hidden" name="nowPage" value="<%=nowPage%>"> 
 				<input type="hidden" name="numPerPage" value="<%=numPerPage%>">
-				<input type="hidden" name="keyField" value="<%=keyField%>"> 
+				<%if(!(keyWord==null||keyWord.equals(""))){%>
+				<input type="hidden" name="keyField" value="<%=keyField%>">
 				<input type="hidden" name="keyWord" value="<%=keyWord%>">
+				<%}%>
 				<input type="hidden" name="pageValue" value="<%=group%>">
 				<input type="hidden" name="num">
 			</form>

@@ -122,7 +122,16 @@ a:hover {
 			document.cFrm.submit();
 		}
 	}
-	
+	function goRep() {
+		
+		url = "acLReport.jsp?stopid=<%=id%>&renum=<%=num%>";
+		window.open(url, "GoReport", 'width=360, height=300, top=200, left=300');
+	}
+
+	function goCReport(conum,stuc_depth,stopid) {
+		url = "acLCReport.jsp?conum="+conum+"&stuc_depth="+stuc_depth+"&renum="+<%=num%>+"&stopid="+stopid;
+		window.open(url, "GoReport", "width=360, height=300, top=200, left=300");
+		}
 </script>
 </head>
 <body>
@@ -227,6 +236,9 @@ a:hover {
 		    <td align="right">
 		     	조회수  <%=count%>
 		    </td>
+		      <% if(loginid!=null) {%>		    
+		    <td><input type="button" value="신고" onclick="javascript:goRep();"></td>
+		    <%}%>
 		   </tr>
 		   </table>
 		  </td>
@@ -284,7 +296,7 @@ a:hover {
 	 		 	 			String cregdate = acrcbean.getAcr_regdate();
 	 		 	 			int conum = acrcbean.getAcr_conum();
 	 		 	 			int depth = acrcbean.getAcr_depth();
-	 		 	 			
+	 		 	 			String stopid=acrcbean.getAcr_id();
 			 				String dstyle = "";
 	 		 	 			if(depth==1) {
 	 		 	 				dstyle = "style=\"padding-left:30px;\"";	
@@ -298,14 +310,19 @@ a:hover {
 						<td <%=dstyle%> colspan="2"><%=comment%></td>
 						<% 
 						if(loginNick!=null) {
-							if(loginNick.equals(cnick)) { %>
+							if(loginNick.equals(cnick) || acrmgr.checkM(loginid)==0) { %>
 						<td align="center" valign="middle">
 							<input type="button" value="삭제"
 							onclick="cDel('<%=conum%>','<%=cnum%>','<%=depth%>')">
 						</td>
-						<% 	
-							}
-						} %>
+							<% 	}%>
+							<td align="left" valign="middle">
+							<input type="button" value="댓글신고"
+							onclick="javascript:goCReport
+							('<%=acrcbean.getNum()%>','<%=depth%>','<%=stopid%>')">
+							
+						</td>
+						<%} %>
 					</tr>
 					<tr>
 						<td <%=dstyle%> colspan="3">
@@ -381,7 +398,7 @@ a:hover {
 		 [ <a href="javascript:list();" >리스트</a>
 		 <% 
 		 if(loginNick!=null) {
-			 if(loginNick.equals(nickname)) { %>
+			 if(loginNick.equals(nickname) || acrmgr.checkM(loginid)==0) { %>
 			 | <a href="ac_ReviewUpdate.jsp?num=<%=num%>&acrnum=<%=acrnum%>&numPerPage=<%=numPerPage%>&nowPage=<%=nowPage%><%
 			 if(!(keyWord==null||keyWord.equals(""))){%>&keyField=<%=keyField%>&keyWord=<%=keyWord%><%}%>" >수 정</a> |
 			 <a href="ac_ReviewDelete.jsp?num=<%=num%>&acrnum=<%=acrnum%>&numPerPage=<%=numPerPage%>&nowPage=<%=nowPage%><%

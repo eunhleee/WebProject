@@ -24,7 +24,7 @@
 		
 		lebean.setId(id);
 		  System.out.println("선생님아이디는"+id);
-		%>
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -105,11 +105,15 @@ function graph(){
 	
 	
 	function goReport() {
-		url = "../Report/reportReceiptLInf.jsp?stopid=<%=id%>";
+
+		url = "../Report/reportReceiptLInf.jsp?stopid=<%=id%>&stopurl=../Lesson/leRead.jsp?num=<%=num%>";
 		window.open(url, "GoReport", "width=900, height=560, top=200, left=300");
 	}
 		
-	
+	function goErr(){
+		alert("로그인을 해주세요");
+
+	}
 
 	
 </script>
@@ -127,7 +131,7 @@ function graph(){
 					<table width="100%" style="font-size: 20; background: rgb(250, 248, 235);">
 						<tr>
 							<td width="25%" align="center">
-							<img src="../img/banner1.jpg"	width="100%" height="250">
+							<img src="../img/<%=lebean.getImgname() %>"	width="100%" height="250">
 							</td>
 							<td width="60%" height="100%">
 								<table width="100%"  style="font-size: 20;">
@@ -169,8 +173,11 @@ function graph(){
 											style="font-size: 20;" onclick="moveQnA();"></td>
 									</tr>
 									<tr>
-										<td><input type="button" value="잘못된정보 신고하기"
-											style="font-size: 20;" onclick="goReport();"></td>
+									<%	if(session.getAttribute("idKey")==null||session.getAttribute("idKey").equals("")){ %>
+									<td><input type="button" value="잘못된정보 신고하기"
+									style="font-size: 20;" onclick="goErr();"></td>
+										<%}else{%><td><input type="button" value="잘못된정보 신고하기"
+											style="font-size: 20;" onclick="goReport();"></td><%} %>
 									</tr>
 									<tr>
 										<td><input type="button" value="신청하기" id="myButton1"

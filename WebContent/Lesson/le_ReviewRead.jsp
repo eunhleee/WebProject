@@ -199,14 +199,31 @@ function graph(){
 		}
 	}
 	
+	function goRep() {
+		
+		url = "stQReport.jsp?stopid=<%=id%>&renum=<%=num%>";
+		window.open(url, "GoReport", 'width=360, height=300, top=200, left=300');
+	}
 
-	
+	function goCReport(conum,stuc_depth,stopid) {
+		url = "stQCReport.jsp?conum="+conum+"&stuc_depth="+stuc_depth+"&renum="+<%=num%>+"&stopid="+stopid;
+		window.open(url, "GoReport", "width=360, height=300, top=200, left=300");
+		}
+	function goRep() {
+		
+		url = "leLReport.jsp?stopid=<%=id%>&renum=<%=num%>";
+		window.open(url, "GoReport", 'width=360, height=300, top=200, left=300');
+	}
+
+	function goCReport(conum,stuc_depth,stopid) {
+		url = "leLCReport.jsp?conum="+conum+"&stuc_depth="+stuc_depth+"&renum="+<%=num%>+"&stopid="+stopid;
+		window.open(url, "GoReport", "width=360, height=300, top=200, left=300");
+		}
 </script>
 
 </head>
 <body>
 
-	<%@ include file="../alcinfo/headerSearch.jsp"%>
 	<br>
 	<br>
 	<form name="cart" action="">
@@ -326,6 +343,9 @@ function graph(){
 		    <td align="right">
 		     	조회수  <%=count%>
 		    </td>
+		     <% if(loginid!=null) {%>		    
+		    <td><input type="button" value="신고" onclick="javascript:goRep();"></td>
+		    <%}%>
 		   </tr>
 		   </table>
 		  </td>
@@ -339,7 +359,7 @@ function graph(){
 					<tr  align="center">
 						<td width="50">닉네임</td>
 						<td align="left">
-							<input name="cid" size="10" value="<%=loginNick%>" readonly>
+							<input name="cNick" size="10" value="<%=loginNick%>" readonly>
 						</td>
 					</tr>
 					<tr align="center">
@@ -383,7 +403,8 @@ function graph(){
 	 		 	 			String cregdate = lercbean.getLer_regdate();
 	 		 	 			int conum = lercbean.getLer_conum();
 	 		 	 			int depth = lercbean.getLer_depth();
-	 		 	 			
+	 		 	 			String stopid=lercbean.getLer_id();
+
 			 				String dstyle = "";
 	 		 	 			if(depth==1) {
 	 		 	 				dstyle = "style=\"padding-left:30px;\"";	
@@ -397,14 +418,19 @@ function graph(){
 						<td <%=dstyle%> colspan="2"><%=comment%></td>
 						<% 
 						if(loginNick!=null) {
-							if(loginNick.equals(cnick)) { %>
+							if(loginNick.equals(cnick)||lermgr.checkM(loginid)==0) { %>
 						<td align="center" valign="middle">
 							<input type="button" value="삭제"
 							onclick="cDel('<%=conum%>','<%=cnum%>','<%=depth%>')">
 						</td>
-						<% 	
-							}
-						} %>
+			<% 	}%>
+							<td align="left" valign="middle">
+							<input type="button" value="댓글신고"
+							onclick="javascript:goCReport
+							('<%=cnum%>','<%=depth%>','<%=stopid%>')">
+							
+						</td>
+						<%} %>
 					</tr>
 					<tr>
 						<td <%=dstyle%> colspan="3">
@@ -480,7 +506,7 @@ function graph(){
 		 [ <a href="javascript:list();" >리스트</a>
 		 <% 
 		 if(loginNick!=null) {
-			 if(loginNick.equals(nickname)) { %>
+			 if(loginNick.equals(nickname)||lermgr.checkM(loginid)==0) { %>
 			 | <a href="le_ReviewUpdate.jsp?num=<%=num%>&id=<%=id%>&lernum=<%=lernum%>&numPerPage=<%=numPerPage%>&nowPage=<%=nowPage%><%
   	 	if(!(keyWord==null||keyWord.equals(""))){
 		     %>&keyField=<%=keyField%>&keyWord=<%=keyWord%><%}%>" >수 정</a> |

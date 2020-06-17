@@ -9,7 +9,6 @@
 <jsp:useBean id="sccmgr" class="alcinfo.SCommentMgr"/>
 <%
 	request.setCharacterEncoding("UTF-8");
-	//read.jsp?nowPage=1&numPerPage=10&keyField=&keyWord=&num=3
 	String pageValue=request.getParameter("pageValue");
 	String nowPage = request.getParameter("nowPage");	
 	String numPerPage = request.getParameter("numPerPage");	
@@ -63,6 +62,7 @@
 	int ccount = scmgr.ccount(num);
 	//읽어온 게시물을 수정 및 삭제를 위해 세션저장
 	session.setAttribute("bean", bean);
+	
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -76,7 +76,8 @@ function down(filename) {
 	document.downFrm.submit();
 }
 function list() {
-	document.listFrm.action = "communityList.jsp";
+	document.listFrm.action = "communityList.jsp?pageValue=<%=pageValue%>&numPerPage=<%=numPerPage%>&nowPage=<%=nowPage%><%
+		if(!(keyWord==null||keyWord.equals(""))){%>&keyField=<%=keyField%>&keyWord=<%=keyWord%><%}%>";
 	document.listFrm.submit();
 }
 function cInsert() {
@@ -270,7 +271,7 @@ a:hover {
 						<td <%=dstyle%> colspan="2"><%=comment%></td>
 						<% 
 						if(loginNick!=null) {
-							if(loginNick.equals(cnick)) { %>
+							if(loginNick.equals(cnick)||scmgr.checkM(loginid)==0) { %>
 						<td align="center" valign="middle">
 							<input type="button" value="삭제"
 							onclick="cDel('<%=conum%>','<%=cnum%>','<%=depth%>')">
@@ -363,7 +364,7 @@ a:hover {
 		 [ <a href="javascript:list()" >리스트</a>
 		 <% 
 		 if(loginid!=null) {
-			 if(loginid.equals(id)) { %>
+			 if(loginid.equals(id)||scmgr.checkM(loginid)==0) { %>
 			 | <a href="scUpdate.jsp?nowPage=<%=nowPage%>&num=<%=num%>&numPerPage=<%=numPerPage%>&pageValue=<%=pageValue %>" >수 정</a> |
 			 <a href="scDelete.jsp?nowPage=<%=nowPage%>&num=<%=num%>">삭 제</a> 
 		 <% }

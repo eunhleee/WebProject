@@ -1,4 +1,4 @@
-<!-- 커뮤니티의 자유게시판 리스트 출력 -->
+<!-- 학생 문의 리스트 출력 -->
 <%@page import="alcinfo.UtilMgr"%>
 <%@page import="alcinfo.StinqueryBean"%>
 <%@page import="java.util.Vector"%>
@@ -263,11 +263,11 @@ a:hover {
 			<tr>
 				<td align="center" valign="bottom">
 				<select name="keyField"	size="1">
-						<option value="title">제 목</option>
-						<option value="content">내 용</option>
-						<option value="id">아 이 디</option>
+						<option value="title" <%if(keyField.equals("title")) {%>selected<%} %>>제 목</option>
+						<option value="content" <%if(keyField.equals("content")) {%>selected<%} %>>내 용</option>
+						<option value="id" <%if(keyField.equals("id")) {%>selected<%} %>>아 이 디</option>
 				</select> 
-				<input size="16" name="keyWord"> 
+				<input size="16" name="keyWord" value="<%=keyWord%>"> 
 				<input type="hidden" name="stunum" value="<%=stunum %>">
 				<input type="submit" value="찾기" onClick="javascript:stcheck()"> 
 				<input type="hidden" name="nowPage" value="1">

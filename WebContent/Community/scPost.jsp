@@ -6,6 +6,10 @@
 <jsp:useBean id="Mmgr" class="member.MemberMgr"></jsp:useBean>
 <%
 	request.setCharacterEncoding("UTF-8");
+	String nowPage = request.getParameter("nowPage");
+	String numPerPage = request.getParameter("numPerPage");
+	String keyField = request.getParameter("keyField");	
+	String keyWord = request.getParameter("keyWord");
 	String scid = (String)session.getAttribute("idKey");
 	//닉네임 가져오기 해야함 아직 안했음
 	String group=request.getParameter("pageValue");
@@ -142,7 +146,9 @@ a:hover {
 			<h2><img src="../img/questionmark2.png" width="40" height="40">&nbsp;글쓰기</h2>	
 			<hr style="border:1px solid #F88C65;">	
 			<br/>
-			<form name="scpostFrm" method="post" action="scPost?pageValue=<%=group%>"
+			<form name="scpostFrm" method="post" action="scPost?pageValue=<%=group%>&numPerPage=<%=numPerPage%>&nowPage=<%=nowPage%><%
+  	 	if(!(keyWord==null||keyWord.equals(""))){
+		     %>&keyField=<%=keyField%>&keyWord=<%=keyWord%><%}%>"
 			enctype="multipart/form-data">
 			<table width="700" cellpadding="3" align="center">
 				<tr>
@@ -191,8 +197,8 @@ a:hover {
 						
 								 <input type="submit" value="확인">
 								 <input type="reset" value="다시쓰기">
-								 <input type="button" value="취소"
-								 onClick="javascript:location.href='../Community/communityList.jsp?pageValue=<%=group%>'">
+								 <input type="button" value="취소" onClick="javascript:location.href='<%=request.getHeader("referer")%>'">
+
 							</td>
 						</tr>
 					</table>
@@ -202,6 +208,16 @@ a:hover {
 			<input type="hidden" name="scid" value="<%=scid%>">
 			<input type="hidden" name="scip" value="<%=request.getRemoteAddr()%>">
 			<input type="hidden" name="pageValue" value="<%=group %>">
+			<input type="hidden" name="nowPage" value="<%=nowPage%>">
+			<input type="hidden" name="numPerPage" value="<%=numPerPage%>"> 
+			<%
+		  	 	if(!(keyWord==null||keyWord.equals(""))){
+		     %>
+		     <input type="hidden" name="keyField" value="<%=keyField%>">
+		     <input type="hidden" name="keyWord" value="<%=keyWord%>">
+		 	 <%
+				}
+			 %>
 			</form>
 		</div>
 		

@@ -21,7 +21,6 @@ String keyField = "", keyWord = "";
 		if(request.getParameter("numPerPage")!=null){
 			numPerPage=UtilMgr.parseInt(request,"numPerPage");
 		}//여기까지만 하면 10개가 기본값이기 때문에 10개로 다시 바꾸고 싶을때 반응하지 않는다.
-		//따라서110번째 줄을 추가하면 값이 바뀌어 되게된다.
 		
 //검색일때
 if (request.getParameter("keyWord") != null) {
@@ -103,6 +102,7 @@ if (request.getParameter("reload") != null && request.getParameter("reload").equ
 		document.readFr.action="read.jsp";
 		document.readFr.submit();
 	}
+
 </script>
 </head>
 <body>
@@ -186,12 +186,12 @@ if (request.getParameter("reload") != null && request.getParameter("reload").equ
 						%>
 					<form method="post" action="MGMCUpdateProc.jsp">
 						<tr>
-							<td><%=mbean.getNum()%></td>
-							<td><%=mbean.getRegroup()%></td>
-							<td><%=mbean.getReid()%></td>
-							<td><%=mbean.getStopid()%></td>
-							<td><%=mbean.getRetitle()%></td>
-							<td><%=mbean.getRecontent()%></td>
+						<td><a href="<%=mbean.getStopurl() %>"><%=mbean.getNum()%></a></td>
+							<td><a href="<%=mbean.getStopurl() %>"><%=mbean.getRegroup()%></a></td>
+							<td><a href="<%=mbean.getStopurl() %>"><%=mbean.getReid()%></a></td>
+							<td><a href="<%=mbean.getStopurl() %>"><%=mbean.getStopid()%></a></td>
+							<td><a href="<%=mbean.getStopurl() %>"><%=mbean.getRetitle()%></a></td>
+							<td><a href="<%=mbean.getStopurl() %>"><%=mbean.getRecontent()%></a></td>
 							<td><select name="restate">
 									<option value="접수중"
 										<%=mbean.getRestate().equals("접수중")?"selected":""%>>접수중

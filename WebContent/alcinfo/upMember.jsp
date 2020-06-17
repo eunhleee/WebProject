@@ -9,8 +9,11 @@
 <jsp:useBean id="mgr" class="alcinfo.MemberMgr"/>
     
 <%
-	request.setCharacterEncoding("UTF-8");
-	String id="1111";
+if(session.getAttribute("idKey")==null||session.getAttribute("idKey").equals("")){
+	response.sendRedirect("cards-gallery.jsp");
+	}
+	else{
+	String id=(String)session.getAttribute("idKey");
 	MemberBean bean=mgr.getUpMember(id);
 
 	int to=Integer.parseInt(bean.getBirth().substring(4,6)); 
@@ -310,6 +313,7 @@ function win_close(){
 			</tr>
 		</table>
 	</form>
+	<%} %>
 </div>
 
 <%@ include file="../alcinfo/footer.jsp"%>

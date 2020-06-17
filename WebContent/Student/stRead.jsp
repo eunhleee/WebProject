@@ -96,13 +96,16 @@ function deleteT(){
 	
 }
 
-
+ 
 function goReport() {
-	url = "../Report/reportReceiptSInf.jsp?stopid=<%=mbean.getId()%>";
+	url = "../Report/reportReceiptSInf.jsp?stopid=<%=mbean.getId()%>&stopurl=../Student/stRead.jsp?stunum=<%=stunum%>";
 	window.open(url, "GoReport", "width=900, height=560, top=200, left=300");
 }
 	
+function goErr(){
+	alert("로그인을 해주세요");
 
+}
 
 </script>
 
@@ -118,7 +121,7 @@ function goReport() {
 					<table width="100%" style="font-size: 20; background: rgb(250, 248, 235);">
 						<tr>
 							<td width="25%" align="center">
-							<img src="../img/banner1.jpg" width="100%" height="250"></td>
+							<img src="../img/<%=stbean.getImgname() %>" width="100%" height="250"></td>
 							<td width="60%" height="100%">
 								<table width="100%" style="font-size: 20;">
 									<tr height="40">
@@ -152,8 +155,11 @@ function goReport() {
 								<table>
 									
 									<tr>
-										<td><input type="button" value="잘못된정보 신고하기"
-											style="font-size: 20;" onclick="goReport();"></td>
+									<%	if(session.getAttribute("idKey")==null||session.getAttribute("idKey").equals("")){ %>
+									<td><input type="button" value="잘못된정보 신고하기"
+											style="font-size: 20;" onclick="goErr();"></td>
+									<%}else{%><td><input type="button" value="잘못된정보 신고하기"
+											style="font-size: 20;" onclick="goReport();"></td><%} %>
 									</tr>
 									<tr>
 										<td><input type="button" value="신청하기" id="myButton1"
