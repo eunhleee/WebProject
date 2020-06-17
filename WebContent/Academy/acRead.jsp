@@ -19,6 +19,7 @@
 	} else {
 		num = Integer.parseInt(request.getParameter("num"));
 		bean = mgr.getAcademy(num);
+		mgr.upAcCount(num);
 		session.setAttribute("bean", bean);
 	
 %>
@@ -36,10 +37,8 @@
 			
 		}
 		function goReport() {
-
 			url = "../Report/reportReceiptAInf.jsp?stopid=<%=num%>&stopurl=../Academy/acRead.jsp?num=<%=num%>";
 			window.open(url, "GoReport", "width=900, height=560, top=200, left=300");
-
 		}
 		function goErr(){
 			alert("로그인을 해주세요");

@@ -140,14 +140,11 @@ public class StudentMgr {
 				sql = "insert stinsert(num,stid,teaid,teaname,stclass,state,date )"
 						+ "values(?,?,?,?,?,'신청접수',now())";
 				pstmt = con.prepareStatement(sql);
-				
 				pstmt.setInt(1, sbean.getNum());
 				pstmt.setString(2, sbean.getId());
 				pstmt.setString(3, lbean.getId());
 				pstmt.setString(4, lbean.getName());
 				pstmt.setString(5, lbean.getLeclass());
-
-				
 				if(pstmt.executeUpdate()==1) {
 					flag=true;
 				}

@@ -266,6 +266,11 @@ function goReport() {
 							</div></td>
 						</tr>
 						<tr>
+			    			<td align="right">
+			    			비밀글<input type="checkbox" name="stqsecret">
+							</td>
+			    		</tr>
+						<tr>
 							<td colspan="4" align="center">
 						
 								 <input type="submit" value="확인">
