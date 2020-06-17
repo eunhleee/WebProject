@@ -19,6 +19,7 @@
 	} else {
 		num = Integer.parseInt(request.getParameter("num"));
 		bean = mgr.getAcademy(num);
+		mgr.upAcCount(num);
 		session.setAttribute("bean", bean);
 	
 %>

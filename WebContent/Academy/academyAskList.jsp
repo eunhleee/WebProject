@@ -42,9 +42,10 @@
  	String strToday = sdf.format(today.getTime());
 	
 	 todaynumber=Integer.parseInt(strToday);
+	 if(mpoint!=null){
 	 mpoint=mpoint.replace("-", "");
 	 mpointnumber=Integer.parseInt(mpoint);
-	
+	 }
 	}
 	
 	int totalRecord = 0;//총게시물수

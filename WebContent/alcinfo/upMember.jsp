@@ -141,7 +141,7 @@ function win_close(){
 </script>
 </head>
 <body>
-<%@ include file="../alcinfo/mainHeader.jsp"%>
+<%@ include file="../alcinfo/headerSearch.jsp"%>
 <div id="insertMember" class="insertMember1" align="center">
 	<form name="imFrm" class="im-content" method="post" action="../alcinfo/upmemberProc.jsp">
 		<table style="margin-left:10px;">
@@ -153,7 +153,7 @@ function win_close(){
 				<td>
 					<table border="1" class="insertMt">
 						<tr>
-				<img src="../img/<%=bean.getImgname()%>" width="380" height="300" margin-bottom="5px"><br/>
+				<img src="../img/<%=bean.getImgname()%>" width="380" height="300" ><br/>
 				<input type="button" onclick="imgcheck();" value="이미지수정"></td>
 			</tr>
 						<tr>
