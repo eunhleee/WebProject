@@ -32,12 +32,17 @@
 <script>
 		function moveQnA(){
 			url = "ac_QnA.jsp?ac_num="+<%=num%>;
-			window.open(url, "Ac_QnA", "width=900, height=500, top=200, left=400");
+			window.open(url, "Ac_QnA", "width=900, height=560, top=200, left=400");
 			
 		}
 		function goReport() {
+<<<<<<< HEAD
 			url = "../Report/reportReceiptAInf.jsp?stopid=<%=num%>&stopurl=../Academy/acRead.jsp?num=<%=num%>";
 			window.open(url, "GoReport", "width=400, height=350, top=200, left=300");
+=======
+			url = "../Report/reportReceiptAInf.jsp?stopid=<%=num%>";
+			window.open(url, "GoReport", "width=900, height=560, top=200, left=300");
+>>>>>>> branch 'master' of https://github.com/eunhleee/WebProject.git
 		}
 		function goErr(){
 			alert("로그인을 해주세요");

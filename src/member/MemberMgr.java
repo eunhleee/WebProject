@@ -242,13 +242,14 @@ public class MemberMgr {
 			MemberBean bean=new MemberBean();
 			try {
 				con = pool.getConnection();
-				sql = "select name,email,phone,address,mpoint from member where id=? ";
+				sql = "select name,nickname,email,phone,address,mpoint from member where id=? ";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, id);
 				
 				rs = pstmt.executeQuery();
 				if(rs.next()) {
 					bean.setName(rs.getString("name"));
+					bean.setNickname(rs.getString("nickname"));
 					bean.setEmail(rs.getString("email"));
 					bean.setPhone(rs.getString("phone"));
 					bean.setAddress(rs.getString("address"));

@@ -99,6 +99,7 @@
 	background-color: rgb(240, 240, 240);
 	box-shadow: 0px 0px 10px #c0c0c0;
 	width: 100%;
+
 }
 
 .banner a img {

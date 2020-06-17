@@ -28,16 +28,88 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="utf-8">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js">
 <title>Team Read</title>
+
 <link href="style.css" rel="stylesheet" type="text/css">
+
 <script>
 		function moveQnA(){
 			url = "ac_QnA.jsp?ac_num="+<%=num%>;
 			window.open(url, "Ac_QnA", "width=800, height=500, top=200, left=400");
 			
 		}
+		
+		$('.starRev span').click(function(){
+			  $(this).parent().children('span').removeClass('on');
+			  $(this).addClass('on').prevAll('span').addClass('on');
+			  return false;
+			});
 </script>
+<style>
+#inputdiv{
+	margin:10px;
+	width:490px;
+	border:1px solid gray;
+	border-radius: 6px;
+	padding:3px;
+}
+#inputdiv input{
+	width:480px;
+	border:none;
+	font-size:15px;
+}
+
+#inputdiv1{
+	margin:10px;
+	width:200px;
+	border:1px solid gray;
+	border-radius: 6px;
+	padding:3px;
+}
+
+#inputdiv1 input{
+	width:180px;
+	border:none;
+	font-size:15px;
+	
+}
+
+#textareadiv{
+	margin:10px;
+	width:490px;
+	border:1px solid gray;
+	border-radius: 6px;
+	padding:3px;
+}
+#textareadiv textarea{
+	border:none;
+	font-size:15px;
+	width:480px;
+}
+
+.starR1{
+    background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat -52px 0;
+    background-size: auto 100%;
+    width: 15px;
+    height: 30px;
+    float:left;
+    text-indent: -9999px;
+    cursor: pointer;
+}
+.starR2{
+    background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat right 0;
+    background-size: auto 100%;
+    width: 15px;
+    height: 30px;
+    float:left;
+    text-indent: -9999px;
+    cursor: pointer;
+}
+.starR1.on{background-position:0 0;}
+.starR2.on{background-position:-15px 0;}
+</style>
 </head>
 <body>
 	<%@ include file="../alcinfo/headerSearch.jsp"%>
@@ -99,7 +171,7 @@
 	</form>
 		<br>
 		<br>
-		<table width="70%" height="300" align="center" border="1">
+		<table width="70%" height="300" align="center">
 			<tr>
 				<td width="30%" align="center"><jsp:include page="mapJsp.jsp">
 						<jsp:param value="<%=bean.getAc_address()%>" name="address" />
@@ -107,49 +179,49 @@
 				<td width="70%" align="center">
 
 <!-- 글쓰기 Start -->
-
-		<div align="center">
-			<br/>
-			<table width="600" cellpadding="3">
-				<tr>
-					<td height="25" align="center"><%=bean.getAc_name()%> 리뷰</td>
-				</tr>
-			</table>
-			<br/>
+<div style="height:450px;">
+	<h2><%=bean.getAc_name()%> 리뷰</h2>	
+	<hr style="border:1px solid #36ada9;">	
+	<br/>
 			<form name="acrpostFrm" method="post" action="ac_ReviewPostProc.jsp">
-			<table width="600" cellpadding="3" align="center" border="1">
+			<table width="600" cellpadding="3" align="center">
 				<tr>
 					<td align=center>
 					<table align="center">
 						<tr>
 							<td>제 목</td>
 							<td>
-							<input name="acrtitle" size="50" maxlength="30"></td>
+							<div id="inputdiv">
+							<input name="acrtitle" size="50" maxlength="30">
+							</div>
+							</td>
 						</tr>
 						<tr>
 							<td>평 점</td>
 							<td>
-								<select name="acrstar">
-									<option value="5.0" selected>5점</option>
-									<option value="4.5">4.5점</option>
-									<option value="4.0">4점</option>
-									<option value="3.5">3.5점</option>
-									<option value="3.0">3점</option>
-									<option value="2.5">2.5점</option>
-									<option value="2.0">2점</option>
-									<option value="1.5">1.5점</option>
-									<option value="1.0">1점</option>
-									<option value="0.5">0.5점</option>
-									<option value="0.0">0점</option>
-								</select>
+								<div class="starRev">
+								  <span class="starR1 on">별1_왼쪽</span>
+								  <span class="starR2">별1_오른쪽</span>
+								  <span class="starR1">별2_왼쪽</span>
+								  <span class="starR2">별2_오른쪽</span>
+								  <span class="starR1">별3_왼쪽</span>
+								  <span class="starR2">별3_오른쪽</span>
+								  <span class="starR1">별4_왼쪽</span>
+								  <span class="starR2">별4_오른쪽</span>
+								  <span class="starR1">별5_왼쪽</span>
+								  <span class="starR2">별5_오른쪽</span>
+								</div>
 							</td>
 						</tr>
 						<tr>
 							<td>내 용</td>
-							<td><textarea name="acrcontent" rows="10" cols="50"></textarea></td>
+							<td>
+							<div id="textareadiv">
+							<textarea name="acrcontent" rows="10" cols="50"></textarea>
+							</div></td>
 						</tr>
 						<tr>
-							<td colspan="2">
+							<td colspan="2" align="center">
 						
 								 <input type="submit" value="확인">
 								 <input type="reset" value="다시쓰기">

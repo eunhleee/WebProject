@@ -114,9 +114,7 @@
 		document.readFrm.submit();
 	}
 	function block(block) {
-		document.readFrm.nowPage.value =
-<%=pagePerBlock%>
-	* (block - 1) + 1;
+		document.readFrm.nowPage.value =<%=pagePerBlock%> * (block - 1) + 1;
 		document.readFrm.submit();
 	}
 	function list() {//[처음으로]를 누르면 게시글의 처음 페이지로 돌아감

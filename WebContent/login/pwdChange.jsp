@@ -9,11 +9,7 @@
 	function closepwdChange() {
 		document.getElementById("pwdChange").style.display = 'none';
 	}
-	window.onclick = function (event) {
-	  if (event.target == pwdChange) {
-		  document.getElementById("pwdChange").style.display = "none";
-	  }
-	}
+	
 	function pcpwdCheck() {
 		if(document.pcfrm.pcpwd.value != document.pcfrm.pcrepwd.value){
 			alert("비밀번호가 일치하지 않습니다.");
