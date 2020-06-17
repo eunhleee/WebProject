@@ -1,4 +1,4 @@
-<!-- 커뮤니티의 자유게시판 리스트 출력 -->
+<!-- 고객센터 게시판 리스트 출력 -->
 <%@page import="alcinfo.UtilMgr"%>
 <%@page import="alcinfo.CSBean"%>
 <%@page import="java.util.Vector"%>
@@ -20,8 +20,8 @@
 	}
 	//검색에 필요한 변수
 
-	int totalRecord = 0;//총게시물수
-	int totalRecord1 = 0;
+	int totalRecord = 0;//총게시물수(관리자)
+	int totalRecord1 = 0;//총게시물수(회원)
 	int numPerPage = 10;//페이지당 레코드 개수(5,10,15,30)
 	int pagePerBlock = 15;//블럭당 페이지 개수
 	int totalPage = 0;//총 페이지 개수
@@ -62,7 +62,12 @@
 	int cnt = numPerPage;
 
 	//전체페이지 개수
-	totalPage = (int) Math.ceil((double) totalRecord / numPerPage);
+	if(mgr.checkM(loginid)==0) {
+		totalPage = (int) Math.ceil((double) totalRecord / numPerPage);
+	} else {
+		totalPage = (int) Math.ceil((double) totalRecord1 / numPerPage);
+	}
+	
 	//전체블럭 개수
 	totalBlock = (int) Math.ceil((double) totalPage / pagePerBlock);
 	//현재블럭

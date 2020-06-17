@@ -9,7 +9,16 @@ public class StinqueryBean {
 	private String ip;
 	private String st_date;
 	private int count;
+	private String st_secret;
 	
+	public String getSt_secret() {
+		return st_secret;
+	}
+
+	public void setSt_secret(String st_secret) {
+		this.st_secret = st_secret;
+	}
+
 	public int getCount() {
 		return count;
 	}
