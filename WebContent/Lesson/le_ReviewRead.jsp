@@ -224,7 +224,6 @@ function graph(){
 </head>
 <body>
 
-	<%@ include file="../alcinfo/headerSearch.jsp"%>
 	<br>
 	<br>
 	<form name="cart" action="">
@@ -360,7 +359,7 @@ function graph(){
 					<tr  align="center">
 						<td width="50">닉네임</td>
 						<td align="left">
-							<input name="cid" size="10" value="<%=loginNick%>" readonly>
+							<input name="cNick" size="10" value="<%=loginNick%>" readonly>
 						</td>
 					</tr>
 					<tr align="center">
@@ -419,7 +418,7 @@ function graph(){
 						<td <%=dstyle%> colspan="2"><%=comment%></td>
 						<% 
 						if(loginNick!=null) {
-							if(loginNick.equals(cnick)) { %>
+							if(loginNick.equals(cnick)||lermgr.checkM(loginid)==0) { %>
 						<td align="center" valign="middle">
 							<input type="button" value="삭제"
 							onclick="cDel('<%=conum%>','<%=cnum%>','<%=depth%>')">
@@ -507,7 +506,7 @@ function graph(){
 		 [ <a href="javascript:list();" >리스트</a>
 		 <% 
 		 if(loginNick!=null) {
-			 if(loginNick.equals(nickname)) { %>
+			 if(loginNick.equals(nickname)||lermgr.checkM(loginid)==0) { %>
 			 | <a href="le_ReviewUpdate.jsp?num=<%=num%>&id=<%=id%>&lernum=<%=lernum%>&numPerPage=<%=numPerPage%>&nowPage=<%=nowPage%><%
   	 	if(!(keyWord==null||keyWord.equals(""))){
 		     %>&keyField=<%=keyField%>&keyWord=<%=keyWord%><%}%>" >수 정</a> |

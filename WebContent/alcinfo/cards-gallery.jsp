@@ -66,7 +66,7 @@
 				</div>
 				<%} %>
 				<div>
-					<a href="./Academy/AcademyMain.jsp?pageValue=top">학원 더 알아보기</a>
+					<a href="../Academy/AcademyMain.jsp?pageValue=top">학원 더 알아보기</a>
 				</div>
 			</div>
 		</div>
@@ -114,7 +114,7 @@
 				<%} %>
 			</div>
 			<div>
-				<a href="Lesson/LessonMain.jsp">과외 더 알아보기</a>
+				<a href="../Lesson/LessonMain.jsp">과외 더 알아보기</a>
 			</div>
 		</div>
 	</section>

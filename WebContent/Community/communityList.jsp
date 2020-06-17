@@ -5,9 +5,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <jsp:useBean id="mgr" class="alcinfo.SCommunityMgr"></jsp:useBean>
+
 <%
+		
 		request.setCharacterEncoding("UTF-8");
 		String id=(String )session.getAttribute("idKey");
+	
 		String category="",group="";
 		
 		if(request.getParameter("pageValue").equals("free")){
@@ -21,6 +24,14 @@
 		else if(request.getParameter("pageValue").equals("lesson")){
 			category="과외 Q&A";
 			group="lesson";
+		}
+		else if(request.getParameter("pageValue").equals("onlyst")){
+			category="학생 전용 게시판";
+			group="onlyst";
+		}
+		else if(request.getParameter("pageValue").equals("onlyte")){
+			category="선생님 전용 게시판";
+			group="onlyte";
 		}
 //검색에 필요한 변수
 		
@@ -118,10 +129,18 @@ function read(num){
 	document.readFrm.action="scRead.jsp?pageValue=<%=group%>";
 	document.readFrm.submit();
 }
+function clalert1(){
+	alert("학생만 이용가능 합니다.")
+}
+function clalert2(){
+	alert("선생님만 이용가능 합니다.")
+}
 </script>
  <style>
 #list td {
 	border-bottom: 1px solid lightgray;
+	height:30px;
+	
 }
 
 #title td {
@@ -137,39 +156,77 @@ a {
 a:hover {
 	color: gray;
 }
+#frame{
+	display:flex;
+	margin-left:15%;
+	margin-right:15%;
+}
 
 #leftdiv{
-	width: 50px; 
-	text-align: left;
-	flex: 1; 
+	flex: 1;
+	width: 40%; 
+	margin-right:50px;
 	border: 10px solid #FCBC7E; 
 	border-radius:10px;
-	margin-right:20px;
-	padding: 40px 40px;
+	padding: 10px 10px;
+	text-align:center;
+	background-color:#FAF8EB;
+	
+	
  }
- 
-#rightdiv{
-	width: 800px; 
+ #rightdiv{
 	flex: 2; 
+	width:60%;
 	border: 10px solid #F88C65; 
 	border-radius:10px;
-	padding: 20px 20px;
+	padding:20px 40px;
 }
+ 
+ 
+ #atag {
+ 	margin-left:90px;
+ 	margin-bottom:50px;
+ 	height:40px;
+ 	line-height:40px;
+ 	width:200px;
+ 	display: block;
+ }
+ 
+ 
+ #atag:hover{
+ 	background-color:white;
+ 	border-radius: 10px;
+ }
+ 
+
+
 </style> 
 </head>
 <body>
 	
 	<jsp:include page="../alcinfo/headerSearch.jsp"></jsp:include>
 
-	<div style="display: flex; margin-left: 15%; margin-right: 15%">
-
+	<div id="frame">
 		<div id="leftdiv">
 			<h3>커뮤니티</h3>
-			<a href="communityList.jsp?pageValue=free">&#149; 자유게시판</a><br>
-			<a href="communityList.jsp?pageValue=academy">&#149; 학원 Q&A</a><br>
-			<a href="communityList.jsp?pageValue=lesson">&#149; 과외 Q&A</a><br>
-			<br>
-
+			<div id="atag"><a href="communityList.jsp?pageValue=free">&#149; 자유게시판</a></div>
+			<div id="atag"><a href="communityList.jsp?pageValue=academy">&#149; 학원 Q&A</a></div>
+			<div id="atag"><a href="communityList.jsp?pageValue=lesson">&#149; 과외 Q&A</a></div>
+			<div id="atag"><a 
+			<%if(mgr.checkM(id)==0||mgr.checkM(id)==1) {%>
+			href="communityList.jsp?pageValue=onlyst"
+			<%} else { %>
+			href="javascript:clalert1()"
+			<%} %>
+			>&#149; 학생 전용 게시판</a></div>
+			<div id="atag"><a 
+			<%if(mgr.checkM(id)==0||mgr.checkM(id)==2||mgr.checkM(id)==3) {%>
+			href="communityList.jsp?pageValue=onlyte"
+			<%} else { %>
+			href="javascript:clalert2()"<%} %>
+			>&#149; 선생님 전용 게시판</a></div>
+			
+	
 		</div>
 
 		<!-- 리스트 부분 -->
@@ -178,7 +235,7 @@ a:hover {
 			<h2><%=category %></h2>
 			<table>
 				<tr>
-					<td width="600">Total : <%=totalRecord%>Articles(<font
+					<td width="600">>Total : <%=totalRecord%>Articles(<font
 						color="red"> <%=nowPage+"/"+totalPage%>Pages
 					</font>)
 					</td>
@@ -242,7 +299,7 @@ a:hover {
 
 							<tr id="list">
 								<td align="center"><%=totalRecord-start-i%></td>
-								<td align="center"><a href="javascript:read('<%=num%>')"><%=title%></a>
+								<td align="left"><a href="javascript:read('<%=num%>')"><%=title%></a>
 									<% if(filename!=null) { %>
 										<img src="../img/icon_file1.png">
 									<% } %>
@@ -311,7 +368,7 @@ a:hover {
 
 			<hr width="750">
 			<form name="scsearchFrm" >
-				<table width="600" cellpadding="4" cellspacing="0">
+				<table align="center" cellpadding="4" cellspacing="0">
 					<tr>
 						<td align="center" valign="bottom">
 							<select name="keyField" size="1">

@@ -10,11 +10,7 @@
 	function closepwdSearch() {
 		document.getElementById("pwdSearch").style.display = 'none';
 	}
-	window.onclick = function (event) {
-	  if (event.target == pwdSearch) {
-		  document.getElementById("pwdSearch").style.display = "none";
-	  }
-	}
+	
 	function pwdSearch() {
 		if(document.psfrm1.psid.value.trim()=="") {
 			alert("아이디를 입력하세요.");
@@ -58,43 +54,52 @@
 <link href="../login/idpwdstyle.css" rel="stylesheet" type="text/css">
 <body onload="javascript:openpwdSearch1()">
 <div id="pwdSearch" class="pwdSearch">
-	<button onclick="closepwdSearch();">close</button>
+	<button onclick="closepwdSearch();" id="btnExit"><img src="../img/exit.png" width="25" height="25"></button>
 	<form class="idpwd-content" name="psfrm1">
 		<table>
 			<tr>
-				<td><p style="margin-bottom:10px;">비밀번호 찾기</p></td>
+				<td colspan="3">
+					<h3 style="margin-bottom:10px; color: #56C8D3;">Search Password</h3>
+					<hr style="border:3px solid ligtgray;width:400px;">
+				</td>
 			</tr>
 			<tr>
 				<td>
-					<table border="1" width="400px">
+					<table width="400px">
 						<tr>
 							<td width="140px" align="center">아이디</td>
-							<td width="260px">
-								<input type="text" style="width:260px; height:30px;"
-								name="psid">
+							<td >
+							<div id="inputdiv" style="width:200px;">
+								<input type="text" style="width:180px;" name="psid">
+								</div>
 							</td>
 						</tr>
 						<tr>
 							<td width="140px" align="center">이름</td>
-							<td width="260px">
-								<input type="text" style="width:260px; height:30px;"
-								name="psname">
+							<td >
+							<div id="inputdiv" style="width:200px;">
+								<input type="text" style="width:180px;" name="psname">
+								</div>
 							</td>
 						</tr>
 						<tr>
 							<td width="140px" align="center">휴대폰 번호</td>
 							<td width="260px">
-								<input type="text" style="width:260px; height:30px;"
+							<div id="inputdiv" style="width:200px;">
+								<input type="text" style="width:180px;"
 								name="psphone">
+								</div>
+							</td>
+						</tr>
+						<tr  align="right">
+							<td colspan="2"><input type="button" value="찾기" class="loginb" 
+								style="margin-top:10px; margin-right:47px; width:100px;" onclick="pwdSearch();">
 							</td>
 						</tr>
 					</table>
 				</td>
 			</tr>
-			<tr>
-				<td align="right"><input type="button" value="찾기" class="loginb" 
-				style="margin-top:10px;" onclick="pwdSearch();"></td>
-			</tr>
+			
 		</table>
 	</form>
 	<form name="psfrm2" method="post">

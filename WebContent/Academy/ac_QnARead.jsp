@@ -238,7 +238,7 @@ a:hover {
 						<td <%=dstyle%> colspan="2"><%=comment%></td>
 						<% 
 						if(loginid!=null) {
-							if(loginid.equals(cid)) { %>
+							if(loginid.equals(cid) || acqmgr.checkM(loginid)==0) { %>
 						<td align="center" valign="middle">
 							<input type="button" value="삭제"
 							onclick="cDel('<%=conum%>','<%=cnum%>','<%=depth%>')">
@@ -326,7 +326,7 @@ a:hover {
 		 [ <a href="javascript:list();" >리스트</a>
 		 <% 
 		 if(loginid!=null) {
-			 if(loginid.equals(id)) { %>
+			 if(loginid.equals(id) || acqmgr.checkM(loginid)==0) { %>
 			 | <a href="ac_QnAUpdate.jsp?num=<%=num%>&ac_num=<%=acnum%>&numPerPage=<%=numPerPage%>&nowPage=<%=nowPage%><%
   	 	if(!(keyWord==null||keyWord.equals(""))){
 		     %>&keyField=<%=keyField%>&keyWord=<%=keyWord%><%}%>" >수 정</a> |

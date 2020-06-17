@@ -135,7 +135,6 @@ a:hover {
 </script>
 </head>
 <body>
-	<%@ include file="../alcinfo/headerSearch.jsp"%>
 	<br>
 	<br>
 	<form method="post" action="../Report/reportReceipt.jsp">
@@ -311,7 +310,7 @@ a:hover {
 						<td <%=dstyle%> colspan="2"><%=comment%></td>
 						<% 
 						if(loginNick!=null) {
-							if(loginNick.equals(cnick)) { %>
+							if(loginNick.equals(cnick) || acrmgr.checkM(loginid)==0) { %>
 						<td align="center" valign="middle">
 							<input type="button" value="삭제"
 							onclick="cDel('<%=conum%>','<%=cnum%>','<%=depth%>')">
@@ -399,7 +398,7 @@ a:hover {
 		 [ <a href="javascript:list();" >리스트</a>
 		 <% 
 		 if(loginNick!=null) {
-			 if(loginNick.equals(nickname)) { %>
+			 if(loginNick.equals(nickname) || acrmgr.checkM(loginid)==0) { %>
 			 | <a href="ac_ReviewUpdate.jsp?num=<%=num%>&acrnum=<%=acrnum%>&numPerPage=<%=numPerPage%>&nowPage=<%=nowPage%><%
 			 if(!(keyWord==null||keyWord.equals(""))){%>&keyField=<%=keyField%>&keyWord=<%=keyWord%><%}%>" >수 정</a> |
 			 <a href="ac_ReviewDelete.jsp?num=<%=num%>&acrnum=<%=acrnum%>&numPerPage=<%=numPerPage%>&nowPage=<%=nowPage%><%

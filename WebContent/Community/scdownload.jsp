@@ -5,7 +5,7 @@
 <%@page import="java.io.File"%>
 <%@page import="alcinfo.SCommunityMgr"%>
 <%
-		request.setCharacterEncoding("EUC-KR");
+		request.setCharacterEncoding("UTF-8");
 		try{
 			String filename = request.getParameter("filename");
 			File file = new File(SCommunityMgr.SAVEFOLDER+

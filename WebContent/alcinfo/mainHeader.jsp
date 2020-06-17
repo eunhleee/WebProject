@@ -99,6 +99,7 @@
 	background-color: rgb(240, 240, 240);
 	box-shadow: 0px 0px 10px #c0c0c0;
 	width: 100%;
+
 }
 
 .banner a img {
@@ -173,7 +174,7 @@
 			<input type="button" onclick="openloginSelect();" class="openlm" value="로그인">
 			<%}else{ %>
 			<input type="button" onclick="openlogoutProc();" class="openlm" value="로그아웃">
-			<a href="../alcinfo/upMember.jsp">마이페이지</a>
+			<a href="../Mypage/upMember.jsp">마이페이지</a>
 			<%} %>
 		</div>
 	</div>

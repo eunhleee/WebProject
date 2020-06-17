@@ -28,6 +28,7 @@ public class ScPostServlet extends HttpServlet {
 		} else
 			response.sendRedirect("communityList.jsp?pageValue="+pageValue+"&nowPage="+
 					nowPage+"&numPerPage="+numPerPage);
+		
 	}
 
 }

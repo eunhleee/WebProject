@@ -119,12 +119,13 @@
 	margin-right : 40px;
 }
 .idpwdhr {
-	border : 0.5px solid #000;
+	border : 1px solid #000;
 	margin-bottom : 15px;
 }
 .loginb {
 	width : 150px;
 	height : 30px;
+	
 }
 .loginleft {
 	width : 150px;

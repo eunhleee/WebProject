@@ -1,4 +1,6 @@
 <!-- st_QnAPost.jsp -->
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Calendar"%>
 <%@page import="alcinfo.MemberBean"%>
 <%@page import="java.util.Vector"%>
 <%@page import="alcinfo.StudentBean"%>
@@ -18,6 +20,9 @@
 	String keyWord = request.getParameter("keyWord");
 	String prevurl = request.getHeader("referer");
 	String stqid = (String)session.getAttribute("idKey");
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    Calendar today = Calendar.getInstance();
+ 	String strToday = sdf.format(today.getTime());
 	int stunum = 0;
 	String url = "StudentMain.jsp";
 	StudentBean stbean = null;
@@ -103,19 +108,35 @@ function goReport() {
 <style>
 #inputdiv{
 	margin:10px;
-	width:400px;
+	width:490px;
 	border:1px solid gray;
 	border-radius: 6px;
 	padding:3px;
 }
 #inputdiv input{
-	width:350px;
+	width:480px;
 	border:none;
 	font-size:15px;
 }
+
+#inputdiv1{
+	margin:10px;
+	width:200px;
+	border:1px solid gray;
+	border-radius: 6px;
+	padding:3px;
+}
+
+#inputdiv1 input{
+	width:180px;
+	border:none;
+	font-size:15px;
+	
+}
+
 #textareadiv{
 	margin:10px;
-	width:400px;
+	width:490px;
 	border:1px solid gray;
 	border-radius: 6px;
 	padding:3px;
@@ -123,7 +144,7 @@ function goReport() {
 #textareadiv textarea{
 	border:none;
 	font-size:15px;
-	width:390px;
+	width:480px;
 }
 </style>
 </head>
@@ -206,30 +227,51 @@ function goReport() {
 					
 <!-- 글쓰기 Start -->
 		<div style="height:450px;">
-			<h2>문의 하기</h2>	
+			<h2><img src="../img/questionmark2.png" width="40" height="40">&nbsp;문의 하기</h2>	
 			<hr style="border:1px solid #36ada9;">	
 			<br/>
 			<form name="stpostFrm" method="post" action="st_QnAPostProc.jsp">
 			<table width="600" cellpadding="3" align="center">
 				<tr>
-					<td align=center>
-					<table align="center">
+					<td align="center">
+					<table align="center" >
 						<tr>
-							<td>제 목</td>
+							<td>작성자</td>
 							<td>
+								<div id="inputdiv1">
+									<input name="stqtitle" size="50" maxlength="30" disabled="disabled"
+									value="<%=stqid%>">
+								</div>
+							</td>
+							<td>작성일</td>
+							<td>
+								<div id="inputdiv1">
+									<input name="stqtitle" size="50" maxlength="30" disabled="disabled"
+									value="<%=strToday%>">
+								</div>
+							</td>
+						</tr>
+						<tr >
+							<td>제 목</td>
+							<td colspan="3">
 							<div id="inputdiv">
 							<input name="stqtitle" size="50" maxlength="30">
 							</div></td>
 						</tr>
 						<tr>
 							<td>내 용</td>
-							<td>
+							<td colspan="3">
 							<div id="textareadiv">
 							<textarea name="stqcontent" rows="10" cols="50"></textarea>
 							</div></td>
 						</tr>
 						<tr>
-							<td colspan="2" align="center">
+			    			<td align="right">
+			    			비밀글<input type="checkbox" name="stqsecret">
+							</td>
+			    		</tr>
+						<tr>
+							<td colspan="4" align="center">
 						
 								 <input type="submit" value="확인">
 								 <input type="reset" value="다시쓰기">

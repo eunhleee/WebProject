@@ -1,7 +1,6 @@
 
 
-<!--
-헤더스타일 -->nav {
+nav {
 	margin-top: 40px;
 }
 
@@ -68,9 +67,7 @@
 	border-bottom: 3px solid white;
 }
 
-.banner {
-	margin-bottom: 50px;
-}
+
 .openlm {
 	COLOR: white;
 	text-decoration: none;

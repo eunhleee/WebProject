@@ -11,7 +11,7 @@ import javax.servlet.http.HttpSession;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-@WebServlet("/csUpdate")
+@WebServlet("/CS/csUpdate")
 public class CsUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

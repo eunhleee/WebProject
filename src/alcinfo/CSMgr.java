@@ -14,15 +14,16 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 public class CSMgr {
 	private DBConnectionMgr pool;
 	public static final String SAVEFOLDER = "C:/Jsp/myapp/WebContent2/fileupload/";
-	public static final String ENCTYPE = "EUC-KR";
+	public static final String ENCTYPE = "UTF-8";
 	public static int MAXSIZE = 10*1024*1024;
 	
 	public CSMgr() {
 		pool=DBConnectionMgr.getInstance();
 	}
 	
+	// 고객센터 리스트(관리자모드)
 	public Vector<CSBean> getBoardList(String keyField,String keyWord,int start,int cnt, String group){
-		 Connection con = null;
+		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = null;
@@ -31,7 +32,7 @@ public class CSMgr {
 			con = pool.getConnection();
 			if(keyWord.trim().equals("")||keyWord==null) {
 				//占싯삼옙占쏙옙 占싣닌곤옙占�
-				sql = "select num, cc_title,cc_id,cc_regdate,cc_count "
+				sql = "select num, cc_title,cc_id,cc_regdate,cc_count,cc_filename,cc_secret "
 						+ " from cs where cc_group=? order by num desc limit ?,?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, group);
@@ -41,7 +42,8 @@ public class CSMgr {
 			}
 			else {
 			//占싯삼옙占쏙옙 占쏙옙占�
-			sql = "select num, cc_title,cc_id,cc_regdate,cc_count from cs where "+keyField+" like ? "
+			sql = "select num, cc_title,cc_id,cc_regdate,cc_count,cc_filename,cc_secret "
+					+ "from cs where "+keyField+" like ? "
 					+ "and cc_group=? order by num desc limit ?,?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, "%"+keyWord+"%");
@@ -59,6 +61,68 @@ public class CSMgr {
 				bean.setCc_id(rs.getString("cc_id"));
 				bean.setCc_regdate(rs.getString("cc_regdate"));
 				bean.setCc_count(rs.getInt("cc_count"));
+				bean.setCc_filename(rs.getString("cc_filename"));
+				bean.setCc_secret(rs.getString("cc_secret"));
+				
+				vlist.addElement(bean);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt, rs);
+		}
+		return vlist; 
+	}
+	
+	// 고객센터 리스트(회원용)
+	public Vector<CSBean> getBoardList1(String keyField,String keyWord,int start,int cnt, String group, String id){
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		Vector<CSBean> vlist=new Vector<CSBean>();
+		try {
+			con = pool.getConnection();
+			if(keyWord.trim().equals("")||keyWord==null) {
+				sql = "select num, cc_title,cc_id,cc_regdate,cc_count,cc_filename,cc_secret "
+						+ " from cs where cc_group=? and cc_secret is null or "
+						+ "cc_group=? and cc_id=? "
+						+ "order by num desc limit ?,?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, group);
+				pstmt.setString(2, group);
+				pstmt.setString(3, id);
+				pstmt.setInt(4, start); 
+				pstmt.setInt(5, cnt);
+	
+			}
+			else {
+			sql = "select num, cc_title,cc_id,cc_regdate,cc_count,cc_filename,cc_secret "
+					+ "from cs "
+					+ "where "+keyField+" like ? and cc_group=? and cc_secret is null or "
+					+ keyField + "like ? and cc_group=? and cc_id=? "
+					+ "order by num desc limit ?,?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, "%"+keyWord+"%");
+			pstmt.setString(2, group);
+			pstmt.setString(3, "%"+keyWord+"%");
+			pstmt.setString(4, group);
+			pstmt.setString(5, id);
+			pstmt.setInt(6, start); 
+			pstmt.setInt(7, cnt);
+				 
+			}
+
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				CSBean bean = new CSBean();
+				bean.setNum(rs.getInt("num"));
+				bean.setCc_title(rs.getString("cc_title"));
+				bean.setCc_id(rs.getString("cc_id"));
+				bean.setCc_regdate(rs.getString("cc_regdate"));
+				bean.setCc_count(rs.getInt("cc_count"));
+				bean.setCc_filename(rs.getString("cc_filename"));
+				bean.setCc_secret(rs.getString("cc_secret"));
 				
 				vlist.addElement(bean);
 			}
@@ -71,6 +135,7 @@ public class CSMgr {
 	}
 	
 	//Board Total Count:占쏙옙 占쌉시뱄옙 占쏙옙
+	//관리자
 	public int getTotalCount(String keyField,String keyWord, String group) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -80,18 +145,56 @@ public class CSMgr {
 		try {
 			con = pool.getConnection();
 			if(keyWord.trim().equals("")||keyWord==null) {
-				//占싯삼옙占쏙옙 占싣닌곤옙占�
 				sql = "select count(*) from cs where cc_group=?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, group);
 			}
 			else {
-			//占싯삼옙占쏙옙 占쏙옙占�
 			sql = "select count(*) from cs where "
 					+keyField+" like ? and cc_group=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, "%"+keyWord+"%");
 			pstmt.setString(2, group);
+			}
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				totalCount=rs.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt, rs);
+		}
+		return totalCount;
+	}
+	//일반회원
+	public int getTotalCount1(String keyField,String keyWord, String group, String id) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		int totalCount=0;
+		try {
+			con = pool.getConnection();
+			if(keyWord.trim().equals("")||keyWord==null) {
+				sql = "select count(*) from cs "
+						+ "where cc_group=? and cc_secret is null or "
+						+ "cc_group=? and cc_id=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, group);
+				pstmt.setString(2, group);
+				pstmt.setString(3, id);
+			}
+			else {
+			sql = "select count(*) from cs "
+					+ "where "+keyField+" like ? and cc_group=? and cc_secret is null or "
+					+keyField+" like ? and cc_group=? and cc_id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, "%"+keyWord+"%");
+			pstmt.setString(2, group);
+			pstmt.setString(3, "%"+keyWord+"%");
+			pstmt.setString(4, group);
+			pstmt.setString(5, id);
 			}
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
@@ -126,17 +229,17 @@ public class CSMgr {
 			con = pool.getConnection();
 			sql = "insert cs(cc_title,cc_content,cc_id,cc_regdate,"
 					+ "cc_ip,cc_filename,cc_filesize,cc_secret,cc_group) "
-					+ "values(?,?,?,?,now()"
+					+ "values(?,?,?,now()"
 					+ ",?,?,?,?,?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, multi.getParameter("cctitle"));
 			pstmt.setString(2, multi.getParameter("cccontent"));
 			pstmt.setString(3, multi.getParameter("ccid"));
-			pstmt.setString(5, multi.getParameter("ccip"));
-			pstmt.setString(6, filename);
-			pstmt.setInt(7, filesize);
-			pstmt.setString(8, multi.getParameter("ccsecret"));
-			pstmt.setString(9, group);
+			pstmt.setString(4, multi.getParameter("ccip"));
+			pstmt.setString(5, filename);
+			pstmt.setInt(6, filesize);
+			pstmt.setString(7, multi.getParameter("ccsecret"));
+			pstmt.setString(8, group);
 			pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -188,7 +291,7 @@ public class CSMgr {
 		int ccount = 0;
 		try {
 			con = pool.getConnection();
-			sql = "select count(num) from cscomment where ccr_pnum=?";
+			sql = "select count(num) from cscomment where ccr_num=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			rs = pstmt.executeQuery();
@@ -254,7 +357,7 @@ public class CSMgr {
 			String title = multi.getParameter("cctitle");
 			String content = multi.getParameter("cccontent");
 			String filename = multi.getFilesystemName("ccfilename");
-			int secret = Integer.parseInt(multi.getParameter("ccsecret"));
+			String secret = multi.getParameter("ccsecret");
 			if (filename != null && !filename.equals("")) {
 				CSBean bean = getBoard(num);
 				String tempfile = bean.getCc_filename();
@@ -266,21 +369,21 @@ public class CSMgr {
 				}
 				int filesize = (int) multi.getFile("ccfilename").length();
 				sql = "update cs set cc_title=?, cc_content=?, " 
-				+ "cc_filename=?, cc_filesize=?, cc_secret where num=?";
+				+ "cc_filename=?, cc_filesize=?, cc_secret=? where num=?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, title);
 				pstmt.setString(2, content);
 				pstmt.setString(3, filename);
 				pstmt.setInt(4, filesize);
-				pstmt.setInt(5, secret);
+				pstmt.setString(5, secret);
 				pstmt.setInt(6, num);
 			} else {
 				sql = "update cs set cc_title=?, cc_content=?,"
-						+ "cc_secret where num=?";
+						+ "cc_secret=? where num=?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, title);
 				pstmt.setString(2, content);
-				pstmt.setInt(3, secret);
+				pstmt.setString(3, secret);
 				pstmt.setInt(4, num);
 			}
 			pstmt.executeUpdate();

@@ -3,7 +3,8 @@
 <%@page import="java.util.Vector"%>
 <%@page import="alcinfo.CSBean" %>
 <%@page import="alcinfo.CSCommentBean" %>
-<%@page contentType="text/html; charset=utf-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <jsp:useBean id="csmgr" class="alcinfo.CSMgr"/>
 <jsp:useBean id="cscmgr" class="alcinfo.CSCommentMgr"/>
 <%
@@ -49,6 +50,7 @@
 	String regdate = bean.getCc_regdate();
 	String content = bean.getCc_content();
 	String filename = bean.getCc_filename();
+	String checkSecret = bean.getCc_secret();
 	int filesize = bean.getCc_filesize();
 	String ip = bean.getCc_ip();
 	int count = bean.getCc_count();
@@ -80,7 +82,7 @@ a {
 a:hover {
 	color: gray;
 }
-.csrReply {
+.csReply {
 	display:none;
 }
 </style>
@@ -194,7 +196,7 @@ function cDel(conum, cnum, depth) {
 					<tr  align="center">
 						<td width="50">아이디</td>
 						<td align="left">
-							<input name="cNick" size="10" value="<%=loginid%>" readonly>
+							<input name="cid" size="10" value="<%=loginid%>" readonly>
 						</td>
 					</tr>
 					<tr align="center">
@@ -252,7 +254,7 @@ function cDel(conum, cnum, depth) {
 						<td <%=dstyle%> colspan="2"><%=comment%></td>
 						<% 
 						if(loginid!=null) {
-							if(loginid.equals(cid)) { %>
+							if(loginid.equals(cid) || csmgr.checkM(loginid)==0) { %>
 						<td align="center" valign="middle">
 							<input type="button" value="삭제"
 							onclick="cDel('<%=conum%>','<%=cnum%>','<%=depth%>')">
@@ -309,7 +311,7 @@ function cDel(conum, cnum, depth) {
 										<td>
 											<input name="comment" size="50" placeholder="댓글을 남겨보세요"> 
 											<input type="button" value="등록" onclick="rInsert<%=i%>()">
-											<input type="button" value="취소" onclick="offscReply<%=i%>()">
+											<input type="button" value="취소" onclick="offcsReply<%=i%>()">
 										</td>
 									</tr>
 								</table>
@@ -345,10 +347,10 @@ function cDel(conum, cnum, depth) {
 		 [ <a href="javascript:list()" >리스트</a>
 		 <% 
 		 if(loginid!=null) {
-			 if(loginid.equals(id)) { %>
-			 | <a href="scUpdate.jsp?num=<%=num%>&cust_page=<%=cust_page%>&numPerPage=<%=numPerPage%>&nowPage=<%=nowPage%><%
+			 if(loginid.equals(id) || csmgr.checkM(loginid)==0) { %>
+			 | <a href="cs_Update.jsp?num=<%=num%>&cust_page=<%=cust_page%>&numPerPage=<%=numPerPage%>&nowPage=<%=nowPage%><%
 			 if(!(keyWord==null||keyWord.equals(""))){%>&keyField=<%=keyField%>&keyWord=<%=keyWord%><%}%>" >수 정</a> |
-			 <a href="scDelete.jsp?num=<%=num%>&cust_page=<%=cust_page%>&numPerPage=<%=numPerPage%>&nowPage=<%=nowPage%><%
+			 <a href="cs_Delete.jsp?num=<%=num%>&cust_page=<%=cust_page%>&numPerPage=<%=numPerPage%>&nowPage=<%=nowPage%><%
 			 if(!(keyWord==null||keyWord.equals(""))){%>&keyField=<%=keyField%>&keyWord=<%=keyWord%><%}%>">삭 제</a> 
 		 <% }
 		 } %>
@@ -357,7 +359,7 @@ function cDel(conum, cnum, depth) {
 		 </tr>
 		</table>
 
-		<form method="post" name="downFrm" action="scdownload.jsp">
+		<form method="post" name="downFrm" action="csdownload.jsp">
 			<input type="hidden" name="filename">
 		</form>
 

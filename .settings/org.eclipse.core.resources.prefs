@@ -1,5 +1,9 @@
 eclipse.preferences.version=1
+<<<<<<< HEAD
+encoding//src/alcinfo/CsPostServlet.java=UTF-8
+=======
 encoding//src/alcinfo/LeRcommentsMgr.java=UTF-8
+>>>>>>> branch 'master' of https://github.com/eunhleee/WebProject.git
 encoding//src/alcinfo/LessonMgr.java=UTF-8
 encoding//src/alcinfo/LeteaMgr.java=UTF-8
 encoding//src/alcinfo/MemberMgr.java=UTF-8

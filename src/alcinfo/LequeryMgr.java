@@ -243,5 +243,26 @@ public class LequeryMgr {
 		}
 		return leqccount;
 	}
+	
+	public int checkM(String id) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		int grade = 1;
+		try {
+			con = pool.getConnection();
+			sql = "select grade from member where id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) grade = rs.getInt(1);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt, rs);
+		}
+		return grade;
+	}
 }
 

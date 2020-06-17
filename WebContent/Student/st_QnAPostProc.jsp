@@ -16,6 +16,7 @@
 	bean.setContent(request.getParameter("stqcontent"));
 	bean.setId(request.getParameter("stqid"));
 	bean.setIp(request.getParameter("stqip"));
+	bean.setSt_secret(request.getParameter("stqsecret"));
 	mgr.insertStq(bean);
 %>
 <script>

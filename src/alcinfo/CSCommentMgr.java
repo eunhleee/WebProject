@@ -56,7 +56,7 @@ public class CSCommentMgr {
 			con = pool.getConnection();
 			sql = "insert cscomment(ccr_num, ccr_id, ccr_content, ccr_ip, ccr_regdate,"
 					+ "ccr_conum, ccr_depth) values(?,?,?,?,now(),"
-					+ "(select max(stuc_conum) from cscomment s)+1),0";
+					+ "(select max(ccr_conum) from cscomment s)+1,0)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, bean.getCcr_num());
 			pstmt.setString(2, bean.getCcr_id());
