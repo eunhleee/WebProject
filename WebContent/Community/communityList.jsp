@@ -207,7 +207,6 @@ a:hover {
 	<jsp:include page="../alcinfo/headerSearch.jsp"></jsp:include>
 
 	<div id="frame">
-
 		<div id="leftdiv">
 			<h3>커뮤니티</h3>
 			<a href="communityList.jsp?pageValue=free">&#149; 자유게시판</a><br>
@@ -219,8 +218,8 @@ a:hover {
 			<%} else { %>
 			href="javascript:clalert1()"
 			<%} %>
-			>&#149; 학생 전용 게시판</a><br>
-			<a 
+			>&#149; 학생 전용 게시판</a></div>
+			<div id="atag"><a 
 			<%if(mgr.checkM(id)==0||mgr.checkM(id)==2||mgr.checkM(id)==3) {%>
 			href="communityList.jsp?pageValue=onlyte"
 			<%} else { %>

@@ -1,38 +1,27 @@
-<<<<<<< HEAD
-<!-- 13p 7.신고접수창 과외 잘못된 정보-->
-<!-- reportReceiptLint.jsp -->
-=======
 <!-- 13p 7.신고접수창 학원 잘못된 정보-->
 <!-- reportReceipt.jsp -->
 <%@page import="java.text.SimpleDateFormat"%>
->>>>>>> branch 'master' of https://github.com/eunhleee/WebProject.git
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page import ="java.util.*,alcinfo.*"%>
 <jsp:useBean id="rBean" class="alcinfo.MemberBean"/>
 
 <jsp:setProperty name="rBean" property="*"/>
 <%
-<<<<<<< HEAD
-		request.setCharacterEncoding("UTF-8");
-
-=======
 	request.setCharacterEncoding("UTF-8");
+
 //	int num=0;
  	//num = Integer.parseInt(request.getParameter("stopid"));
->>>>>>> branch 'master' of https://github.com/eunhleee/WebProject.git
  	String stopid = request.getParameter("stopid").trim();
-<<<<<<< HEAD
  	String stopurl =request.getParameter("stopurl").trim();
 
 	System.out.println("여기"+session.getAttribute("idKey")+"stopid는"+stopid+"topurl은"+stopurl);
-=======
+
 	// num=UtilMgr.parseInt(request,"stopid");
 	//String stopid=Integer.toString(num);
 	String id =(String)session.getAttribute("idKey");
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     Calendar today = Calendar.getInstance();
  	String strToday = sdf.format(today.getTime());
->>>>>>> branch 'master' of https://github.com/eunhleee/WebProject.git
 %>
 <html>
 <head>

@@ -224,7 +224,6 @@ function graph(){
 </head>
 <body>
 
-	<%@ include file="../alcinfo/headerSearch.jsp"%>
 	<br>
 	<br>
 	<form name="cart" action="">

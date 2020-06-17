@@ -105,13 +105,8 @@ function graph(){
 	
 	
 	function goReport() {
-<<<<<<< HEAD
-		url = "../Report/reportReceiptLInf.jsp?stopid=<%=id%>&stopurl=../Lesson/leRead.jsp?num=<%=num%>";
-		window.open(url, "GoReport", "width=400, height=350, top=200, left=300");
-=======
 		url = "../Report/reportReceiptLInf.jsp?stopid=<%=id%>";
 		window.open(url, "GoReport", "width=900, height=560, top=200, left=300");
->>>>>>> branch 'master' of https://github.com/eunhleee/WebProject.git
 	}
 		
 	function goErr(){
