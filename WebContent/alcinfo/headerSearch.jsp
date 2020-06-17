@@ -1,8 +1,13 @@
 <!-- 헤더1 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<jsp:useBean id="HeaderMmgr" class="member.MemberMgr"></jsp:useBean>
 <%
+	
  	int random=(int)(Math.random()*10+1);
+	String loginid=(String)session.getAttribute("idKey");
+	String loginNickname=HeaderMmgr.getInfo(loginid).getNickname();
+	
   %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -80,7 +85,7 @@ function openlogoutProc(){
 			<a	href="../Student/StudentMain.jsp?pageValue=count">학생</a> 
 			<a	href="../Community/communityList.jsp?pageValue=free">커뮤니티</a> 
 			<a	href="../Payment/buyPoint.jsp" style="color:yellow;"><img src="../img/won.png" width="20" height="20">포인트</a>
-			<% if(session.getAttribute("idKey")==null){%>
+			<% if(loginid==null){%>
 			<input type="button" onclick="openloginSelect();" class="openlm" value="로그인">
 			<%}else{ %>
 			<input type="button" onclick="openlogoutProc();" class="openlm" value="로그아웃">
@@ -90,7 +95,7 @@ function openlogoutProc(){
 	</div>
 
 	<div class="banner" align="center"
-		style="width: 100%; background-color: rgb(240, 240, 240); box-shadow: 0px 0px 10px #c0c0c0;">
+		style="width: 100%; background-color: rgb(240, 240, 240); box-shadow: 0px 0px 10px #c0c0c0; margin-bottom:0px;">
 		<a href=""><img src="../img/banner<%=random %>.jpg"
 			style="width: 70%; height: 300px"></a>
 	</div>

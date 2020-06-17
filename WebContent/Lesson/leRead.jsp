@@ -84,7 +84,7 @@ function graph(){
 	
 	function moveQnA(){
 			url = "le_QnA.jsp?lq_lnum="+<%=lebean.getNum()%>;
-			window.open(url, "Le_QnA", "width=900, height=500, top=200, left=400");
+			window.open(url, "Le_QnA", "width=900, height=560, top=200, left=400");
 			
 		}
 		
@@ -106,7 +106,7 @@ function graph(){
 	
 	function goReport() {
 		url = "../Report/reportReceiptLInf.jsp?stopid=<%=id%>";
-		window.open(url, "GoReport", "width=400, height=350, top=200, left=300");
+		window.open(url, "GoReport", "width=900, height=560, top=200, left=300");
 	}
 		
 	

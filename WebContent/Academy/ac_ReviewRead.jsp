@@ -126,7 +126,6 @@ a:hover {
 </script>
 </head>
 <body>
-	<%@ include file="../alcinfo/headerSearch.jsp"%>
 	<br>
 	<br>
 	<form method="post" action="../Report/reportReceipt.jsp">

@@ -31,14 +31,14 @@
 		if(flag.equals("insert")) {
 			LeRcommentsBean lerbean = new LeRcommentsBean();
 			lerbean.setLer_num(lernum);
-			lerbean.setLer_id(request.getParameter("cid"));
+			lerbean.setLer_id(loginid);
 			lerbean.setLer_content(request.getParameter("comment"));
 			lerbean.setLer_ip(request.getParameter("ip"));
 			lercmgr.insertLerComment(lerbean);
 		} else if(flag.equals("insert1")) {
 			LeRcommentsBean lerrbean = new LeRcommentsBean();
 			lerrbean.setLer_num(lernum);
-			lerrbean.setLer_id(request.getParameter("cid"));
+			lerrbean.setLer_id(loginid);
 			lerrbean.setLer_content(request.getParameter("comment"));
 			lerrbean.setLer_ip(request.getParameter("ip"));
 			lerrbean.setLer_conum(UtilMgr.parseInt(request, "conum"));

@@ -42,71 +42,126 @@
 		window.open(url, "NICKCheck", "width=300, height=150, top=200, left=400");
 	}
 </script>
+<style>
+#insertMember{
+	background-color:#FAF8EB;
+	width:100%;
+	height:100%;
+	padding:30px;
+}
+#inputdiv{
+	background-color:white;
+}
+#btnJoin{
+  background:#FCBC7E;
+  color:#fff;
+  border:none;
+  position:relative;
+  width:90px;
+  height:50px;
+  font-size:17px;
+  line-height:50px;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+  border-radius: 6px;
+}
+#btnJoin:hover{
+  background:#fff;
+  color:#FCBC7E;
+}
+#btnJoin:before,#btnJoin:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background:#FCBC7E;
+  transition:400ms ease all;
+}
+#btnJoin:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+#btnJoin:hover:before,#btnJoin:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
+
+
+</style>
 </head>
 <body>
-<%@ include file="../alcinfo/mainHeader.jsp"%>
+<%@ include file="../alcinfo/headerSearch.jsp"%>
 <div id="insertMember" class="insertMember1" align="center">
 	<form name="imFrm" class="im-content" method="post" action="../login/memberProc.jsp">
 		<table style="margin-left:10px;">
 			<tr>
-				<td><p style="margin-bottom:10px;">학생 회원가입</p></td>
+				<td colspan="3">
+					<h2 style="margin-bottom:10px;">회원가입</h2>
+				</td>
 			</tr>
 			<tr>
 				<td>
-					<table border="1" class="insertMt">
+					<table  class="insertMt">
 						<tr>
 							<td width="100px">&nbsp;아이디</td>
-							<td width="230px">
-								<input type="text" style="width:185px; height:30px;"
+							<td width="270px">
+								<div id="inputdiv" style="width:270px;">
+								<input type="text" style="width:180px; height:30px;"
 								maxlength="15" name="imid">
 								<input type="button" style="width:70px; height:30px;"
 								value="중복체크" onclick="idCheck();">
+								</div>
 							</td>
-						</tr>
 						<tr>
-							<td width="100px">&nbsp;이름</td>
-							<td width="260px">
-								<input type="text" style="width:260px; height:30px;"
-								name="imname">
+							<td >&nbsp;이름</td>
+							<td >
+								<div id="inputdiv" style="width:270px;">
+								<input type="text" style="width:260px; height:30px;" name="imname">
+								</div>
 							</td>
 						</tr>
 						<tr height="33px">
-							<td width="100px">&nbsp;성별</td>
-							<td width="260px">
-								<input type="radio" name="imgender" value="남자" checked
-								style="margin-left:5px;">남자
-								<input type="radio" name="imgender" value="여자"
-								style="margin-left:5px;">여자
+							<td >&nbsp;성별</td>
+							<td >
+								<input type="radio" name="imgender" value="남자" checked style="margin-left:5px;">남자
+								<input type="radio" name="imgender" value="여자"	style="margin-left:5px;">여자
 							</td>
 						</tr>
 						<tr>
-							<td width="100px">&nbsp;비밀번호</td>
-							<td width="260px">
-								<input type="password" style="width:260px; height:30px;"
-								maxlength="15" name="impwd">
+							<td >&nbsp;비밀번호</td>
+							<td >
+								<div id="inputdiv" style="width:270px;">
+									<input type="password" style="width:260px; height:30px;" maxlength="15" name="impwd">
+								</div>
 							</td>
 						</tr>
 						<tr>
-							<td width="100px">&nbsp;비밀번호확인</td>
-							<td width="260px">
-								<input type="password" style="width:260px; height:30px;"
-								maxlength="15" name="imrepwd">
+							<td >&nbsp;비밀번호확인</td>
+							<td >
+								<div id="inputdiv" style="width:270px;">
+									<input type="password" style="width:260px; height:30px;" maxlength="15" name="imrepwd">
+								</div>
 							</td>
 						</tr>
 						<tr>
-							<td width="100px">&nbsp;닉네임</td>
-							<td width="230px">
-								<input type="text" style="width:185px; height:30px;"
-								name="imnickname">
-								<input type="button" style="width:70px; height:30px;" 
-								value="중복체크" onclick="nickCheck();">
+							<td>&nbsp;닉네임</td>
+							<td >
+								<div id="inputdiv" style="width:270px;">
+									<input type="text" style="width:185px; height:30px;" name="imnickname">
+									<input type="button" style="width:70px; height:30px;" value="중복체크" onclick="nickCheck();">
+								</div>
 							</td>
 						</tr>
 						<tr>
-							<td width="100px">&nbsp;생년월일</td>
-							<td width="260px">
-								<input type="text" style="width:85px; height:32px;"
-									placeholder="년(4자)" name="imbirthy" maxlength="4">
+							<td >&nbsp;생년월일</td>
+							<td >
+							<div id="inputdiv" style="width:270px;">
+								<input type="text" style="width:85px; height:32px;" placeholder="년(4자)" name="imbirthy" maxlength="4">
 								<select name="imbirthm" style="width:82px; height:32px">
 									<option value="월" selected>월</option>
 									<% for(int i=1; i<13; i++) { 
@@ -135,62 +190,67 @@
 										
 									<% } %>
 								</select>
+								</div>
 							</td>
 						</tr>
 						<tr>
-							<td width="100px">&nbsp;휴대폰번호</td>
-							<td width="260px">
-								<input type="text" style="width:260px; height:30px;"
-								placeholder=" '-' 빼고 입력" maxlength="11" name="imphone">
+							<td >&nbsp;휴대폰번호</td>
+							<td >
+								<div id="inputdiv" style="width:270px;">
+									<input type="text" style="width:260px; height:30px;" placeholder=" '-' 빼고 입력" maxlength="11" name="imphone">
+								</div>
 							</td>
 						</tr>
 						<tr>
-							<td width="100px">&nbsp;이메일</td>
-							<td width="260px">
-								<input type="text" style="width:260px; height:30px;"
-								name="imemail">
+							<td>&nbsp;이메일</td>
+							<td>
+								<div id="inputdiv" style="width:270px;">
+									<input type="text" style="width:260px; height:30px;" name="imemail">
+								</div>
 							</td>
 						</tr>
 						<tr>
-							<td width="100px" height="66px">&nbsp;주소</td>
-							<td width="260px">
-								<input type="text" id="address" name="imaddress1"
-								style="width:185px; height:30px;" readonly>
-								<input type="button" style="width:70px; height:30px;"
-								onClick="openDaumZipAddress();" value="주소찾기">
-								<input type="text" style="width:260px; height:30px; margin-top:2px;"
-								placeholder="기타 주소" name="imaddress2">
+							<td height="66px">&nbsp;주소</td>
+							<td>
+								<div id="inputdiv" style="width:270px;">
+									<input type="text" id="address" name="imaddress1" style="width:185px; height:30px;" readonly>
+									<input type="button" style="width:70px; height:30px;" onClick="openDaumZipAddress();" value="주소찾기">
+								</div>
+								<div id="inputdiv" style="width:270px;">
+									<input type="text" style="width:260px; height:30px; margin-top:2px;" placeholder="기타 주소" name="imaddress2">
+								</div>
 							</td>
 						</tr>
 						<tr>
-							<td width="100px">&nbsp;학교 구분</td>
-							<td width="260px">
-								<select name="imschoolgrade" style="width:260px; height:30px">
+							<td >&nbsp;학교 구분</td>
+							<td >
+								<div id="inputdiv" style="width:270px;">
+								<select name="imschoolgrade" style="width:260px; height:30px; border:none;">
 									<option value="학교 구분">학교 구분</option>
 									<option value="초등학생">초등학생</option>
 									<option value="중학생">중학생</option>
 									<option value="고등학생">고등학생</option>
 									<option value="기타">기타</option>
 								</select>
+								</div>
 							</td>
 						</tr>
 						<tr>
-							<td width="100px">&nbsp;학교 이름</td>
-							<td width="260px">
-								<input type="text" style="width:260px; height:30px;"
-								name="imschoolname">
+							<td >&nbsp;학교 이름</td>
+							<td >
+								<div id="inputdiv" style="width:270px;">
+									<input type="text" style="width:260px; height:30px;" name="imschoolname">
+								</div>
 							</td>
 						</tr>
 					</table>
 				</td>
 			</tr>
 			<tr>
-				<td align="right"><input type="button" value="가입신청" class="loginb"
-				style="width:120px;" onclick="inputCheck();"></td>
+				<td align="right"><button  id="btnJoin"  onclick="inputCheck();">가입신청</button></td>
 			</tr>
 		</table>
 	</form>
 </div>
-<%@ include file="../alcinfo/footer.jsp"%>
 </body>
 </html>

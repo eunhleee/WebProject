@@ -100,6 +100,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>과외 후기 게시판</title>
 <script>
+
 	function lecheck() {
 		if (document.lesearchFrm.keyWord.value == "") {
 			alert("검색어를 입력하세요.");
@@ -108,24 +109,27 @@
 		}
 		document.lesearchFrm.submit();
 	}
+	
 	function pageing(page) {
 		document.readFrm.nowPage.value = page;
 		document.readFrm.submit();
 	}
+	
 	function block(block) {
-		document.readFrm.nowPage.value =
-<%=pagePerBlock%>
-	* (block - 1) + 1;
+		document.readFrm.nowPage.value =<%=pagePerBlock%> * (block - 1) + 1;
 		document.readFrm.submit();
 	}
+	
 	function list() {//[처음으로]를 누르면 게시글의 처음 페이지로 돌아감
 		document.listFrm.action = "leRead.jsp?num=<%=num%>&id=<%=id%>";
 		document.listFrm.submit();
 	}
+	
 	function numPerFn(numPerPage) {
 		document.readFrm.numPerPage.value = numPerPage;
 		document.readFrm.submit();
 	}
+	
 	//list.jsp에서 read.jsp로 요청이 될때 기존에 조건
 	//기존 조건 : keyField,keyWord,nowPage,numPerPage
 	function read(num) {
@@ -133,6 +137,11 @@
 		document.readFrm.action = "le_ReviewRead.jsp";
 		document.readFrm.submit();
 	}
+	
+	function moveToBuyPoint(){
+		location.href="../Payment/buyPoint.jsp";
+	}
+	
 	function lealert() {
 		alert("로그인 후 이용가능합니다.");
 	}

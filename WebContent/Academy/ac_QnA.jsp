@@ -134,8 +134,8 @@ div{
 
 	<!-- 리스트 부분 -->
 <div>
-	<h2>학원 문의 게시판</h2>
-	
+	<h2><img src="../img/book.png" width="30" height="30">&nbsp;학원 문의 게시판</h2>
+	<hr style="border:1px solid #36ada9;">
 	<table>
 		<tr>
 			<td width="600">Total : <%=totalRecord%>Articles(<font
