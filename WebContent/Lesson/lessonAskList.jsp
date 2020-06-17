@@ -37,10 +37,12 @@
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 	    Calendar today = Calendar.getInstance();
 	 	String strToday = sdf.format(today.getTime());
-		
+	 	
 		 todaynumber=Integer.parseInt(strToday);
+	 if(mpoint!=null){
 		 mpoint=mpoint.replace("-", "");
 		 mpointnumber=Integer.parseInt(mpoint);
+	 	}
 	}
 	int totalRecord = 0;//총게시물수
 	int numPerPage = 10;//페이지당 레코드 개수(5,10,15,30)
