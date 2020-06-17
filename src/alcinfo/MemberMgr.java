@@ -122,7 +122,7 @@ public class MemberMgr {
 				con = pool.getConnection();
 				sql = "SELECT DISTINCT(a.id),a.name,a.email,a.gender,a.passwd,a.nickname,a.birth," + 
 						" a.phone,a.address,a.school_name,a.school_grade,a.imgname"
-						+" FROM report,"
+						+" FROM "
 						+" (SELECT name,id,email,gender,passwd,nickname,birth,"
 						+" phone,address,school_name,school_grade,imgname"
 						+" FROM member"
@@ -141,7 +141,6 @@ public class MemberMgr {
 					bean.setGender(rs.getString("a.gender"));
 					bean.setPasswd(rs.getString("a.passwd"));
 					bean.setNickname(rs.getString("a.nickname"));
-					bean.setPasswd(rs.getString("a.passwd"));
 					bean.setBirth(rs.getString("a.birth"));
 					bean.setPhone(rs.getString("a.phone"));
 					bean.setAddress(rs.getString("a.address"));
@@ -157,7 +156,7 @@ public class MemberMgr {
 			}
 			return bean;
 		}
-	//�븰�깮�젙蹂� 媛��졇�삤湲�
+	//占쎈린占쎄문占쎌젟癰귨옙 揶쏉옙占쎌죬占쎌궎疫뀐옙
 	public MemberBean getMember(String id) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -166,7 +165,7 @@ public class MemberMgr {
 		MemberBean mbean = new MemberBean();
 		try {
 			con = pool.getConnection();
-			sql = "SELECT imgname, name, gender, substr(address,1,instr(address,'구 ')+1) address, phone, school_name, school_grade, grade from member where id = ?;";
+			sql = "SELECT imgname, name, gender, substr(address,1,instr(address,'援� ')+1) address, phone, school_name, school_grade, grade from member where id = ?;";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
@@ -195,7 +194,7 @@ public class MemberMgr {
 		MemberBean mbean = new MemberBean();
 		try {
 			con = pool.getConnection();
-			sql = "SELECT imgname, name, gender, substr(address,1,instr(address,'구 ')+1) address, phone, school_name, school_grade, grade from member where id = ?;";
+			sql = "SELECT imgname, name, gender, substr(address,1,instr(address,'援� ')+1) address, phone, school_name, school_grade, grade from member where id = ?;";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
@@ -217,7 +216,7 @@ public class MemberMgr {
 		return mbean;
 	}	
 	
-	//�븰�깮 �젙蹂� �벑濡앺븯湲�
+	//占쎈린占쎄문 占쎌젟癰귨옙 占쎈쾻嚥≪빜釉�疫뀐옙
 	public boolean insertStudent(String id, String stclass, String stetc) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
