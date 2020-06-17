@@ -1,4 +1,5 @@
-
+<!-- 13p 7.신고접수창  학생 잘못된 정보 신고하기-->
+<!-- reportReceiptSinf.jsp -->
 <%@page import="java.text.SimpleDateFormat"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page import ="java.util.*,alcinfo.*"%>
@@ -17,7 +18,6 @@
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     Calendar today = Calendar.getInstance();
  	String strToday = sdf.format(today.getTime());
-
 %>
 <html>
 <head>

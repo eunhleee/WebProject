@@ -197,7 +197,8 @@ a:hover {
 						
 								 <input type="submit" value="확인">
 								 <input type="reset" value="다시쓰기">
-								 <input type="button" value="취소" onClick="javascript:location.href='<%=request.getHeader("referer")%>'">
+								 <input type="button" value="취소"
+								 onClick="javascript:location.href='<%=request.getHeader("referer")%>'">
 
 							</td>
 						</tr>

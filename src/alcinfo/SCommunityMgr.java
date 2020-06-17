@@ -50,7 +50,7 @@ public class SCommunityMgr {
 		return vlist;
 	}
 
-		public int getTotalCount(String keyField, String keyWord, String group) {
+	public int getTotalCount(String keyField, String keyWord, String group) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
