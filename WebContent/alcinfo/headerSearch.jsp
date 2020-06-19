@@ -79,7 +79,7 @@ function openlogoutProc(){
 
 
 		<div class="catagory" align="center" 
-		style="background-color: rgb(034, 200, 211); border-radius: 0px; box-shadow: 0px 0px 10px #c0c0c0; height:35px;
+		style="background-color: rgb(034, 200, 211); border-radius: 0px; box-shadow: 0px 0px 10px #c0c0c0; height:75px;
 			line-height:35px; text-align: center; margin-top:35px;">
 			<a href="../Academy/AcademyMain.jsp?pageValue=top">학원</a> 
 			<a	href="../Lesson/LessonMain.jsp?pageValue=top">과외선생님</a> 

@@ -1,4 +1,6 @@
 <!-- ac_QnAUpdate.jsp -->
+<%@page import="java.util.Calendar"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="alcinfo.AcqueryBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -12,6 +14,10 @@
 	String keyField = request.getParameter("keyField");	
 	String keyWord = request.getParameter("keyWord");
 	
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    Calendar today = Calendar.getInstance();
+ 	String strToday = sdf.format(today.getTime());
+ 	
 	AcqueryBean bean = (AcqueryBean)session.getAttribute("bean");
 	String title = bean.getAc_title();
 	String subject = bean.getAc_subject();
@@ -31,73 +37,106 @@
 	}
 </script>
 <style>
-#list td {
-	border-bottom: 1px solid lightgray;
+#inputdiv{
+	margin:10px;
+	width:490px;
+	border:1px solid gray;
+	border-radius: 6px;
+	padding:3px;
+}
+#inputdiv input{
+	width:480px;
+	border:none;
+	font-size:15px;
 }
 
-#title td {
-	color: white;
-	background-color: #36ada9;
+#inputdiv1{
+	margin:10px;
+	width:200px;
+	border:1px solid gray;
+	border-radius: 6px;
+	padding:3px;
 }
 
-a {
-	text-decoration: none;
-	color: black;
+#inputdiv1 input{
+	width:180px;
+	border:none;
+	font-size:15px;
+	
 }
 
-a:hover {
-	color: gray;
+#textareadiv{
+	margin:10px;
+	width:490px;
+	border:1px solid gray;
+	border-radius: 6px;
+	padding:3px;
+}
+#textareadiv textarea{
+	border:none;
+	font-size:15px;
+	width:480px;
+}
+#checkbox {
+	border:1px solid gray;
+	border-radius: 6px;
 }
 </style>
 </head>
 <body>
-	<div style="margin-left: 15%; margin-right: 15%">
-
-		<div align="center">
-			<br/>
-			<table width="600" cellpadding="3">
-				<tr>
-					<td height="25" align="center">글 수정</td>
-				</tr>
-			</table>
-			<br/>
-			<form name="anqupdateFrm" method="post"
-			action="ac_QnAUpdateProc.jsp">
-			<table width="600" cellpadding="3" align="center" border="1">
+	<div style="padding:10px; border:8px solid #F88C65; border-radius: 10px;">
+		<h2><img src="../img/questionmark.png" width="40" height="40">&nbsp;문의 하기</h2>
+		<hr style="border:1px solid #F88C65;">
+			<form name="anqupdateFrm" method="post" action="ac_QnAUpdateProc.jsp">
+			<table width="800" cellpadding="3">
 				<tr>
 					<td align=center>
 					<table align="center">
+					<tr>
+						<td>작성자</td>
+						<td>
+						<div id="inputdiv1">
+						<input size="50" maxlength="30" disabled="disabled"
+						value="<%=acqid%>">
+						</div>
+						</td>
+						<td>작성일</td>
+						<td>
+						<div id="inputdiv1">
+						<input size="50" maxlength="30" disabled="disabled"
+						value="<%=strToday%>">
+						</div>
+						</td>
+						
+					</tr>
 						<tr>
 							<td>제 목</td>
-							<td>
+							<td colspan="3"><div id="inputdiv1">
 								<input name="acqtitle" size="50" maxlength="30" value="<%=title%>">
-							</td>
+							</div></td>
 						</tr>
 						<tr>
 							<td>과 목</td>
-							<td>
+							<td colspan="3"><div id="inputdiv1">
 								<input name="acqsubject" size="50" maxlength="30" value="<%=subject%>">
-							</td>
+							</div></td>
 						</tr>
 						<tr>
 							<td>내 용</td>
-							<td>
+							<td colspan="3"><div id="textareadiv">
 								<textarea name="acqcontent" rows="10" cols="50"><%=content%></textarea>
-							</td>
+							</div></td>
 						</tr>
 						<tr>
 			    			<td colspan="1">
 			    			비밀글
 							</td>
-							<td><input type="checkbox" name="acqsecret" 
-							<% if(secret!=null) {%>checked<%} %>></td>
+							<td colspan="3"><input type="checkbox" name="acqsecret" 
+							id="checkbox" <% if(secret!=null) {%>checked<%} %>></td>
 			    		</tr>
 						<tr>
-							<td colspan="2"><hr/></td>
-						</tr>
-						<tr>
-							<td colspan="2">
-								 <input type="submit" value="확인">
+							<td colspan="4" align="center">
+								 <input type="submit" value="수정">
 								 <input type="reset" value="다시쓰기">
 								 <input type="button" value="취소"
 								 onClick="javascript:cancel()">
@@ -117,8 +156,7 @@ a:hover {
 			<input type="hidden" name="keyField" value="<%=keyField%>">
 			<input type="hidden" name="keyWord" value="<%=keyWord%>">
 			<%}%>
-			</form>
-		</div>
+		</form>
 	</div>
 
 </body>
