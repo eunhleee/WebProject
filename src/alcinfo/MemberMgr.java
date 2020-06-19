@@ -122,8 +122,7 @@ public class MemberMgr {
 				con = pool.getConnection();
 				sql = "SELECT DISTINCT(a.id),a.name,a.email,a.gender,a.passwd,a.nickname,a.birth," + 
 						" a.phone,a.address,a.school_name,a.school_grade,a.imgname"
-						+" FROM report,"
-						+" (SELECT name,id,email,gender,passwd,nickname,birth,"
+						+" FROM (SELECT name,id,email,gender,passwd,nickname,birth,"
 						+" phone,address,school_name,school_grade,imgname"
 						+" FROM member"
 						+" union" 

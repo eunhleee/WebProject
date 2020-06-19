@@ -15,7 +15,7 @@ if(session.getAttribute("idKey")==null||session.getAttribute("idKey").equals("")
 	else{
 	String id=(String)session.getAttribute("idKey");
 	MemberBean bean=mgr.getUpMember(id);
-
+	
 	int to=Integer.parseInt(bean.getBirth().substring(4,6)); 
 	int to2=Integer.parseInt(bean.getBirth().substring(6,8));
 	
