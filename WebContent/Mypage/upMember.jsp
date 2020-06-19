@@ -20,6 +20,7 @@ if(session.getAttribute("idKey")==null||session.getAttribute("idKey").equals("")
 	int to2=Integer.parseInt(bean.getBirth().substring(6,8));
 	
 	System.out.println("pic"+bean.getImgname());
+	
 %>
 <html>
 <head>
@@ -276,6 +277,7 @@ function win_close(){
 									<input type="text" style="width:260px; height:30px;"
 									maxlength="15" name="imid" value="<%=bean.getId()%>" readonly>
 								</div>
+
 							</td>
 						</tr>
 						<tr>

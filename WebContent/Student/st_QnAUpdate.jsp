@@ -31,6 +31,7 @@
 	String title = stqbean.getTitle();
 	String id = stqbean.getId();
 	String content = stqbean.getContent();
+	String secret = stqbean.getSt_secret();
 %>
 <!DOCTYPE html>
 <html>
@@ -220,11 +221,20 @@ function goReport() {
 						</td>
 					</tr>
 					<tr>
+		    			<td colspan="1">
+		    			비밀글
+						</td>
+						<td><input type="checkbox" name="stqsecret" 
+						<% if(secret!=null) {%>checked<%} %>></td>
+		    		</tr>
+					<tr>
 						<td colspan="2">
 							 <input type="submit" value="확인">
 							 <input type="reset" value="다시쓰기">
 							 <input type="button" value="취소"
-							 onClick="javascript:location.href='st_QnARead.jsp?num=<%=num%>&stunum=<%=stunum%>&numPerPage=<%=numPerPage%>&nowPage=<%=nowPage%>&keyField=<%=keyField%>&keyWord=<%=keyWord%>'">
+							 onClick="javascript:location.href='st_QnARead.jsp?num=<%=num%>&stunum=<%=stunum%>&numPerPage=<%=numPerPage%>&nowPage=<%=nowPage%><%
+  	 	if(!(keyWord==null||keyWord.equals(""))){
+		     %>&keyField=<%=keyField%>&keyWord=<%=keyWord%><%}%>'">
 						</td>
 					</tr>
 				</table>

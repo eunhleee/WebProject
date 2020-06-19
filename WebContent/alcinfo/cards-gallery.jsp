@@ -6,6 +6,8 @@
 	pageEncoding="UTF-8"%>
 <jsp:useBean id="Amgr" class="alcinfo.AcademyMgr"></jsp:useBean>
 <jsp:useBean id="Lmgr" class="alcinfo.LessonMgr"></jsp:useBean>
+<jsp:setProperty property="*" name="mpbean"/>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,7 +23,6 @@
 </head>
 <body>
 	<%@ include file="mainHeader.jsp"%>
-
 	<section class="gallery-block cards-gallery">
 	<br><br>
 		<div class="container">
@@ -31,6 +32,7 @@
 			<br>  
 			<div class="row">  
 				<%
+			
 	        	Vector<AcademyBean> Avlist=Amgr.getBestBoard("top","star");
 	        	//int listsize=vlist.size();
 	        	for(int i=0;i<6;i++){

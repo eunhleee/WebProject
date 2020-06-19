@@ -60,6 +60,10 @@
 	font-size:15px;
 	width:480px;
 }
+#checkbox {
+	border:1px solid gray;
+	border-radius: 6px;
+}
 </style>
 </head>
 
@@ -109,6 +113,12 @@
 							<div id="textareadiv">
 							<textarea name="acqcontent" rows="10" cols="52"></textarea>
 							</div></td>
+						</tr>
+						<tr>
+							<td>비밀글</td>
+							<td colspan="3">
+							<input type="checkbox" id="checkbox" name="acqsecret">
+							</td>
 						</tr>
 						<tr>
 							<td colspan="4" align="center">

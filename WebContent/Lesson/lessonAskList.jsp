@@ -200,7 +200,7 @@ a:hover {
 						<td width="100">조회수</td>
 					</tr>
 					<%
-						if(loginid==null||mpoint==null||mpointnumber<todaynumber){
+						if(grade!=0&&(loginid==null||mpoint==null||mpointnumber<todaynumber)){
 					%>
 					<tr>
 						<td align="center" colspan="5" height="170" style="background-color:gray;  opacity: 0.5;">
@@ -301,7 +301,7 @@ a:hover {
 				<!-- 페이징 및 블럭 End -->
 			</td>
 			<%
-				if(loginid!=null&&mpoint!=null&&mpointnumber>todaynumber){
+				if(loginid!=null&&mpoint!=null&&mpointnumber>=todaynumber){
 			%>
 			<td align="right">
 				<a 

@@ -263,6 +263,7 @@ a:hover {
 						</tr>
 
 
+		
 				<%
 					Vector<SCommunityBean> vlist = mgr.getBoardList(keyField, keyWord,group, start, cnt);
 					int listsize = vlist.size();
@@ -293,7 +294,7 @@ a:hover {
 				%>
 
 						<tr id="list">
-							<td align="center"><%=totalRecord-start-i%></td>
+							<td align="center"><%=num%></td>
 							<td align="left"><a href="javascript:read('<%=num%>')"><%=title%></a>
 								<% if(filename!=null) { %>
 									<img src="../img/icon_file1.png">

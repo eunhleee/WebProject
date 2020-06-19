@@ -29,23 +29,22 @@
 <html>
 <head>
 <meta charset="utf-8">
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js">
 <title>Team Read</title>
-
 <link href="style.css" rel="stylesheet" type="text/css">
+<script src="./grade.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js">
 
-<script>
-		function moveQnA(){
-			url = "ac_QnA.jsp?ac_num="+<%=num%>;
-			window.open(url, "Ac_QnA", "width=800, height=500, top=200, left=400");
-			
-		}
+	function moveQnA(){
+		url = "ac_QnA.jsp?ac_num="+<%=num%>;
+		window.open(url, "Ac_QnA", "width=800, height=500, top=200, left=400");
 		
-		$('.starRev span').click(function(){
-			  $(this).parent().children('span').removeClass('on');
-			  $(this).addClass('on').prevAll('span').addClass('on');
-			  return false;
-			});
+	}
+	
+	$('.starRev span').click(function(){
+		  $(this).parent().children('span').removeClass('on');
+		  $(this).addClass('on').prevAll('span').addClass('on');
+		  return false;
+		});
 </script>
 <style>
 #inputdiv{
@@ -107,8 +106,8 @@
     text-indent: -9999px;
     cursor: pointer;
 }
-.starR1.on{background-position:0 0;}
-.starR2.on{background-position:-15px 0;}
+.starR1.on{background-position:0px 0px;}
+.starR2.on{background-position:-15px 0px;}
 </style>
 </head>
 <body>
@@ -200,16 +199,17 @@
 							<td>평 점</td>
 							<td>
 								<div class="starRev">
-								  <span class="starR1 on">별1_왼쪽</span>
-								  <span class="starR2">별1_오른쪽</span>
-								  <span class="starR1">별2_왼쪽</span>
-								  <span class="starR2">별2_오른쪽</span>
-								  <span class="starR1">별3_왼쪽</span>
-								  <span class="starR2">별3_오른쪽</span>
-								  <span class="starR1">별4_왼쪽</span>
-								  <span class="starR2">별4_오른쪽</span>
-								  <span class="starR1">별5_왼쪽</span>
-								  <span class="starR2">별5_오른쪽</span>
+								  <span class="starR1 on" id="star0" onclick="starclick0()">별1_왼쪽</span>
+								  <span class="starR2" id="star1" onclick="starclick1()">별1_오른쪽</span>
+								  <span class="starR1" id="star2" onclick="starclick2()">별2_왼쪽</span>
+								  <span class="starR2" id="star3" onclick="starclick3()">별2_오른쪽</span>
+								  <span class="starR1" id="star4" onclick="starclick4()">별3_왼쪽</span>
+								  <span class="starR2" id="star5" onclick="starclick5()">별3_오른쪽</span>
+								  <span class="starR1" id="star6" onclick="starclick6()">별4_왼쪽</span>
+								  <span class="starR2" id="star7" onclick="starclick7()">별4_오른쪽</span>
+								  <span class="starR1" id="star8" onclick="starclick8()">별5_왼쪽</span>
+								  <span class="starR2" id="star9" onclick="starclick9()">별5_오른쪽</span>
+								  <input type="hidden" name="acrstar" value="0.5">
 								</div>
 							</td>
 						</tr>

@@ -13,6 +13,7 @@ public class LequeryMgr {
 	}
 	
 	//Board Total Count:
+	//관리자 & 해당 과외선생님
 	public int getTotalCount(int lq_lnum,String keyField,String keyWord) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -22,19 +23,56 @@ public class LequeryMgr {
 		try {
 			con = pool.getConnection();
 			if(keyWord.trim().equals("")||keyWord==null) {
-				//
 				sql = "select count(*) from lequery where lq_lnum=?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, lq_lnum);
-				
 			}
 			else {
-			//
 			sql = "select count(*) from lequery where lq_lnum=? and "
 					+keyField+" like ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, lq_lnum);
 			pstmt.setString(2, "%"+keyWord+"%");
+			}
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				totalCount=rs.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt, rs);
+		}
+		return totalCount;
+	}
+	//일반회원
+	public int getTotalCount1(int lq_lnum,String keyField,String keyWord,String id) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		int totalCount=0;
+		try {
+			con = pool.getConnection();
+			if(keyWord.trim().equals("")||keyWord==null) {
+				sql = "select count(*) from lequery "
+						+ "where lq_lnum=? and lq_secret is null or "
+						+ "lq_lnum=? and lq_id=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, lq_lnum);
+				pstmt.setInt(2, lq_lnum);
+				pstmt.setString(3, id);
+			}
+			else {
+			sql = "select count(*) from lequery "
+					+ "where lq_lnum=? and "+keyField+" like ? and lq_secret is null or "
+					+ "lq_lnum=? and "+keyField+" like ? and lq_id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, lq_lnum);
+			pstmt.setString(2, "%"+keyWord+"%");
+			pstmt.setInt(3, lq_lnum);
+			pstmt.setString(4, "%"+keyWord+"%");
+			pstmt.setString(5, id);
 			}
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
@@ -53,6 +91,7 @@ public class LequeryMgr {
 	//keyWord :
 	//start :
 	//cnt :
+	//관리자 & 해당 과외선생님
 	public Vector<LequeryBean> getBoardList(int lq_lnum,String keyField,String keyWord,int start,int cnt){
 		 Connection con = null;
 		PreparedStatement pstmt = null;
@@ -62,29 +101,23 @@ public class LequeryMgr {
 		try {
 			con = pool.getConnection();
 			if(keyWord.trim().equals("")||keyWord==null) {
-				//
 				sql = "select num, lq_lnum,lq_title,lq_subject,lq_content,lq_ip,lq_id,lq_date,"
-						+ "lq_count from lequery where lq_lnum=? order by num desc limit ?,?";
+						+ "lq_count,lq_secret from lequery where lq_lnum=? order by num desc limit ?,?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, lq_lnum);
 				pstmt.setInt(2, start);
 				pstmt.setInt(3, cnt);
-					 
-	
 			}
 			else {
-			//
 			sql = "select  num, lq_lnum,lq_title,lq_subject,lq_content,lq_ip,lq_id,lq_date,"
-					+ "lq_count from lequery where lq_lnum=? and "+keyField+" like ? "
+					+ "lq_count,lq_secret from lequery where lq_lnum=? and "+keyField+" like ? "
 				+ "order by num desc limit ?,?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, lq_lnum);
 			pstmt.setString(2, "%"+keyWord+"%");
 			pstmt.setInt(3, start);
 			pstmt.setInt(4, cnt);
-				 
 			}
-
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				LequeryBean bean = new LequeryBean();
@@ -97,6 +130,69 @@ public class LequeryMgr {
 				bean.setLq_id(rs.getString("lq_id"));
 				bean.setLq_date(rs.getString("lq_date"));
 				bean.setLq_count(rs.getInt("lq_count"));
+				bean.setLq_secret(rs.getString("lq_secret"));
+				
+				vlist.addElement(bean);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt, rs);
+		}
+		return vlist; 
+	}
+	//일반 회원
+	public Vector<LequeryBean> getBoardList1(int lq_lnum,String keyField,String keyWord,int start,int cnt,String id){
+		 Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		Vector<LequeryBean> vlist=new Vector<LequeryBean>();
+		try {
+			con = pool.getConnection();
+			if(keyWord.trim().equals("")||keyWord==null) {
+				//
+				sql = "select num, lq_lnum,lq_title,lq_subject,lq_content,lq_ip,lq_id,"
+						+ "lq_date,lq_count,lq_secret from lequery "
+						+ "where lq_lnum=? and lq_secret is null or "
+						+ "lq_lnum=? and lq_id=? "
+						+ "order by num desc limit ?,?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, lq_lnum);
+				pstmt.setInt(2, lq_lnum);
+				pstmt.setString(3, id);
+				pstmt.setInt(4, start);
+				pstmt.setInt(5, cnt);
+			}
+			else {
+			//
+			sql = "select  num, lq_lnum,lq_title,lq_subject,lq_content,lq_ip,lq_id,"
+					+ "lq_date,lq_count,lq_secret from lequery "
+					+ "where lq_lnum=? and "+keyField+" like ? and lq_secret is null or "
+					+ "lq_lnum=? and "+keyField+" like ? and lq_id=? "
+				+ "order by num desc limit ?,?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, lq_lnum);
+			pstmt.setString(2, "%"+keyWord+"%");
+			pstmt.setInt(3, lq_lnum);
+			pstmt.setString(4, "%"+keyWord+"%");
+			pstmt.setString(5, id);
+			pstmt.setInt(6, start);
+			pstmt.setInt(7, cnt);
+			}
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				LequeryBean bean = new LequeryBean();
+				bean.setNum(rs.getInt("num"));
+				bean.setLq_lnum(rs.getInt("lq_lnum"));
+				bean.setLq_title(rs.getString("lq_title"));
+				bean.setLq_subject(rs.getString("lq_subject"));
+				bean.setLq_content(rs.getString("lq_content"));
+				bean.setLq_ip(rs.getString("lq_ip"));
+				bean.setLq_id(rs.getString("lq_id"));
+				bean.setLq_date(rs.getString("lq_date"));
+				bean.setLq_count(rs.getInt("lq_count"));
+				bean.setLq_secret(rs.getString("lq_secret"));
 				
 				vlist.addElement(bean);
 			}
@@ -116,7 +212,7 @@ public class LequeryMgr {
 		try {
 			con = pool.getConnection();
 			sql = "insert lequery(lq_lnum,lq_title,lq_subject,lq_content,"
-					+ "lq_ip,lq_id,lq_date) values(?,?,?,?,?,?,now())";
+					+ "lq_ip,lq_id,lq_date,lq_secret) values(?,?,?,?,?,?,now(),?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, bean.getLq_lnum());
 			pstmt.setString(2, bean.getLq_title());
@@ -124,6 +220,7 @@ public class LequeryMgr {
 			pstmt.setString(4, bean.getLq_content());
 			pstmt.setString(5, bean.getLq_ip());
 			pstmt.setString(6, bean.getLq_id());
+			pstmt.setString(7, bean.getLq_secret());
 			pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -142,7 +239,7 @@ public class LequeryMgr {
 		try {
 			con = pool.getConnection();
 			sql = "select num,lq_lnum,lq_title,lq_subject,lq_content,"
-					+ "lq_ip,lq_id,lq_date,lq_count from lequery where num=?";
+					+ "lq_ip,lq_id,lq_date,lq_count,lq_secret from lequery where num=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			rs = pstmt.executeQuery();
@@ -156,6 +253,7 @@ public class LequeryMgr {
 				bean.setLq_id(rs.getString("lq_id"));
 				bean.setLq_date(rs.getString("lq_date"));
 				bean.setLq_count(rs.getInt("lq_count"));
+				bean.setLq_secret(rs.getString("lq_secret"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -208,12 +306,14 @@ public class LequeryMgr {
 		String sql = null;
 		try {
 			con = pool.getConnection();
-			sql = "update lequery set lq_title=?, lq_subject=?, lq_content=? where num=?";
+			sql = "update lequery set lq_title=?, lq_subject=?, lq_content=?, "
+					+ "lq_secret=? where num=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, bean.getLq_title());
 			pstmt.setString(2, bean.getLq_subject());
 			pstmt.setString(3, bean.getLq_content());
-			pstmt.setInt(4, bean.getNum());
+			pstmt.setString(4, bean.getLq_secret());
+			pstmt.setInt(5, bean.getNum());
 			pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -263,6 +363,27 @@ public class LequeryMgr {
 			pool.freeConnection(con, pstmt, rs);
 		}
 		return grade;
+	}
+	
+	public int checklqlnum(String id) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		int num = 0;
+		try {
+			con = pool.getConnection();
+			sql = "select lq_lnum from lequery where lq_id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) num = rs.getInt(1);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt, rs);
+		}
+		return num;
 	}
 }
 

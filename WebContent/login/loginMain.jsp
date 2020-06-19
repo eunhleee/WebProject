@@ -16,6 +16,7 @@
 	}
 
 	function loginCheck() {
+		
 		if (document.loginFrm.lid.value.trim() == "") {
 			alert("아이디를 입력해 주세요.");
 			document.loginFrm.lid.focus();
@@ -27,6 +28,7 @@
 			return;
 		}
 		document.loginFrm.submit();
+		
 	}
 </script>
 <style>
@@ -125,7 +127,7 @@
 							</div>
 							</td>
 							<td rowspan="2" align="center">
-								<button id="btnLogin" onclick="loginCheck();">로그인</button>
+								<button type="button" id="btnLogin" onclick="loginCheck();">로그인</button>
 							</td>
 						</tr>
 						<tr style="height:30px;">

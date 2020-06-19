@@ -226,7 +226,7 @@ function goReport() {
 					<div style="border:10px solid #36ada9; border-radius:15px; padding:20px">
 					
 <!-- 글쓰기 Start -->
-		<div style="height:450px;">
+		<div style="height:480px;">
 			<h2><img src="../img/questionmark2.png" width="40" height="40">&nbsp;문의 하기</h2>	
 			<hr style="border:1px solid #36ada9;">	
 			<br/>
@@ -266,9 +266,10 @@ function goReport() {
 							</div></td>
 						</tr>
 						<tr>
-			    			<td align="right">
-			    			비밀글<input type="checkbox" name="stqsecret">
+			    			<td colspan="1">
+			    			비밀글
 							</td>
+							<td><input type="checkbox" name="stqsecret"></td>
 			    		</tr>
 						<tr>
 							<td colspan="4" align="center">

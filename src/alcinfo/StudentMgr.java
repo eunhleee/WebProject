@@ -33,7 +33,7 @@ public class StudentMgr {
 					pstmt.setString(1, "%"+pageValue+"%");
 				}
 				
-				rs = pstmt.executeQuery();//select 占쏙옙占쏙옙
+				rs = pstmt.executeQuery();//select �뜝�룞�삕�뜝�룞�삕
 				while(rs.next()) {
 					StudentBean bean = new StudentBean();
 					bean.setNum(rs.getInt("num"));
@@ -98,7 +98,7 @@ public class StudentMgr {
 			try {
 				con = pool.getConnection();
 				if(!keyWord.trim().equals("")||keyWord!=null) {
-					//占싯삼옙占쏙옙 占싣닌곤옙占�
+					//�뜝�떙�궪�삕�뜝�룞�삕 �뜝�떍�땶怨ㅼ삕�뜝占�
 				
 				sql = "select st.num,me.imgname,me.name,st.class,me.school_name,me.school_grade,st.count from student st,member me " + 
 						" where st.id=me.id and ( me.name like ? or st.class like ? or school_name like ?)";
@@ -138,7 +138,7 @@ public class StudentMgr {
 			try {
 				con = pool.getConnection();
 				sql = "insert stinsert(num,stid,teaid,teaname,stclass,state,date )"
-						+ "values(?,?,?,?,?,'신청접수',now())";
+						+ "values(?,?,?,?,?,'�떊泥��젒�닔',now())";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, sbean.getNum());
 				pstmt.setString(2, sbean.getId());
@@ -238,7 +238,7 @@ public class StudentMgr {
 				return jsonArray;
 		}
 		
-		//Count Up : 조회수 증가
+		//Count Up : 議고쉶�닔 利앷�
 				public void upStCount(int num) {
 					Connection con = null;
 					PreparedStatement pstmt = null;

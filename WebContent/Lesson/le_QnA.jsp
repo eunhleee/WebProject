@@ -12,6 +12,7 @@
 	//검색에 필요한 변수
 
 	int totalRecord = 0;//총게시물수
+	int totalRecord1 = 0;
 	int numPerPage = 10;//페이지당 레코드 개수(5,10,15,30)
 	int pagePerBlock = 15;//블럭당 페이지 개수
 	int totalPage = 0;//총 페이지 개수
@@ -39,6 +40,7 @@
 	}
 
 	totalRecord = mgr.getTotalCount(lq_lnum,keyField, keyWord);
+	totalRecord1 = mgr.getTotalCount1(lq_lnum, keyField, keyWord, loginid);
 	//out.print("totalRecord : " + totalRecord);
 
 	//nowPage 요청 처리
@@ -51,7 +53,12 @@
 	int cnt = numPerPage;
 
 	//전체페이지 개수
-	totalPage = (int) Math.ceil((double) totalRecord / numPerPage);
+	if(mgr.checkM(loginid)==0||mgr.checklqlnum(loginid)==lq_lnum){
+		totalPage = (int) Math.ceil((double) totalRecord / numPerPage);
+	} else {
+		totalPage = (int) Math.ceil((double) totalRecord1 / numPerPage);
+	}
+	
 	//전체블럭 개수
 	totalBlock = (int) Math.ceil((double) totalPage / pagePerBlock);
 	//현재블럭
@@ -151,7 +158,12 @@ div{
 	<hr style="border:1px solid #36ada9;">
 	<table>
 		<tr>
-			<td width="600">Total : <%=totalRecord%>Articles(<font
+			<td width="600">Total : 
+			<%if(mgr.checkM(loginid)==0||mgr.checklqlnum(loginid)==lq_lnum) {%>
+			<%=totalRecord%>
+			<%} else { %>
+			<%=totalRecord1%>
+			<%} %>Articles(<font
 				color="red"> <%=nowPage + "/" + totalPage%>Pages
 			</font>)
 			</td>
@@ -184,8 +196,8 @@ div{
 						<td width="150">날 짜</td>
 						<td width="100">조회수</td>
 					</tr>
-
-
+					<!-- 관리자 & 해당 과외선생님 -->
+					<% if(mgr.checkM(loginid)==0||mgr.checklqlnum(loginid)==lq_lnum) {%>
 					<%
 						Vector<LequeryBean> vlist = mgr.getBoardList(lq_lnum,keyField, keyWord, start, cnt);
 						int listsize = vlist.size();
@@ -198,9 +210,6 @@ div{
 							%>
 						</td>
 					</tr>
-
-
-
 					<%
 						} else {
 							for (int i = 0; i < listsize; i++) {
@@ -210,6 +219,7 @@ div{
 								String title = bean.getLq_title();
 								String id = bean.getLq_id();
 								String date = bean.getLq_date();
+								String secret = bean.getLq_secret();
 								int count = bean.getLq_count();
 								int ccount = mgr.leqccount(num);
 					%>
@@ -217,7 +227,11 @@ div{
 						<td align="center"><%=totalRecord-start-i%></td>
 						<td align="center"><%=subject%></td>
 						<td align="center">
-						<a href="javascript:read('<%=num%>')"><%=title%></a>
+						<a href="javascript:read('<%=num%>')">
+						<% if(secret!=null) {%>
+						<img src="../img/key-icon.png">
+						<% } %>
+						<%=title%></a>
 						<% if(ccount>0) { %>
 							<font color="red">[<%=ccount%>]</font>
 						<% } %>
@@ -226,11 +240,59 @@ div{
 						<td align="center"><%=date%></td>
 						<td align="center"><%=count%></td>
 					</tr>
-
 					<%
-						}
+							}
 						}
 					%>
+					<%} else {%>
+					<!-- 일반 회원 -->
+					<%
+						Vector<LequeryBean> vlist = mgr.getBoardList1(lq_lnum,keyField, keyWord, start, cnt, loginid);
+						int listsize = vlist.size();
+						if (vlist.isEmpty()) {
+					%>
+					<tr>
+						<td align="center" colspan="6" height="240">
+							<%
+								out.println("등록된 게시물이 없습니다.");
+							%>
+						</td>
+					</tr>
+					<%
+						} else {
+							for (int i = 0; i < listsize; i++) {
+								LequeryBean bean = vlist.get(i);
+								int num = bean.getNum();
+								String subject=bean.getLq_subject();
+								String title = bean.getLq_title();
+								String id = bean.getLq_id();
+								String date = bean.getLq_date();
+								String secret = bean.getLq_secret();
+								int count = bean.getLq_count();
+								int ccount = mgr.leqccount(num);
+					%>
+					<tr id="list">
+						<td align="center"><%=totalRecord1-start-i%></td>
+						<td align="center"><%=subject%></td>
+						<td align="center">
+						<a href="javascript:read('<%=num%>')">
+						<% if(secret!=null) {%>
+						<img src="../img/key-icon.png">
+						<% } %>
+						<%=title%></a>
+						<% if(ccount>0) { %>
+							<font color="red">[<%=ccount%>]</font>
+						<% } %>
+						</td>
+						<td align="center"><a href=""><%=id%></a></td>
+						<td align="center"><%=date%></td>
+						<td align="center"><%=count%></td>
+					</tr>
+					<%
+							}
+						}
+					%>
+					<%} %>
 
 
 				</table>

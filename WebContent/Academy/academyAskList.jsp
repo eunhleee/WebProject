@@ -26,7 +26,7 @@
 	int todaynumber=0,mpointnumber=0;
 	String mpoint=null;
 	if(loginid!=null){
-	if(grade==0||grade==1){
+	if(grade==1){
 		MemberBean mbean=Memmgr.getInfo(loginid);
 		mpoint=mbean.getMpoint();
 		
@@ -203,7 +203,7 @@ a:hover {
 						<td width="100">조회수</td>
 					</tr>
 					<%
-						if(loginid==null||mpoint==null||mpointnumber<todaynumber){
+						if(grade!=0&&(loginid==null||mpoint==null||mpointnumber<todaynumber)){
 					%>
 					<tr>
 						<td align="center" colspan="5" height="180" style="background-color:gray;  opacity: 0.5;">
@@ -306,7 +306,7 @@ a:hover {
 				<!-- 페이징 및 블럭 End -->
 			</td>
 			<%
-				if(loginid!=null&&mpoint!=null&&mpointnumber>todaynumber){
+				if(loginid!=null&&mpoint!=null&&mpointnumber>=todaynumber){
 			%>
 			<td align="right">
 			<a 
