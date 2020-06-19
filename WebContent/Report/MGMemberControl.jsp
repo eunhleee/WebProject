@@ -59,7 +59,7 @@ if (request.getParameter("reload") != null && request.getParameter("reload").equ
 <html>
 <head>
 <title>관리자-신고접수건관리</title>
-<link href="MyReportListStyle.css" rel="stylesheet">
+<link href="../Report/MyReportListStyle.css" rel="stylesheet">
 
 <script type="text/javascript">
 	function goupdate(num,restate) {

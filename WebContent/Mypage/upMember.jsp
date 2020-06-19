@@ -240,9 +240,6 @@ function win_close(){
 </style>
 </head>
 <body>
-<%@ include file="../alcinfo/headerSearch.jsp"%>
-
-
 
 <div id="totalframe">
 <div id="categoryframe">
@@ -267,6 +264,7 @@ function win_close(){
 					<table  class="insertMt" >
 					
 						<tr>
+
 							<td rowspan="5" align="center" style="background-color:white; width:270px; border-radius: 10px;">
 								<img src="../img/<%=bean.getImgname()%>" style="margin-bottom:10px;width:250px; height:200px; "><br>
 								<input type="button" onclick="imgcheck();" value="이미지수정">

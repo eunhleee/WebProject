@@ -1,0 +1,39 @@
+.frame {
+  width: 70%;
+  margin: 0 auto;
+  border: 1px solid #aaa;
+}
+
+.container {
+  overflow: hidden;
+}
+
+.nav {
+  border: 1px solid #aaa;
+  float: left;
+  width: 250px;
+  margin-right: 50px;
+}
+.nav-link {
+  display: block;
+  text-decoration: none;
+  padding: 4px 10px;
+}
+.nav-list {
+  margin: 0;
+  padding: 10px 0;
+}
+.nav-item {
+  margin: 4px 0;
+}
+content {
+  float: left;
+  width: 800px;
+}
+  table {
+    border: 1px solid #444444;
+    border-collapse: collapse;
+  }
+  th, td {
+    border: 1px solid #aaa;
+  }

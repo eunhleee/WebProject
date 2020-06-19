@@ -16,6 +16,6 @@ public class upmemberServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		ReportMgr pMgr = new ReportMgr();
 		pMgr.insertPBlog(request);
-		response.sendRedirect("upMembernew.jsp");
+		response.sendRedirect("../Mypage/upMembernew.jsp");
 	}
 }
