@@ -122,7 +122,8 @@ public class MemberMgr {
 				con = pool.getConnection();
 				sql = "SELECT DISTINCT(a.id),a.name,a.email,a.gender,a.passwd,a.nickname,a.birth," + 
 						" a.phone,a.address,a.school_name,a.school_grade,a.imgname"
-						+" FROM (SELECT name,id,email,gender,passwd,nickname,birth,"
+						+" FROM "
+						+" (SELECT name,id,email,gender,passwd,nickname,birth,"
 						+" phone,address,school_name,school_grade,imgname"
 						+" FROM member"
 						+" union" 
@@ -140,7 +141,6 @@ public class MemberMgr {
 					bean.setGender(rs.getString("a.gender"));
 					bean.setPasswd(rs.getString("a.passwd"));
 					bean.setNickname(rs.getString("a.nickname"));
-					bean.setPasswd(rs.getString("a.passwd"));
 					bean.setBirth(rs.getString("a.birth"));
 					bean.setPhone(rs.getString("a.phone"));
 					bean.setAddress(rs.getString("a.address"));

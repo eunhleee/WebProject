@@ -79,7 +79,7 @@
 	text-align: center;
 	margin-top: 40px;
 	HEIGHT: 75px;
-	padding: 20px 35px;
+	line-height:75px;
 	box-shadow: 0px 0px 10px #c0c0c0;
 }
 
@@ -171,10 +171,10 @@
 			<a	href="../Community/communityList.jsp?pageValue=free">커뮤니티</a>
 			<a	href="../Payment/buyPoint.jsp" style="color:yellow;"><img src="../img/won.png" width="20" height="20">포인트</a>
 			<% if(session.getAttribute("idKey")==null){%>
-			<input type="button" onclick="openloginSelect();" class="openlm" value="로그인">
+			<input type="button" onclick="openloginMain();" class="openlm" value="로그인">
 			<%}else{ %>
 			<input type="button" onclick="openlogoutProc();" class="openlm" value="로그아웃">
-			<a href="../alcinfo/upMember.jsp">마이페이지</a>
+			<a href="../Mypage/upMember.jsp">마이페이지</a>
 			<%} %>
 		</div>
 	</div>

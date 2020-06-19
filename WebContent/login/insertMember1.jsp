@@ -247,7 +247,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td align="right"><button  id="btnJoin"  onclick="inputCheck();">가입신청</button></td>
+				<td align="right"><button  id="btnJoin"  onclick="inputCheck();">가입 신청</button></td>
 			</tr>
 		</table>
 	</form>

@@ -27,7 +27,7 @@ String id="1111";
 </head>
 <body>
 <div data-role="content">
-			<form method="post" name="frm" action="pBlogPost"
+			<form method="post" name="frm" action="ImgUp"
 				enctype="multipart/form-data" class="post_form">
 				<div class="preview">
 					<div class="upload">
@@ -45,9 +45,9 @@ String id="1111";
 				<input type="hidden" value="<%=id%>" name="id"> 
 				<input type="button" value="저장" onclick="send()">
 			</form>
-		</div>
+		
 		<form method="post" name="frm1"></form>
-		<%@include file="footer.jsp"%>
+		
 	</div>
 	<script>
 		var fileInput = document.querySelector("#id_photo"), button = document
