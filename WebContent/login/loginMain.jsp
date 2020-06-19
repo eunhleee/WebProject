@@ -15,21 +15,22 @@
 		document.getElementById("idpwdSearch").style.display = 'block';
 	}
 
-	function loginCheck() {
-		
-		if (document.loginFrm.lid.value.trim() == "") {
-			alert("아이디를 입력해 주세요.");
-			document.loginFrm.lid.focus();
-			return;
-		}
-		if (document.loginFrm.lpwd.value == "") {
-			alert("비밀번호를 입력해 주세요.");
-			document.loginFrm.lpwd.focus();
-			return;
-		}
-		document.loginFrm.submit();
-		
+</script>
+<script type="text/javascript">
+function loginCheck() {
+	if (document.loginFrm.lid.value.trim() == "") {
+		alert("아이디를 입력해 주세요.");
+		document.loginFrm.lid.focus();
+		return;
+
 	}
+	if (document.loginFrm.lpwd.value == "") {
+		alert("비밀번호를 입력해 주세요.");
+		document.loginFrm.lpwd.focus();
+		return;
+	}
+	document.loginFrm.submit();
+}
 </script>
 <style>
 #btnExit{

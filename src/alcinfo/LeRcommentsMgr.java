@@ -55,9 +55,9 @@ public class LeRcommentsMgr {
 		try {
 			con = pool.getConnection();
 			sql = "insert lercomments(ler_num,ler_nick,ler_id,ler_content,ler_ip,ler_regdate,"
-					+ "ler_conum) "
+					+ "ler_conum,ler_depth) "
 					+ "values(?,?,?,?,?,now(),"
-					+ "(select max(ler_conum) from lercomments a)+1)";
+					+ "coalesce((select max(ler_conum) from lercomments a)+1,0),0)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, bean.getLer_num());
 			pstmt.setString(2, memberNick(bean.getLer_id()));

@@ -6,7 +6,6 @@
 	
  	int random=(int)(Math.random()*10+1);
 	String loginid=(String)session.getAttribute("idKey");
-	int grade=(Integer)session.getAttribute("idgrade");
 
 	String loginNickname=HeaderMmgr.getInfo(loginid).getNickname();
 	
@@ -93,8 +92,9 @@ function openlogoutProc(){
 			<input type="button" onclick="openloginMain();" class="openlm" value="로그인">
 			<%}else{ %>
 			<input type="button" onclick="openlogoutProc();" class="openlm" value="로그아웃">
-			<% if(grade==0){%>
-			<a href="../Mypage/academyApply.jsp">관리자페이지</a>
+
+			<% if((Integer)session.getAttribute("idgrade")==0){%>
+			<a href="../Report/MGMemberControl.jsp">관리자페이지</a>
 			<%}else{%>
 			<a href="../Mypage/upMember.jsp">마이페이지</a>
 			<%}} %>

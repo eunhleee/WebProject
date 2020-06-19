@@ -56,7 +56,6 @@
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="script.js"></script>
 </head>
-<%@ include file="../alcinfo/headerSearch.jsp" %>
 <body>
 <br>
 	<form name="leForm" method="post" action="leInsertProc.jsp">

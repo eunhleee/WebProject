@@ -52,9 +52,10 @@ private DBConnectionMgr pool;
 		String sql = null;
 		try {
 			con = pool.getConnection();
-			sql = "insert acqcomments(acq_num,acq_id,acq_content,acq_ip,acq_regdate,acq_conum) "
+			sql = "insert acqcomments(acq_num,acq_id,acq_content,acq_ip,acq_regdate,"
+					+ "acq_conum,acq_depth) "
 					+ "values(?,?,?,?,now(),"
-					+ "(select max(acq_conum) from acqcomments a)+1)";
+					+ "coalesce((select max(acq_conum) from acqcomments a)+1,0),0)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, bean.getAcq_num());
 			pstmt.setString(2, bean.getAcq_id());

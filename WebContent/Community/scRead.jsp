@@ -119,7 +119,7 @@ function goCReport(conum,stuc_depth,stopid) {
 	align:center;
 	border: 10px solid #F88C65; 
 	border-radius:10px;
-	padding:40px 40px;
+	padding:20px 40px;
 }
 #list td {
 	border-bottom: 1px solid lightgray;
@@ -156,22 +156,21 @@ a:hover {
 		 <tr>
 		  <td>
 		   <table cellpadding="3" cellspacing="0" width="100%" > 
-		   <tr> 
-			    <td align="center" bgcolor="#FCBC7E" style="color:white; font-weight:bold;"> 제 목</td>
-			    <td bgcolor="#FAF8EB" colspan="3"><%=title%></td>
-			    <td align="center" bgcolor="#FCBC7E" width="15%" style="color:white; font-weight:bold;">조회수</td>
-				<td bgcolor="#FAF8EB"  ><%=count%>  
-				 <% if(loginid!=null) {%>		    
+		   <tr height="100"> 
+			    <td colspan="7"><span style="font-size:30px;"><%=title%></span> 
+			    <% if(loginid!=null) {%>		    
 				 <input type="button" value="신고" onclick="javascript:goRep();" style="float:right;">
 				  <%}%></td>
 			    
 		   </tr>
 		    <tr> 
-				<td align="center" bgcolor="#FCBC7E" width="15%" style="color:white; font-weight:bold;" > 닉 네 임</td>
-				<td bgcolor="#FAF8EB" width="15%"><%=id%></td>
-				<td align="center" bgcolor="#FCBC7E" width="15%" style="color:white; font-weight:bold;"> 등록날짜 </td>
-				<td bgcolor="#FAF8EB" colspan="2" ><%=regdate%></td>
-				
+				<td align="center" bgcolor="#FCBC7E" width="10%" style="color:white; font-weight:bold;" > 닉 네 임</td>
+				<td bgcolor="#FAF8EB" width="10%"><%=id%></td>
+				<td align="center" bgcolor="#FCBC7E" width="10%" style="color:white; font-weight:bold;"> 등록날짜 </td>
+				<td bgcolor="#FAF8EB" width="10%"><%=regdate%></td>
+				<td align="center" bgcolor="#FCBC7E" width="10%" style="color:white; font-weight:bold;">조회수</td>
+				<td bgcolor="#FAF8EB"  colspan="3"><%=count%></td>
+			    
 			</tr>
 		 
 		   <tr> 
@@ -190,7 +189,7 @@ a:hover {
 		     </td>
 		   </tr>
 		   <tr> 
-		    <td colspan="6"><br/><pre><%=content%></pre><br/></td>
+		    <td colspan="6" height="200"><span><%=content%></span></td>
 		   </tr>
 		   <tr>
 		    <td colspan="3" align="left">
@@ -208,7 +207,7 @@ a:hover {
 			  	Vector<SCommentBean> cvlist = sccmgr.getSComment(num);
 			      	if(!cvlist.isEmpty()){
 			  %>
-				 <table>
+				 <table width="100%">
 				 <%
 					 	for(int i=0;i<cvlist.size();i++){
 	 		 	 			SCommentBean sccbean = cvlist.get(i);
@@ -226,21 +225,19 @@ a:hover {
 				 %>
 				 	
 				 	<tr>
-						<td <%=dstyle%> colspan="3" width="600"><b><%=cnick%></b></td>
+						<td <%=dstyle%> colspan="4" width="600"><b><%=cnick%></b></td>
 					</tr>
 					<tr>
-						<td <%=dstyle%> colspan="2"><%=comment%></td>
+						<td <%=dstyle%> colspan="3" style=" min-height:150px;"><%=comment%></td>
+						<td align="right" >
 						<% 
 						if(loginNick!=null) {
 							if(loginNick.equals(cnick)||scmgr.checkM(loginid)==0) { %>
-						<td align="center" valign="middle">
+						
 							<input type="button" value="삭제"
 							onclick="cDel('<%=conum%>','<%=cnum%>','<%=depth%>')">
 							
-						</td>
 						<%}%>
-							<td align="left" valign="middle">
-							
 							<input type="button" value="댓글신고" 
 							onclick="javascript:goCReport
 							('<%=sccbean.getNum()%>','<%=sccbean.getStuc_depth()%>','<%=stopid%>')">
@@ -250,7 +247,7 @@ a:hover {
 						
 					</tr>
 					<tr>
-						<td <%=dstyle%> colspan="3">
+						<td <%=dstyle%> colspan="3" style="font-size:12px; color:gray;">
 						<%=cregdate%>
 						<% if(loginid!=null) { %>
 						<a onclick="onscReply<%=i%>();">답글쓰기</a>  
@@ -324,18 +321,21 @@ a:hover {
 			
 			 <% if(loginid!=null) { %>
 		   <form method="post" name="cFrm">
-				<table>
-					
-					<tr >
-						<td><%=loginNick%>&nbsp;:&nbsp;</td>
-						<td>
-							<div id="inputdiv" style="width:650px; display:flex; backgound-color:white;">
-								<input name="comment" size="50" placeholder="댓글을 남겨보세요" style="flex:5;"> 
-								<input type="button" value="등록" onclick="cInsert()" style="flex:1;">
-							</div>
-						</td>
-					</tr>
-				</table>
+			   <div id="inputdiv" style="width:97%; backgound-color:white;">
+					<table width="97%">
+						<tr >
+							<td colspan="4"><%=loginNick%></td>
+						</tr>
+						<tr>
+							<td colspan="3" width="90%">
+								<input name="comment"  placeholder="댓글을 남겨보세요" style="width:95%; height:30px;"> 
+							</td>
+							<td align="right">
+								<input type="button" value="등록" onclick="cInsert()" style=" height:30px;">
+							</td>
+						</tr>
+					</table>
+				</div>
 			 <input type="hidden" name="flag" value="insert">	
 			 <input type="hidden" name="num" value="<%=num%>">
 			 <input type="hidden" name="cnum">

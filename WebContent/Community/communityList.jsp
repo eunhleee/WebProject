@@ -226,7 +226,7 @@ a:hover {
 
 	<!-- 리스트 부분 -->
 	<div id="insertMember" class="insertMember1" align="left">
-			
+
 		<h2><%=category %></h2>
 		<table>
 			<tr>
@@ -260,8 +260,8 @@ a:hover {
 							<td width="100">닉네임</td>
 							<td width="150">날 짜</td>
 							<td width="100">조회수</td>
-						</tr>
 
+						</tr>
 
 		
 				<%
