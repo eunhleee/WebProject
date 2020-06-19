@@ -10,7 +10,7 @@
     
 <%
 if(session.getAttribute("idKey")==null||session.getAttribute("idKey").equals("")){
-	response.sendRedirect("cards-gallery.jsp");
+	response.sendRedirect("../alcinfo/cards-gallery.jsp");
 	}
 	else{
 	String id=(String)session.getAttribute("idKey");
@@ -23,7 +23,7 @@ if(session.getAttribute("idKey")==null||session.getAttribute("idKey").equals("")
 %>
 <html>
 <head>
-<link href="../login/idpwdstyle.css" rel="stylesheet" type="text/css">
+
 <script type="text/JavaScript" src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript">
 function inputCheck(){
@@ -135,44 +135,163 @@ function win_close(){
 	}
 
 	function imgcheck(){
-		url = "../alcinfo/ImgProc.jsp";
+		url = "../Mypage/ImgProc.jsp";
 		window.open(url, "imggo", "width=500, height=500, top=200, left=200");
 	}
 </script>
+<style>
+#totalframe{
+	background-color:#FAF8EB;
+	display:flex;
+	width:96.5%;
+	height:100%;
+	padding:30px;
+	
+}
+
+#categoryframe{
+	margin-left:250px;
+	margin-right:30px;
+	flex:1;
+	border:10px solid #FCBC7E;
+	border-radius:15px;
+	background-color:white;
+	width:100px;
+	height:300px;
+	padding:30px 0px;
+}
+
+#atag {
+	width:150px;
+ 	height:40px;
+ 	line-height:40px;
+ 	display: block;
+ 	margin-left:50px;
+ }
+ 
+ 
+#atag:hover{
+ 	background-color:#FAF8EB;
+ 	border-radius: 10px;
+ }
+ 
+#atag a {
+	text-decoration: none;
+	color: black;
+}
+
+#atag a:hover {
+	color: gray;
+}
+
+#insertMember{
+	padding:0px 150px;
+	flex:4;
+}
+
+#imFrm{
+	width:900px;
+}
+
+#inputdiv{
+	background-color:white;
+}
+#btnJoin{
+  background:#FCBC7E;
+  color:#fff;
+  border:none;
+  position:relative;
+  width:90px;
+  height:50px;
+  font-size:17px;
+  line-height:50px;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+  border-radius: 6px;
+}
+#btnJoin:hover{
+  background:#fff;
+  color:#FCBC7E;
+}
+#btnJoin:before,#btnJoin:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background:#FCBC7E;
+  transition:400ms ease all;
+}
+#btnJoin:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+#btnJoin:hover:before,#btnJoin:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
+
+
+</style>
 </head>
 <body>
-<%@ include file="../alcinfo/mainHeader.jsp"%>
-<div id="insertMember" class="insertMember1" align="center">
-	<form name="imFrm" class="im-content" method="post" action="../alcinfo/upmemberProc.jsp">
-		<table style="margin-left:10px;">
+<%@ include file="../alcinfo/headerSearch.jsp"%>
+
+
+
+<div id="totalframe">
+<div id="categoryframe">
+	<h3 style="margin-left:50px;">마이 페이지</h3>
+	<div id="atag"><a href="">&#149; 개인 정보 수정</a></div>
+	<div id="atag"><a href="">&#149; 내가 쓴 글</a></div>
+	<div id="atag"><a href="../Mypage/MyReportList.jsp">&#149; 나의 신고</a></div>
+	<div id="atag"><a href="">&#149; 신청한 과외</a></div>
+	<div id="atag"><a href="">&#149; 신청 받은 과외</a></div>
+</div>
+<div id="insertMember" class="insertMember1" align="left">
+	<form name="imFrm" class="im-content" method="post" action="../Mypage/upmemberProc.jsp">
+		<table style="width:700px; margin-left:-50px;">
 			<tr>
-				<td><p style="margin-bottom:10px;">학생 정보수정</p></td>
+				<td colspan="4">
+					<h2 style="margin-bottom:10px;">개인 정보 수정</h2>
+				</td>
 			</tr>
 		
 			<tr>
 				<td>
-					<table border="1" class="insertMt">
+					<table  class="insertMt" >
+					
 						<tr>
-				<img src="../img/<%=bean.getImgname()%>" width="380" height="300" margin-bottom="5px"><br/>
-				<input type="button" onclick="imgcheck();" value="이미지수정"></td>
-			</tr>
-						<tr>
-							<td width="100px">&nbsp;아이디</td>
-							<td width="260px">
-								<input type="text" style="width:260px; height:30px;"
-								maxlength="15" name="imid" value="<%=bean.getId()%>" readonly>
+							<td rowspan="5" align="center" style="background-color:white; width:270px; border-radius: 10px;">
+								<img src="../img/<%=bean.getImgname()%>" style="margin-bottom:10px;width:250px; height:200px; "><br>
+								<input type="button" onclick="imgcheck();" value="이미지수정">
+							</td>
+							<td width="200px" align="center">&nbsp;아이디</td>
+							<td width="270px">
+								<div id="inputdiv" style="width:270px;">
+									<input type="text" style="width:260px; height:30px;"
+									maxlength="15" name="imid" value="<%=bean.getId()%>" readonly>
+								</div>
 							</td>
 						</tr>
 						<tr>
-							<td width="100px">&nbsp;이름</td>
-							<td width="260px">
-								<input type="text" style="width:260px; height:30px;"
-								name="imname" value="<%=bean.getName()%>">
+							
+							<td width="100px" align="center">&nbsp;이름</td>
+							<td >
+								<div id="inputdiv" style="width:270px;">
+									<input type="text" style="width:260px; height:30px;"
+									name="imname" value="<%=bean.getName()%>">
+								</div>
 							</td>
 						</tr>
 						<tr height="33px">
-							<td width="100px">&nbsp;성별</td>
-							<td width="260px">
+							
+							<td width="100px" align="center">&nbsp;성별</td>
+							<td >
 								<input type="radio" name="imgender" value="남자" 
 								<%=bean.getGender().equals("남자")?"checked":""%> 
 								style="margin-left:5px;">남자
@@ -182,32 +301,42 @@ function win_close(){
 							</td>
 						</tr>
 						<tr>
-							<td width="100px">&nbsp;비밀번호</td>
-							<td width="260px">
+							
+							<td width="100px" align="center">&nbsp;비밀번호</td>
+							<td >
+								<div id="inputdiv" style="width:270px;">
 								<input type="password" style="width:260px; height:30px;"
 								maxlength="15" name="impwd" value="<%=bean.getPasswd()%>">
+								</div>
 							</td>
 						</tr>
 						<tr>
-							<td width="100px">&nbsp;비밀번호확인</td>
-							<td width="260px">
-								<input type="password" style="width:260px; height:30px;"
-								maxlength="15" name="imrepwd">
-							</td>
-						</tr>
-						<tr>
-							<td width="100px">&nbsp;닉네임</td>
-							<td width="230px">
-								<input type="text" style="width:185px; height:30px;"
-								name="imnickname" value="<%=bean.getNickname()%>">
-								<input type="button" style="width:70px; height:30px;" 
-								value="중복체크" onclick="nickCheck();">
-							</td>
-						</tr>
-						<tr>
-							<td width="100px">&nbsp;생년월일</td>
-							<td width="260px">
 							
+							<td width="100px" align="center">&nbsp;비밀번호확인</td>
+							<td >
+								<div id="inputdiv" style="width:270px;">
+									<input type="password" style="width:260px; height:30px;"
+									maxlength="15" name="imrepwd">
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td width="100px" align="center">&nbsp;닉네임</td>
+							<td >
+								<div id="inputdiv" style="width:270px;">
+									<input type="text" style="width:185px; height:30px;"
+									name="imnickname" value="<%=bean.getNickname()%>">
+									<input type="button" style="width:70px; height:30px;" 
+									value="중복체크" onclick="nickCheck();">
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td width="100px" align="center">&nbsp;생년월일</td>
+							<td width="260px">
+								<div id="inputdiv" style="width:270px;">
 								<input type="text" style="width:85px; height:32px;"
 									placeholder="년(4자)" name="imbirthy" maxlength="4" 
 									value="<%=bean.getBirth().substring(0,4)%>">
@@ -251,71 +380,87 @@ function win_close(){
 										
 									<% } %>
 								</select>
+								</div>
 							</td>
 						</tr>
 						<tr>
-							<td width="100px">&nbsp;휴대폰번호</td>
-							<td width="260px">
-								<input type="text" style="width:260px; height:30px;"
-								placeholder="  숫자만 입력해주세요" maxlength="11" name="imphone"
-								value="<%=bean.getPhone()%>">
+							<td></td>
+							<td width="100px" align="center">&nbsp;휴대폰번호</td>
+							<td >
+								<div id="inputdiv" style="width:270px;">
+									<input type="text" style="width:260px; height:30px;"
+									placeholder="  숫자만 입력해주세요" maxlength="11" name="imphone"
+									value="<%=bean.getPhone()%>">
+								</div>
 							</td>
 						</tr>
 						<tr>
-							<td width="100px">&nbsp;이메일</td>
-							<td width="260px">
-								<input type="text" style="width:260px; height:30px;"
-								name="imemail" value="<%=bean.getEmail()%>">
+							<td></td>
+							<td width="100px" align="center">&nbsp;이메일</td>
+							<td >
+								<div id="inputdiv" style="width:270px;">
+									<input type="text" style="width:260px; height:30px;"
+									name="imemail" value="<%=bean.getEmail()%>">
+								</div>
 							</td>
 						</tr>
 						<tr>
-							<td width="100px" height="66px">&nbsp;주소</td>
-							<td width="260px">
-								<input type="text" id="address" name="imaddress1"
-								value="<%=bean.getAddress()%>"
-								style="width:185px; height:30px;" readonly >
-								<input type="button" style="width:70px; height:30px;"
-								onClick="openDaumZipAddress();" value="주소찾기">
-								<input type="text" style="width:260px; height:30px; margin-top:2px;"
-								placeholder="기타 주소" name="imaddress2">
+							<td></td>
+							<td width="100px" height="66px" align="center">&nbsp;주소</td>
+							<td >
+								<div id="inputdiv" style="width:270px;">
+									<input type="text" id="address" name="imaddress1"
+									value="<%=bean.getAddress()%>"
+									style="width:185px; height:30px;" readonly >
+									<input type="button" style="width:70px; height:30px;"
+									onClick="openDaumZipAddress();" value="주소찾기">
+								</div>
+								<div id="inputdiv" style="width:270px;">
+									<input type="text" style="width:260px; height:30px; margin-top:2px;"
+									placeholder="기타 주소" name="imaddress2">
+								</div>
 							</td>
 						</tr>
 						<tr>
-							<td width="100px">&nbsp;학교 구분</td>
-							
-							<td width="260px">
-								<select name="imschoolgrade" style="width:260px; height:30px">
-									<option value="학교 구분">학교 구분</option>
-									<option value="초등학생" 
-									<%=bean.getSchool_grade().equals("초등학생")?"selected":""%>>초등학생</option>
-									<option value="중학생" 
-									<%=bean.getSchool_grade().equals("중학생")?"selected":""%>>중학생</option>
-									<option value="고등학생" 
-									<%=bean.getSchool_grade().equals("고등학생")?"selected":""%>>고등학생</option>
-									<option value="기타" 
-									<%=bean.getSchool_grade().equals("기타")?"selected":""%>>기타</option>
-								</select>
+							<td></td>
+							<td width="100px" align="center">&nbsp;학교 구분</td>
+							<td >
+								<div id="inputdiv" style="width:270px;">
+									<select name="imschoolgrade" style="width:260px; height:30px;border:none;">
+										<option value="학교 구분">학교 구분</option>
+										<option value="초등학생" 
+										<%=bean.getSchool_grade().equals("초등학생")?"selected":""%>>초등학생</option>
+										<option value="중학생" 
+										<%=bean.getSchool_grade().equals("중학생")?"selected":""%>>중학생</option>
+										<option value="고등학생" 
+										<%=bean.getSchool_grade().equals("고등학생")?"selected":""%>>고등학생</option>
+										<option value="기타" 
+										<%=bean.getSchool_grade().equals("기타")?"selected":""%>>기타</option>
+									</select>
+								</div>
 							</td>
 						</tr>
 						<tr>
-							<td width="100px">&nbsp;학교 이름</td>
-							<td width="260px">
-								<input type="text" style="width:260px; height:30px;"
-								name="imschoolname" value="<%=bean.getSchool_name()%>">
+							<td></td>
+							<td width="100px" align="center">&nbsp;학교 이름</td>
+							<td >
+								<div id="inputdiv" style="width:270px;">
+									<input type="text" style="width:260px; height:30px;"
+									name="imschoolname" value="<%=bean.getSchool_name()%>">
+								</div>
 							</td>
 						</tr>
 					</table>
 				</td>
 			</tr>
 			<tr>
-				<td align="right"><input type=button value="회원수정" class="loginb"
-				style="width:120px;" onclick="inputCheck();"></td>
+				<td align="right"><button  id="btnJoin"  onclick="inputCheck();">정보 수정</button></td>
 			</tr>
 		</table>
 	</form>
 	<%} %>
 </div>
+</div>
 
-<%@ include file="../alcinfo/footer.jsp"%>
 </body>
 </html>

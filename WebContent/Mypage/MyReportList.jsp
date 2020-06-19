@@ -9,10 +9,8 @@
 <%
 		
 		request.setCharacterEncoding("UTF-8");
-/* 		String reid=(String)session.getAttribute("idKey");
+ 		String reid=(String)session.getAttribute("idKey");
 
- */		
- 		String reid="1111";
  		int totalRecord = 0;//총게시물수
 		int numPerPage = 10;//페이지당 레코드 개수(5,10,15,30)
 		int pagePerBlock = 15;//블럭당 페이지 개수
@@ -90,65 +88,139 @@ function numPerFn(numPerPage) {
 	document.readFrm.submit();
 }
 </script>
+<style>
+#totalframe{
+	background-color:#FAF8EB;
+	width:96.5%;
+	height:100%;
+	padding:30px 50px;
+	
+}
+#insertMember{
+	float: right;
+	margin-right:400px;
+  	width: 800px;
+}
+#categoryframe{
+	margin-left:280px;
+	margin-right:80px;
+	float:left;
+	border:10px solid #FCBC7E;
+	border-radius:15px;
+	background-color:white;
+	width:250px;
+	height:300px;
+	padding:30px 0px;
+}
+
+#atag {
+	width:150px;
+ 	height:40px;
+ 	line-height:40px;
+ 	display: block;
+ 	margin-left:60px;
+ }
+ 
+ 
+#atag:hover{
+ 	background-color:#FAF8EB;
+ 	border-radius: 10px;
+ }
+ 
+#atag a {
+	text-decoration: none;
+	color: black;
+}
+
+#atag a:hover {
+	color: gray;
+}
+
+#list td {
+	border-bottom: 1px solid lightgray;
+	background-color:white;
+	height:30px;
+	
+}
+
+#title td {
+	color: white;
+	background-color: #F88C65;
+}
+
+select{
+	font-size:15px;
+}
+
+#inputdiv{
+	background-color:white;
+}
+
+
+</style>
 </head>
 <body>
 <jsp:include page="../alcinfo/headerSearch.jsp"/>
-<div class="frame">
-  <div class="container">
-    <div class="nav">
-      <ul class="nav-list">
-        <li class="nav-item"><a href="" class="nav-link">개인정보 변경</a></li>
-        <li class="nav-item"><a href="" class="nav-link">내가 쓴 글</a></li>      
-        <li class="nav-item"><a href="" class="nav-link">나의신고</a></li>
-        <li class="nav-item"><a href="" class="nav-link">신청한 과외</a></li>
-        <li class="nav-item"><a href="" class="nav-link">접수된 학생</a></li>
-      
-      </ul>
-    </div>
+<div id="totalframe">
+	<div id="categoryframe">
+		<h3 align="center">마이 페이지</h3>
+		<div id="atag"><a href="../Mypage/upMember.jsp">&#149; 개인 정보 수정</a></div>
+		<div id="atag"><a href="">&#149; 내가 쓴 글</a></div>
+		<div id="atag"><a href="../Mypage/MyReportList.jsp">&#149; 나의 신고</a></div>
+		<div id="atag"><a href="">&#149; 신청한 과외</a></div>
+		<div id="atag"><a href="">&#149; 신청 받은 과외</a></div>
+	</div>
     <!--nav-->
-    <div class="content">
+  <div id="insertMember" class="insertMember1" align="left">
 		<form name="searchF">
-					<table width="600" cellpadding="4" cellspacing="0">
+					<table width="800" cellpadding="4" cellspacing="0">
 						<tr>
-							<td align="center" valign="bottom"><select name="keyField" size="1">
-							<option value="renum">글번호</option>
-							<option value="regroup">글분류</option>
-							<option value="retitle">제목</option>
-							<option value="recontent">내용</option>
-							<option value="restate">상태</option>
-							
-							</select> <input size="16" name="keyWord">
-							<input type="button" value="찾기" onClick="javascript:mycheck()"> 
-							<input type="hidden" name="nowPage" value="1"></td>
+							<td align="center" valign="bottom">
+								<div id="inputdiv" style="width:320px; display:flex;">
+									<select name="keyField" size="1" style="flex:1; border:none;"> 
+									<option value="renum">글번호</option>
+									<option value="regroup">글분류</option>
+									<option value="retitle">제목</option>
+									<option value="recontent">내용</option>
+									<option value="restate">상태</option>
+									
+									</select> 
+									
+								
+									<input name="keyWord" style="width:150px;flex:2; ">
+									<input type="button" value="찾기" onClick="javascript:mycheck()" style="flex:1;"> 
+								</div>
+								<input type="hidden" name="nowPage" value="1">
+							</td>
 						</tr>
 					</table>
 				</form>
-	<table>
+	<table >
 	<tr>
 		<td width="600">
 		Total : <%=totalRecord%>Articles(
 		<font color="red"><%=nowPage+"/"+totalPage%>Pages</font>)
 		</td>
 		<td align="right"><form name="npFrm" method="post">
-					<select name="numPerPage" size="1" onchange="numPerFn(this.form.numPerPage.value)">
-    					<option value="5">5개 보기</option>
-    					<option value="10" selected>10개 보기</option>
-    					<option value="15">15개 보기</option>
-    					<option value="30">30개 보기</option>
-   				</select>
-   			</form>
-   			<script>
-   			document.npFrm.numPerPage.value=<%=numPerPage%>
-   			//19번째 줄에 10개 셋팅시에 값을 바꾸는 역할을 한다. 이게 없으면 값이 처음기본 세팅의 10으로 돌아올수가 없다.
-   			</script>
-   	</td>
-		
-	</tr>
-</table>
+					<select name="numPerPage" size="1" onchange="numPerFn(this.form.numPerPage.value)" style="font-size:15px;">
+	   					<option value="5">5개 보기</option>
+	   					<option value="10" selected>10개 보기</option>
+	   					<option value="15">15개 보기</option>
+	   					<option value="30">30개 보기</option>
+	  				</select>
+	  			</form>
+	  			<script>
+	  			document.npFrm.numPerPage.value=<%=numPerPage%>
+	  			//19번째 줄에 10개 셋팅시에 값을 바꾸는 역할을 한다. 이게 없으면 값이 처음기본 세팅의 10으로 돌아올수가 없다.
+	  			</script>
+	   	</td>
+			
+		</tr>
+	</table>
 		<table>
-	<tr>
-		<td align="center" colspan="2" width="1000">
-		<%
+		<tr>
+			<td align="center" colspan="2" width="800">
+			<%
 				Vector<ReportBean> vlist = 
 				rMgr.MRList(keyField, keyWord,reid, start, cnt);
 				int listSize = vlist.size();//브라우저 화면에 표시될 게시물 번호
@@ -157,11 +229,11 @@ function numPerFn(numPerPage) {
 				}else{
 		//Vector<ReportBean> mvlist=rMgr.MRList(keyField, keyWord,reid);
 		//int listStze =mvlist.size();
-%>
-	<table cellspacing="0">
-
-			<tr>
-				<td width="100">신고날짜</td>
+	%>
+	<table cellspacing="0"  width="800">
+	
+			<tr id="title">
+				<td>신고날짜</td>
 				<td>글번호</td>
 				<td>글분류</td>
 				<td>제목</td>
@@ -172,7 +244,7 @@ function numPerFn(numPerPage) {
 			if(i==listSize) break;
 			ReportBean mbean=vlist.get(i);
 		%>
-			<tr>
+			<tr id="list">
 			<td><%=mbean.getOlddate()%></td>
 			<td><%=mbean.getRenum()%></td>
 			<td><%=mbean.getRegroup()%></td>
@@ -205,44 +277,42 @@ function numPerFn(numPerPage) {
 		for(;pageStart<pageEnd;pageStart++){
 	%>
 	<a href="javascript:pageing('<%=pageStart%>')"><!-- 페이징처리(페이지번호 넘기기) -->
-	<%if(nowPage==pageStart){ %><font color="blue"><%}%>
+	<%if(nowPage==pageStart){ %><font color="black"><%}%>
 	[<%=pageStart%>]
 	<%if(nowPage==pageStart){ %></font><%}%>
 	</a>
 	<%}//---for%>
 	<!-- 다음 블럭(다음페이지로 넘긴다) -->
-	<%if(totalBlock>nowBlock){ %>
+		<%if(totalBlock>nowBlock){ %>
 			<a href="javascript:block('<%=nowBlock+1%>')">...next</a>
 		<%}%>
 	<%}///-if1%>
-	<!-- 페이징 및 블럭 End -->
-	</td>
-	<td align="right">
-		<a href="javascript:list()">[처음으로]</a>
-	</td>
-	</tr>
-</table>
-	<form name="listFrm" method="post">
+		<!-- 페이징 및 블럭 End -->
+		</td>
+		<td align="right">
+			<a href="javascript:list()" style="color:black;">[처음으로]</a>
+		</td>
+		</tr>
+	</table>
+ </div>
+</div>
+<form name="listFrm" method="post">
 	<input type="hidden" name="reload" value="true">
 	<input type="hidden" name="nowPage" value="1">
 </form>
-	<form name="readFrm">
+<form name="readFrm">
 	<input type="hidden" name="nowPage" value="<%=nowPage%>">
 	<input type="hidden" name="numPerPage" value="<%=numPerPage%>">
 	<input type="hidden" name="keyField" value="<%=keyField%>">
 	<input type="hidden" name="keyWord" value="<%=keyWord%>">
 	<input type="hidden" name="num">
 	
-	
 </form>
-    </div>
-  </div>
+   
+ 
   <!-- //container -->
-    <div class="footer">
-  </div>
-  <!-- //footer -->
-  <jsp:include page="../alcinfo/footer.jsp"/>
-</div>
+
+
 <!-- //frame -->
 </body>
 </html>

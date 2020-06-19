@@ -140,7 +140,7 @@ a:hover {
 		</td>
 		<td align="right">
 			<form name="npFrm" method="post">
-				<select name="numPerPage" size="1" onchange="numPerFn(this.form.numPerPage.value)">
+				<select name="numPerPage" size="1" onchange="numPerFn(this.form.numPerPage.value)" style="font-size:15px;">
     				<option value="5">5개 보기</option>
     				<option value="10" selected>10개 보기</option>
     				<option value="15">15개 보기</option>
@@ -174,7 +174,7 @@ a:hover {
 						if (vlist.isEmpty()) {
 					%>
 					<tr>
-						<td align="center" colspan="6" height="210">
+						<td align="center" colspan="6" height="180">
 							<p>등록된 게시글이 없습니다.</p>
 						</td>
 					</tr>
@@ -332,16 +332,17 @@ a:hover {
 		<table width="600" cellpadding="4" cellspacing="0">
 			<tr>
 				<td align="center" valign="bottom">
-				<select name="keyField"	size="1">
-						<option value="title" <%if(keyField.equals("title")) {%>selected<%} %>>제 목</option>
-						<option value="content" <%if(keyField.equals("content")) {%>selected<%} %>>내 용</option>
-						<option value="id" <%if(keyField.equals("id")) {%>selected<%} %>>아 이 디</option>
-				</select> 
-				<input size="16" name="keyWord" value="<%=keyWord%>"> 
-				<input type="hidden" name="stunum" value="<%=stunum %>">
-				<input type="submit" value="찾기" onClick="javascript:stcheck()"> 
+				<div id="inputdiv" style="width:320px; display:flex;">
+					<select name="keyField"	size="1" style="flex:1; border:none;">
+							<option value="title" <%if(keyField.equals("title")) {%>selected<%} %>>제 목</option>
+							<option value="content" <%if(keyField.equals("content")) {%>selected<%} %>>내 용</option>
+							<option value="id" <%if(keyField.equals("id")) {%>selected<%} %>>아 이 디</option>
+					</select> 
+					<input size="16" name="keyWord" value="<%=keyWord%>"  style="flex:2;"> 
+					<input type="submit" value="찾기" onClick="javascript:stcheck()"  style="flex:1;"> 
+				</div>
 				<input type="hidden" name="nowPage" value="1">
-				
+				<input type="hidden" name="stunum" value="<%=stunum %>">
 				</td>
 			</tr>
 		</table>
