@@ -24,6 +24,7 @@
 		
 		lebean.setId(id);
 		  System.out.println("선생님아이디는"+id);
+		
 %>
 <!DOCTYPE html>
 <html>
