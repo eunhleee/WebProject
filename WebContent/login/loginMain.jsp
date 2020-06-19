@@ -14,20 +14,21 @@
 	function openidpwdSearch() {
 		document.getElementById("idpwdSearch").style.display = 'block';
 	}
-
-	function loginCheck() {
-		if (document.loginFrm.lid.value.trim() == "") {
-			alert("아이디를 입력해 주세요.");
-			document.loginFrm.lid.focus();
-			return;
-		}
-		if (document.loginFrm.lpwd.value == "") {
-			alert("비밀번호를 입력해 주세요.");
-			document.loginFrm.lpwd.focus();
-			return;
-		}
-		document.loginFrm.submit();
+</script>
+<script type="text/javascript">
+function loginCheck() {
+	if (document.loginFrm.lid.value.trim() == "") {
+		alert("아이디를 입력해 주세요.");
+		document.loginFrm.lid.focus();
+		return;
 	}
+	if (document.loginFrm.lpwd.value == "") {
+		alert("비밀번호를 입력해 주세요.");
+		document.loginFrm.lpwd.focus();
+		return;
+	}
+	document.loginFrm.submit();
+}
 </script>
 <style>
 #btnExit{
@@ -125,7 +126,7 @@
 							</div>
 							</td>
 							<td rowspan="2" align="center">
-								<button id="btnLogin" onclick="loginCheck();">로그인</button>
+								<button type="button" id="btnLogin" onclick="loginCheck();">로그인</button>
 							</td>
 						</tr>
 						<tr style="height:30px;">

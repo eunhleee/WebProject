@@ -176,7 +176,7 @@ a:hover {
 			<td align="right">
 				<form name="npFrm" method="post">
 					<select name="numPerPage" size="1"
-						onchange="numPerFn(this.form.numPerPage.value)">
+						onchange="numPerFn(this.form.numPerPage.value)" style="font-size:15px;">
 						<option value="5">5개 보기</option>
 						<option value="10" selected>10개 보기</option>
 						<option value="15">15개 보기</option>
@@ -206,7 +206,7 @@ a:hover {
 						if(loginid==null||mpoint==null||mpointnumber<todaynumber){
 					%>
 					<tr>
-						<td align="center" colspan="5" height="210" style="background-color:gray;  opacity: 0.5;">
+						<td align="center" colspan="5" height="180" style="background-color:gray;  opacity: 0.5;">
 							<p style="color:white;">포인트를 구입하시면 <%=totalRecord%> 개의 후기글을 보실 수 있습니다.</p><br>
 							<input type="button" value="포인트 구입하러 가기" onclick="moveToBuyPoint();">
 						</td>
@@ -218,7 +218,7 @@ a:hover {
 						if (vlist.isEmpty()) {
 					%>
 					<tr>
-						<td align="center" colspan="5" height="210">
+						<td align="center" colspan="5" height="180">
 							<%
 								out.println("등록된 게시물이 없습니다.");
 							%>
@@ -306,7 +306,7 @@ a:hover {
 				<!-- 페이징 및 블럭 End -->
 			</td>
 			<%
-				if(loginid!=null&&mpoint!=null&&mpointnumber>todaynumber){
+				if(loginid!=null&&mpoint!=null&&mpointnumber>=todaynumber){
 			%>
 			<td align="right">
 			<a 
@@ -330,14 +330,16 @@ a:hover {
 		<table width="600" cellpadding="4" cellspacing="0">
 			<tr>
 				<td align="center" valign="bottom">
-					<select name="keyField" size="1">
-						<option value="ac_title" <%if(keyField.equals("ac_title")) {%>selected<%} %>>제 목</option>
-						<option value="ac_content" <%if(keyField.equals("ac_content")) {%>selected<%} %>>내 용</option>
-						<option value="ac_nickname" <%if(keyField.equals("ac_nickname")) {%>selected<%} %>>닉 네 임</option>
-					</select> 
-					<input size="16" name="keyWord" value="<%=keyWord%>"> 
-					<input type="button" value="찾기" onClick="javascript:accheck()"> 
-					<input type="hidden" name="nowPage" value="1">
+					<div id="inputdiv" style="width:320px; display:flex;">
+						<select name="keyField" size="1" style="flex:1; border:none;">
+							<option value="ac_title" <%if(keyField.equals("ac_title")) {%>selected<%} %>>제 목</option>
+							<option value="ac_content" <%if(keyField.equals("ac_content")) {%>selected<%} %>>내 용</option>
+							<option value="ac_nickname" <%if(keyField.equals("ac_nickname")) {%>selected<%} %>>닉 네 임</option>
+						</select> 
+						<input size="16" name="keyWord" value="<%=keyWord%>" style="flex:2;"> 
+						<input type="button" value="찾기" onClick="javascript:accheck()"> 
+					</div>
+					<input type="hidden" name="nowPage" value="1"  style="flex:1;">
 					<input type="hidden" name="num" value="<%=ac_serialnum%>">
 				</td>
 			</tr>

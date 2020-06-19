@@ -137,6 +137,30 @@ function clalert2(){
 }
 </script>
  <style>
+
+#insertMember{
+	float: right;
+	margin-right:350px;
+  	width: 800px;
+  	border: 10px solid #F88C65; 
+	border-radius:10px;
+	padding:20px 40px;
+	margin-top:50px;
+}
+#categoryframe{
+	margin-left:280px;
+	margin-right:80px;
+	margin-top:50px;
+	float:left;
+	border:10px solid #FCBC7E;
+	border-radius:15px;
+	background-color:white;
+	width:250px;
+	height:300px;
+	padding:30px 0px;
+	background-color:#FAF8EB;
+}
+ 
 #list td {
 	border-bottom: 1px solid lightgray;
 	height:30px;
@@ -156,39 +180,13 @@ a {
 a:hover {
 	color: gray;
 }
-#frame{
-	display:flex;
-	margin-left:15%;
-	margin-right:15%;
-}
 
-#leftdiv{
-	flex: 1;
-	width: 40%; 
-	margin-right:50px;
-	border: 10px solid #FCBC7E; 
-	border-radius:10px;
-	padding: 10px 10px;
-	text-align:center;
-	background-color:#FAF8EB;
-	
-	
- }
- #rightdiv{
-	flex: 2; 
-	width:60%;
-	border: 10px solid #F88C65; 
-	border-radius:10px;
-	padding:20px 40px;
-}
- 
- 
+
  #atag {
- 	margin-left:90px;
- 	margin-bottom:50px;
+ 	margin-left:50px;
  	height:40px;
  	line-height:40px;
- 	width:200px;
+ 	width:170px;
  	display: block;
  }
  
@@ -202,207 +200,209 @@ a:hover {
 
 </style> 
 </head>
+
 <body>
-	
-	<jsp:include page="../alcinfo/headerSearch.jsp"></jsp:include>
 
-	<div id="frame">
-		<div id="leftdiv">
-			<h3>커뮤니티</h3>
-			<div id="atag"><a href="communityList.jsp?pageValue=free">&#149; 자유게시판</a></div>
-			<div id="atag"><a href="communityList.jsp?pageValue=academy">&#149; 학원 Q&A</a></div>
-			<div id="atag"><a href="communityList.jsp?pageValue=lesson">&#149; 과외 Q&A</a></div>
-			<div id="atag"><a 
-			<%if(mgr.checkM(id)==0||mgr.checkM(id)==1) {%>
-			href="communityList.jsp?pageValue=onlyst"
-			<%} else { %>
-			href="javascript:clalert1()"
-			<%} %>
-			>&#149; 학생 전용 게시판</a></div>
-			<div id="atag"><a 
-			<%if(mgr.checkM(id)==0||mgr.checkM(id)==2||mgr.checkM(id)==3) {%>
-			href="communityList.jsp?pageValue=onlyte"
-			<%} else { %>
-			href="javascript:clalert2()"<%} %>
-			>&#149; 선생님 전용 게시판</a></div>
-			
-	
-		</div>
+<jsp:include page="../alcinfo/headerSearch.jsp"></jsp:include>
+	<div id="categoryframe">
+		<h3 style="margin-left:50px;">커뮤니티</h3>
+		<div id="atag"><a href="communityList.jsp?pageValue=free">&#149; 자유게시판</a></div>
+		<div id="atag"><a href="communityList.jsp?pageValue=academy">&#149; 학원 Q&A</a></div>
+		<div id="atag"><a href="communityList.jsp?pageValue=lesson">&#149; 과외 Q&A</a></div>
+		<div id="atag"><a 
+		<%if(mgr.checkM(id)==0||mgr.checkM(id)==1) {%>
+		href="communityList.jsp?pageValue=onlyst"
+		<%} else { %>
+		href="javascript:clalert1()"
+		<%} %>
+		>&#149; 학생 전용 게시판</a></div>
+		<div id="atag"><a 
+		<%if(mgr.checkM(id)==0||mgr.checkM(id)==2||mgr.checkM(id)==3) {%>
+		href="communityList.jsp?pageValue=onlyte"
+		<%} else { %>
+		href="javascript:clalert2()"<%} %>
+		>&#149; 선생님 전용 게시판</a></div>
+	</div>
 
-		<!-- 리스트 부분 -->
-		<div id="rightdiv">
-			
-			<h2><%=category %></h2>
-			<table>
-				<tr>
-					<td width="600">Total : <%=totalRecord%>Articles(<font
-						color="red"> <%=nowPage+"/"+totalPage%>Pages
-					</font>)
-					</td>
-					<td align="right">
-						<form name="npFrm" method="post">
-							<select name="numPerPage" size="1"
-								onchange="numPerFn(this.form.numPerPage.value)">
-								<option value="5">5개 보기</option>
-								<option value="10" selected>10개 보기</option>
-								<option value="15">15개 보기</option>
-								<option value="30">30개 보기</option>
-							</select>
-						</form> <script>
-   			document.npFrm.numPerPage.value=<%=numPerPage%>
-   			
-   			</script>
-					</td>
-				</tr>
-			</table>
-			<table class="table table-hover">
-				<tr>
-					<td align="center" colspan="2">
-						<table cellspacing="0" height="80">
-							<tr align="center" id="title">
-								<td width="100">번 호</td>
-								<td width="280">제 목</td>
-								<td width="100">닉네임</td>
-								<td width="150">날 짜</td>
-								<td width="100">조회수</td>
-							</tr>
+	<!-- 리스트 부분 -->
+	<div id="insertMember" class="insertMember1" align="left">
+
+		<h2><%=category %></h2>
+		<table>
+			<tr>
+				<td width="600">Total : <%=totalRecord%>Articles(<font
+					color="red"> <%=nowPage+"/"+totalPage%>Pages
+				</font>)
+				</td>
+				<td align="right">
+					<form name="npFrm" method="post">
+						<select name="numPerPage" size="1"
+							onchange="numPerFn(this.form.numPerPage.value)" style="font-size:15px;">
+							<option value="5">5개 보기</option>
+							<option value="10" selected>10개 보기</option>
+							<option value="15">15개 보기</option>
+							<option value="30">30개 보기</option>
+						</select>
+					</form> <script>
+  			document.npFrm.numPerPage.value=<%=numPerPage%>
+  			
+  			</script>
+				</td>
+			</tr>
+		</table>
+		<table class="table table-hover">
+			<tr>
+				<td align="center" colspan="2">
+					<table cellspacing="0" height="80">
+						<tr align="center" id="title">
+							<td width="100">번 호</td>
+							<td width="280">제 목</td>
+							<td width="100">닉네임</td>
+							<td width="150">날 짜</td>
+							<td width="100">조회수</td>
+						</tr>
 
 
-					<%
-						Vector<SCommunityBean> vlist = mgr.getBoardList(keyField, keyWord,group, start, cnt);
-						int listsize = vlist.size();
-						if (vlist.isEmpty()) {
-					%>
-							<tr>
-								<td align="center" colspan="5">
-									<%
-								out.println("등록된 게시물이 없습니다.");
-							%>
-								</td>
-							</tr>
+				<%
+					Vector<SCommunityBean> vlist = mgr.getBoardList(keyField, keyWord,group, start, cnt);
+					int listsize = vlist.size();
+					if (vlist.isEmpty()) {
+				%>
+						<tr>
+							<td align="center" colspan="5">
+								<%
+							out.println("등록된 게시물이 없습니다.");
+						%>
+							</td>
+						</tr>
 
 
 
-							<%
-						} else {
-							for (int i = 0; i <numPerPage; i++) {
-								if(i==listsize) break;
-								SCommunityBean bean = vlist.get(i);
-								int num = bean.getNum();
-								String title = bean.getSc_title();
-								String nickname = bean.getSc_nick();
-								String date = bean.getSc_regdate();
-								String filename=bean.getSc_filename();
-								int ccount=mgr.ccount(num);
-								int count = bean.getSc_count();
-					%>
-
-							<tr id="list">
-								<td align="center"><%=totalRecord-start-i%></td>
-								<td align="left"><a href="javascript:read('<%=num%>')"><%=title%></a>
-									<% if(filename!=null) { %>
-										<img src="../img/icon_file1.png">
-									<% } %>
-									<% if(ccount>0) { %>
-										<font color="red">[<%=ccount%>]</font>
-									<% } %></td>
-								<td align="center"><a href=""><%=nickname%></a></td>
-								<td align="center"><%=date%></td>
-								<td align="center"><%=count%></td>
-
-							</tr>
-
-							<%
-						}
-						}
-					%>
-
-
-						</table>
-
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2"><br> <br></td>
-				</tr>
-
-				<tr>
-					<td>
-						<!-- 페이징 및 블럭 Start --> 
-						<%if(totalPage>0){%> <!-- 이전 블럭 -->
-						 <%if(nowBlock>1){ %>
-						<a href="javascript:block('<%=nowBlock-1%>')">이전</a> 
-						<%} %> <!-- 페이징 -->
 						<%
-					int pageStart = (nowBlock-1)*pagePerBlock+1;
-					int pageEnd = (pageStart+pagePerBlock)<totalPage?
-						pageStart+pagePerBlock:totalPage+1;
-					for(;pageStart<pageEnd;pageStart++){
-						%> 
-						<a href="javascript:pageing('<%=pageStart%>')"> 
-						<%if(nowPage==pageStart){%>
-						<font color="gray">
-								<%}%> [<%=pageStart%>]
-						 <%if(nowPage==pageStart){%>
-						</font>
-							<%}%>
-						</a>
-						 <%}//---for%> <!-- 다음 블럭 -->
-						  <%if(totalBlock>nowBlock){ %> 
-						  <a href="javascript:block('<%=nowBlock+1%>')">다음</a> <%} %> <%}//---if1%>
-						<!-- 페이징 및 블럭 End -->
-					</td>
-					
-					<td align="right"><a 
-					<%if(id==null){ %>
-						onclick="clalert();" href=""
-						<%}else{ %>
-						href="scPost.jsp?pageValue=<%=group %>&numPerPage=<%=numPerPage%>&nowPage=<%=nowPage%><%
-  	 	if(!(keyWord==null||keyWord.equals(""))){
-		     %>&keyField=<%=keyField%>&keyWord=<%=keyWord%><%}%>" class="btn btn-default"
-						<%} %>>[글쓰기]</a> 
-						<a href="javascript:list()">[처음으로]</a></td>
-				</tr>
-			</table>
+					} else {
+						for (int i = 0; i <numPerPage; i++) {
+							if(i==listsize) break;
+							SCommunityBean bean = vlist.get(i);
+							int num = bean.getNum();
+							String title = bean.getSc_title();
+							String nickname = bean.getSc_nick();
+							String date = bean.getSc_regdate();
+							String filename=bean.getSc_filename();
+							int ccount=mgr.ccount(num);
+							int count = bean.getSc_count();
+				%>
+
+						<tr id="list">
+							<td align="center"><%=totalRecord-start-i%></td>
+							<td align="left"><a href="javascript:read('<%=num%>')"><%=title%></a>
+								<% if(filename!=null) { %>
+									<img src="../img/icon_file1.png">
+								<% } %>
+								<% if(ccount>0) { %>
+									<font color="red">[<%=ccount%>]</font>
+								<% } %></td>
+							<td align="center"><a href=""><%=nickname%></a></td>
+							<td align="center"><%=date%></td>
+							<td align="center"><%=count%></td>
+
+						</tr>
+
+						<%
+					}
+					}
+				%>
 
 
-			<hr width="750">
-			<form name="scsearchFrm" >
-				<table align="center" cellpadding="4" cellspacing="0">
-					<tr>
-						<td align="center" valign="bottom">
-							<select name="keyField" size="1">
+					</table>
+
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2"><br> <br></td>
+			</tr>
+
+			<tr>
+				<td>
+					<!-- 페이징 및 블럭 Start --> 
+					<%if(totalPage>0){%> <!-- 이전 블럭 -->
+					 <%if(nowBlock>1){ %>
+					<a href="javascript:block('<%=nowBlock-1%>')">이전</a> 
+					<%} %> <!-- 페이징 -->
+					<%
+				int pageStart = (nowBlock-1)*pagePerBlock+1;
+				int pageEnd = (pageStart+pagePerBlock)<totalPage?
+					pageStart+pagePerBlock:totalPage+1;
+				for(;pageStart<pageEnd;pageStart++){
+					%> 
+					<a href="javascript:pageing('<%=pageStart%>')"> 
+					<%if(nowPage==pageStart){%>
+					<font color="gray">
+							<%}%> [<%=pageStart%>]
+					 <%if(nowPage==pageStart){%>
+					</font>
+						<%}%>
+					</a>
+					 <%}//---for%> <!-- 다음 블럭 -->
+					  <%if(totalBlock>nowBlock){ %> 
+					  <a href="javascript:block('<%=nowBlock+1%>')">다음</a> <%} %> <%}//---if1%>
+					<!-- 페이징 및 블럭 End -->
+				</td>
+				
+				<td align="right"><a 
+				<%if(id==null){ %>
+					onclick="clalert();" href=""
+					<%}else{ %>
+					href="scPost.jsp?pageValue=<%=group %>&numPerPage=<%=numPerPage%>&nowPage=<%=nowPage%><%
+ 	 	if(!(keyWord==null||keyWord.equals(""))){
+	     %>&keyField=<%=keyField%>&keyWord=<%=keyWord%><%}%>" class="btn btn-default"
+					<%} %>>[글쓰기]</a> 
+					<a href="javascript:list()">[처음으로]</a></td>
+			</tr>
+		</table>
+
+
+		<hr width="750">
+		<form name="scsearchFrm" >
+			<table align="center" cellpadding="4" cellspacing="0">
+				<tr>
+					<td align="center" valign="bottom">
+						<div id="inputdiv" style="width:320px; display:flex;">
+							<select name="keyField" size="1" style="flex:1; border:none;">
 								<option value="sc_title" <%if(keyField.equals("sc_title")) {%>selected<%} %>>제 목</option>
 								<option value="sc_content" <%if(keyField.equals("sc_content")) {%>selected<%} %>>내 용</option>
 								<option value="sc_nick" <%if(keyField.equals("sc_nick")) {%>selected<%} %>>닉 네 임</option>
 							</select>
-							<input size="16" name="keyWord" value="<%=keyWord%>">
-							<input type="submit" value="찾기" onClick="javascript:sccheck()"> 
-							<input type="hidden" name="nowPage" value="1">
-							<input type="hidden" name="pageValue" value="<%=group%>">
-						</td>
-					</tr>
-				</table>
-			</form>
-			<form name="listFrm" method="post">
-				<input type="hidden" name="reload" value="true">
-				<!-- 요게 중요 -->
-				<input type="hidden" name="nowPage" value="1">
-			</form>
-
-			<form name="readFrm">
-				<input type="hidden" name="nowPage" value="<%=nowPage%>"> 
-				<input type="hidden" name="numPerPage" value="<%=numPerPage%>">
-				<%if(!(keyWord==null||keyWord.equals(""))){%>
-				<input type="hidden" name="keyField" value="<%=keyField%>">
-				<input type="hidden" name="keyWord" value="<%=keyWord%>">
-				<%}%>
-				<input type="hidden" name="pageValue" value="<%=group%>">
-				<input type="hidden" name="num">
-			</form>
-		</div>
+							<input size="16" name="keyWord" value="<%=keyWord%>"  style="flex:2;">
+							<input type="submit" value="찾기" onClick="javascript:sccheck()"  style="flex:1;"> 
+						</div>
+						<input type="hidden" name="nowPage" value="1">
+						<input type="hidden" name="pageValue" value="<%=group%>">
+					</td>
+				</tr>
+			</table>
+		</form>
 	</div>
-	<jsp:include page="../alcinfo/footer.jsp" />
+
+		<form name="listFrm" method="post">
+			<input type="hidden" name="reload" value="true">
+			<!-- 요게 중요 -->
+			<input type="hidden" name="nowPage" value="1">
+		</form>
+
+		<form name="readFrm">
+			<input type="hidden" name="nowPage" value="<%=nowPage%>"> 
+			<input type="hidden" name="numPerPage" value="<%=numPerPage%>">
+			<%if(!(keyWord==null||keyWord.equals(""))){%>
+			<input type="hidden" name="keyField" value="<%=keyField%>">
+			<input type="hidden" name="keyWord" value="<%=keyWord%>">
+			<%}%>
+			<input type="hidden" name="pageValue" value="<%=group%>">
+			<input type="hidden" name="num">
+		</form>
+
+
+
+
 
 </body>
 
