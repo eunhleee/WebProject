@@ -18,6 +18,7 @@
 	bean.setAc_content(request.getParameter("acqcontent"));
 	bean.setAc_id(request.getParameter("acqid"));
 	bean.setAc_ip(request.getParameter("acqip"));
+	bean.setAc_secret(request.getParameter("acqsecret"));
 	mgr.updateAnQ(bean);
 %>
 <script>

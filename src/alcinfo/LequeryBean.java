@@ -12,7 +12,14 @@ public class LequeryBean {
 	private String lq_id;
 	private String lq_date;
 	private int lq_count;
+	private String lq_secret;
 	
+	public String getLq_secret() {
+		return lq_secret;
+	}
+	public void setLq_secret(String lq_secret) {
+		this.lq_secret = lq_secret;
+	}
 	public int getLq_count() {
 		return lq_count;
 	}

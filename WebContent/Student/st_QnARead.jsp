@@ -285,7 +285,9 @@ function goCReport(conum,stuc_depth,stopid) {
 		    <td bgcolor="#FFFFE8" colspan="3"><%=title%></td>
 		   </tr>
 		   <tr> 
-		    <td colspan="4"><br/><pre><%=content%></pre><br/><hr></td>
+		    <td colspan="4"><br/>
+		    <textarea rows="10" cols="100"><%=content%></textarea>
+		    <br/><hr></td>
 		   </tr>
 		   <tr>
 		    <td colspan="3" align="left">

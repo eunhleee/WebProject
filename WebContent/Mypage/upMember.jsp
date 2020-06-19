@@ -20,6 +20,7 @@ if(session.getAttribute("idKey")==null||session.getAttribute("idKey").equals("")
 	int to2=Integer.parseInt(bean.getBirth().substring(6,8));
 	
 	System.out.println("pic"+bean.getImgname());
+	
 %>
 <html>
 <head>
