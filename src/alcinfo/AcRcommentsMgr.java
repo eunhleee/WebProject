@@ -55,9 +55,9 @@ public class AcRcommentsMgr {
 		try {
 			con = pool.getConnection();
 			sql = "insert acrcomments(acr_num,acr_nick,acr_id,acr_content,acr_ip,acr_regdate,"
-					+ "acr_conum) "
+					+ "acr_conum,acr_depth) "
 					+ "values(?,?,?,?,?,now(),"
-					+ "(select max(acr_conum) from acrcomments a)+1)";
+					+ "coalesce((select max(acr_conum) from acrcomments a)+1,0),0)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, bean.getAcr_num());
 			pstmt.setString(2, memberNick(bean.getAcr_id()));

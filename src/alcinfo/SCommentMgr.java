@@ -57,11 +57,11 @@ private DBConnectionMgr pool;
 		try {
 			con = pool.getConnection();
 			sql = "insert scomment(stuc_nick,stuc_content,stuc_regdate,stuc_pnum,"
-					+ "stuc_id,stuc_ip,stuc_conum) "
+					+ "stuc_id,stuc_ip,stuc_conum,stuc_depth) "
 					+ "values(?,?,now(),?,"
 					+ "(select id from member where nickname=? union all "
 					+ "select id from letea where nickname=?),?,"
-					+ "(select max(stuc_conum) from scomment s)+1)";
+					+ "coalesce((select max(stuc_conum) from scomment s)+1,0),0)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, nick);
 			pstmt.setString(2, bean.getStuc_content());

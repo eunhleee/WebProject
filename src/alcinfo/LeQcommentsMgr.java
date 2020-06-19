@@ -53,9 +53,10 @@ public class LeQcommentsMgr {
 		String sql = null;
 		try {
 			con = pool.getConnection();
-			sql = "insert leqcomments(leq_num,leq_id,leq_content,leq_ip,leq_regdate,leq_conum) "
+			sql = "insert leqcomments(leq_num,leq_id,leq_content,leq_ip,leq_regdate,"
+					+ "leq_conum,leq_depth) "
 					+ "values(?,?,?,?,now(),"
-					+ "(select max(leq_conum) from leqcomments a)+1)";
+					+ "coalesce((select max(leq_conum) from leqcomments a)+1,0),0)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, bean.getLeq_num());
 			pstmt.setString(2, bean.getLeq_id());
