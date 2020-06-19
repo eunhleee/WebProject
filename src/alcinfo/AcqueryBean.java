@@ -10,6 +10,13 @@ public class AcqueryBean {
 	public String ac_id;
 	public String ac_date;
 	public int ac_count;
+	public String ac_secret;
+	public String getAc_secret() {
+		return ac_secret;
+	}
+	public void setAc_secret(String ac_secret) {
+		this.ac_secret = ac_secret;
+	}
 	public int getAc_count() {
 		return ac_count;
 	}

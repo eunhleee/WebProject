@@ -57,16 +57,15 @@ public class StinqueryMgr {
 		try {
 			con = pool.getConnection();
 			if(keyWord.trim().equals("")||keyWord==null) {
-				//�˻��� �ƴѰ��
 				sql = "select count(*) from stquery "
 						+ "where stunum=? and st_secret is null or "
 						+ "stunum=? and id=?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, stunum);
-				pstmt.setString(2, id);
+				pstmt.setInt(2, stunum);
+				pstmt.setString(3, id);
 			}
 			else {
-			//�˻��� ���
 			sql = "select count(*) from stquery "
 					+ "where stunum=? and "+keyField+" like ? and st_secret is null or "
 					+ "stunum=? and "+keyField+" like ? and id=?";
@@ -106,7 +105,7 @@ public class StinqueryMgr {
 			con = pool.getConnection();
 			if(keyWord.trim().equals("")||keyWord==null) {
 				//�˻��� �ƴѰ��
-				sql = "select num,stunum,title,content,id,ip,st_date,count from stquery "
+				sql = "select num,stunum,title,content,id,ip,st_date,count,st_secret from stquery "
 						+ "where stunum=? order by num desc limit ?,?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, stunum);
@@ -117,7 +116,7 @@ public class StinqueryMgr {
 			}
 			else {
 			//�˻��� ���
-			sql = "select num,stunum,title,content,id,ip,st_date,count from stquery "
+			sql = "select num,stunum,title,content,id,ip,st_date,count,st_secret from stquery "
 					+ "where stunum=? and "+keyField+" like ? "
 					+ "order by num desc limit ?,?";
 			pstmt = con.prepareStatement(sql);
@@ -139,6 +138,7 @@ public class StinqueryMgr {
 				bean.setId(rs.getString("id"));
 				bean.setSt_date(rs.getString("st_date"));
 				bean.setCount(rs.getInt("count"));
+				bean.setSt_secret(rs.getString("st_secret"));
 				
 				vlist.addElement(bean);
 			}
@@ -159,8 +159,7 @@ public class StinqueryMgr {
 		try {
 			con = pool.getConnection();
 			if(keyWord.trim().equals("")||keyWord==null) {
-				//�˻��� �ƴѰ��
-				sql = "select num,stunum,title,content,id,ip,st_date,count from stquery "
+				sql = "select num,stunum,title,content,id,ip,st_date,count,st_secret from stquery "
 						+ "where stunum=? and st_secret is null or "
 						+ "stunum=? and id=? "
 						+ "order by num desc limit ?,?";
@@ -174,8 +173,7 @@ public class StinqueryMgr {
 	
 			}
 			else {
-			//�˻��� ���
-			sql = "select num,stunum,title,content,id,ip,st_date,count from stquery "
+			sql = "select num,stunum,title,content,id,ip,st_date,count,st_secret from stquery "
 					+ "where stunum=? and "+keyField+" like ? and st_secret is null or "
 					+ "stunum=? and "+keyField+" like ? and id=?"
 					+ "order by num desc limit ?,?";
@@ -201,6 +199,7 @@ public class StinqueryMgr {
 				bean.setId(rs.getString("id"));
 				bean.setSt_date(rs.getString("st_date"));
 				bean.setCount(rs.getInt("count"));
+				bean.setSt_secret(rs.getString("st_secret"));
 				
 				vlist.addElement(bean);
 			}
@@ -312,11 +311,12 @@ public class StinqueryMgr {
 		String sql = null;
 		try {
 			con = pool.getConnection();
-			sql = "update stquery set title=?, content=? where num=?";
+			sql = "update stquery set title=?, content=?, st_secret=? where num=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, bean.getTitle());
 			pstmt.setString(2, bean.getContent());
-			pstmt.setInt(3, bean.getNum());
+			pstmt.setString(3, bean.getSt_secret());
+			pstmt.setInt(4, bean.getNum());
 			pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();

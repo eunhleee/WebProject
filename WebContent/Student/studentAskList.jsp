@@ -159,8 +159,7 @@ a:hover {
 				<table cellspacing="0" height="80">
 					<tr align="center" id="title">
 						<td width="150">번 호</td>
-						<td width="150">제 목</td>
-						<td width="280">내 용</td>
+						<td width="280">제 목</td>
 						<td width="100">아 이 디</td>
 						<td width="150">날 짜</td>
 						<td width="100">조회수</td>
@@ -205,8 +204,6 @@ a:hover {
 							<font color="red">[<%=ccount%>]</font>
 						<% } %>
 						</td>
-						<td align="center"><a href="javascript:read('<%=num%>')">
-						<%=content%></a></td>
 						<td align="center"><a href=""><%=id%></a></td>
 						<td align="center"><%=date%></td>
 						<td align="center"><%=count%></td>
@@ -256,8 +253,6 @@ a:hover {
 							<font color="red">[<%=ccount%>]</font>
 						<% } %>
 						</td>
-						<td align="center"><a href="javascript:read('<%=num%>')">
-						<%=content%></a></td>
 						<td align="center"><a href=""><%=id%></a></td>
 						<td align="center"><%=date%></td>
 						<td align="center"><%=count%></td>

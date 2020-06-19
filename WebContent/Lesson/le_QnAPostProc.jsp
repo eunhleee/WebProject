@@ -17,6 +17,7 @@
 	bean.setLq_content(request.getParameter("leqcontent"));
 	bean.setLq_id(request.getParameter("leqid"));
 	bean.setLq_ip(request.getParameter("leqip"));
+	bean.setLq_secret(request.getParameter("leqsecret"));
 	mgr.insertLeq(bean);
 %>
 <script>

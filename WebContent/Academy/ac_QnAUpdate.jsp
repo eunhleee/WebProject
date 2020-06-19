@@ -17,6 +17,7 @@
 	String subject = bean.getAc_subject();
 	String id = bean.getAc_id(); 
 	String content = bean.getAc_content();
+	String secret = bean.getAc_secret();
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -84,6 +85,13 @@ a:hover {
 								<textarea name="acqcontent" rows="10" cols="50"><%=content%></textarea>
 							</td>
 						</tr>
+						<tr>
+			    			<td colspan="1">
+			    			비밀글
+							</td>
+							<td><input type="checkbox" name="acqsecret" 
+							<% if(secret!=null) {%>checked<%} %>></td>
+			    		</tr>
 						<tr>
 							<td colspan="2"><hr/></td>
 						</tr>

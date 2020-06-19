@@ -15,6 +15,7 @@
 	bean.setNum(num);
 	bean.setTitle(request.getParameter("stqtitle"));
 	bean.setContent(request.getParameter("stqcontent"));
+	bean.setSt_secret(request.getParameter("stqsecret"));
 	mgr.updateStQ(bean);
 %>
 <script>

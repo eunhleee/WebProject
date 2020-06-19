@@ -235,7 +235,7 @@ a:hover {
 			<h2><%=category %></h2>
 			<table>
 				<tr>
-					<td width="600">>Total : <%=totalRecord%>Articles(<font
+					<td width="600">Total : <%=totalRecord%>Articles(<font
 						color="red"> <%=nowPage+"/"+totalPage%>Pages
 					</font>)
 					</td>
