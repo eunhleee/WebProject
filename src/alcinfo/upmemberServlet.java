@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/alcinfo/pBlogPost")
+@WebServlet("/Mypage/pBlogPost")
 public class upmemberServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, 
@@ -16,6 +16,6 @@ public class upmemberServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		ReportMgr pMgr = new ReportMgr();
 		pMgr.insertPBlog(request);
-		response.sendRedirect("upMembernew.jsp");
+		response.sendRedirect("../Mypage/upMembernew.jsp");
 	}
 }

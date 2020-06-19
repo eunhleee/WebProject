@@ -144,7 +144,7 @@ function win_close(){
 <body>
 <%@ include file="../alcinfo/mainHeader.jsp"%>
 <div id="insertMember" class="insertMember1" align="center">
-	<form name="imFrm" class="im-content" method="post" action="../alcinfo/upmemberProc.jsp">
+	<form name="imFrm" class="im-content" method="post" action="../Mypage/upmemberProc.jsp">
 		<table style="margin-left:10px;">
 			<tr>
 				<td><p style="margin-bottom:10px;">학생 정보수정</p></td>
