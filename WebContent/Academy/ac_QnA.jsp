@@ -131,6 +131,20 @@ div{
 	border-radius: 10px;
 	padding:15px;
 }
+
+#inputdiv{
+	margin:10px;
+	width:150px;
+	border:1px solid gray;
+	border-radius: 6px;
+	padding:3px;
+}
+#inputdiv input{
+	width:140px;
+	border:none;
+	font-size:15px;
+}
+
 </style>
 </head>
 <body>
@@ -156,7 +170,7 @@ div{
 			<td align="right">
 				<form name="npFrm" method="post">
 					<select name="numPerPage" size="1"
-						onchange="numPerFn(this.form.numPerPage.value)">
+						onchange="numPerFn(this.form.numPerPage.value)" style="font-size:15px;">
 						<option value="5">5개 보기</option>
 						<option value="10" selected>10개 보기</option>
 						<option value="15">15개 보기</option>
@@ -190,7 +204,7 @@ div{
 						if (vlist.isEmpty()) {
 					%>
 					<tr>
-						<td align="center" colspan="5">
+						<td align="center" colspan="5" height="200">
 							<%
 								out.println("등록된 게시물이 없습니다.");
 							%>
@@ -347,19 +361,23 @@ div{
 
 
 	<hr width="830" align="left">
-	<form name="searchFrm">
-		<table width="600" cellpadding="4" cellspacing="0">
+	<form name="searchFrm" >
+		<table width="600" cellpadding="4" cellspacing="0" align="center">
 			<tr>
-				<td align="center" valign="bottom"><select name="keyField"
-					size="1">
-						<option value="ac_title" <%if(keyField.equals("ac_title")) {%>selected<%} %>>제 목</option>
-						<option value="ac_subject" <%if(keyField.equals("ac_subject")) {%>selected<%} %>>과 목</option>
-						<option value="ac_content" <%if(keyField.equals("ac_content")) {%>selected<%} %>>내 용</option>
-						<option value="ac_id" <%if(keyField.equals("ac_id")) {%>selected<%} %>>아 이 디</option>
-				</select> <input size="16" name="keyWord" value="<%=keyWord%>">
-				<input type="hidden" name="ac_num" value="<%=ac_num%>">
-				 <input type="button" value="찾기" onClick="javascript:check()"> 
-				 <input type="hidden" name="nowPage" value="1"></td>
+				<td align="center" valign="bottom">
+				<div id="inputdiv" style="width:320px; display:flex;">
+					<select name="keyField"	size="1" style="flex:1; border:none;">
+							<option value="ac_title" <%if(keyField.equals("ac_title")) {%>selected<%} %>>제 목</option>
+							<option value="ac_subject" <%if(keyField.equals("ac_subject")) {%>selected<%} %>>과 목</option>
+							<option value="ac_content" <%if(keyField.equals("ac_content")) {%>selected<%} %>>내 용</option>
+							<option value="ac_id" <%if(keyField.equals("ac_id")) {%>selected<%} %>>아 이 디</option>
+					</select> 
+					<input size="16" name="keyWord" value="<%=keyWord%>" style="flex:2;">
+					<input type="button" value="찾기" onClick="javascript:check()" style="flex:1;"> 
+				 </div>
+				 <input type="hidden" name="nowPage" value="1">
+				 <input type="hidden" name="ac_num" value="<%=ac_num%>">
+				</td>
 			</tr>
 		</table>
 	</form>

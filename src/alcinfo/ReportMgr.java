@@ -16,8 +16,8 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 public class ReportMgr {
 	private DBConnectionMgr pool;
-
-	private final String  SAVEFOLDER = "C:/WebPro4/WebProject/WebContent/img/";
+	File file = new File("");
+	private final String  SAVEFOLDER = "C:/user/admin/git/WebPoject/WebContent/img/";
 	private final String ENCTYPE = "UTF-8";
 	private int MAXSIZE = 5*1024*1024;
 	 public ReportMgr() {
@@ -716,4 +716,5 @@ public class ReportMgr {
 	}
 	return bean;
 	}
+	
 }

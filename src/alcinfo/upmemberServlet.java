@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/Mypage/pBlogPost")
+@WebServlet("/Mypage/ImgUp")
 public class upmemberServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, 

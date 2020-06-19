@@ -80,15 +80,16 @@ function openlogoutProc(){
 
 
 
-		<div class="catagory" align="center"
-			style="background-color: rgb(034, 200, 211);">
+		<div class="catagory" align="center" 
+		style="background-color: rgb(034, 200, 211); border-radius: 0px; box-shadow: 0px 0px 10px #c0c0c0; height:35px;
+			line-height:35px; text-align: center; margin-top:35px;">
 			<a href="../Academy/AcademyMain.jsp?pageValue=top">학원</a> 
 			<a	href="../Lesson/LessonMain.jsp?pageValue=top">과외선생님</a> 
 			<a	href="../Student/StudentMain.jsp?pageValue=count">학생</a> 
 			<a	href="../Community/communityList.jsp?pageValue=free">커뮤니티</a> 
 			<a	href="../Payment/buyPoint.jsp" style="color:yellow;"><img src="../img/won.png" width="20" height="20">포인트</a>
 			<% if(loginid==null){%>
-			<input type="button" onclick="openloginSelect();" class="openlm" value="로그인">
+			<input type="button" onclick="openloginMain();" class="openlm" value="로그인">
 			<%}else{ %>
 			<input type="button" onclick="openlogoutProc();" class="openlm" value="로그아웃">
 			<% if((Integer)session.getAttribute("idgrade")==0){%>

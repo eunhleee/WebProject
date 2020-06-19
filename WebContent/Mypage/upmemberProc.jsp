@@ -33,6 +33,7 @@
 	if(imresult) {
 		mpmsg = "회원정보 수정을 성공 하였습니다.";
 		mpurl = "../Mypage/upMember.jsp";
+
 	}
 %>
 <script>
