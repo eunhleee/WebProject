@@ -153,7 +153,7 @@ function win_close(){
 				<td>
 					<table border="1" class="insertMt">
 						<tr>
-				<img src="../img/<%=bean.getImgname()%>" width="380" height="300" margin-bottom="5px"><br/>
+				<td><img src="../img/<%=bean.getImgname()%>" width="380" height="300" margin-bottom="5px"><br/>
 				<input type="button" onclick="imgcheck();" value="이미지수정"></td>
 			</tr>
 						<tr>

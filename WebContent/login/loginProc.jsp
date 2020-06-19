@@ -4,6 +4,8 @@
 <jsp:useBean id="lbean" class="alcinfo.MemberBean"/>
 <jsp:useBean id="Mmgr" class="member.MemberMgr"/>
 <jsp:useBean id="Lmgr" class="alcinfo.LoginMgr"/>
+<%@page import="alcinfo.MemberBean"%>
+
 <%
 	  request.setCharacterEncoding("UTF-8");
 	  String lid = request.getParameter("lid");
@@ -12,9 +14,11 @@
 	  lbean = Mmgr.loginMember(lid,lpass);
 	  String url="../alcinfo/cards-gallery.jsp";
 	  boolean lresult = Lmgr.insertLogin(lbean);
-	  
+	  MemberBean gBean =Mmgr.getGrade(lid);
+
 	  if(lresult){
 	    session.setAttribute("idKey",lid);
+	    session.setAttribute("idgrade",gBean.getGrade());
 	    lmsg = "로그인에 성공 하였습니다.";
 	    url=request.getHeader("referer");
 	  }

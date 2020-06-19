@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 
 import alcinfo.LeteaBean;
 import alcinfo.MemberBean;
+import alcinfo.ReportBean;
 
 public class MemberMgr {
 	DBConnectionMgr pool;
@@ -14,7 +15,7 @@ public class MemberMgr {
 		pool = DBConnectionMgr.getInstance();
 	}
 	
-	// 로그인
+	// 濡쒓렇�씤
 	public MemberBean loginMember(String id, String pwd) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -48,7 +49,7 @@ public class MemberMgr {
 	
 	
 	
-	// id 찾기
+	// id 李얘린
 	public String idSearch(String name, String phone) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -73,7 +74,7 @@ public class MemberMgr {
 		return id;
 	}
 	
-	// pwd 찾기
+	// pwd 李얘린
 	public boolean pwdSearch(String id, String name, String phone) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -97,7 +98,7 @@ public class MemberMgr {
 		return flag;
 	}
 	
-	// 비밀번호 변경
+	// 鍮꾨�踰덊샇 蹂�寃�
 	public boolean pwdChange(String id, String pwd) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -119,7 +120,7 @@ public class MemberMgr {
 	}
 	
 	
-	// id 중복체크
+	// id 以묐났泥댄겕
 	public boolean checkId(String id) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -143,7 +144,7 @@ public class MemberMgr {
 		return flag;
 	}
 	
-	// nickname 중복체크
+	// nickname 以묐났泥댄겕
 	public boolean checkNickname(String nickname) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -167,7 +168,7 @@ public class MemberMgr {
 		return flag;
 	}
 	
-	// 학생 회원가입
+	// �븰�깮 �쉶�썝媛��엯
 	public boolean insertMember(MemberBean bean) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -200,7 +201,7 @@ public class MemberMgr {
 		return flag;
 	}
 	
-	// 선생님 회원가입
+	// �꽑�깮�떂 �쉶�썝媛��엯
 	public boolean insertLetea(LeteaBean bean) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -233,7 +234,7 @@ public class MemberMgr {
 		}
 		return flag;
 	}
-	// 사용자 정보 가지고 오기
+	// �궗�슜�옄 �젙蹂� 媛�吏�怨� �삤湲�
 		public MemberBean getInfo(String id) {
 			Connection con = null;
 			PreparedStatement pstmt = null;
@@ -259,6 +260,32 @@ public class MemberMgr {
 				e.printStackTrace();
 			} finally {
 				pool.freeConnection(con, pstmt);
+			}
+			return bean;
+		}
+		public MemberBean getGrade(String id) {
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String sql = null;
+			MemberBean bean = new MemberBean();
+			String a="";
+			try {
+				con = pool.getConnection();
+				sql = "select id, grade from member where id="+"'"+id+"'"
+						+ " union "
+						+ " select id, grade from letea where id="+"'"+id+"'";
+				pstmt = con.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+
+				if(rs.next()) {
+					bean.setGrade(rs.getInt("grade"));
+					System.out.println(rs.getString("grade"));
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				pool.freeConnection(con, pstmt, rs);
 			}
 			return bean;
 		}
