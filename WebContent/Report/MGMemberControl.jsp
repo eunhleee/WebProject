@@ -8,52 +8,52 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%
 		request.setCharacterEncoding("UTF-8");
-int totalRecord=0;//총 게시물 수
-int numPerPage=10;//페이지당 레코드 개수(5,10,15,30)
-int pagePerBlock=15;//블럭당 페이지 개수
-int totalPage=0;//총 페이지 개수
-int totalBlock=0;//총 블럭개수
-int nowPage=1;//현재 페이지
-int nowBlock=1;//현재 블럭
-String keyField = "", keyWord = "";
-//요청된 numPerPage 처리
+		int totalRecord=0;//총 게시물 수
+		int numPerPage=10;//페이지당 레코드 개수(5,10,15,30)
+		int pagePerBlock=15;//블럭당 페이지 개수
+		int totalPage=0;//총 페이지 개수
+		int totalBlock=0;//총 블럭개수
+		int nowPage=1;//현재 페이지
+		int nowBlock=1;//현재 블럭
+		String keyField = "", keyWord = "";
+		//요청된 numPerPage 처리
 		//요청이 있으면 처리가 되지만 그렇지 않으면 기본 10개 세팅이 된다
 		if(request.getParameter("numPerPage")!=null){
 			numPerPage=UtilMgr.parseInt(request,"numPerPage");
 		}//여기까지만 하면 10개가 기본값이기 때문에 10개로 다시 바꾸고 싶을때 반응하지 않는다.
 		
-//검색일때
-if (request.getParameter("keyWord") != null) {
-	keyField = request.getParameter("keyField");
-	keyWord = request.getParameter("keyWord");
-}
-//검색 후에 다시 처음화면 요청
-if (request.getParameter("reload") != null && request.getParameter("reload").equals("true")) {
-	keyField = "";
-	keyWord = "";
-}
+		//검색일때
+		if (request.getParameter("keyWord") != null) {
+			keyField = request.getParameter("keyField");
+			keyWord = request.getParameter("keyWord");
+		}
+		//검색 후에 다시 처음화면 요청
+		if (request.getParameter("reload") != null && request.getParameter("reload").equals("true")) {
+			keyField = "";
+			keyWord = "";
+		}
 	//	Vector<ReportBean> mvlist=rMgr.mGMList();
 		totalRecord=rMgr.rgetTotalCount(keyField, keyWord);
 	//	out.print("totalRecord : "+totalRecord);//레코드 다 나오는지 확인코드
 	
-	
-	//nowPage 요청처리
-	if(request.getParameter("nowPage")!=null){
-		nowPage=UtilMgr.parseInt(request,"nowPage");
-	}	
-	
-	
-	//sql문에 들어가는 start,cnt선언
-	int start=(nowPage*numPerPage)-numPerPage;
-	int cnt=numPerPage;
-	
-	//전체페이지수 개수
-	totalPage = (int)Math.ceil((double)totalRecord/numPerPage);
-	//전체블럭 개수
-	totalBlock = (int)Math.ceil((double)totalPage/pagePerBlock);
-	//현재블럭
-	nowBlock = (int)Math.ceil((double)nowPage/pagePerBlock);
 		
+		//nowPage 요청처리
+		if(request.getParameter("nowPage")!=null){
+			nowPage=UtilMgr.parseInt(request,"nowPage");
+		}	
+		
+		
+		//sql문에 들어가는 start,cnt선언
+		int start=(nowPage*numPerPage)-numPerPage;
+		int cnt=numPerPage;
+		
+		//전체페이지수 개수
+		totalPage = (int)Math.ceil((double)totalRecord/numPerPage);
+		//전체블럭 개수
+		totalBlock = (int)Math.ceil((double)totalPage/pagePerBlock);
+		//현재블럭
+		nowBlock = (int)Math.ceil((double)nowPage/pagePerBlock);
+			
 %>
 
 <html>
@@ -105,51 +105,11 @@ if (request.getParameter("reload") != null && request.getParameter("reload").equ
 
 </script>
 <style>
-#table {
-	width: 100%;
-}
 
-#table tr{
-	border:5px solid #56C8D3;
-}
-
-#table td {
-	text-align: center;
-	width: 150px;
-	height: 100px;
-	border: none;
-}
-
-td a {
-	color: black;
-	text-decoration: none;
-}
-
-td a:hover {
-	color: white;
-	font-weight: bold;
-}
-
-#td:hover {
-	background-color: #56C8D3;
-}
 </style>
 </head>
 <body>
-	<jsp:include page="../alcinfo/headerSearch.jsp" />
-	<div class="frame">
-		<div class="container">
-			<div id="total" align="center">
-				<table id="table">
-					<tr>
-						<td id="td"><a href="">매출 현황</a></td>
-						<td id="td"><a href="">회원 현황</a></td>
-						<td id="td"><a href="">신고 접수건</a></td>
-						<td id="td"><a href="">회원 관리</a></td>
-					</tr>
-				</table>
-			</div>
-			<!--nav-->
+	
 		<div class="content">
 	
 		<form  name="searchF">

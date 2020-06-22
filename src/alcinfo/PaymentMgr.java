@@ -149,9 +149,9 @@ public class PaymentMgr {
 		}
 		return vlist;
 	}
-	//달별 매출 합계
+	//월별 매출 합계
 	@SuppressWarnings("unchecked")
-	public JSONArray getSales(){
+	public JSONArray getMonthSales(){
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -159,13 +159,46 @@ public class PaymentMgr {
 		JSONArray jsonArray=new JSONArray();
 		try {
 			con = pool.getConnection();
-			sql = " SELECT  left(paydate,7),sum(price) from alcinfo.payment GROUP BY (left(paydate,7)) with ROLLUP";
+			sql = " SELECT  left(paydate,7),sum(price) from alcinfo.payment GROUP BY (left(paydate,7))";
 			pstmt = con.prepareStatement(sql);
 
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				JSONArray rowArray = new JSONArray();
 				rowArray.add(rs.getString("left(paydate,7)"));
+				rowArray.add(rs.getInt("sum(price)"));
+
+				jsonArray.add(rowArray);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt, rs);
+		}
+		return jsonArray;
+	}
+	
+	//주간별 매출 합계
+	@SuppressWarnings("unchecked")
+	public JSONArray getWeekSales(){
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		JSONArray jsonArray=new JSONArray();
+		try {
+			con = pool.getConnection();
+			sql = " SELECT DATE_FORMAT(DATE_SUB(paydate, INTERVAL (DAYOFWEEK(paydate)-1) DAY), '%Y/%m/%d') as START," + 
+					" 		 DATE_FORMAT(DATE_SUB(paydate, INTERVAL (DAYOFWEEK(paydate)-7) DAY), '%Y/%m/%d') as end," + 
+					" 		 DATE_FORMAT(paydate, '%Y%U') weekdate, sum(price) " + 
+					"FROM payment " + 
+					"GROUP BY weekdate";
+			pstmt = con.prepareStatement(sql);
+
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				JSONArray rowArray = new JSONArray();
+				rowArray.add(rs.getString("weekdate"));
 				rowArray.add(rs.getInt("sum(price)"));
 
 				jsonArray.add(rowArray);

@@ -121,15 +121,7 @@ function numPerFn(numPerPage){//5개보기,10개보기 등등 보기리스트 �
 	<jsp:include page="../alcinfo/headerSearch.jsp" />
 	<div class="frame">
 		<div class="container">
-			<div class="nav">
-				<ul class="nav-list">
-					<li class="nav-item"><a href="" class="nav-link">관리자 정보 수정</a></li>
-					<li class="nav-item"><a href="" class="nav-link">내가 쓴 글</a></li>
-					<li class="nav-item"><a href="" class="nav-link">신고 접수 건</a></li>
-					<li class="nav-item"><a href="" class="nav-link">회원 상태 관리</a></li>
-
-				</ul>
-			</div>
+			
 			<!--nav-->
 			<div class="content">
 				<form name="searchF">
