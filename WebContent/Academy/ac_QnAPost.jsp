@@ -70,7 +70,7 @@
 <body>
 <div style="padding:10px; border:8px solid #F88C65; border-radius: 10px;">
 	<h2><img src="../img/questionmark.png" width="40" height="40">&nbsp;문의 하기</h2>	
-	<hr style="border:1px solid #F88C65;">	
+	<hr style="border:1px solid #F88C65;">
 			<form name="scpostFrm" method="post" action="ac_QnAPostProc.jsp">
 			<table width="800" cellpadding="3" >
 				<tr>
@@ -80,14 +80,14 @@
 							<td>작성자</td>
 							<td>
 							<div id="inputdiv1">
-							<input name="stqtitle" size="50" maxlength="30" disabled="disabled"
+							<input size="50" maxlength="30" disabled="disabled"
 							value="<%=acqid%>">
 							</div>
 							</td>
 							<td>작성일</td>
 							<td>
 							<div id="inputdiv1">
-							<input name="stqtitle" size="50" maxlength="30" disabled="disabled"
+							<input size="50" maxlength="30" disabled="disabled"
 							value="<%=strToday%>">
 							</div>
 							</td>

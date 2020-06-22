@@ -106,20 +106,20 @@ function goReport() {
 
 </script>
 <style>
-#inputdiv{
+#inputdiv2{
 	margin:10px;
 	width:490px;
 	border:1px solid gray;
 	border-radius: 6px;
 	padding:3px;
 }
-#inputdiv input{
+#inputdiv2 input{
 	width:480px;
 	border:none;
 	font-size:15px;
 }
 
-#inputdiv1{
+#inputdiv3{
 	margin:10px;
 	width:200px;
 	border:1px solid gray;
@@ -127,7 +127,7 @@ function goReport() {
 	padding:3px;
 }
 
-#inputdiv1 input{
+#inputdiv3 input{
 	width:180px;
 	border:none;
 	font-size:15px;
@@ -238,14 +238,14 @@ function goReport() {
 						<tr>
 							<td>작성자</td>
 							<td>
-								<div id="inputdiv1">
+								<div id="inputdiv3">
 									<input name="stqtitle" size="50" maxlength="30" disabled="disabled"
 									value="<%=stqid%>">
 								</div>
 							</td>
 							<td>작성일</td>
 							<td>
-								<div id="inputdiv1">
+								<div id="inputdiv3">
 									<input name="stqtitle" size="50" maxlength="30" disabled="disabled"
 									value="<%=strToday%>">
 								</div>
@@ -254,7 +254,7 @@ function goReport() {
 						<tr >
 							<td>제 목</td>
 							<td colspan="3">
-							<div id="inputdiv">
+							<div id="inputdiv2">
 							<input name="stqtitle" size="50" maxlength="30">
 							</div></td>
 						</tr>

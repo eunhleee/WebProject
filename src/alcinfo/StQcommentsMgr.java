@@ -53,7 +53,7 @@ public class StQcommentsMgr {
 			con = pool.getConnection();
 			sql = "insert stqcomments(stq_num,stq_id,stq_content,stq_ip,stq_regdate,stq_conum,"
 					+ "stq_depth) values(?,?,?,?,now(),"
-					+ "(select max(stq_conum) from stqcomments s)+1,0)";
+					+ "coalesce((select max(stq_conum) from stqcomments s)+1,0),0)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, bean.getStq_num());
 			pstmt.setString(2, bean.getStq_id());

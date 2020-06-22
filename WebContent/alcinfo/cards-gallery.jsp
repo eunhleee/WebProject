@@ -32,9 +32,7 @@
 			<br>  
 			<div class="row">  
 				<%
-				System.out.println("그레이드는");
-				System.out.println(session.getAttribute("idgrade"));
-
+			
 	        	Vector<AcademyBean> Avlist=Amgr.getBestBoard("top","star");
 	        	//int listsize=vlist.size();
 	        	for(int i=0;i<6;i++){

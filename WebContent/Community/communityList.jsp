@@ -226,49 +226,7 @@ a:hover {
 
 	<!-- 리스트 부분 -->
 	<div id="insertMember" class="insertMember1" align="left">
-			
-<<<<<<< HEAD
-	
-		</div>
 
-		<!-- 리스트 부분 -->
-		<div id="rightdiv">
-			
-			<h2><%=category %></h2>
-			<table>
-				<tr>
-					<td width="600">Total : <%=totalRecord%>Articles(<font
-						color="red"> <%=nowPage+"/"+totalPage%>Pages
-					</font>)
-					</td>
-					<td align="right">
-						<form name="npFrm" method="post">
-							<select name="numPerPage" size="1"
-								onchange="numPerFn(this.form.numPerPage.value)">
-								<option value="5">5개 보기</option>
-								<option value="10" selected>10개 보기</option>
-								<option value="15">15개 보기</option>
-								<option value="30">30개 보기</option>
-							</select>
-						</form> <script>
-   			document.npFrm.numPerPage.value=<%=numPerPage%>
-   			
-   			</script>
-					</td>
-				</tr>
-			</table>
-			<table class="table table-hover">
-				<tr>
-					<td align="center" colspan="2">
-						<table cellspacing="0" height="80">
-							<tr align="center" id="title">
-								<td width="100">번 호</td>
-								<td width="280">제 목</td>
-								<td width="100">닉네임</td>
-								<td width="150">날 짜</td>
-								<td width="100">조회수</td>
-							</tr>
-=======
 		<h2><%=category %></h2>
 		<table>
 			<tr>
@@ -302,10 +260,10 @@ a:hover {
 							<td width="100">닉네임</td>
 							<td width="150">날 짜</td>
 							<td width="100">조회수</td>
+
 						</tr>
->>>>>>> branch 'master' of https://github.com/eunhleee/WebProject.git
 
-
+		
 				<%
 					Vector<SCommunityBean> vlist = mgr.getBoardList(keyField, keyWord,group, start, cnt);
 					int listsize = vlist.size();
@@ -336,7 +294,7 @@ a:hover {
 				%>
 
 						<tr id="list">
-							<td align="center"><%=totalRecord-start-i%></td>
+							<td align="center"><%=num%></td>
 							<td align="left"><a href="javascript:read('<%=num%>')"><%=title%></a>
 								<% if(filename!=null) { %>
 									<img src="../img/icon_file1.png">
