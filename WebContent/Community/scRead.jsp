@@ -112,6 +112,15 @@ function goCReport(conum,stuc_depth,stopid) {
 	}
 </script>
 <style>
+#readDiv{
+	margin-top:50px;
+	margin-left:15%;
+	width:65%;
+	align:center;
+	border: 10px solid #F88C65; 
+	border-radius:10px;
+	padding:20px 40px;
+}
 #list td {
 	border-bottom: 1px solid lightgray;
 }
@@ -141,43 +150,36 @@ a:hover {
 
 	<jsp:include page="../alcinfo/headerSearch.jsp"></jsp:include>
 
-	<div style="display: flex; margin-left: 15%; margin-right: 15%">
-
-		<div
-			style="width: 50px; text-align: left; flex: 1; border: 1px solid black; margin-right: 10%; padding: 40px 40px;">
-			<h3>커뮤니티</h3>
-			<a href="communityList.jsp?pageValue=free">&#149; 자유게시판</a><br>
-			<a href="communityList.jsp?pageValue=academy">&#149; 학원 Q&A</a><br>
-			<a href="communityList.jsp?pageValue=lesson">&#149; 과외 Q&A</a><br>
-			<br>
-
-		</div>
-		<div style="flex:4;">
-		<table align="center" width="75%" cellspacing="3">
+		<div id="readDiv">
+		<table align="center" width="100%" cellspacing="3" bgcolor="white">
+		
 		 <tr>
-		  <td bgcolor="#9CA2EE" height="25" align="center">글읽기
-		  </td>
-		 </tr>
-		 <tr>
-		  <td colspan="2">
-		   <table cellpadding="3" cellspacing="0" width="100%"> 
-		    <tr> 
-		  <td align="center" bgcolor="#DDDDDD" width="20%"> 아 이 디 </td>
-		  <td bgcolor="#FFFFE8"><%=id%></td>
-		  <td align="center" bgcolor="#DDDDDD" width="20%"> 등록날짜 </td>
-		  <td bgcolor="#FFFFE8"><%=regdate%></td>
-		 </tr>
-		 <tr> 
-		    <td align="center" bgcolor="#DDDDDD"> 제 목</td>
-		    <td bgcolor="#FFFFE8" colspan="3"><%=title%></td>
+		  <td>
+		   <table cellpadding="3" cellspacing="0" width="100%" > 
+		   <tr height="100"> 
+			    <td colspan="7"><span style="font-size:30px;"><%=title%></span> 
+			    <% if(loginid!=null) {%>		    
+				 <input type="button" value="신고" onclick="javascript:goRep();" style="float:right;">
+				  <%}%></td>
+			    
 		   </tr>
+		    <tr> 
+				<td align="center" bgcolor="#FCBC7E" width="10%" style="color:white; font-weight:bold;" > 닉 네 임</td>
+				<td bgcolor="#FAF8EB" width="10%"><%=id%></td>
+				<td align="center" bgcolor="#FCBC7E" width="10%" style="color:white; font-weight:bold;"> 등록날짜 </td>
+				<td bgcolor="#FAF8EB" width="10%"><%=regdate%></td>
+				<td align="center" bgcolor="#FCBC7E" width="10%" style="color:white; font-weight:bold;">조회수</td>
+				<td bgcolor="#FAF8EB"  colspan="3"><%=count%></td>
+			    
+			</tr>
+		 
 		   <tr> 
-		     <td align="center" bgcolor="#DDDDDD">첨부파일</td>
-		     <td bgcolor="#FFFFE8" colspan="3">
+		     <td align="center" bgcolor="#FCBC7E" style="color:white; font-weight:bold;">첨부파일</td>
+		     <td bgcolor="#FAF8EB" colspan="5">
 		    	<%
 		    		if(filename!=null&&!filename.equals("")){
 		    	%>
-		    		<a href="javascript:down('<%=filename%>')"><%=filename%></a>
+		    		<a href="javascript:down('<%=filename%>')" style="margin-right:15px;"><%=filename%></a>
 		    		<font color="blue">(<%=UtilMgr.intFormat(filesize)%>bytes)</font>
 		    	<%
 		    		} else {
@@ -187,67 +189,25 @@ a:hover {
 		     </td>
 		   </tr>
 		   <tr> 
-		    <td colspan="4"><br/><pre><%=content%></pre><br/><hr></td>
+		    <td colspan="6" height="200"><span><%=content%></span></td>
 		   </tr>
 		   <tr>
 		    <td colspan="3" align="left">
 		    	댓글 <%=ccount%>
 		    </td>
-		    <td align="right">
-		     	조회수  <%=count%>
-		    </td>
-		    
-		  <% if(loginid!=null) {%>		    
-		    <td><input type="button" value="신고" onclick="javascript:goRep();"></td>
-		    <%}%>
 		   </tr>
-		   </table>
-		  </td>
-		 </tr>
-		 <tr>
-		  <td align="center" colspan="2">
-		   <!-- 댓글 입력폼 Start -->
-			<% if(loginid!=null) { %>
-		   <form method="post" name="cFrm">
-				<table>
-					<tr  align="center">
-						<td width="50">닉네임</td>
-						<td align="left">
-							<input name="cNick" size="10" value="<%=loginNick%>" readonly>
-						</td>
-					</tr>
-					<tr align="center">
-						<td>내 용</td>
-						<td>
-						<input name="comment" size="50" placeholder="댓글을 남겨보세요"> 
-						<input type="button" value="등록" onclick="cInsert()"></td>
-					</tr>
-				</table>
-			 <input type="hidden" name="flag" value="insert">	
-			 <input type="hidden" name="num" value="<%=num%>">
-			 <input type="hidden" name="cnum">
-			 <input type="hidden" name="conum">
-		    <input type="hidden" name="nowPage" value="<%=nowPage%>">
-		    <input type="hidden" name="numPerPage" value="<%=numPerPage%>">
-			<input type="hidden" name="ip" value="<%=request.getRemoteAddr()%>">
-			   <%
-			   	if(!(keyWord==null||keyWord.equals(""))){
-			   %>
-		    <input type="hidden" name="keyField" value="<%=keyField%>">
-		    <input type="hidden" name="keyWord" value="<%=keyWord%>">
-			<%
-				}
-			%>
-			</form>
-			<% } %>
-		   <!-- 댓글 입력폼 End -->
-		 <hr/>
+		</table>
+	 </td>
+	</tr>
+	<tr>
+		<td colspan="2">
+		<hr/>
   			<!-- 댓글 List Start -->
 			  <%
 			  	Vector<SCommentBean> cvlist = sccmgr.getSComment(num);
 			      	if(!cvlist.isEmpty()){
 			  %>
-				 <table>
+				 <table width="100%">
 				 <%
 					 	for(int i=0;i<cvlist.size();i++){
 	 		 	 			SCommentBean sccbean = cvlist.get(i);
@@ -265,21 +225,20 @@ a:hover {
 				 %>
 				 	
 				 	<tr>
-						<td <%=dstyle%> colspan="3" width="600"><b><%=cnick%></b></td>
+						<td <%=dstyle%> colspan="4" width="600"><b><%=cnick%></b></td>
 					</tr>
 					<tr>
-						<td <%=dstyle%> colspan="2"><%=comment%></td>
+						<td <%=dstyle%> colspan="3" style=" min-height:150px;"><%=comment%></td>
+						<td align="right" >
 						<% 
 						if(loginNick!=null) {
 							if(loginNick.equals(cnick)||scmgr.checkM(loginid)==0) { %>
-						<td align="center" valign="middle">
+						
 							<input type="button" value="삭제"
 							onclick="cDel('<%=conum%>','<%=cnum%>','<%=depth%>')">
 							
-						</td>
 						<%}%>
-							<td align="left" valign="middle">
-							<input type="button" value="댓글신고"
+							<input type="button" value="댓글신고" 
 							onclick="javascript:goCReport
 							('<%=sccbean.getNum()%>','<%=sccbean.getStuc_depth()%>','<%=stopid%>')">
 							
@@ -288,7 +247,7 @@ a:hover {
 						
 					</tr>
 					<tr>
-						<td <%=dstyle%> colspan="3">
+						<td <%=dstyle%> colspan="3" style="font-size:12px; color:gray;">
 						<%=cregdate%>
 						<% if(loginid!=null) { %>
 						<a onclick="onscReply<%=i%>();">답글쓰기</a>  
@@ -317,18 +276,14 @@ a:hover {
 						<div id="scReply<%=i%>" class="scReply">
 							<form method="post" name="crFrm<%=i%>">
 								<table>
-									<tr align="center">
-										<td width="50">닉네임</td>
-										<td align="left">
-											<input name="cNick" size="10" value="<%=loginNick%>" readonly>
-										</td>
-									</tr>
-									<tr align="center">
-										<td>내 용</td>
+									<tr >
+										<td><%=loginNick%>&nbsp;:&nbsp;</td>
 										<td>
-											<input name="comment" size="50" placeholder="댓글을 남겨보세요"> 
-											<input type="button" value="등록" onclick="rInsert<%=i%>()">
-											<input type="button" value="취소" onclick="offscReply<%=i%>()">
+										<div id="inputdiv" style="width:500px; display:flex; backgound-color:white;">
+										<input name="comment" size="50" placeholder="댓글을 남겨보세요" style="flex:3;"> 
+										<input type="button" value="등록" onclick="rInsert<%=i%>()" style="flex:1; margin-right:5px;">
+										<input type="button" value="취소" onclick="offscReply<%=i%>()" style="flex:1;">
+										</div>
 										</td>
 									</tr>
 								</table>
@@ -341,6 +296,7 @@ a:hover {
 						    <input type="hidden" name="nowPage" value="<%=nowPage%>">
 						    <input type="hidden" name="numPerPage" value="<%=numPerPage%>">
 							<input type="hidden" name="ip" value="<%=request.getRemoteAddr()%>">
+							<input type="hidden" name="cNick" size="10" value="<%=loginNick%>">
 						    <% 
 						  	 	if(!(keyWord==null||keyWord.equals(""))){
 						    %>
@@ -358,9 +314,49 @@ a:hover {
 					</tr>
 				 <%  }//---for%>
 				 </table>	
-			 <hr/>
+			
 			 <% } %>
 			 <!-- 댓글 List End -->
+			 <!-- 댓글 입력폼 Start -->
+			
+			 <% if(loginid!=null) { %>
+		   <form method="post" name="cFrm">
+			   <div id="inputdiv" style="width:97%; backgound-color:white;">
+					<table width="97%">
+						<tr >
+							<td colspan="4"><%=loginNick%></td>
+						</tr>
+						<tr>
+							<td colspan="3" width="90%">
+								<input name="comment"  placeholder="댓글을 남겨보세요" style="width:95%; height:30px;"> 
+							</td>
+							<td align="right">
+								<input type="button" value="등록" onclick="cInsert()" style=" height:30px;">
+							</td>
+						</tr>
+					</table>
+				</div>
+			 <input type="hidden" name="flag" value="insert">	
+			 <input type="hidden" name="num" value="<%=num%>">
+			 <input type="hidden" name="cnum">
+			 <input type="hidden" name="conum">
+		    <input type="hidden" name="nowPage" value="<%=nowPage%>">
+		    <input type="hidden" name="numPerPage" value="<%=numPerPage%>">
+			<input type="hidden" name="ip" value="<%=request.getRemoteAddr()%>">
+			<input type="hidden" name="cNick" size="10" value="<%=loginNick%>">
+			   <%
+			   	if(!(keyWord==null||keyWord.equals(""))){
+			   %>
+		    <input type="hidden" name="keyField" value="<%=keyField%>">
+		    <input type="hidden" name="keyWord" value="<%=keyWord%>">
+			<%
+				}
+			%>
+			</form>
+			<% } %>
+			
+		   <!-- 댓글 입력폼 End -->
+			<hr>
 		 [ <a href="javascript:list()" >리스트</a>
 		 <% 
 		 if(loginid!=null) {
@@ -388,7 +384,7 @@ a:hover {
 			<%}%>
 		</form>
 		</div>
-	</div>
+	
 	<jsp:include page="../alcinfo/footer.jsp"/>
 </body>
 </html>

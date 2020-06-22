@@ -15,6 +15,7 @@ if(session.getAttribute("idKey")==null||session.getAttribute("idKey").equals("")
 	else{
 	String id=(String)session.getAttribute("idKey");
 	MemberBean bean=mgr.getUpMember(id);
+	int grade=(Integer)session.getAttribute("idgrade");
 
 	int to=Integer.parseInt(bean.getBirth().substring(4,6)); 
 	int to2=Integer.parseInt(bean.getBirth().substring(6,8));
@@ -240,7 +241,7 @@ function win_close(){
 </style>
 </head>
 <body>
-
+<jsp:include page="../alcinfo/headerSearch.jsp"></jsp:include>
 <div id="totalframe">
 <div id="categoryframe">
 	<h3 style="margin-left:50px;">마이 페이지</h3>
@@ -249,6 +250,14 @@ function win_close(){
 	<div id="atag"><a href="../Mypage/MyReportList.jsp">&#149; 나의 신고</a></div>
 	<div id="atag"><a href="">&#149; 신청한 과외</a></div>
 	<div id="atag"><a href="">&#149; 신청 받은 과외</a></div>
+	<% 
+		if(grade==2||grade==3){
+	%>
+		<div id="atag"><a href="">&#149; 권한 변경 신청</a></div>
+	<%
+		}
+	%>
+	
 </div>
 <div id="insertMember" class="insertMember1" align="left">
 	<form name="imFrm" class="im-content" method="post" action="../Mypage/upmemberProc.jsp">
@@ -275,6 +284,7 @@ function win_close(){
 									<input type="text" style="width:260px; height:30px;"
 									maxlength="15" name="imid" value="<%=bean.getId()%>" readonly>
 								</div>
+
 							</td>
 						</tr>
 						<tr>

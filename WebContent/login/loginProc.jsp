@@ -14,6 +14,7 @@
 	  lbean = Mmgr.loginMember(lid,lpass);
 	  String url="../alcinfo/cards-gallery.jsp";
 	  boolean lresult = Lmgr.insertLogin(lbean);
+	 
 	  MemberBean gBean =Mmgr.getGrade(lid);
 
 	  if(lresult){
@@ -22,6 +23,7 @@
 	    lmsg = "로그인에 성공 하였습니다.";
 	    url=request.getHeader("referer");
 	  }
+	 
 	  
 %>
 <script>

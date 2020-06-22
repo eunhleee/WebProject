@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<!-- acSearch.jsp -->
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%
 	response.setHeader("Cache-Control", "no-store");
 	response.setHeader("Pragma", "no-cache");
@@ -15,72 +16,66 @@
 <script language="JavaScript" type="text/JavaScript">
 	var xhrObject;
 
-	//ajax°´Ã¼¸¦ ¸¸µå´Â ÇÔ¼ö
+	//ajaxê°ì²´ë¥¼ ë§Œë“œëŠ” í•¨ìˆ˜
 	function createXHR() {
 		if (window.ActiveXObject) {
 			xhrObject = new ActiveXObject("Microsoft.XMLHTTP");
 		} else if (window.XMLHttpRequest) {
-			//ajax°´Ã¼ ¸¸µé±â
+			//ajaxê°ì²´ ë§Œë“¤ê¸°
 			xhrObject = new XMLHttpRequest();
 		}
 	}
-//ÆäÀÌÁö¸¦ ¿äÃ»ÇÏ´Â ÇÔ¼ö(»ç¿ëÀÚ Á¤ÀÇ),ajax°´Ã¼¸¦ »ç¿ëÇÑ´Ù.
+//í˜ì´ì§€ë¥¼ ìš”ì²­í•˜ëŠ” í•¨ìˆ˜(ì‚¬ìš©ì ì •ì˜),ajaxê°ì²´ë¥¼ ì‚¬ìš©í•œë‹¤.
 	function getData() {
-		//HTML ÄÚµå¿¡¼­ javascript ÄÚµå¿µ¿ªÀ¸·Î °¡Á®¿À´Â °Í
+		//HTML ì½”ë“œì—ì„œ javascript ì½”ë“œì˜ì—­ìœ¼ë¡œ ê°€ì ¸ì˜¤ëŠ” ê²ƒ
 		var form_name = "form_main";
-		var user_id = document.forms[form_name].elements["txt_user_id"].value;
+		var user_name = document.forms[form_name].elements["txt_user_name"].value;
 		
-		//Ajax °´Ã¼¸¦ ¸¸µå´Â ÇÔ¼ö
-		//¸¸µå´Â ÀÌÀ¯´Â »ç¿ëÇÏ·Á°í 
-		//¾îµğ¿¡ »ç¿ëÇÏ´Â°¡ 1.ÆäÀÌÁö¸¦ ¿äÃ»ÇÑ´Ù. 2.(json°´Ã¼°¡ ÀÖ´Â) ÆäÀÌÁö¸¦ ¿äÃ»ÇÑ´Ù
+		//Ajax ê°ì²´ë¥¼ ë§Œë“œëŠ” í•¨ìˆ˜
+		//ë§Œë“œëŠ” ì´ìœ ëŠ” ì‚¬ìš©í•˜ë ¤ê³  
+		//ì–´ë””ì— ì‚¬ìš©í•˜ëŠ”ê°€ 1.í˜ì´ì§€ë¥¼ ìš”ì²­í•œë‹¤. 2.(jsonê°ì²´ê°€ ìˆëŠ”) í˜ì´ì§€ë¥¼ ìš”ì²­í•œë‹¤
 		createXHR();
 		
 		//var url = "./testFile.jsp";
 		var url="";
-		if(user_id==null) user_id="";
-		var reqparam = "user_id=" + user_id;
+		if(user_name==null) user_name="";
+		var reqparam = "user_name=" + user_name;
 		
-		 url = "./testDB.jsp?reqparam";
+		 url = "./academyDB.jsp?reqparam";
 		
-		//ajax°´Ã¼¿¡ ¿É¼Ç 4°¡Áö¸¦ ¼³Á¤
-		xhrObject.onreadystatechange = resGetData; //µ¹·Á¹ŞÀ» ÇÔ¼ö,Äİ¹éÇÔ¼ö¸¦ µî·Ï
-		xhrObject.open("Post", url, "true");//¿äÃ»ÇÒ ÆäÀÌÁöÀÇ °æ·Î ÀÔ·Â
+		//ajaxê°ì²´ì— ì˜µì…˜ 4ê°€ì§€ë¥¼ ì„¤ì •
+		xhrObject.onreadystatechange = resGetData; //ëŒë ¤ë°›ì„ í•¨ìˆ˜,ì½œë°±í•¨ìˆ˜ë¥¼ ë“±ë¡
+		xhrObject.open("Post", url, "true");//ìš”ì²­í•  í˜ì´ì§€ì˜ ê²½ë¡œ ì…ë ¥
 		xhrObject.setRequestHeader("Content-Type","application/x-www-form-urlencoded;charset=utf-8");
-		xhrObject.send(reqparam);//°´Ã¼ ½ÇÇà
+		xhrObject.send(reqparam);//ê°ì²´ ì‹¤í–‰
 	}
-	
-	
-
 	function resGetData() {
 		if (xhrObject.readyState == 4) {
 			if (xhrObject.status == 200) {
 				var result = xhrObject.responseText;
 				var objRes = eval("(" + result + ")");
 				var num = objRes.datas.length;
-				var res = "<table cellpadding='3' cellspacing='0' border='1' width='980'>";
+				var res = "<table cellpadding='3' cellspacing='0' border='1' width='580'>";
 				var resDiv = document.getElementById("div_res");
 
 				if (num < 1) {
-					res += "<tr><td width='980' height='50' align='center' style='font-size:20;'>°Ë»ö °á°ú°¡ ¾ø½À´Ï´Ù.</td></tr>";
+					res += "<tr><td width='500' height='30' align='center' style='font-size:20;'>ê²€ìƒ‰ ê²°ê³¼ê°€ ì—†ìŠµë‹ˆë‹¤.</td></tr>";
 				} else {
 					for (var i = 0; i < num; i++) {
-						var user_id = objRes.datas[i].ID;
 						var user_name = objRes.datas[i].NAME;
 						var user_address = objRes.datas[i].ADDRESS;
-						var user_phone = objRes.datas[i].PHONE;
+						var user_num = objRes.datas[i].NUM;
 
 						res += "<tr>";
-						res += "<td width='980' height='50' align='center' style='font-size:20;' bgcolor='#D0E6FC'>"
-								+ user_id + "</td>";
-					
-						res += "<td width='980' height='50' align='center' style='font-size:20;' bgcolor='white'><br>"
-								+ user_name + "<br></td>";
+						res += "<td width='100' height='15' align='center' style='font-size:15;' bgcolor='#D0E6FC'><br>"
+							+ user_num + "<br></td>";
+						res += "<td width='180' height='15' align='center' style='font-size:15;' bgcolor='white'><br>"
+						+"<a href=\"javascript:sendChildValue(\'"+user_name+"\',\'"+user_num+"\')\">"
+								+ user_name + "</a><br></td>";
 								
-						res += "<td width='980' height='50' align='center' style='font-size:20;' bgcolor='#D0E6FC'><br>"
+						res += "<td width='500' height='15' align='center' style='font-size:15;' bgcolor='#D0E6FC'><br>"
 									+ user_address + "<br></td>";
-									
-						res += "<td width='980' height='50' align='center' style='font-size:20;' bgcolor='white'><br>"
-								+ user_phone + "<br></td>";
+
 						res += "</tr>";
 					}
 				}
@@ -91,50 +86,43 @@
 	}
 
 	function searchData() {
-		
 		var form_name = "form_main";
-		var user_id = document.forms[form_name].elements["txt_user_id"].value;
-
-		//if (user_id == "") {
-			
-		//	document.forms[form_name].elements["txt_user_id"].focus();
-		//	getData();
-		//	return;
-		//} else {
-			//Ajax °´Ã¼¿¡ ÀÖ´Â ´Ù¸¥ À¥ÆäÀÌÁö¸¦ È£ÃâÇÏ´Â ÇÔ¼ö(»ç¿ëÀÚ°¡ ¸¸µç)
-			//text_main.jsp¿¡¼­ textDB.jsp¸¦ È£ÃâÇÑ´Ù.
+		var user_name = document.forms[form_name].elements["txt_user_name"].value;
 			getData();
-		//}
 	}
+	function sendChildValue(name,num){
+	opener.setChildValue(name,num);
+	window.close();
+		}
 </script>
 
 </head>
 <body>
-	<div id='div_main' width='980' height="300"
+	<div id='div_main' width='380' height="300"
 		style="visibility: visible; position: absolute; left: 0px; top: 115px; z-index: 1;">
-		<table border='0' width='980' cellpadding='0' cellspacing='0'>
+		<table border='0' width='380' cellpadding='0' cellspacing='0'>
 			<form name="form_main" onSubmit="javascript:return false;">
 				<tr>
-					<td width='245'></td>
-					<td width='245' align='right'>
+					<td width='145'></td>
+					<td width='145' align='right'>
 					<input type='text'
-						name='txt_user_id' size='10' value='' maxlength='10'
-						style='width: 240px; font-size: 50; text-align: left;'
+						name='txt_user_name' size='15' value='' maxlength='10'
+						style='width: 140px; font-size: 15; text-align: left;'
 						onkeyup='javascript:searchData();'></td>
-					<td width='245'><img src='./img/search.gif' width='245'
+					<td width='145'><img src='./img/search.gif' width='145'
 						height='100' onClick='javascript:searchData();'></td>
-					<td width='245'></td>
+					<td width='145'></td>
 				</tr>
 			</form>
 		</table>
 	</div>
 
-	<div id='div_res' width='980'
+	<div id='div_res' width='380'
 		style="visibility: visible; position: absolute; left: 0px; top: 215px; z-index: 1;">
-		<table border='1' width='980' cellpadding='10' cellspacing='0'>
+		<table border='1' width='580' cellpadding='10' cellspacing='0'>
 			<tr>
-				<td align='center' style="width =: 950px; font-size: 50"
-					bgcolor='#FFFFCC'>°á°ú¹°</td>
+				<td align='center' style="width =: 550px; font-size: 20"
+					bgcolor='#FFFFCC'>í•™ì›ëª©ë¡</td>
 			</tr>
 		</table>
 	</div>

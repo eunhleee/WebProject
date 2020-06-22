@@ -91,7 +91,7 @@
 	margin: 60px;
 }
 
-.catagory a:hover {
+.catagory a:hover{
 	border-bottom: 3px solid white;
 }
 
@@ -175,10 +175,11 @@
 			<%}else{ %>
 			<input type="button" onclick="openlogoutProc();" class="openlm" value="로그아웃">
 			<% if((Integer)session.getAttribute("idgrade")==0){%>
-			<a href="../Report/MGMemberControl.jsp">관리자페이지</a>
+			<a href="../Mypage/managerPage.jsp?pageValue=salesList">관리자페이지</a>
 			<%}else{%>
 			<a href="../Mypage/upMember.jsp">마이페이지</a>
-			<%}} %>
+			<%}
+			} %>
 		</div>
 	</div>
 

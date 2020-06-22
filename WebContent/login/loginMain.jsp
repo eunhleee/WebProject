@@ -14,6 +14,7 @@
 	function openidpwdSearch() {
 		document.getElementById("idpwdSearch").style.display = 'block';
 	}
+
 </script>
 <script type="text/javascript">
 function loginCheck() {
@@ -21,6 +22,7 @@ function loginCheck() {
 		alert("아이디를 입력해 주세요.");
 		document.loginFrm.lid.focus();
 		return;
+
 	}
 	if (document.loginFrm.lpwd.value == "") {
 		alert("비밀번호를 입력해 주세요.");

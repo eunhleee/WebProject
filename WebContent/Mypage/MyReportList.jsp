@@ -196,7 +196,7 @@ select{
 					</table>
 				</form>
 	<table >
-	<tr>
+		<tr>
 		<td width="600">
 		Total : <%=totalRecord%>Articles(
 		<font color="red"><%=nowPage+"/"+totalPage%>Pages</font>)
@@ -217,20 +217,10 @@ select{
 			
 		</tr>
 	</table>
-		<table>
+		<table >
 		<tr>
 			<td align="center" colspan="2" width="800">
-			<%
-				Vector<ReportBean> vlist = 
-				rMgr.MRList(keyField, keyWord,reid, start, cnt);
-				int listSize = vlist.size();//브라우저 화면에 표시될 게시물 번호
-				if(vlist.isEmpty()){
-					out.println("등록된 게시물이 없습니다.");
-				}else{
-		//Vector<ReportBean> mvlist=rMgr.MRList(keyField, keyWord,reid);
-		//int listStze =mvlist.size();
-	%>
-	<table cellspacing="0"  width="800">
+				<table cellspacing="0"  width="800" >
 	
 			<tr id="title">
 				<td>신고날짜</td>
@@ -240,6 +230,25 @@ select{
 				<td>내용</td>
 				<td>상태</td>
 			</tr>
+			<%
+				Vector<ReportBean> vlist = 
+				rMgr.MRList(keyField, keyWord,reid, start, cnt);
+				int listSize = vlist.size();//브라우저 화면에 표시될 게시물 번호
+				if(vlist.isEmpty()){
+					%>
+					<tr>
+						<td align="center" colspan="6" height="150" style="background-color:white;">
+							<%
+						out.println("등록된 게시물이 없습니다.");
+					%>
+						</td>
+					</tr>
+					<%
+				} else {
+		//Vector<ReportBean> mvlist=rMgr.MRList(keyField, keyWord,reid);
+		//int listStze =mvlist.size();
+		%>
+	
 		<%for(int i=0;i<numPerPage;i++){
 			if(i==listSize) break;
 			ReportBean mbean=vlist.get(i);
@@ -257,7 +266,7 @@ select{
 		<%}//if-else %>
 	</tr>
 		<tr>
-		<td colspan="2"><br><br></td>
+		<td colspan="6"><br><br></td>
 	</tr>
 	<tr>
 	<td>
@@ -289,7 +298,7 @@ select{
 	<%}///-if1%>
 		<!-- 페이징 및 블럭 End -->
 		</td>
-		<td align="right">
+		<td align="right" colspan="5">
 			<a href="javascript:list()" style="color:black;">[처음으로]</a>
 		</td>
 		</tr>

@@ -17,7 +17,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 public class ReportMgr {
 	private DBConnectionMgr pool;
 	File file = new File("");
-	private final String  SAVEFOLDER = "C:/user/admin/git/WebPoject/WebContent/img/";
+	private final String  SAVEFOLDER = "C:/WerPro4/WebProject/WebContent/img";
 	private final String ENCTYPE = "UTF-8";
 	private int MAXSIZE = 5*1024*1024;
 	 public ReportMgr() {
@@ -107,7 +107,7 @@ public class ReportMgr {
 		return vlist;
 	}
 	
-	//Board Total Count : 珥� 寃뚯떆臾쇱닔
+	//Board Total Count : �룯占� 野껊슣�뻻�눧�눘�땾
 	public int getTotalCount(String keyField, String keyWord, String reid) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -117,12 +117,12 @@ public class ReportMgr {
 		try {
 			con = pool.getConnection();
 			if(keyWord.trim().equals("")||keyWord==null) {
-				//寃��깋�씠 �븘�땶寃쎌슦
+				//野껓옙占쎄퉳占쎌뵠 占쎈툡占쎈빒野껋럩�뒭
 				sql = "select count(*) from report where reid ="+"'"+reid+"'";
 				pstmt = con.prepareStatement(sql);
 				
 			}else {
-				//寃��깋�씤 寃쎌슦
+				//野껓옙占쎄퉳占쎌뵥 野껋럩�뒭
 				sql = "select count(*) from report where " 
 				+ keyField +" like ? and reid = "+"'"+reid+"'";;
 				pstmt = con.prepareStatement(sql);
@@ -182,7 +182,7 @@ public class ReportMgr {
 		}
 		return vlist;
 	}
-	*///�엫�떆諛깆뾽
+	*///占쎌뿫占쎈뻻獄쏄퉮毓�
 	
 	///////////////////////////////
 	

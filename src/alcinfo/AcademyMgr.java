@@ -1,12 +1,23 @@
 package alcinfo;
 
 import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.Vector;
+
+import javax.servlet.http.HttpServletRequest;
+
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 public class AcademyMgr {
 	private DBConnectionMgr pool;
+	private static final String UPLOAD = "C:/WerPro4/WebProject/WebContent/authority/";
+	private static final String ENCTYPE = "UTF-8";
+	private static final int MAXSIZE = 10*1024*1024;
+	
 	public AcademyMgr(){
 		pool=DBConnectionMgr.getInstance();
 	}
@@ -34,7 +45,7 @@ public class AcademyMgr {
 				
 			}
 			
-			rs = pstmt.executeQuery();//select ����
+			rs = pstmt.executeQuery();//select 占쏙옙占쏙옙
 			while(rs.next()) {
 				AcademyBean bean = new AcademyBean();
 				bean.setNum(rs.getInt("num"));
@@ -70,7 +81,7 @@ public class AcademyMgr {
 			sql = "select num,imgname, ac_name,group2, ac_tel,star,count from academy order by count desc";
 			pstmt = con.prepareStatement(sql);
 			
-			rs = pstmt.executeQuery();//select ����
+			rs = pstmt.executeQuery();//select 占쏙옙占쏙옙
 			while(rs.next()) {
 				AcademyBean bean = new AcademyBean();
 				bean.setNum(rs.getInt("num"));
@@ -128,9 +139,9 @@ public class AcademyMgr {
 			Vector<AcademyBean> vlist=new Vector<AcademyBean>();
 			try {
 				con = pool.getConnection();
-				if(keyWord.equals("과학")) {
+				if(keyWord.equals("怨쇳븰")) {
 					sql = "select num,imgname, ac_name,group2, ac_tel,star,count from academy "
-							+" where ac_name like '%과학%' and ac_name not in	 ( select ac_name  from academy where ac_name like '%단과학원')";
+							+" where ac_name like '%怨쇳븰%' and ac_name not in	 ( select ac_name  from academy where ac_name like '%�떒怨쇳븰�썝')";
 					pstmt = con.prepareStatement(sql);
 				}
 				else if(!keyWord.trim().equals("")||keyWord!=null) {
@@ -168,7 +179,7 @@ public class AcademyMgr {
 			return vlist; 
 		}
 		
-		//조회수 증가
+		//議고쉶�닔 利앷�
 				public void upAcCount(int num) {
 					Connection con = null;
 					PreparedStatement pstmt = null;
@@ -185,7 +196,62 @@ public class AcademyMgr {
 						pool.freeConnection(con, pstmt);
 					}
 				}	
-	
+				public ArrayList geAcInfo(String id) throws Exception {
+
+					Connection con = null;
+					PreparedStatement pstmt = null;
+					ResultSet rs = null;
+					String sql = null;
+					ArrayList res=new ArrayList();
+						con = pool.getConnection();
+						sql = "select num,ac_name,ac_address from academy";
+								if(!id.equals("")) {
+									sql+=" where ac_name like '%"+id+"%'";
+									}
+								sql+=" order by num";
+						pstmt = con.prepareStatement(sql);
+						rs = pstmt.executeQuery();
+						while(rs.next()) {
+							res.add(rs.getInt(1));
+							res.add(rs.getString(2));
+							res.add(rs.getString(3));
+
+							}
+						return res;
+					
+				}
+				//academy state insert
+				public boolean insertProduct(HttpServletRequest req) {
+					Connection con = null;
+					PreparedStatement pstmt = null;
+					String sql = null;
+					boolean flag = false;
+					try {
+						MultipartRequest multi = 
+								new MultipartRequest(req, UPLOAD, MAXSIZE, ENCTYPE,
+										new DefaultFileRenamePolicy());
+						con = pool.getConnection();
+						sql = "insert acapply(aca_num,aca_name,aca_identity,aca_business)"+
+								  "values(?,?,?,?)";
+						pstmt = con.prepareStatement(sql);
+						pstmt.setString(1, multi.getParameter("num"));
+						pstmt.setString(2,multi.getParameter("name"));
+						if(multi.getFilesystemName("identity")!=null)
+							pstmt.setString(3, multi.getFilesystemName("identity"));
+						else
+							pstmt.setString(3,"no_image.jpg");
+						if(multi.getFilesystemName("business")!=null)
+							pstmt.setString(4, multi.getFilesystemName("business"));
+						else
+							pstmt.setString(4,"no_image.jpg");
+						if(pstmt.executeUpdate()==1) flag = true;
+					} catch (Exception e) {
+						e.printStackTrace();
+					} finally {
+						pool.freeConnection(con, pstmt);
+					}
+					return flag;
+				}
 	
 	}
 

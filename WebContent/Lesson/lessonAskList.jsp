@@ -200,7 +200,7 @@ a:hover {
 						<td width="100">조회수</td>
 					</tr>
 					<%
-						if(loginid==null||mpoint==null||mpointnumber<todaynumber){
+						if(grade!=0&&(loginid==null||mpoint==null||mpointnumber<todaynumber)){
 					%>
 					<tr>
 						<td align="center" colspan="5" height="170" style="background-color:gray;  opacity: 0.5;">
