@@ -14,6 +14,49 @@ public class AcademyBean {
 	private String regdate; 
 	private String regtime;
 	private int count;
+	private int aca_num;
+	private String aca_name;
+	private String aca_identity;
+	private String aca_business;
+	private String aca_state;
+	private String aca_id;
+
+	public String getAca_id() {
+		return aca_id;
+	}
+	public void setAca_id(String aca_id) {
+		this.aca_id = aca_id;
+	}
+	public int getAca_num() {
+		return aca_num;
+	}
+	public void setAca_num(int aca_num) {
+		this.aca_num = aca_num;
+	}
+	public String getAca_name() {
+		return aca_name;
+	}
+	public void setAca_name(String aca_name) {
+		this.aca_name = aca_name;
+	}
+	public String getAca_identity() {
+		return aca_identity;
+	}
+	public void setAca_identity(String aca_identity) {
+		this.aca_identity = aca_identity;
+	}
+	public String getAca_business() {
+		return aca_business;
+	}
+	public void setAca_business(String aca_business) {
+		this.aca_business = aca_business;
+	}
+	public String getAca_state() {
+		return aca_state;
+	}
+	public void setAca_state(String aca_state) {
+		this.aca_state = aca_state;
+	}
 	public int getNum() {
 		return num;
 	}

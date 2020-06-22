@@ -231,7 +231,7 @@ public class AcademyMgr {
 								new MultipartRequest(req, UPLOAD, MAXSIZE, ENCTYPE,
 										new DefaultFileRenamePolicy());
 						con = pool.getConnection();
-						sql = "insert acapply(aca_num,aca_name,aca_identity,aca_business)"+
+						sql = "insert acapply(aca_num,aca_name,aca_identity,aca_business,aca_id)"+
 								  "values(?,?,?,?)";
 						pstmt = con.prepareStatement(sql);
 						pstmt.setString(1, multi.getParameter("num"));
@@ -244,6 +244,8 @@ public class AcademyMgr {
 							pstmt.setString(4, multi.getFilesystemName("business"));
 						else
 							pstmt.setString(4,"no_image.jpg");
+						pstmt.setString(5,multi.getParameter("ac_id"));
+
 						if(pstmt.executeUpdate()==1) flag = true;
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -252,6 +254,79 @@ public class AcademyMgr {
 					}
 					return flag;
 				}
-	
+				// requestAclist.jsp
+				public Vector<AcademyBean> mGMList(){
+					Connection con = null;
+					PreparedStatement pstmt = null;
+					ResultSet rs = null;
+					String sql = null;
+					Vector<AcademyBean> vlist = new Vector<AcademyBean>();
+					try {
+						con = pool.getConnection();
+							//
+							sql = "select num,aca_num, aca_name, aca_identity , aca_business, aca_state,aca_id"
+									+ " from acapply";
+						pstmt = con.prepareStatement(sql);
+						rs = pstmt.executeQuery();
+						while(rs.next()) { 
+							AcademyBean bean = new AcademyBean();
+							bean.setNum(rs.getInt(1));
+							bean.setAca_num(rs.getInt(2));
+							bean.setAca_name(rs.getString(3));
+							bean.setAca_identity(rs.getString(4));
+							bean.setAca_business(rs.getString(5));
+							bean.setAca_state(rs.getString(6));
+							bean.setAca_id(rs.getString(7));
+
+							vlist.addElement(bean);
+						}
+						
+					} catch (Exception e) {
+						e.printStackTrace();
+					} finally {
+						pool.freeConnection(con, pstmt, rs);
+					}
+					return vlist;
+				}
+				public boolean upAcstate(String id) {
+					Connection con = null;
+					PreparedStatement pstmt = null;
+					String sql = null;
+					boolean flag=false;
+					try {
+						con = pool.getConnection();
+						sql = "INSERT INTO alcinfo.letea"
+								+ "(id, name,gender,passwd,email,nickname,birth,phone,address,school_name,school_grade,state,mpoint,grade,mdate,imgname)"
+								+ " SELECT id, name,gender,passwd,email,nickname,birth,phone,address,school_name,school_grade,state,mpoint,3,mdate,imgname"
+								+ " FROM alcinfo.member WHERE id='"+id+"'";
+						
+						pstmt = con.prepareStatement(sql);
+						if(pstmt.executeUpdate()==1) flag = true;
+					} catch (Exception e) {
+						e.printStackTrace();
+					} finally {
+						pool.freeConnection(con, pstmt);
+					}
+					return flag;
+				}	
+				public boolean delAcstate(String id) {
+					Connection con = null;
+					PreparedStatement pstmt = null;
+					String sql = null;
+					boolean flag=false;
+					try {
+						con = pool.getConnection();
+						sql = "DELETE FROM member WHERE id ='"+id+"'";
+						
+						pstmt = con.prepareStatement(sql);
+					//	pstmt.setString(1, id);
+						if(pstmt.executeUpdate()==1) flag = true;
+					} catch (Exception e) {
+						e.printStackTrace();
+					} finally {
+						pool.freeConnection(con, pstmt);
+					}
+					return flag;
+				}	
 	}
 

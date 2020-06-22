@@ -8,10 +8,21 @@
 <jsp:setProperty property="*" name="mpbean"/>
 <%
 	String id=request.getParameter("imid");
-
-
-	String imbirth = request.getParameter("imbirthy") + request.getParameter("imbirthm") + 
-	request.getParameter("imbirthd");
+	String mon="";
+	String day="";
+	if(request.getParameter("imbirthm").length()>2){
+		mon="0"+request.getParameter("imbirthm").length();
+	}
+	else{
+		mon=request.getParameter("imbirthm");
+	}
+	if(request.getParameter("imbirthd").length()>2){
+		day="0"+request.getParameter("imbirthd").length();
+	}
+	else{
+		day=request.getParameter("imbirthd");
+	}
+	String imbirth = request.getParameter("imbirthy") + mon + day;
 	String imaddress = request.getParameter("imaddress1") + " " + request.getParameter("imaddress2");
 	mpbean.setId(request.getParameter("imid"));
 	mpbean.setName(request.getParameter("imname"));
@@ -29,7 +40,7 @@
 	
 	boolean imresult = mpmgr.upMember(mpbean,gBean.getGrade());
 	String mpmsg = "회원정보 수정을 실패 하였습니다.";
-	String mpurl = "../login/upMember.jsp";
+	String mpurl = "../Mypage/upMember.jsp";
 	if(imresult) {
 		mpmsg = "회원정보 수정을 성공 하였습니다.";
 		mpurl = "../Mypage/upMember.jsp";
