@@ -29,7 +29,7 @@
 	
 	boolean imresult = mpmgr.upMember(mpbean,gBean.getGrade());
 	String mpmsg = "회원정보 수정을 실패 하였습니다.";
-	String mpurl = "../login/upMember.jsp";
+	String mpurl = "../Mypage/upMember.jsp";
 	if(imresult) {
 		mpmsg = "회원정보 수정을 성공 하였습니다.";
 		mpurl = "../Mypage/upMember.jsp";

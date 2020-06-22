@@ -84,7 +84,6 @@ a:hover {
 			<div id="atag">
 			<a href="custCenter.jsp?cust_page=ccBestBoard">&#149; 자주 묻는 질문</a>
 			</div>
-			<br> 
 			<div id="atag">
 			<a href="custCenter.jsp?cust_page=ccQuery">&#149; 질문하기</a>
 			</div>

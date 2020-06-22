@@ -110,6 +110,7 @@
 <style>
 #list td {
 	border-bottom: 1px solid lightgray;
+	height:30px;
 }
 
 #title td {
@@ -184,7 +185,7 @@ div{
 			</td>
 		</tr>
 	</table>
-	<table>
+	<table class="table table-hover">
 		<tr>
 			<td align="center" colspan="2">
 				<table cellspacing="0" height="80">

@@ -111,6 +111,7 @@
 <style>
 #list td {
 	border-bottom: 1px solid lightgray;
+	height:30px;
 }
 
 #title td {
@@ -144,7 +145,6 @@ div{
 	border:none;
 	font-size:15px;
 }
-
 </style>
 </head>
 <body>

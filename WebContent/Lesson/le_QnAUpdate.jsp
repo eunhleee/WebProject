@@ -88,7 +88,7 @@
 		<h2><img src="../img/questionmark.png" width="40" height="40">&nbsp;문의 하기</h2>
 		<hr style="border:1px solid #F88C65;">
 		<form name="lequpdateFrm" method="post" action="le_QnAUpdateProc.jsp">
-		<table width="600" cellpadding="3" align="center" border="1">
+		<table width="600" cellpadding="3" align="center">
 			<tr>
 				<td align=center>
 				<table align="center">
