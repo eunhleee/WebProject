@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import org.json.simple.JSONArray;
+
 import alcinfo.LeteaBean;
 import alcinfo.MemberBean;
 import alcinfo.ReportBean;
@@ -288,6 +290,35 @@ public class MemberMgr {
 				pool.freeConnection(con, pstmt, rs);
 			}
 			return bean;
+		}
+		
+		//월별 매출 합계
+		@SuppressWarnings("unchecked")
+		public JSONArray getRatio(){
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String sql = null;
+			JSONArray jsonArray=new JSONArray();
+			try {
+				con = pool.getConnection();
+				sql = " ";
+				pstmt = con.prepareStatement(sql);
+
+				rs = pstmt.executeQuery();
+				while(rs.next()) {
+					JSONArray rowArray = new JSONArray();
+					rowArray.add(rs.getString("left(paydate,7)"));
+					rowArray.add(rs.getInt("sum(price)"));
+
+					jsonArray.add(rowArray);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				pool.freeConnection(con, pstmt, rs);
+			}
+			return jsonArray;
 		}
 	
 }
