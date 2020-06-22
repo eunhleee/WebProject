@@ -72,7 +72,7 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>Team Read</title>
+<title>우리 학원 어디?-학생 문의</title>
 <style>
 #list td {
 	border-bottom: 1px solid lightgray;
@@ -286,7 +286,7 @@ function goCReport(conum,stuc_depth,stopid) {
 		   </tr>
 		   <tr> 
 		    <td colspan="4"><br/>
-		    <textarea rows="10" cols="100"><%=content%></textarea>
+		    <textarea rows="10" cols="100" readonly><%=content%></textarea>
 		    <br/><hr></td>
 		   </tr>
 		   <tr>

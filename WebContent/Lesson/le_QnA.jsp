@@ -69,7 +69,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>과외 문의 게시판</title>
+<title>우리 학원 어디?-과외 문의 게시판</title>
 <script>
 	function check() {
 		if (document.searchFrm.keyWord.value == "") {

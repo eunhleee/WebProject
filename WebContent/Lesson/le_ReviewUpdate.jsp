@@ -1,4 +1,6 @@
 <!-- le_ReviewUpdate.jsp -->
+<%@page import="java.util.Calendar"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Vector"%>
 <%@page import="alcinfo.LereviewBean"%>
 <%@page import="alcinfo.LeRcommentsBean"%>
@@ -22,6 +24,10 @@
 	String loginid = (String)session.getAttribute("idKey");
 	String loginNick = lermgr.memberNick(loginid);
 	String prevurl = request.getHeader("referer");
+
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    Calendar today = Calendar.getInstance();
+ 	String strToday = sdf.format(today.getTime());
 	
 	String id = request.getParameter("id");
 	int num = UtilMgr.parseInt(request, "num");
@@ -31,7 +37,6 @@
 	String title = lrbean.getLr_title();
 	String nickname = lrbean.getLr_nick();
 	Double star = lrbean.getLr_star();
-	String star1 = Double.toString(star);
 	String content = lrbean.getLr_content();
 	
 	LessonBean lebean = mgr.getLesson(id);
@@ -40,8 +45,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Team Read</title>
+<title>우리 학원 어디?-과외 리뷰</title>
 
+<script src="./grade2.js"></script>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -63,6 +69,70 @@ a {
 
 a:hover {
 	color: gray;
+}
+#inputdiv2{
+	margin:10px;
+	width:490px;
+	border:1px solid gray;
+	border-radius: 6px;
+	padding:3px;
+}
+#inputdiv2 input{
+	width:480px;
+	border:none;
+	font-size:15px;
+}
+
+#inputdiv3{
+	margin:10px;
+	width:200px;
+	border:1px solid gray;
+	border-radius: 6px;
+	padding:3px;
+}
+
+#inputdiv3 input{
+	width:180px;
+	border:none;
+	font-size:15px;
+	
+}
+
+#textareadiv{
+	margin:10px;
+	width:490px;
+	border:1px solid gray;
+	border-radius: 6px;
+	padding:3px;
+}
+#textareadiv textarea{
+	border:none;
+	font-size:15px;
+	width:480px;
+}
+
+.starR1{
+    background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat -52px 0;
+    background-size: auto 100%;
+    width: 15px;
+    height: 30px;
+    float:left;
+    text-indent: -9999px;
+    cursor: pointer;
+}
+.starR2{
+    background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat right 0;
+    background-size: auto 100%;
+    width: 15px;
+    height: 30px;
+    float:left;
+    text-indent: -9999px;
+    cursor: pointer;
+}
+.starR1.on{background-position:0px 0px;}
+.starR2.on{background-position:-15px 0px;}
+.starRev {
+	margin-left: 10px;
 }
 </style>
 
@@ -261,106 +331,105 @@ function graph(){
 				</div>
 				</td>
 				<td width="70%" align="center">
-				<div style="border:10px solid #36ada9; border-radius:15px; padding:20px">
-				
-<!-- 읽기 Start -->	
-	<table width="600" cellpadding="3">
-							<tr>
-								<td height="25" align="center">글 수정</td>
-							</tr>
-						</table>
-						<br/>
-						<form name="lerupdateFrm" method="post" action="le_ReviewUpdateProc.jsp">
-						<table width="600" cellpadding="3" align="center" border="1">
-							<tr>
-								<td align=center>
-								<table align="center">
-									<tr>
-										<td>제 목</td>
-										<td>
-											<input name="lertitle" size="50" maxlength="30" value="<%=title%>">
-										</td>
-									</tr>
-									<tr>
-										<td>평 점</td>
-										<td>
-											<select name="lerstar">
-												<option value="5" 
-												<% if(star1.equals("5.0")) { %> selected <% } %>
-												>5점</option>
-												<option value="4.5" 
-												<% if(star1.equals("4.5")) { %> selected<% } %>
-												>4.5점</option>
-												<option value="4" 
-												<% if(star1.equals("4.0")) { %> selected <% } %>
-												>4점</option>
-												<option value="3.5" 
-												<% if(star1.equals("3.5")) { %> selected <% } %>
-												>3.5점</option>
-												<option value="3" 
-												<% if(star1.equals("3.0")) { %> selected <% } %>
-												>3점</option>
-												<option value="2.5" 
-												<% if(star1.equals("2.5")) { %> selected <% } %>
-												>2.5점</option>
-												<option value="2" 
-												<% if(star1.equals("2.0")) { %> selected <% } %>
-												>2점</option>
-												<option value="1.5" 
-												<% if(star1.equals("1.5")) { %> selected <% } %>
-												>1.5점</option>
-												<option value="1" 
-												<% if(star1.equals("1.0")) { %> selected <% } %>
-												>1점</option>
-												<option value="0.5" 
-												<% if(star1.equals("0.5")) { %> selected <% } %>
-												>0.5점</option>
-												<option value="0" 
-												<% if(star1.equals("0.0")) { %> selected <% } %>
-												>0점</option>
-											</select>
-										</td>
-									</tr>
-									<tr>
-										<td>내 용</td>
-										<td>
-											<textarea name="lercontent" rows="10" cols="50"><%=content%></textarea>
-										</td>
-									</tr>
-									<tr>
-										<td colspan="2">
-											 <input type="submit" value="확인">
-											 <input type="reset" value="다시쓰기">
-											 <input type="button" value="취소"
-											 onClick="javascript:location.href='<%=prevurl%>'">
-										</td>
-									</tr>
-								</table>
-								</td>
-							</tr>
-						</table>
-						 <input type="hidden" name="lernick" value="<%=nickname%>">
-						 <input type="hidden" name="lerip" value="<%=request.getRemoteAddr()%>">
-						 <input type="hidden" name="nowPage" value="<%=nowPage %>">
-						 <input type="hidden" name="num" value="<%=num%>">
-						 <input type="hidden" name="id" value="<%=id%>">
-						 <input type='hidden' name="lernum" value="<%=lernum%>">
-						<input type="hidden" name="nowPage" value="<%=nowPage%>">
-					    <input type="hidden" name="numPerPage" value="<%=numPerPage%>">
-						   <%
-						   	if(!(keyWord==null||keyWord.equals(""))){
-						   %>
-					    <input type="hidden" name="keyField" value="<%=keyField%>">
-					    <input type="hidden" name="keyWord" value="<%=keyWord%>">
-						<%
-							}
-						%>
-						</form>
-					
+<!-- 글수정 Start -->	
 
-<!-- 읽기 End -->		
+	<div style="border:10px solid #36ada9; border-radius:15px; padding:20px">
+	<h2><%=lebean.getName()%>선생님 리뷰</h2>
+	<hr style="border:1px solid #36ada9;">
+		<br/>
+		<form name="lerupdateFrm" method="post" action="le_ReviewUpdateProc.jsp">
+		<table width="600" cellpadding="3" align="center">
+			<tr>
+				<td align=center>
+				<table align="center">
+					<tr>
+						<td>작성자</td>
+						<td>
+						<div id="inputdiv3">
+						<input size="50" maxlength="30" disabled="disabled"
+						value="<%=loginid%>">
+						</div>
+						</td>
+						<td>작성일</td>
+						<td>
+						<div id="inputdiv3">
+						<input size="50" maxlength="30" disabled="disabled"
+						value="<%=strToday%>">
+						</div>
+						</td>
+					</tr>
+					<tr>
+						<td>제 목</td>
+						<td colspan="3">
+						<div id="inputdiv2">
+						<input name="lertitle" size="50" maxlength="30" value="<%=title%>">
+						</div>
+						</td>
+					</tr>
+					<tr>
+						<td>평 점</td>
+						<td colspan="3">
+							<div class="starRev">
+							<% String[] st = new String[10];
+							int intstar = (int)Math.round(star*2);
+							for(int i=0; i<intstar; i++) st[i]=" on";
+							for(int i=intstar; i<10; i++) st[i]="";%>
+							  <span class="starR1<%=st[0]%>" id="star0" onclick="starclick0()">별1_왼쪽</span>
+							  <span class="starR2<%=st[1]%>" id="star1" onclick="starclick1()">별1_오른쪽</span>
+							  <span class="starR1<%=st[2]%>" id="star2" onclick="starclick2()">별2_왼쪽</span>
+							  <span class="starR2<%=st[3]%>" id="star3" onclick="starclick3()">별2_오른쪽</span>
+							  <span class="starR1<%=st[4]%>" id="star4" onclick="starclick4()">별3_왼쪽</span>
+							  <span class="starR2<%=st[5]%>" id="star5" onclick="starclick5()">별3_오른쪽</span>
+							  <span class="starR1<%=st[6]%>" id="star6" onclick="starclick6()">별4_왼쪽</span>
+							  <span class="starR2<%=st[7]%>" id="star7" onclick="starclick7()">별4_오른쪽</span>
+							  <span class="starR1<%=st[8]%>" id="star8" onclick="starclick8()">별5_왼쪽</span>
+							  <span class="starR2<%=st[9]%>" id="star9" onclick="starclick9()">별5_오른쪽</span>
+							  <input type="hidden" name="lerstar" value="<%=star%>">
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td>내 용</td>
+						<td colspan="3">
+						<div id="textareadiv">
+							<textarea name="lercontent" rows="10" cols="50"><%=content%></textarea>
+						</div>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="4" align="center">
+							 <input type="submit" value="수정">
+							 <input type="reset" value="다시쓰기">
+							 <input type="button" value="취소"
+							 onClick="javascript:location.href='<%=prevurl%>'">
+						</td>
+					</tr>
+				</table>
+				</td>
+			</tr>
+		</table>
+		 <input type="hidden" name="lernick" value="<%=nickname%>">
+		 <input type="hidden" name="lerip" value="<%=request.getRemoteAddr()%>">
+		 <input type="hidden" name="nowPage" value="<%=nowPage %>">
+		 <input type="hidden" name="num" value="<%=num%>">
+		 <input type="hidden" name="id" value="<%=id%>">
+		 <input type='hidden' name="lernum" value="<%=lernum%>">
+		<input type="hidden" name="nowPage" value="<%=nowPage%>">
+	    <input type="hidden" name="numPerPage" value="<%=numPerPage%>">
+		   <%
+		   	if(!(keyWord==null||keyWord.equals(""))){
+		   %>
+	    <input type="hidden" name="keyField" value="<%=keyField%>">
+	    <input type="hidden" name="keyWord" value="<%=keyWord%>">
+		<%
+			}
+		%>
+	</form>
+	</div>			
+
+<!-- 글수정 End -->		
 		
-				</div>
+				
 				</td>
 			</tr>
 		</table>

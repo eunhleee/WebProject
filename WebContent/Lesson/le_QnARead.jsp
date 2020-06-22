@@ -63,7 +63,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>우리학원 어디?-학원 문의 게시판</title>
+<title>우리학원 어디?-과외 문의 게시판</title>
 <script>
 function list() {
 	location.href="le_QnA.jsp?lq_lnum=<%=lq_lnum%>&numPerPage=<%=numPerPage%>&nowPage=<%=nowPage%><%

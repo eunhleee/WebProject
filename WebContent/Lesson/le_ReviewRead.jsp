@@ -71,7 +71,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Team Read</title>
+<title>우리 학원 어디?-과외 리뷰</title>
 
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 

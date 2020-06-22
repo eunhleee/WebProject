@@ -68,7 +68,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>학원 문의 게시판</title>
+<title>우리학원 어디?-학원 문의 게시판</title>
 <script>
 	function check() {
 		if (document.searchFrm.keyWord.value == "") {
@@ -158,7 +158,7 @@ div{
 	<hr style="border:1px solid #36ada9;">
 	<table>
 		<tr>
-			<td width="600">Total : 
+			<td width="750">Total : 
 			<%if(mgr.checkM(loginid)==0||mgr.checkAcnum(loginid)==ac_num) {%>
 			<%=totalRecord%>
 			<%} else {%>
