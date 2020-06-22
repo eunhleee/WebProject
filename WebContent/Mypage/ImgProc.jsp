@@ -2,8 +2,7 @@
 <%@page import="alcinfo.*"%>
 <jsp:useBean id="pmgr" class="alcinfo.ReportMgr" />
 <%
-String id="1111";
-	//String id = (String) session.getAttribute("idKey");
+	String id = (String) session.getAttribute("idKey");
 	//if (id == null)
 	//	response.sendRedirect("login.jsp");
 	//ReportBean mbean = pmgr.getPMember(id);
