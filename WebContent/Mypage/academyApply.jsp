@@ -24,6 +24,10 @@ function goAclist() {
 <table>
 	<tr>
 		<td colspan="3"><h3>권한변경</h3></td>
+	</tr>
+	<tr>
+	<td>아이디</td>
+	<td><input type="text" name="ac_id" value="<%=session.getAttribute("idKey")%>" readonly="readonly"></td>
 	</tr>	
 	<tr>
 		<td>학원검색</td>
@@ -42,7 +46,7 @@ function goAclist() {
 	<tr>
 		<td colspan="3" align="right">
 		<input type="submit" value="접수" onclick="send()">
-		</td>ㅈ
+		</td>
 	</tr>
 </table>
 </form>

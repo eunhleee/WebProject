@@ -359,7 +359,7 @@ function win_close(){
 										<%	
 										i++;
 										}
-										if( i<10) {
+										if(i<10) {
 									%>	
 										<option value="0<%=i%>"><%=i%></option>
 									<%	
@@ -463,13 +463,12 @@ function win_close(){
 				</td>
 			</tr>
 			<tr>
-				<td align="right"><button  id="btnJoin"  onclick="inputCheck();">정보 수정</button></td>
+				<td align="right"><button type="button"  id="btnJoin"  onclick="inputCheck();">정보 수정</button></td>
 			</tr>
 		</table>
 	</form>
 	<%} %>
 </div>
 </div>
-
 </body>
 </html>
