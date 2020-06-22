@@ -12,9 +12,7 @@
 //	int num=0;
  	//num = Integer.parseInt(request.getParameter("stopid"));
  	String stopid = request.getParameter("stopid").trim();
- 	String stopurl =request.getParameter("stopurl").trim();
-
-	System.out.println("여기"+session.getAttribute("idKey")+"stopid는"+stopid+"topurl은"+stopurl);
+	System.out.println("여기"+session.getAttribute("idKey")+"stopid는"+stopid);
 
 	// num=UtilMgr.parseInt(request,"stopid");
 	//String stopid=Integer.toString(num);
@@ -28,7 +26,9 @@
 <title>잘못된 과외정보 신고하기</title>
 <script type="text/javascript">
 	function gocheck(){
-		document.repFrm.action="reportLInfProc.jsp?stopid=<%=stopid%>&stopurl=<%=stopurl%>&id=<%=stopid%>";
+		var stopurl=document.referrer
+		document.repFrm.stopurl.value=stopurl;
+		document.repFrm.action="reportLInfProc.jsp?stopid=<%=stopid%>";
 		document.repFrm.submit();
 	}
 </script>
@@ -145,6 +145,8 @@
 		<input type="hidden" name="reip" value="<%=request.getRemoteAddr()%>">
 		<input type="hidden" name="restate" value="접수중">
 		<input type="hidden" name="stopid" value="<%=stopid%>">
+		<input type="hidden" name="stopurl">
+		
 		</form>
     </div>
   </div>

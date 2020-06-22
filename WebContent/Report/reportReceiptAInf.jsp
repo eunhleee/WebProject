@@ -9,11 +9,8 @@
 <%
 		request.setCharacterEncoding("UTF-8");
 		int num=0;
- 		//num = Integer.parseInt(request.getParameter("stopid"));
  		String stopid = request.getParameter("stopid").trim();
- 		String stopurl =request.getParameter("stopurl").trim();
 		num=UtilMgr.parseInt(request,"stopid");
-		//String stopid=Integer.toString(num);
 		String id=(String)session.getAttribute("idKey");
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	    Calendar today = Calendar.getInstance();
@@ -24,7 +21,9 @@
 <title>잘못된 학원 정보 신고하기</title>
 <script type="text/javascript">
 	function gocheck(){
-		document.repFrm.action="reportAInfProc.jsp?stopid=<%=stopid%>&stopurl=<%=stopurl%>";
+		var stopurl=document.referrer
+		document.repFrm.stopurl.value=stopurl;
+		document.repFrm.action="reportAInfProc.jsp?stopid=<%=stopid%>";
 		document.repFrm.submit();
 	}
 </script>
@@ -143,6 +142,8 @@
 		<input type="hidden" name="reip" value="<%=request.getRemoteAddr()%>">
 		<input type="hidden" name="kind" value="학원">
 		<input type="hidden" name="reid" value="<%=session.getAttribute("idKey")%>">
+		<input type="hidden" name="stopurl">
+		
 		</form>
     </div>
   </div>

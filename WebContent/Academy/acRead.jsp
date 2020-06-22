@@ -37,7 +37,7 @@
 			
 		}
 		function goReport() {
-			url = "../Report/reportReceiptAInf.jsp?stopid=<%=num%>&stopurl=../Academy/acRead.jsp?num=<%=num%>";
+			url = "../Report/reportReceiptAInf.jsp?stopid=<%=num%>";
 			window.open(url, "GoReport", "width=900, height=560, top=200, left=300");
 		}
 		function goErr(){

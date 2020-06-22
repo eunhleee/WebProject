@@ -7,12 +7,13 @@
 <jsp:setProperty property="*" name="bean"/>
 <%
 	String stopid= request.getParameter("stopid").trim();
-	String stopurl= request.getParameter("stopurl").trim();
+	String t= request.getParameter("stopurl");
+	if(t==null||t.trim().length()==0){
+	System.out.println("값이 들어오지 않았습니다.");
+	}
+	int count=t.indexOf("/Academy");
+	String stopurl="../"+t.substring(count+1);
 
-	mgr.rePortAI(bean);
-	response.sendRedirect("reportReceiptAInf.jsp?stopid="+stopid+"&stopurl="+stopurl);
+	mgr.rePortSI(bean,stopurl);
+	response.sendRedirect("reportReceiptAInf.jsp?stopid="+stopid);
 %>
-<script>
-	alert("여기도착")
-
-</script>

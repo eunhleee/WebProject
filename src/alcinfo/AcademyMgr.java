@@ -2,6 +2,7 @@ package alcinfo;
 
 import java.sql.Connection;
 
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -232,7 +233,7 @@ public class AcademyMgr {
 										new DefaultFileRenamePolicy());
 						con = pool.getConnection();
 						sql = "insert acapply(aca_num,aca_name,aca_identity,aca_business,aca_id)"+
-								  "values(?,?,?,?)";
+								  "values(?,?,?,?,?)";
 						pstmt = con.prepareStatement(sql);
 						pstmt.setString(1, multi.getParameter("num"));
 						pstmt.setString(2,multi.getParameter("name"));
@@ -327,6 +328,52 @@ public class AcademyMgr {
 						pool.freeConnection(con, pstmt);
 					}
 					return flag;
+				}	
+				public MemberBean getPhone(String id) {
+					Connection con = null;
+					PreparedStatement pstmt = null;
+					ResultSet rs = null;
+					String sql = null;
+					MemberBean bean = new MemberBean();
+					String a="";
+					try {
+						con = pool.getConnection();
+						sql = "SELECT DISTINCT(a.id),a.phone"
+								+" FROM"
+								+" (SELECT NAME,id,phone"
+								+" FROM member"
+								+" UNION"
+								+" SELECT NAME,id,phone"
+								+" FROM letea) a"
+								+" WHERE a.id='"+id+"'";
+						pstmt = con.prepareStatement(sql);
+						rs = pstmt.executeQuery();
+
+						if(rs.next()) {
+							bean.setPhone(rs.getString("phone"));
+						}
+					} catch (Exception e) {
+						e.printStackTrace();
+					} finally {
+						pool.freeConnection(con, pstmt, rs);
+					}
+					return bean;
+				}
+				public void Upstate(String id) {
+					Connection con = null;
+					PreparedStatement pstmt = null;
+					String sql = null;
+					try {
+						con = pool.getConnection();
+						sql = "update acapply set aca_state='완료' where aca_id='"+id+"'";
+						pstmt = con.prepareStatement(sql);
+						//pstmt.setString(1, id);
+						pstmt.executeUpdate();
+					} catch (Exception e) {
+						e.printStackTrace();
+					} finally {
+						pool.freeConnection(con, pstmt);
+					}
 				}	
 	}
 
