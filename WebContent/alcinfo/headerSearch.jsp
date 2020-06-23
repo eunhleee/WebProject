@@ -17,8 +17,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="../alcinfo/banner.js"></script>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="../alcinfo/headerStyle.css" rel="stylesheet">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script>
 function btnmouseUp(){
 	var button=document.getElementById("button");
