@@ -118,6 +118,7 @@
 }
 
 #title td {
+	height:30px;
 	color: white;
 	background-color: #36ada9;
 }
