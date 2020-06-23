@@ -182,7 +182,7 @@ public class PaymentMgr {
 		JSONArray jsonArray = new JSONArray();
 		JSONArray colArray = new JSONArray();
 		colArray.add("Month");
-		colArray.add("사람 수");
+		colArray.add("매출");
 		jsonArray.add(colArray);
 		try {
 			con = pool.getConnection();
@@ -211,13 +211,11 @@ public class PaymentMgr {
 		ResultSet rs = null;
 		String sql = null;
 		JSONArray jsonArray=new JSONArray();
-		int start=0,end=0;
+		int start=202001,end=202048;
 		JSONArray colArray = new JSONArray();
 		colArray.add("Weeks");
-		String week=null;
-		colArray.add("사람 수");
+		colArray.add("매출");
 		jsonArray.add(colArray);
-		
 		
 		switch(month) {
 		case 1:
@@ -269,18 +267,16 @@ public class PaymentMgr {
 			end =202048;
 			break;
 		}
+		
+		
 		try {
 			con = pool.getConnection();
 			
 			for(int i=start;i<=end;i++) {
-				
-			sql = " SELECT  DATE_FORMAT(DATE_SUB(paydate, INTERVAL (DAYOFWEEK(paydate)-1) DAY), '%Y/%m/%d') as START," + 
-					" 		DATE_FORMAT(DATE_SUB(paydate, INTERVAL (DAYOFWEEK(paydate)-7) DAY), '%Y/%m/%d') as end, " + 
-					" 		DATE_FORMAT(paydate, '%Y%U') weekdate, sum(price) " + 
+			sql = " SELECT 	ifnull(DATE_FORMAT(paydate, '%Y%U'),"+i+") weekdate , ifnull(sum(price),0) 'sum(price)' " + 
 					"FROM payment " + 
-					"GROUP BY weekdate HAVING weekdate="+i;
+					"WHERE DATE_FORMAT(paydate, '%Y%U')=" +i ;
 			pstmt = con.prepareStatement(sql);
-
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
@@ -288,12 +284,9 @@ public class PaymentMgr {
 				
 				rowArray.add(rs.getString("weekdate"));
 				rowArray.add(rs.getInt("sum(price)"));
-				//System.out.println(i);
-				
-				jsonArray.add(rowArray);
-				
-			}
 			
+				jsonArray.add(rowArray);
+			}
 			
 			}
 		} catch (Exception e) {
@@ -303,5 +296,41 @@ public class PaymentMgr {
 		}
 		return jsonArray;
 	}
+	
+	//상품별 주문건수
+		@SuppressWarnings("unchecked")
+		public JSONArray countPoint(){
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String sql = null;
+			JSONArray jsonArray = new JSONArray();
+			JSONArray colArray = new JSONArray();
+			colArray.add("포인트별");
+			colArray.add("주문건수");
+			jsonArray.add(colArray);
+			try {
+				con = pool.getConnection();
+				sql = " SELECT product_name,COUNT(id) " + 
+						"FROM payment " + 
+						"GROUP BY product_name " + 
+						"ORDER BY price ";
+				pstmt = con.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				while(rs.next()) {
+					JSONArray rowArray = new JSONArray();
+					rowArray.add(rs.getString("product_name"));
+					rowArray.add(rs.getInt("COUNT(id)"));
+					jsonArray.add(rowArray);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				pool.freeConnection(con, pstmt, rs);
+			}
+			return jsonArray;
+		}
+		
+	
 
 }

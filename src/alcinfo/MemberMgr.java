@@ -217,7 +217,7 @@ public class MemberMgr {
 		return mbean;
 	}	
 	
-	//占쎈린占쎄문 占쎌젟癰귨옙 占쎈쾻嚥≪빜釉�疫뀐옙
+	
 	public boolean insertStudent(String id, String stclass, String stetc) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -240,4 +240,5 @@ public class MemberMgr {
 		}
 		return flag;
 	}
+	
 }
