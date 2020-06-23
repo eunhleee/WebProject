@@ -261,6 +261,7 @@ public class MemberMgr {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
+
 			pool.freeConnection(con, pstmt);
 		}
 		return bean;
@@ -290,9 +291,10 @@ public class MemberMgr {
 		} finally {
 			pool.freeConnection(con, pstmt, rs);
 		}
+
 		return bean;
 	}
-		
+
 	public String memberNick(String id) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
