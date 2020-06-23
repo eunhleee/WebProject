@@ -6,8 +6,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="../alcinfo/banner.js"></script>
+<link href="../alcinfo/mainHeaderStyle.css" rel="stylesheet">
 <script>
 	function btnmouseUp() {
 		var button = document.getElementById("button");
@@ -31,99 +33,7 @@
 		location.href="../login/logoutProc.jsp";
 	}
 </script>
-<style type="text/css">
-#top {
-	background-color: lightgrey;
-	height: 40px;
-	color: white;
-	padding: 10px 10px;
-}
 
-#top a {
-	color: white;
-	font-weight: bold;
-}
-
-#top a:hover {
-	color: rgb(240, 240, 240);
-}
-
-#searchTotal {
-	width: 525px;
-	height: 70px;
-	border: 2.5px solid gray;
-	border-radius: 6px;
-	padding: 8px 10px;
-}
-
-#search {
-	width: 350px;
-	margin-right: 40px;
-	font-size: 20px;
-	border: none;
-}
-
-#button {
-	width: 80px;
-	height: 50px;
-	border: none;
-	border-radius: 6px;
-	background-color: gray;
-	color: white;
-	font-size: 20px;
-}
-
-.catagory {
-	background-color: rgb(034, 200, 211);
-	border-radius: 0px;
-	text-align: center;
-	margin-top: 40px;
-	HEIGHT: 75px;
-	line-height:75px;
-	box-shadow: 0px 0px 10px #c0c0c0;
-}
-
-.catagory a {
-	COLOR: white;
-	text-decoration: none;
-	font-size: 20px;
-	font-weight: bold;
-	margin: 60px;
-}
-
-.catagory a:hover{
-	border-bottom: 3px solid white;
-}
-
-.banner {
-	background-color: rgb(240, 240, 240);
-	box-shadow: 0px 0px 10px #c0c0c0;
-	width: 100%;
-
-}
-
-.banner a img {
-	width: 70%;
-	height: 300px;
-}
-.openlm {
-	COLOR: white;
-	text-decoration: none;
-	font-size: 20px;
-	font-weight: bold;
-	background-color : transparent;
-	border : none;
-	margin-left : 60px;
-}
-
-.openlm:hover {
-	border-bottom: 3px solid white;
-	cursor : pointer;
-	margin-bottom : -3px;
-}
-
-
-</style>
 </head>
 <body>
 <%@ include file="../login/loginSelect.jsp" %>
@@ -183,9 +93,32 @@
 		</div>
 	</div>
 
-	<div class="banner" align="center">
-		<a href=""><img src="../img/banner<%=random%>.jpg"></a>
+	<div id="slider">
+	
+		<ul class="slides">
+			<li class="slide slide5"><img src="../img/banner5.jpg"></li>
+			<li class="slide slide1"><img src="../img/banner1.jpg"></li>
+			<li class="slide slide2"><img src="../img/banner2.jpg"></li>
+			<li class="slide slide3"><img src="../img/banner3.jpg"></li>
+			<li class="slide slide4"><img src="../img/banner4.jpg"></li>
+			<li class="slide slide5"><img src="../img/banner5.jpg"></li>
+			<li class="slide slide1"><img src="../img/banner1.jpg"></li>
+		</ul>
+	
+		<div id="slider-nav">
+			<div id="slider-nav-prv">&#10094;</div>
+			<div id="slider-nav-nxt">&#10095;</div>
+			<div id="slider-nav-dot-con">
+				<span class="slider-nav-dot" style="background:white" id="nav-dot1"></span>
+				<span class="slider-nav-dot" id="nav-dot2"></span>
+				<span class="slider-nav-dot" id="nav-dot3"></span>
+				<span class="slider-nav-dot" id="nav-dot4"></span>
+				<span class="slider-nav-dot" id="nav-dot5"></span>
+			</div>
+		</div>
+	
 	</div>
-
+	
+	
 </body>
 </html>

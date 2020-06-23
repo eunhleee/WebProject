@@ -15,5 +15,9 @@
 	String stopurl="../"+t.substring(count+1);
 
 	mgr.rePortSI(bean,stopurl);
-	response.sendRedirect("reportReceiptAInf.jsp?stopid="+stopid);
 %>
+<script>
+	alert("신고가 접수되었습니다.");
+	window.close();
+</script>
+

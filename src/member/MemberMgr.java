@@ -17,7 +17,7 @@ public class MemberMgr {
 		pool = DBConnectionMgr.getInstance();
 	}
 	
-	// 濡쒓렇�씤
+	
 	public MemberBean loginMember(String id, String pwd) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -51,7 +51,7 @@ public class MemberMgr {
 	
 	
 	
-	// id 李얘린
+	
 	public String idSearch(String name, String phone) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -76,7 +76,7 @@ public class MemberMgr {
 		return id;
 	}
 	
-	// pwd 李얘린
+	
 	public boolean pwdSearch(String id, String name, String phone) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -100,7 +100,7 @@ public class MemberMgr {
 		return flag;
 	}
 	
-	// 鍮꾨�踰덊샇 蹂�寃�
+	
 	public boolean pwdChange(String id, String pwd) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -122,7 +122,7 @@ public class MemberMgr {
 	}
 	
 	
-	// id 以묐났泥댄겕
+
 	public boolean checkId(String id) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -146,7 +146,7 @@ public class MemberMgr {
 		return flag;
 	}
 	
-	// nickname 以묐났泥댄겕
+	
 	public boolean checkNickname(String nickname) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -170,7 +170,7 @@ public class MemberMgr {
 		return flag;
 	}
 	
-	// �븰�깮 �쉶�썝媛��엯
+	
 	public boolean insertMember(MemberBean bean) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -203,7 +203,7 @@ public class MemberMgr {
 		return flag;
 	}
 	
-	// �꽑�깮�떂 �쉶�썝媛��엯
+	
 	public boolean insertLetea(LeteaBean bean) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -293,35 +293,6 @@ public class MemberMgr {
 		return bean;
 	}
 		
-	//월별 매출 합계
-	@SuppressWarnings("unchecked")
-	public JSONArray getRatio(){
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		String sql = null;
-		JSONArray jsonArray=new JSONArray();
-		try {
-			con = pool.getConnection();
-			sql = " ";
-			pstmt = con.prepareStatement(sql);
-
-			rs = pstmt.executeQuery();
-			while(rs.next()) {
-				JSONArray rowArray = new JSONArray();
-				rowArray.add(rs.getString("left(paydate,7)"));
-				rowArray.add(rs.getInt("sum(price)"));
-
-				jsonArray.add(rowArray);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			pool.freeConnection(con, pstmt, rs);
-		}
-		return jsonArray;
-	}
-	
 	public String memberNick(String id) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -365,5 +336,99 @@ public class MemberMgr {
 			pool.freeConnection(con, pstmt, rs);
 		}
 		return grade;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public JSONArray getRatio(){
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		JSONArray jsonArray=new JSONArray();
+		JSONArray colArray=new JSONArray();
+		colArray.add("성별");
+		colArray.add("사람 수");
+		jsonArray.add(colArray);
+		try {
+			con = pool.getConnection();
+			sql = "SELECT m.gender,COUNT(m.gender) " + 
+					"FROM member m left OUTER JOIN letea t ON m.gender=t.gender " + 
+					"GROUP BY m.gender ORDER BY m.gender";
+			pstmt = con.prepareStatement(sql);
+
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				JSONArray rowArray = new JSONArray();
+				rowArray.add(rs.getString("m.gender"));
+				rowArray.add(rs.getInt("COUNT(m.gender)"));
+
+				jsonArray.add(rowArray);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt, rs);
+		}
+		return jsonArray;
+	}
+	
+	public int countMember() {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		int count=0;
+		try {
+			con = pool.getConnection();
+			sql = "select count(id) from member where grade=1 ";
+			pstmt = con.prepareStatement(sql);
+
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				count=rs.getInt("count(id)");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt, rs);
+		}
+		return count;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public JSONArray countSchool_grade() {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		JSONArray jsonArray=new JSONArray();
+		JSONArray colArray=new JSONArray();
+		colArray.add("학교구분");
+		colArray.add("사람 수");
+		jsonArray.add(colArray);
+		String[] school= {"초등학생","중학생","고등학생","대학생"};
+		try {
+			con = pool.getConnection();
+			for(int i=0;i<4;i++) {
+			sql = "SELECT COUNT(id) " + 
+					"FROM member " + 
+					"WHERE school_grade='"+school[i]+"'";
+			pstmt = con.prepareStatement(sql);
+
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				JSONArray rowArray=new JSONArray();
+				rowArray.add(school[i]);
+				rowArray.add(rs.getInt("COUNT(id)"));
+				
+				jsonArray.add(rowArray);
+			}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt, rs);
+		}
+		return jsonArray;
 	}
 }
