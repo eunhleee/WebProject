@@ -264,7 +264,6 @@ function win_close(){
 	<div id="atag"><a href="../Mypage/myBoard.jsp">&#149; 내가 쓴 글</a></div>
 	<div id="atag"><a href="../Mypage/MyReportList.jsp">&#149; 나의 신고</a></div>
 	<div id="atag"><a href="">&#149; 신청한 과외</a></div>
-<<<<<<< HEAD
 	<div id="atag"><a href="">&#149; 신청 받은 과외</a></div>	
 	<% 
 	
@@ -277,9 +276,7 @@ function win_close(){
 		<div id="atag"><a href="javascript:void(0);" onclick="javascript:acquestion();">&#149; 권한 변경 신청</a></div>
 		<%}
 	%>
-=======
-	<div id="atag"><a href="">&#149; 신청 받은 과외</a></div>
->>>>>>> branch 'master' of https://github.com/eunhleee/WebProject.git
+
 	
 </div>
 <div id="insertMember" class="insertMember1" align="left">

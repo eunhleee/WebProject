@@ -22,9 +22,7 @@
 		session.setAttribute("lebean", lebean);
 		mgr.upLeCount(num);
 		
-		lebean.setId(id);
-		  System.out.println("선생님아이디는"+id);
-		
+		lebean.setId(id);		
 %>
 <!DOCTYPE html>
 <html>
@@ -93,13 +91,13 @@ function graph(){
 		{
 		    var elem = document.getElementById("myButton1");
 		    
-			location.href="insertStudentProc.jsp?id=<%=id%>&num=<%=lebean.getNum()%>";
+			location.href="insertStudentProc.jsp?id=<%=id%>&num=<%=lebean.getNum()%>&phone=<%=lebean.getPhone()%>";
 			   
 		}
 		
 		function cancel(){
 			var elem = document.getElementById("myButton2");
-			location.href="deleteStudentProc.jsp?id=<%=id%>&num=<%=lebean.getNum()%>";
+			location.href="deleteStudentProc.jsp?id=<%=id%>&num=<%=lebean.getNum()%>&phone=<%=lebean.getPhone()%>";
 		}
 		
 	

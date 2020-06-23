@@ -31,6 +31,7 @@ public class MemberMgr {
 				
 				bean.setName(rs.getString(1));
 				bean.setAddress(rs.getString(2));
+
 				
 			} 
 			
