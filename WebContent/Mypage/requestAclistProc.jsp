@@ -25,14 +25,16 @@
 		System.out.println(result+"두번째"+result2);
 		if(result&&result2) {
 			msg="허가하였습니다.";
-			amgr.Upstate(request.getParameter("aca_id"));
-			Smssend.send("[우리학원어디]\n"+request.getParameter("aca_id")+"님의 학원장 자격이 승인되셨습니다.", "0"+ebean.getPhone());
+			amgr.Upstate((String)request.getParameter("aca_id"),"완료");
+			Smssend.send("[우리학원어디]\n"+request.getParameter("aca_id")+"님의 학원장 자격이 승인되셨습니다.", ebean.getPhone());
 		}
 	}
 	if(flag.equals("noPermit")){
 		 /* if(result)  */ {
 			 msg="허가하지 않았습니다.";
-			Smssend.send("[우리학원어디]\n"+request.getParameter("aca_id")+"님의 학원장 자격이 거절되셨습니다.", "0"+ebean.getPhone());
+			 amgr.Upstate((String)request.getParameter("aca_id"),"거절");
+
+			Smssend.send("[우리학원어디]\n"+request.getParameter("aca_id")+"님의 학원장 자격이 거절되셨습니다.", ebean.getPhone());
 
 		 }
 	} 

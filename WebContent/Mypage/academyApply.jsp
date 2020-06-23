@@ -35,6 +35,9 @@ function goAclist() {
 		<td><input type="text" name="name" id="name" readonly="readonly"></td>
 		<td><input type="button" onclick="goAclist();" value="검색"></td>
 	</tr>
+	<tr>
+	<td colspan="3">* 사진파일만 넣어주세요! 잘못된 정보를 입력하시면 신청이 취소되실 수 있습니다.</td>
+	</tr>
 	<tr> 
 		<td align="center">신분증</td>
 		<td><input type="file" name="identity"></td>
