@@ -122,14 +122,14 @@ public class MemberMgr {
 			try {
 				con = pool.getConnection();
 				sql = "SELECT DISTINCT(a.id),a.name,a.email,a.gender,a.passwd,a.nickname,a.birth," + 
-						" a.phone,a.address,a.school_name,a.school_grade,a.imgname"
+						" a.phone,a.address,a.school_name,a.school_grade,a.imgname,a.grade"
 						+" FROM "
 						+" (SELECT name,id,email,gender,passwd,nickname,birth,"
-						+" phone,address,school_name,school_grade,imgname"
+						+" phone,address,school_name,school_grade,imgname,grade"
 						+" FROM member"
 						+" union" 
 						+" SELECT name,id,email,gender,passwd,nickname,birth," 
-						+" phone,address,school_name,school_grade,imgname"
+						+" phone,address,school_name,school_grade,imgname,grade"
 						+" FROM letea) a" 
 						+" WHERE a.id='"+id+"'";
 				pstmt = con.prepareStatement(sql);
@@ -147,7 +147,8 @@ public class MemberMgr {
 					bean.setAddress(rs.getString("a.address"));
 					bean.setSchool_name(rs.getString("a.school_name"));
 					bean.setSchool_grade(rs.getString("a.school_grade"));
-					bean.setImgname(rs.getString("a.imgname"));
+					bean.setGrade(rs.getInt("a.grade"));
+
 
 				}
 			} catch (Exception e) {

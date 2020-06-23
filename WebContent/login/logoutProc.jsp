@@ -7,7 +7,6 @@
 		if(mgr.deleteLogin(id)){
 			session.removeAttribute("idKey");	
 			session.removeAttribute("idgrade");	
-
 			url=request.getHeader("referer");
 		}
 %>

@@ -7,6 +7,8 @@
 <jsp:useBean id="mpbean" class="alcinfo.LeteaBean"/>
 <jsp:setProperty property="*" name="mpbean"/>
 <jsp:useBean id="mgr" class="alcinfo.MemberMgr"/>
+<jsp:useBean id="amgr" class="alcinfo.AcademyMgr"/>
+
     
 <%
 if(session.getAttribute("idKey")==null||session.getAttribute("idKey").equals("")){
@@ -140,6 +142,19 @@ function win_close(){
 		url = "../Mypage/ImgProc.jsp";
 		window.open(url, "imggo", "width=500, height=500, top=200, left=200");
 	}
+	function acquestion(id){
+		msg="선생님으로 권한을 변경하시겠습니까?";
+		if(confirm(msg)){
+			<%
+			amgr.Uptea(id);
+		    session.setAttribute("idgrade",bean.getGrade());
+			%>
+			alert("변경되셨습니다.");
+			window.location.reload();
+		}else{
+			
+		}
+	}
 </script>
 <style>
 #totalframe{
@@ -249,13 +264,17 @@ function win_close(){
 	<div id="atag"><a href="">&#149; 내가 쓴 글</a></div>
 	<div id="atag"><a href="../Mypage/MyReportList.jsp">&#149; 나의 신고</a></div>
 	<div id="atag"><a href="">&#149; 신청한 과외</a></div>
-	<div id="atag"><a href="">&#149; 신청 받은 과외</a></div>
+	<div id="atag"><a href="">&#149; 신청 받은 과외</a></div>	
 	<% 
-		if(grade==2||grade==3){
+	
+		if(bean.getGrade()==2){	
 	%>
-		<div id="atag"><a href="">&#149; 권한 변경 신청</a></div>
+		<div id="atag"><a href="../Mypage/academyApply.jsp">&#149; 권한 변경 신청</a></div>
 	<%
 		}
+		else if(bean.getGrade()==3){%>
+		<div id="atag"><a href="javascript:void(0);" onclick="javascript:acquestion();">&#149; 권한 변경 신청</a></div>
+		<%}
 	%>
 	
 </div>
@@ -420,7 +439,7 @@ function win_close(){
 								<div id="inputdiv" style="width:270px;">
 									<input type="text" id="address" name="imaddress1"
 									value="<%=bean.getAddress()%>"
-									style="width:185px; height:30px;" readonly >
+									style="width:185px; height:30px;">
 									<input type="button" style="width:70px; height:30px;"
 									onClick="openDaumZipAddress();" value="주소찾기">
 								</div>
