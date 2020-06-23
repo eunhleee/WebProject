@@ -149,6 +149,29 @@ public class PaymentMgr {
 		}
 		return vlist;
 	}
+	public int totalSales() {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		int total=0;
+		try {
+			con = pool.getConnection();
+			sql = "SELECT SUM(price) FROM payment";
+			pstmt = con.prepareStatement(sql);
+
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				total=rs.getInt("SUM(price)");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt, rs);
+		}
+		return total;
+	}
+	
 	//월별 매출 합계
 	@SuppressWarnings("unchecked")
 	public JSONArray getMonthSales(){
@@ -156,18 +179,20 @@ public class PaymentMgr {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = null;
-		JSONArray jsonArray=new JSONArray();
+		JSONArray jsonArray = new JSONArray();
+		JSONArray colArray = new JSONArray();
+		colArray.add("Month");
+		colArray.add("사람 수");
+		jsonArray.add(colArray);
 		try {
 			con = pool.getConnection();
 			sql = " SELECT  left(paydate,7),sum(price) from alcinfo.payment GROUP BY (left(paydate,7))";
 			pstmt = con.prepareStatement(sql);
-
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				JSONArray rowArray = new JSONArray();
 				rowArray.add(rs.getString("left(paydate,7)"));
 				rowArray.add(rs.getInt("sum(price)"));
-
 				jsonArray.add(rowArray);
 			}
 		} catch (Exception e) {
@@ -180,28 +205,96 @@ public class PaymentMgr {
 	
 	//주간별 매출 합계
 	@SuppressWarnings("unchecked")
-	public JSONArray getWeekSales(){
+	public JSONArray getWeekSales(int month){
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = null;
 		JSONArray jsonArray=new JSONArray();
+		int start=0,end=0;
+		JSONArray colArray = new JSONArray();
+		colArray.add("Weeks");
+		String week=null;
+		colArray.add("사람 수");
+		jsonArray.add(colArray);
+		
+		
+		switch(month) {
+		case 1:
+			start=202001;
+			end =202004;
+			break;
+		case 2:
+			start=202005;
+			end =202008;
+			break;
+		case 3:
+			start=202009;
+			end =202012;
+			break;
+		case 4:
+			start=202013;
+			end =202016;
+			break;
+		case 5:
+			start=202017;
+			end =202020;
+			break;
+		case 6:
+			start=202021;
+			end =202024;
+			break;
+		case 7:
+			start=202025;
+			end =202028;
+			break;
+		case 8:
+			start=202029;
+			end =202032;
+			break;
+		case 9:
+			start=202033;
+			end =202036;
+			break;
+		case 10:
+			start=202037;
+			end =202040;
+			break;
+		case 11:
+			start=202041;
+			end =202044;
+			break;
+		case 12:
+			start=202045;
+			end =202048;
+			break;
+		}
 		try {
 			con = pool.getConnection();
-			sql = " SELECT DATE_FORMAT(DATE_SUB(paydate, INTERVAL (DAYOFWEEK(paydate)-1) DAY), '%Y/%m/%d') as START," + 
-					" 		 DATE_FORMAT(DATE_SUB(paydate, INTERVAL (DAYOFWEEK(paydate)-7) DAY), '%Y/%m/%d') as end," + 
-					" 		 DATE_FORMAT(paydate, '%Y%U') weekdate, sum(price) " + 
+			
+			for(int i=start;i<=end;i++) {
+				
+			sql = " SELECT  DATE_FORMAT(DATE_SUB(paydate, INTERVAL (DAYOFWEEK(paydate)-1) DAY), '%Y/%m/%d') as START," + 
+					" 		DATE_FORMAT(DATE_SUB(paydate, INTERVAL (DAYOFWEEK(paydate)-7) DAY), '%Y/%m/%d') as end, " + 
+					" 		DATE_FORMAT(paydate, '%Y%U') weekdate, sum(price) " + 
 					"FROM payment " + 
-					"GROUP BY weekdate";
+					"GROUP BY weekdate HAVING weekdate="+i;
 			pstmt = con.prepareStatement(sql);
 
 			rs = pstmt.executeQuery();
+			
 			while(rs.next()) {
 				JSONArray rowArray = new JSONArray();
+				
 				rowArray.add(rs.getString("weekdate"));
 				rowArray.add(rs.getInt("sum(price)"));
-
+				//System.out.println(i);
+				
 				jsonArray.add(rowArray);
+				
+			}
+			
+			
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

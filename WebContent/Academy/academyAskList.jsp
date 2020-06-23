@@ -26,7 +26,7 @@
 	int todaynumber=0,mpointnumber=0;
 	String mpoint=null;
 	if(loginid!=null){
-	if(grade==1){
+	if(grade==0||grade==1){
 		MemberBean mbean=Memmgr.getInfo(loginid);
 		mpoint=mbean.getMpoint();
 		
