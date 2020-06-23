@@ -124,10 +124,19 @@ function cDel(conum, cnum, depth) {
 		document.cFrm.submit();
 	}
 }
+function goRep() {
+	
+	url = "csReport.jsp?stopid=<%=id%>&renum=<%=num%>";
+	window.open(url, "GoReport", 'width=360, height=300, top=200, left=300');
+}
+
+function goCReport(conum,ccr_depth,stopid) {
+	url = "csCReport.jsp?conum="+conum+"&ccr_depth="+ccr_depth+"&renum="+<%=num%>+"&stopid="+stopid;
+	window.open(url, "GoReport", "width=360, height=300, top=200, left=300");
+}
 </script>
 </head>
 <body>
-
 	<jsp:include page="../alcinfo/headerSearch.jsp"></jsp:include>
 
 <!-- 고객센터 글읽기 Start -->
