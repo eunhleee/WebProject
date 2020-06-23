@@ -2,10 +2,10 @@
 <%@page import="alcinfo.UtilMgr"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%request.setCharacterEncoding("UTF-8");  %>
 <jsp:useBean id="scmgr" class="alcinfo.SCommunityMgr"/>
 <jsp:useBean id="sccmgr" class="alcinfo.SCommentMgr"/>
 <% 
-	request.setCharacterEncoding("UTF-8"); 
 	String pageValue=request.getParameter("pageValue");
 	String nowPage = request.getParameter("nowPage");	
 	String numPerPage = request.getParameter("numPerPage");	

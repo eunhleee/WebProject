@@ -103,12 +103,12 @@ function cDel(conum, cnum, depth) {
 function goRep() {
 	
 	url = "scReport.jsp?stopid=<%=id%>&renum=<%=num%>";
-	window.open(url, "GoReport", 'width=360, height=300, top=200, left=300');
+	window.open(url, "GoReport", 'width=900, height=560, top=200, left=300');
 }
 
 function goCReport(conum,stuc_depth,stopid) {
 	url = "scCReport.jsp?conum="+conum+"&stuc_depth="+stuc_depth+"&renum="+<%=num%>+"&stopid="+stopid;
-	window.open(url, "GoReport", "width=360, height=300, top=200, left=300");
+	window.open(url, "GoReport", "width=900, height=560, top=200, left=300");
 	}
 </script>
 <style>
@@ -360,8 +360,12 @@ a:hover {
 		 <% 
 		 if(loginid!=null) {
 			 if(loginid.equals(id)||scmgr.checkM(loginid)==0) { %>
-			 | <a href="scUpdate.jsp?nowPage=<%=nowPage%>&num=<%=num%>&numPerPage=<%=numPerPage%>&pageValue=<%=pageValue %>" >수 정</a> |
-			 <a href="scDelete.jsp?nowPage=<%=nowPage%>&num=<%=num%>">삭 제</a> 
+			 | <a href="scUpdate.jsp?num=<%=num%>&pageValue=<%=pageValue %>&numPerPage=<%=numPerPage%>&nowPage=<%=nowPage%><%
+  	 	if(!(keyWord==null||keyWord.equals(""))){
+		     %>&keyField=<%=keyField%>&keyWord=<%=keyWord%><%}%>" >수 정</a> |
+			 <a href="scDelete.jsp?num=<%=num%>&pageValue=<%=pageValue%>&numPerPage=<%=numPerPage%>&nowPage=<%=nowPage%><%
+  	 	if(!(keyWord==null||keyWord.equals(""))){
+		     %>&keyField=<%=keyField%>&keyWord=<%=keyWord%><%}%>">삭 제</a> 
 		 <% }
 		 } %>
 		 ]<br/>

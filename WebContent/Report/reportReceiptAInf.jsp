@@ -20,12 +20,28 @@
 <head>
 <title>잘못된 학원 정보 신고하기</title>
 <script type="text/javascript">
-	function gocheck(){
-		var stopurl=document.referrer
+function gocheck(){
+	if(document.repFrm.retitle.value==""){
+		alert("제목을 입력 하세요");
+		document.repFrm.retitle.focus();
+		return;
+	}
+	if(document.repFrm.regroup.value==""){
+		alert("신고분류를 선택하세요");
+		document.repFrm.regroup.focus();
+		return;
+	}
+	if(document.repFrm.recontent.value==""){
+		alert("내용을 입력 하세요");
+		document.repFrm.recontent.focus();
+		return;
+	} 
+	if(document.repFrm.retitle.value!=""&&document.repFrm.regroup.value!=""&&document.repFrm.recontent.value!=""){
+	 	var stopurl=document.referrer
 		document.repFrm.stopurl.value=stopurl;
-		document.repFrm.action="reportAInfProc.jsp?stopid=<%=stopid%>";
 		document.repFrm.submit();
 	}
+}
 </script>
 <style>
 .frame{
@@ -128,7 +144,7 @@
 						</tr>
 						<tr align="center">
 							<td  colspan="4" align="center">
-								<input type="submit" value="저장" onClick="gocheck()">
+								<input type="button" value="저장" onClick="gocheck()">
 							</td>
 						</tr>
 						
@@ -136,7 +152,7 @@
 			</td>
 		</tr>
 	</table>
-					
+	
 		<input type="hidden" name="restate" value="접수중">
 		<input type="hidden" name="stopid" value="<%=stopid%>">
 		<input type="hidden" name="reip" value="<%=request.getRemoteAddr()%>">

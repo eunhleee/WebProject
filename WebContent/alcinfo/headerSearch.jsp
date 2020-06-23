@@ -14,9 +14,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="../alcinfo/banner.js"></script>
 <link href="../alcinfo/headerStyle.css" rel="stylesheet">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script>
 function btnmouseUp(){
 	var button=document.getElementById("button");
@@ -95,16 +97,42 @@ function openlogoutProc(){
 
 			<% if((Integer)session.getAttribute("idgrade")==0){%>
 			<a href="../Mypage/managerPage.jsp?pageValue=salesList">관리자페이지</a>
-			<%}else{%>
+			<%}else{
+			if((Integer)session.getAttribute("idgrade")==1){%>
 			<a href="../Mypage/upMember.jsp">마이페이지</a>
-			<%}} %>
+			<%}else if((Integer)session.getAttribute("idgrade")==2||(Integer)session.getAttribute("idgrade")==3){ %>
+			<a href="../Mypage/upTeacher.jsp">마이페이지</a>
+			<%		}
+				}
+			} %>
 		</div>
 	</div>
 
-	<div class="banner" align="center"
-		style="width: 100%; background-color: rgb(240, 240, 240); box-shadow: 0px 0px 10px #c0c0c0; margin-bottom:0px;">
-		<a href=""><img src="../img/banner<%=random %>.jpg"
-			style="width: 70%; height: 300px"></a>
+	<div id="slider">
+	
+		<ul class="slides">
+			<li class="slide slide5"><img src="../img/banner5.jpg"></li>
+			<li class="slide slide1"><img src="../img/banner1.jpg"></li>
+			<li class="slide slide2"><img src="../img/banner2.jpg"></li>
+			<li class="slide slide3"><img src="../img/banner3.jpg"></li>
+			<li class="slide slide4"><img src="../img/banner4.jpg"></li>
+			<li class="slide slide5"><img src="../img/banner5.jpg"></li>
+			<li class="slide slide1"><img src="../img/banner1.jpg"></li>
+		</ul>
+	
+		<div id="slider-nav">
+			<div id="slider-nav-prv">&#10094;</div>
+			<div id="slider-nav-nxt">&#10095;</div>
+			<div id="slider-nav-dot-con">
+				<span class="slider-nav-dot" style="background:white" id="nav-dot1"></span>
+				<span class="slider-nav-dot" id="nav-dot2"></span>
+				<span class="slider-nav-dot" id="nav-dot3"></span>
+				<span class="slider-nav-dot" id="nav-dot4"></span>
+				<span class="slider-nav-dot" id="nav-dot5"></span>
+			</div>
+		</div>
+	
 	</div>
+	
 </body>
 </html>

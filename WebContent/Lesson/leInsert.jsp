@@ -57,18 +57,20 @@
 <script src="script.js"></script>
 </head>
 <body>
+<%@ include file="../alcinfo/headerSearch.jsp"%>
+<br>
 <br>
 	<form name="leForm" method="post" action="leInsertProc.jsp">
 		<table width="70%" align="center">
 	<tr> 
 	<td align="center">
-		<table width="100%" border="1" style="font-size:20; background: rgb(250,248,235);"> 
+		<table width="100%" style="background: rgb(250,248,235);"> 
 		<tr> 
 		<td width="25%" align="center">
-		<img src="img/<%=leBean.getImgname() %>" width="250" height="250">
+		<img src="../img/<%=leBean.getImgname() %>" width="100%" height="250">
 		</td>
 		<td width="60%" height="100%">
-			<table width="100%" border="1" >
+			<table width="100%">
 				<tr height="40">
 					<td width="30%">선생님명 / 성별</td>
 					<td width="70%"><%=leBean.getName()%> / <%=leBean.getGender() %></td>

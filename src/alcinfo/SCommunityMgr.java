@@ -318,9 +318,12 @@ public class SCommunityMgr {
 		int grade = 5;
 		try {
 			con = pool.getConnection();
-			sql = "select grade from member where id=?";
+			sql = "select grade from member where id=? "
+					+ "union "
+					+ "select grade from letea where id=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
+			pstmt.setString(2, id);
 			rs = pstmt.executeQuery();
 			if(rs.next()) grade = rs.getInt(1);
 		} catch (Exception e) {

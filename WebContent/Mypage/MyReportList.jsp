@@ -165,7 +165,7 @@ select{
 	<div id="categoryframe">
 		<h3 align="center">마이 페이지</h3>
 		<div id="atag"><a href="../Mypage/upMember.jsp">&#149; 개인 정보 수정</a></div>
-		<div id="atag"><a href="">&#149; 내가 쓴 글</a></div>
+		<div id="atag"><a href="../Mypage/myBoard.jsp">&#149; 내가 쓴 글</a></div>
 		<div id="atag"><a href="../Mypage/MyReportList.jsp">&#149; 나의 신고</a></div>
 		<div id="atag"><a href="">&#149; 신청한 과외</a></div>
 		<div id="atag"><a href="">&#149; 신청 받은 과외</a></div>
@@ -314,6 +314,7 @@ select{
 	<input type="hidden" name="numPerPage" value="<%=numPerPage%>">
 	<input type="hidden" name="keyField" value="<%=keyField%>">
 	<input type="hidden" name="keyWord" value="<%=keyWord%>">
+	<input type="hidden" name="pageValue" value="reportList">
 	<input type="hidden" name="num">
 	
 </form>

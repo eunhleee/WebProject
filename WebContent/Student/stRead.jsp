@@ -44,6 +44,7 @@
 <script>
 
 google.charts.load("current",{packages:['corechart']});
+google.charts.setOnLoadCallback(columnChart1);
 
 function columnChart1(arrayList) {
 	// 실 데이터를 가진 데이터테이블 객체를 반환하는 메소드
@@ -124,7 +125,7 @@ function goErr(){
 							<td width="25%" align="center">
 							<img src="../img/<%=stbean.getImgname() %>" width="100%" height="250"></td>
 							<td width="60%" height="100%">
-								<table width="100%" style="font-size: 20;">
+								<table width="100%">
 									<tr height="40">
 										<td width="30%">학생명 / 성별</td>
 										<td width="70%"><%=stbean.getName()%> / <%=stbean.getGender() %></td>

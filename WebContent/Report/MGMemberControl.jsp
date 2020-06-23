@@ -107,7 +107,7 @@
 <style>
 #content{
 	margin : auto;
-  	width: 70%;
+  	width: 100%;
   	border: 10px solid #36ada9; 
 	border-radius:10px;
 	margin-top:50px;
@@ -118,6 +118,7 @@
 }
 
 #title td {
+	height:30px;
 	color: white;
 	background-color: #36ada9;
 }
@@ -128,11 +129,53 @@ a {
 a:hover {
 	color: gray;
 }
+#nav_table tr {
+	border:5px solid #56C8D3;
+}
+
+#nav_td {
+	text-align: center;
+	width:330px;
+	height: 100px;
+	border: none;
+	
+}
+
+#nav_td a {
+	color: black;
+	text-decoration: none;
+}
+
+#nav_td a:hover {
+	color: white;
+	font-weight: bold;
+}
+
+#nav_td:hover {
+	background-color: #56C8D3;
+}
+#graphList{
+	width:70%;
+}
 
 
 </style>
 </head>
 <body>
+<jsp:include page="../alcinfo/headerSearch.jsp" />
+	<div id="frame" >
+		<div id="container" align="center">
+			<div id="total" align="center">
+				<table id="nav_table">
+					<tr>
+						<td id="nav_td"><a href="../Mypage/managerPage.jsp?pageValue=salesList">매출 현황</a></td>
+						<td id="nav_td"><a href="../Mypage/managerPage.jsp?pageValue=memberChart">회원 현황</a></td>
+						<td id="nav_td"><a href="../Report/MGMemberControl.jsp">신고 접수건</a></td>
+						<td id="nav_td"><a href="../Report/StateManagement.jsp">회원 관리</a></td>
+					</tr>
+				</table>
+			</div>
+		<div id="graphList">
 		
 		<div align="center" id="content" class="content">
 	
@@ -272,6 +315,8 @@ a:hover {
 </table>
 	<hr width="90%">
 </div>
+</div>
+
 	<form name="listFr" method="post">
 		<input type="hidden" name="reload" value="true">
 		<input type="hidden" name="noPage" value="1">

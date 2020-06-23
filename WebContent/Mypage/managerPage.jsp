@@ -2,6 +2,7 @@
 <%
 		request.setCharacterEncoding("utf-8");
 		String pageValue=request.getParameter("pageValue");
+		
 %>
 <html>
 <head>
@@ -32,34 +33,40 @@
 #nav_td:hover {
 	background-color: #56C8D3;
 }
+#graphList{
+	width:70%;
+}
 </style>
 </head>
 <body>
 <jsp:include page="../alcinfo/headerSearch.jsp" />
-	<div id="frame">
-		<div id="container">
+	<div id="frame" >
+		<div id="container" align="center">
 			<div id="total" align="center">
 				<table id="nav_table">
 					<tr>
 						<td id="nav_td"><a href="../Mypage/managerPage.jsp?pageValue=salesList">매출 현황</a></td>
 						<td id="nav_td"><a href="../Mypage/managerPage.jsp?pageValue=memberChart">회원 현황</a></td>
-						<td id="nav_td"><a href="../Mypage/managerPage.jsp?pageValue=reportList">신고 접수건</a></td>
-						<td id="nav_td"><a href="../Mypage/managerPage.jsp?pageValue=memberControl">회원 관리</a></td>
+						<td id="nav_td"><a href="../Report/MGMemberControl.jsp">신고 접수건</a></td>
+						<td id="nav_td"><a href="../Report/StateManagement.jsp">회원 관리</a></td>
 					</tr>
 				</table>
 			</div>
 			<!--nav-->
-			<div>
-				<% if(pageValue.equals("salseList")){ %>
-					<jsp:include page="../Mypage/salesList.jsp"></jsp:include>
+			<div id="graphList">
+				<% if(pageValue.equals("salesList")){%>
+					 <jsp:include page="salesList.jsp"></jsp:include>
 				<%} else if(pageValue.equals("memberChart")){%>
-					<%-- <jsp:include page="../Mypage/memberChart.jsp"></jsp:include> --%>
+					<jsp:include page="memberChart.jsp"></jsp:include>
 				<%} else if(pageValue.equals("reportList")){%>
 					<jsp:include page="../Report/MGMemberControl.jsp"></jsp:include>
 				<%} else if(pageValue.equals("memberControl")){%>
 					<jsp:include page="../Report/StateManagement.jsp"></jsp:include>
 				<%} %>
 			</div>
+		</div>
+		<div>
+			<jsp:include page="../alcinfo/footer.jsp"></jsp:include>
 		</div>
 	</div>
 </body>

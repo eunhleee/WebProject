@@ -145,12 +145,12 @@ function clalert2(){
   	border: 10px solid #F88C65; 
 	border-radius:10px;
 	padding:20px 40px;
-	margin-top:50px;
+	margin-top:25px;
 }
 #categoryframe{
 	margin-left:280px;
 	margin-right:80px;
-	margin-top:50px;
+	margin-top:25px;
 	float:left;
 	border:10px solid #FCBC7E;
 	border-radius:15px;
