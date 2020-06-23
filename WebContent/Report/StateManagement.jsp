@@ -116,29 +116,58 @@ function numPerFn(numPerPage){//5개보기,10개보기 등등 보기리스트 �
 	document.readF.submit();
 }
 </script>
+<style>
+#content{
+	margin : auto;
+  	width: 70%;
+  	border: 10px solid #36ada9; 
+	border-radius:10px;
+	margin-top:50px;
+}
+#list td {
+	border-bottom: 1px solid lightgray;
+	height:30px;
+}
+
+#title td {
+	color: white;
+	background-color: #36ada9;
+}
+a {
+	text-decoration: none;
+	color: black;
+}
+a:hover {
+	color: gray;
+}
+</style>
 </head>
 <body>
-	<jsp:include page="../alcinfo/headerSearch.jsp" />
 	<div class="frame">
 		<div class="container">
 			
 			<!--nav-->
-			<div class="content">
-				<form name="searchF">
-					<table width="600" cellpadding="4" cellspacing="0">
+			<div id="content" class="content">
+				<form style="margin-top:30;" name="searchF">
+					<table align="center" width="600" cellpadding="4" cellspacing="0">
 						<tr>
-							<td align="center" valign="bottom"><select name="keyField" size="1">
-							<option value="name">이 름</option>
-							<option value="stopid">신고아이디</option>
-							</select> <input size="16" name="keyWord">
-							<input type="button" value="찾기" onClick="javascript:scheck()"> 
-							<input type="hidden" name="nowPage" value="1"></td>
+							<td align="center" valign="bottom">
+								<div id="inputdiv" style="width:320px; display:flex;">
+							<select name="keyField" size="1" style="flex:1; border:none;">
+								<option value="name">이 름</option>
+								<option value="stopid">신고아이디</option>
+							</select>
+								<input size="16" name="keyWord">
+								<input type="button" value="찾기" onClick="javascript:scheck()">
+								</div> 
+								<input type="hidden" name="nowPage" value="1">
+							</td>				
 						</tr>
 					</table>
 				</form>
-<table>
+<table style="margin-left:5%" width="90%">
 	<tr>
-		<td width="600">
+		<td>
 		Total : <%=totalRecord%>Articles(
 		<font color="red"><%=nowPage+"/"+totalPage%>Pages</font>)
 		</td>
@@ -159,10 +188,10 @@ function numPerFn(numPerPage){//5개보기,10개보기 등등 보기리스트 �
 	</tr>
 </table>
 				
-								<table>
-				<tr>
-	<td align="center" colspan="2">
-	<%
+	<table align="center" width="90%">
+		<tr>
+			<td align="center" colspan="2">
+				<%
 			
 				Vector<ReportBean> pvlist = rMgr.SMList(keyField, keyWord,start,cnt);
 				int listSize=pvlist.size();//브라우저 화면에 표시될 게시물 번호
@@ -170,12 +199,12 @@ function numPerFn(numPerPage){//5개보기,10개보기 등등 보기리스트 �
 				out.println("등록된 게시물이 없습니다.");
 				}else{
 				%>
-				<table cellspacing="0">
-					<tr>
+				<table cellspacing="0" width="100%">
+					<tr align="center" id="title">
 						<td>아이디</td>
 						<td>이름</td>
 						<td>사유</td>
-						<td>상태</td>
+						<td colspan="2">상태</td>
 					</tr>
 					<%
 						for (int i = 0; i < numPerPage; i++) {
@@ -183,7 +212,7 @@ function numPerFn(numPerPage){//5개보기,10개보기 등등 보기리스트 �
 						ReportBean rbean = pvlist.get(i);
 					%>
 				<form method="post" action="SMupdateProc.jsp">
-				<tr>
+				<tr align="center" id="list">
 						<td><%=rbean.getStopid()%></td>
 						<td><%=rbean.getName()%></td>
 						<td><select name=contents>
@@ -232,7 +261,7 @@ function numPerFn(numPerPage){//5개보기,10개보기 등등 보기리스트 �
 		for(;pageStart<pageEnd;pageStart++){
 	%>
 	<a href="javascript:pageing('<%=pageStart%>')"><!-- 페이징처리(페이지번호 넘기기) -->
-	<%if(nowPage==pageStart){ %><font color="blue"><%}%>
+	<%if(nowPage==pageStart){ %><font color="black"><%}%>
 	[<%=pageStart%>]
 	<%if(nowPage==pageStart){ %></font><%}%>
 	</a>
@@ -249,7 +278,7 @@ function numPerFn(numPerPage){//5개보기,10개보기 등등 보기리스트 �
 	</td>
 	</tr>
 </table>
-<hr width="750">
+<hr width="90%">
 			</div>
 			<form name="listFr" method="post">
 	<input type="hidden" name="reload" value="true">
@@ -260,6 +289,7 @@ function numPerFn(numPerPage){//5개보기,10개보기 등등 보기리스트 �
 			<form name="readFr" action="SMupdateProc.jsp">
 					<input type="hidden" name="keyField" value="<%=keyField%>">
 					<input type="hidden" name="keyWord" value="<%=keyWord%>"> 
+					<input type="hidden" name="pageValue" value="memberControl"> 
 					<input type="hidden" name="num">
 					<input type="hidden" name="renum">
 					<input type="hidden" name="contents">
@@ -271,13 +301,14 @@ function numPerFn(numPerPage){//5개보기,10개보기 등등 보기리스트 �
 	<input type="hidden" name="numPerPage" value="<%=numPerPage%>">
 	<input type="hidden" name="keyField" value="<%=keyField%>">
 	<input type="hidden" name="keyWord" value="<%=keyWord%>">
+	<input type="hidden" name="pageValue" value="memberControl"> 
 	<input type="hidden" name="num">
 	</form>
 	
 		</div>
 		<!-- //container -->
 		<div class="footer">
-			<p class="copyright">&copy;copy</p>
+			<p style="margin-left:15%;" class="copyright">&copy;copy</p>
 		</div>
 		<!-- //footer -->
 		<jsp:include page="../alcinfo/footer.jsp" />
