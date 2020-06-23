@@ -463,7 +463,7 @@ function win_close(){
 				</td>
 			</tr>
 			<tr>
-				<td align="right"><button  id="btnJoin"  onclick="inputCheck();">정보 수정</button></td>
+				<td align="right"><button type="button" id="btnJoin"  onclick="inputCheck();">정보 수정</button></td>
 			</tr>
 		</table>
 	</form>

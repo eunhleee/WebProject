@@ -59,7 +59,7 @@
 <html>
 <head>
 <title>관리자-신고접수건관리</title>
-<link href="../Report/MyReportListStyle.css" rel="stylesheet">
+<!-- <link href="../Report/MyReportListStyle.css" rel="stylesheet"> -->
 
 <script type="text/javascript">
 	function goupdate(num,restate) {
@@ -105,32 +105,58 @@
 
 </script>
 <style>
+#content{
+	margin : auto;
+  	width: 70%;
+  	border: 10px solid #36ada9; 
+	border-radius:10px;
+	margin-top:50px;
+}
+#list td {
+	border-bottom: 1px solid lightgray;
+	height:30px;
+}
+
+#title td {
+	color: white;
+	background-color: #36ada9;
+}
+a {
+	text-decoration: none;
+	color: black;
+}
+a:hover {
+	color: gray;
+}
+
 
 </style>
 </head>
 <body>
+		
+		<div align="center" id="content" class="content">
 	
-		<div class="content">
-	
-		<form  name="searchF">
-			<table  width="600" cellpadding="4" cellspacing="0">
+		<form style="margin-top:30;" name="searchF">
+			<table id="sr" cellpadding="4" cellspacing="0">
 		 		<tr>
-		  			<td align="center" valign="bottom">
-		   				<select name="keyField" size="1" >
-		    				<option value="stopid"> 신고당한아이디 </option>
-		    				<option value="retitle"> 제 목</option>
-		    				<option value="regroup"> 신고분류</option>
-		   				</select>
-		   				<input size="16" name="keyWord">
-		   				<input type="button"  value="찾기" onClick="javascript:msearch()">
-		   				<input type="hidden" name="nowPage" value="1">
+		  			<td style="align:center;"  valign="bottom">
+		  				<div id="inputdiv" style="width:320px; display:flex;">
+		   					<select name="keyField" size="1" style="flex:1; border:none;">
+		    					<option value="stopid"> 신고당한아이디 </option>
+		    					<option value="retitle"> 제 목</option>
+		    					<option value="regroup"> 신고분류</option>
+			   				</select>
+		   					<input size="16" name="keyWord">
+		   					<input type="button"  value="찾기" onClick="javascript:msearch()">
+		   					</div>
+		   					<input type="hidden" name="nowPage" value="1">
 		  			</td>
 		 		</tr>
 			</table>
 		</form>
-		<table>
-			<tr>
-				<td width="600">
+		<table width="90%">
+			<tr >
+				<td>
 				Total : <%=totalRecord%>Articles(
 				<font color="red"><%=nowPage+"/"+totalPage%>Pages</font>)
 				</td>
@@ -150,7 +176,7 @@
 		   		</td>
 			</tr>
 		</table>
-		<table>
+		<table width="90%">
 			<tr>
 				<td align="center" colspan="2">
 					<%
@@ -160,15 +186,15 @@
 						out.println("등록된 게시물이 없습니다.");
 						}else{
 					%>
-						<table cellspacing="0">
-							<tr>
+						<table align="center" cellspacing="0" width="100%">
+							<tr align="center" id="title">
 								<td>신고접수번호</td>
 								<td>신고분류</td>
 								<td>신고자 아이디</td>
 								<td>신고당한 아이디</td>
 								<td>제목</td>
 								<td>사유</td>
-								<td>상태</td>
+								<td colspan="2">상태</td>
 							</tr>
 					<%
 						for(int i=0;i<numPerPage;i++){
@@ -176,7 +202,7 @@
 						ReportBean mbean=mvlist.get(i);
 					%>
 					<form method="post" action="MGMCUpdateProc.jsp">
-						<tr>
+						<tr align="center" id="list">
 							<td><a href="<%=mbean.getStopurl() %>"><%=mbean.getNum()%></a></td>
 								<td><a href="<%=mbean.getStopurl() %>"><%=mbean.getRegroup()%></a></td>
 								<td><a href="<%=mbean.getStopurl() %>"><%=mbean.getReid()%></a></td>
@@ -227,7 +253,7 @@
 			for(;pageStart<pageEnd;pageStart++){
 		%>
 		<a href="javascript:pageing('<%=pageStart%>')"><!-- 페이징처리(페이지번호 넘기기) -->
-		<%if(nowPage==pageStart){ %><font color="blue"><%}%>
+		<%if(nowPage==pageStart){ %><font color="black"><%}%>
 		[<%=pageStart%>]
 		<%if(nowPage==pageStart){ %></font><%}%>
 		</a>
@@ -244,7 +270,7 @@
 		</td>
 	</tr>
 </table>
-	<hr width="750">
+	<hr width="90%">
 </div>
 	<form name="listFr" method="post">
 		<input type="hidden" name="reload" value="true">
@@ -253,6 +279,7 @@
 	<form name="readFrm" action="MGMCUpdateProc.jsp">
 		<input type="hidden" name="keyField" value="<%=keyField%>">
 		<input type="hidden" name="keyWord" value="<%=keyWord%>">
+		<input type="hidden" name="pageValue" value="reportList"> 
 		<input type="hidden" name="num">
 		<input type="hidden" name="restate">
 	</form>
@@ -261,12 +288,13 @@
 		<input type="hidden" name="numPerPage" value="<%=numPerPage%>">
 		<input type="hidden" name="keyField" value="<%=keyField%>">
 		<input type="hidden" name="keyWord" value="<%=keyWord%>">
+		<input type="hidden" name="pageValue" value="reportList">
 		<input type="hidden" name="num">
 	</form>
 </div>
 		<!-- //container -->
 		<div class="footer">
-			<p class="copyright">&copy;copy</p>
+			<p style="margin-left:15%;" class="copyright">&copy;copy</p>
 		</div>
 		<!-- //footer -->
 		<jsp:include page="../alcinfo/footer.jsp" />
