@@ -204,6 +204,10 @@ a:hover {
 <body>
 
 <jsp:include page="../alcinfo/headerSearch.jsp"></jsp:include>
+<table width="70%" align="center">
+<tr>
+<!-- 카테고리 부분 -->
+<td style="vertical-align:top">
 	<div id="categoryframe">
 		<h3 style="margin-left:50px;">커뮤니티</h3>
 		<div id="atag"><a href="communityList.jsp?pageValue=free">&#149; 자유게시판</a></div>
@@ -223,8 +227,9 @@ a:hover {
 		href="javascript:clalert2()"<%} %>
 		>&#149; 선생님 전용 게시판</a></div>
 	</div>
-
+	</td>
 	<!-- 리스트 부분 -->
+	<td>
 	<div id="insertMember" class="insertMember1" align="left">
 
 		<h2><%=category %></h2>
@@ -294,7 +299,7 @@ a:hover {
 				%>
 
 						<tr id="list">
-							<td align="center"><%=num%></td>
+							<td align="center"><%=totalRecord-start-i%></td>
 							<td align="left"><a href="javascript:read('<%=num%>')"><%=title%></a>
 								<% if(filename!=null) { %>
 									<img src="../img/icon_file1.png">
@@ -309,7 +314,7 @@ a:hover {
 						</tr>
 
 						<%
-					}
+						}
 					}
 				%>
 
@@ -400,10 +405,10 @@ a:hover {
 			<input type="hidden" name="pageValue" value="<%=group%>">
 			<input type="hidden" name="num">
 		</form>
-
-
-
-
+		</td>
+		</tr>
+	</table>
+	<jsp:include page="../alcinfo/footer.jsp"></jsp:include>
 
 </body>
 

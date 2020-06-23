@@ -8,10 +8,21 @@
 <jsp:setProperty property="*" name="mpbean"/>
 <%
 	String id=request.getParameter("imid");
-
-
-	String imbirth = request.getParameter("imbirthy") + request.getParameter("imbirthm") + 
-	request.getParameter("imbirthd");
+	String mon="";
+	String day="";
+	if(request.getParameter("imbirthm").length()>2){
+		mon="0"+request.getParameter("imbirthm").length();
+	}
+	else{
+		mon=request.getParameter("imbirthm");
+	}
+	if(request.getParameter("imbirthd").length()>2){
+		day="0"+request.getParameter("imbirthd").length();
+	}
+	else{
+		day=request.getParameter("imbirthd");
+	}
+	String imbirth = request.getParameter("imbirthy") + mon + day;
 	String imaddress = request.getParameter("imaddress1") + " " + request.getParameter("imaddress2");
 	mpbean.setId(request.getParameter("imid"));
 	mpbean.setName(request.getParameter("imname"));

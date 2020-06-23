@@ -30,7 +30,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>우리학원 어디?-학원 문의 게시판</title>
+<title>우리학원 어디?-과외 문의 게시판</title>
 <script>
 	function cancel() {
 		location.href = "<%=request.getHeader("referer")%>";
@@ -88,7 +88,7 @@
 		<h2><img src="../img/questionmark.png" width="40" height="40">&nbsp;문의 하기</h2>
 		<hr style="border:1px solid #F88C65;">
 		<form name="lequpdateFrm" method="post" action="le_QnAUpdateProc.jsp">
-		<table width="600" cellpadding="3" align="center" border="1">
+		<table width="600" cellpadding="3" align="center">
 			<tr>
 				<td align=center>
 				<table align="center">
@@ -116,13 +116,13 @@
 					</tr>
 					<tr>
 						<td>과 목</td>
-						<td><div id="inputdiv">
+						<td colspan="3"><div id="inputdiv">
 							<input name="leqsubject" size="50" maxlength="30" value="<%=subject%>">
 						</div></td>
 					</tr>
 					<tr>
 						<td>내 용</td>
-						<td><div id="textareadiv">
+						<td colspan="3"><div id="textareadiv">
 							<textarea name="leqcontent" rows="10" cols="50"><%=content%></textarea>
 						</div></td>
 					</tr>

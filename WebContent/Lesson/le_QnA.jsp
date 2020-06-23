@@ -69,7 +69,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>과외 문의 게시판</title>
+<title>우리 학원 어디?-과외 문의 게시판</title>
 <script>
 	function check() {
 		if (document.searchFrm.keyWord.value == "") {
@@ -111,6 +111,7 @@
 <style>
 #list td {
 	border-bottom: 1px solid lightgray;
+	height:30px;
 }
 
 #title td {
@@ -144,7 +145,6 @@ div{
 	border:none;
 	font-size:15px;
 }
-
 </style>
 </head>
 <body>

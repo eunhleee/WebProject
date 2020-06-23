@@ -34,7 +34,7 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>Team Read</title>
+<title>우리 학원 어디?-학생 문의</title>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -99,7 +99,7 @@ function deleteT(){
  
 
 function goReport() {
-	url = "../Report/reportReceiptSInf.jsp?stopid=<%=mbean.getId()%>&stopurl=../Student/stRead.jsp?stunum=<%=stunum%>";
+	url = "../Report/reportReceiptSInf.jsp?stopid=<%=mbean.getId()%>";
 	window.open(url, "GoReport", "width=900, height=560, top=200, left=300");
 }
 	

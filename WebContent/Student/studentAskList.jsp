@@ -108,6 +108,7 @@
 <style>
 #list td {
 	border-bottom: 1px solid lightgray;
+	height:30px;
 }
 
 #title td {
@@ -352,8 +353,10 @@ a:hover {
 		<input type="hidden" name="stunum" value="<%=stunum %>">
 		<input type="hidden" name="nowPage" value="<%=nowPage%>"> 
 		<input type="hidden" name="numPerPage" value="<%=numPerPage%>"> 
-		<input type="hidden" name="keyField" value="<%=keyField%>"> 
-		<input type="hidden" name="keyWord" value="<%=keyWord%>"> 
+		<%if(!(keyWord==null||keyWord.equals(""))){%>
+		<input type="hidden" name="keyField" value="<%=keyField%>">
+		<input type="hidden" name="keyWord" value="<%=keyWord%>">
+		<%}%> 
 		<input type="hidden" name="num">
 			
 	</form>

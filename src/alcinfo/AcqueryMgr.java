@@ -381,7 +381,7 @@ public class AcqueryMgr {
 		int acnum=0;
 		try {
 			con = pool.getConnection();
-			sql = "select ac_num from letea where id=?";
+			sql = "select ac_num from letea where id=? and grade=3";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();

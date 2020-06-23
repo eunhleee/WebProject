@@ -8,10 +8,15 @@
 <jsp:setProperty property="*" name="bean"/>
 <%
 	String stopid= request.getParameter("stopid").trim();
-	String stopurl =request.getParameter("stopurl").trim();
+	String t= request.getParameter("stopurl");
+	if(t==null||t.trim().length()==0){
+	System.out.println("값이 들어오지 않았습니다.");
+	}
+	int count=t.indexOf("/Student");
+	String stopurl="../"+t.substring(count+1);
 
-	mgr.rePortAI(bean);
-	response.sendRedirect("reportReceiptSInf.jsp?stopid="+stopid+"&stopurl="+stopurl);
+	mgr.rePortSI(bean,stopurl);
+	response.sendRedirect("reportReceiptSInf.jsp?stopid="+stopid);
 	%>
 <script type="text/javascript">
 window.close();

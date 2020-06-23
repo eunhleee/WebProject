@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import org.json.simple.JSONArray;
+
 import alcinfo.LeteaBean;
 import alcinfo.MemberBean;
 import alcinfo.ReportBean;
@@ -234,60 +236,134 @@ public class MemberMgr {
 		}
 		return flag;
 	}
-	// �궗�슜�옄 �젙蹂� 媛�吏�怨� �삤湲�
-		public MemberBean getInfo(String id) {
-			Connection con = null;
-			PreparedStatement pstmt = null;
-			ResultSet rs = null;
-			String sql = null;
-			MemberBean bean=new MemberBean();
-			try {
-				con = pool.getConnection();
-				sql = "select name,nickname,email,phone,address,mpoint from member where id=? ";
-				pstmt = con.prepareStatement(sql);
-				pstmt.setString(1, id);
-				
-				rs = pstmt.executeQuery();
-				if(rs.next()) {
-					bean.setName(rs.getString("name"));
-					bean.setNickname(rs.getString("nickname"));
-					bean.setEmail(rs.getString("email"));
-					bean.setPhone(rs.getString("phone"));
-					bean.setAddress(rs.getString("address"));
-					bean.setMpoint(rs.getString("mpoint"));
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			} finally {
-				pool.freeConnection(con, pstmt);
-			}
-			return bean;
-		}
-		public MemberBean getGrade(String id) {
-			Connection con = null;
-			PreparedStatement pstmt = null;
-			ResultSet rs = null;
-			String sql = null;
-			MemberBean bean = new MemberBean();
-			String a="";
-			try {
-				con = pool.getConnection();
-				sql = "select id, grade from member where id="+"'"+id+"'"
-						+ " union "
-						+ " select id, grade from letea where id="+"'"+id+"'";
-				pstmt = con.prepareStatement(sql);
-				rs = pstmt.executeQuery();
 
-				if(rs.next()) {
-					bean.setGrade(rs.getInt("grade"));
-					System.out.println(rs.getString("grade"));
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			} finally {
-				pool.freeConnection(con, pstmt, rs);
+	public MemberBean getInfo(String id) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		MemberBean bean=new MemberBean();
+		try {
+			con = pool.getConnection();
+			sql = "select name,nickname,email,phone,address,mpoint from member where id=? ";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				bean.setName(rs.getString("name"));
+				bean.setNickname(rs.getString("nickname"));
+				bean.setEmail(rs.getString("email"));
+				bean.setPhone(rs.getString("phone"));
+				bean.setAddress(rs.getString("address"));
+				bean.setMpoint(rs.getString("mpoint"));
 			}
-			return bean;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt);
 		}
+		return bean;
+	}
 	
+	public MemberBean getGrade(String id) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		MemberBean bean = new MemberBean();
+		String a="";
+		try {
+			con = pool.getConnection();
+			sql = "select id, grade from member where id="+"'"+id+"'"
+					+ " union "
+					+ " select id, grade from letea where id="+"'"+id+"'";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+
+			if(rs.next()) {
+				bean.setGrade(rs.getInt("grade"));
+				System.out.println(rs.getString("grade"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt, rs);
+		}
+		return bean;
+	}
+		
+	//월별 매출 합계
+	@SuppressWarnings("unchecked")
+	public JSONArray getRatio(){
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		JSONArray jsonArray=new JSONArray();
+		try {
+			con = pool.getConnection();
+			sql = " ";
+			pstmt = con.prepareStatement(sql);
+
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				JSONArray rowArray = new JSONArray();
+				rowArray.add(rs.getString("left(paydate,7)"));
+				rowArray.add(rs.getInt("sum(price)"));
+
+				jsonArray.add(rowArray);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt, rs);
+		}
+		return jsonArray;
+	}
+	
+	public String memberNick(String id) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		String nick = null;
+		try {
+			con = pool.getConnection();
+			sql = "select nickname from member where id=? "
+					+ "union all "
+					+ "select nickname from letea where id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setString(2, id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) nick=rs.getString(1);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt, rs);
+		}
+		return nick;
+	}
+
+	public int checkM(String id) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		int grade = 5;
+		try {
+			con = pool.getConnection();
+			sql = "select grade from member where id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) grade = rs.getInt(1);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt, rs);
+		}
+		return grade;
+	}
 }

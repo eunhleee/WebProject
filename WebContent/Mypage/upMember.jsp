@@ -359,7 +359,7 @@ function win_close(){
 										<%	
 										i++;
 										}
-										if( i<10) {
+										if(i<10) {
 									%>	
 										<option value="0<%=i%>"><%=i%></option>
 									<%	
@@ -470,6 +470,5 @@ function win_close(){
 	<%} %>
 </div>
 </div>
-
 </body>
 </html>

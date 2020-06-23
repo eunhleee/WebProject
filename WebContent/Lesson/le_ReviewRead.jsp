@@ -67,17 +67,26 @@
 	//읽어온 게시물을 수정 및 삭제를 위해 세션저장
 	session.setAttribute("bean", lrbean);
 %>	
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Team Read</title>
+<title>우리 학원 어디?-과외 리뷰</title>
 
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <style>
+#readDiv{
+	margin-top:50px;
+	margin-left:15%;
+	width:65%;
+	align:center;
+	border: 10px solid #F88C65; 
+	border-radius:10px;
+	padding:20px 40px;
+}
 #list td {
 	border-bottom: 1px solid lightgray;
 }
@@ -223,320 +232,226 @@ function graph(){
 
 </head>
 <body>
+<jsp:include page="../alcinfo/headerSearch.jsp"></jsp:include>
 
-	<br>
-	<br>
-	<form name="cart" action="">
-		<table width="70%" align="center">
+<!-- 읽기 Start -->
+
+<div id="readDiv">
+	<table align="center" cellspacing="3" width="100%" bgcolor="white">
+	 <tr>
+	  <td>
+	   <table cellpadding="3" cellspacing="0" width="100%"> 
+	    <tr height="100"> 
+	    <td colspan="7">
+	    <span style="font-size:30px;"><%=title%></span> 
+	    <% if(loginid!=null) {%>		    
+		 <input type="button" value="신고" onclick="javascript:goRep();" style="float:right;">
+		  <%}%></td>
+		</tr>
+	    <tr height="30"> 
+			<td align="center" bgcolor="#FCBC7E" width="10%" style="color:white; font-weight:bold;" > 닉 네 임</td>
+			<td bgcolor="#FAF8EB" width="10%"><%=id%></td>
+			<td align="center" bgcolor="#FCBC7E" width="10%" style="color:white; font-weight:bold;"> 등록날짜 </td>
+			<td bgcolor="#FAF8EB" width="15%"><%=regdate%></td>
+			<td align="center" bgcolor="#FCBC7E" width="10%" style="color:white; font-weight:bold;">조회수</td>
+			<td bgcolor="#FAF8EB" colspan="3"><%=count%></td>
+		</tr>
+	   <tr> 
+	    <td align="center" bgcolor="#FCBC7E" width="10%" style="color:white; font-weight:bold;" > 평 점</td>
+	    <td bgcolor="#FFFFE8" colspan="5"><%=star%></td>
+	   </tr>
+	   <tr> 
+	    <td colspan="6" height="200"><span><%=content%></span></td>
+	   </tr>
+	   <tr>
+	    <td colspan="3" align="left">
+	    	댓글 <%=ccount%>
+	    </td>
+	   </tr>
+	   </table>
+	  </td>
+	 </tr>
+	 <tr>
+	  <td colspan="2">
+	 <hr/>
+ 	<!-- 댓글 List Start -->
+	  <%
+	  	Vector<LeRcommentsBean> cvlist = lercmgr.getLeRComment(lernum);
+	      	if(!cvlist.isEmpty()){
+	  %>
+		 <table width="100%">
+		 <%
+			 	for(int i=0;i<cvlist.size();i++){
+			 		LeRcommentsBean lercbean = cvlist.get(i);
+		 	 			int cnum = lercbean.getNum();
+		 	 			String cnick = lercbean.getLer_nick();
+		 	 			String comment = lercbean.getLer_content();
+		 	 			String cregdate = lercbean.getLer_regdate();
+		 	 			int conum = lercbean.getLer_conum();
+		 	 			int depth = lercbean.getLer_depth();
+		 	 			String stopid=lercbean.getLer_id();
+
+	 					String dstyle = "", dstyle1 = "";
+		 	 			if(depth==1) {
+		 	 				dstyle = "style=\"padding-left:30px;\"";		
+ 		 	 				dstyle1 = "padding-left:30px;";
+		 			}
+		 %>
+		 	
+		 	<tr>
+				<td <%=dstyle%> colspan="4" width="600"><b><%=cnick%></b></td>
+			</tr>
 			<tr>
-				<td align="center">
-					<table width="100%" style="font-size: 20; background: rgb(250, 248, 235);">
-						<tr>
-							<td width="25%" align="center">
-							<img src="../img/banner1.jpg"	width="100%" height="250">
-							</td>
-							<td width="60%" height="100%">
-								<table width="100%"  style="font-size: 20;">
-									<tr height="40">
-										<td width="30%">선생님명 / 성별</td>
-										<td width="70%"><%=lebean.getName()%> / <%=lebean.getGender() %></td>
-									</tr>
-									<tr height="40">
-										<td width="30%">과외가능지역</td>
-										<td width="70%"><%=lebean.getArea() %></td>
-									</tr>
-									<tr height="40">
-										<td width="30%">전화번호</td>
-										<td width="70%"><%=lebean.getPhone() %></td>
-									</tr>
-									<tr height="35">
-										<td width="30%">과외 가능한 과목</td>
-										<td width="70%"><%=lebean.getLeclass() %></td>
-									</tr>
-									<tr height="35">
-										<td width="30%">과외중인 학생 수</td>
-										<td width="70%"><%=lebean.getStudent() %>명</td>
-									</tr>
-									<tr height="40">
-										<td width="30%">재학(졸업)중인 학교</td>
-										<td width="70%"><%=lebean.getSchool_name() %></td>
-									</tr>
-									<tr height="40">
-										<td width="30%">비고</td>
-										<td width="70%"><%=lebean.getEtc() %></td>
-									</tr>
-
-								</table>
-							</td>
-							<td width="15%" align="center">
-								<table name="buttonTable">
-									<tr>
-										<td><input type="button" value="문의하기"
-											style="font-size: 20;" onclick="moveQnA();"></td>
-									</tr>
-									<tr>
-										<td><input type="button" value="잘못된정보 신고하기"
-											style="font-size: 20;" onclick="goReport();"></td>
-									</tr>
-									<tr>
-										<td><input type="button" value="신청하기" id="myButton1"
-											style="font-size: 20;" onclick="insert()"></input>
-											</td>
-									</tr>
-									<tr>
-										<td><input type="button" value="취소하기" id="myButton2"
-											style="font-size: 20;" onclick="cancel()"></input>
-											</td>
-									</tr>
-								</table>
-							</td>
-						</tr>
-					</table>
+				<td <%=dstyle%> colspan="3" style=" min-height:150px;"><%=comment%></td>
+				<td align="right">
+				<% 
+				  if(loginNick!=null) {
+					if(loginNick.equals(cnick)||lermgr.checkM(loginid)==0) { %>
+					<input type="button" value="삭제"
+					onclick="cDel('<%=conum%>','<%=cnum%>','<%=depth%>')">
+					<% 	}%>
+					<input type="button" value="댓글신고"
+					onclick="javascript:goCReport
+					('<%=cnum%>','<%=depth%>','<%=stopid%>')">
+				<%} %>
 				</td>
 			</tr>
-		</table>
-	</form>
-		<br>
-		<br>
-		<table width="70%" height="280" align="center">
 			<tr>
-				<td width="30%" align="center">
-				<div style="border:10px solid #FCBC7E; border-radius:15px; padding:20px">
-				<button type="button" id="btn" onclick="graph()" >그래프 보기</button>
-				<div id="column_chart_div1"  style="height: 440px; width:300px;"></div>
-				</div>
-				</td>
-				<td width="70%" align="center">
-				<div style="border:10px solid #36ada9; border-radius:15px; padding:20px">
+				<td colspan="3" style="font-size:12px; color:gray; <%=dstyle1%>">
+				<%=cregdate%>
+				<% if(loginid!=null) { %>
+				<a href="javascript:onlerReply<%=i%>();">답글쓰기</a>
+				<% } %>
 				
-<!-- 읽기 Start -->	
-	<div>
-		<table align="center" cellspacing="3" width="100%">
-		 <tr>
-		  <td bgcolor="#9CA2EE" height="25" align="center">글읽기
-		  </td>
-		 </tr>
-		 <tr>
-		  <td colspan="2">
-		   <table cellpadding="3" cellspacing="0" width="100%"> 
-		    <tr> 
-		  <td align="center" bgcolor="#DDDDDD" width="20%"> 닉 네 임 </td>
-		  <td bgcolor="#FFFFE8"><%=nickname%></td>
-		  <td align="center" bgcolor="#DDDDDD" width="20%"> 등록날짜 </td>
-		  <td bgcolor="#FFFFE8"><%=regdate%></td>
-		 </tr>
-		   <tr> 
-		    <td align="center" bgcolor="#DDDDDD"> 제 목</td>
-		    <td bgcolor="#FFFFE8" colspan="3"><%=title%></td>
-		   </tr>
-		   <tr> 
-		    <td align="center" bgcolor="#DDDDDD"> 평 점</td>
-		    <td bgcolor="#FFFFE8" colspan="3"><%=star%></td>
-		   </tr>
-		   <tr> 
-		    <td colspan="4"><br/><pre><%=content%></pre><br/><hr></td>
-		   </tr>
-		   <tr>
-		    <td colspan="3" align="left">
-		    	댓글 <%=ccount%>
-		    </td>
-		    <td align="right">
-		     	조회수  <%=count%>
-		    </td>
-		     <% if(loginid!=null) {%>		    
-		    <td><input type="button" value="신고" onclick="javascript:goRep();"></td>
-		    <%}%>
-		   </tr>
-		   </table>
-		  </td>
-		 </tr>
-		 <tr>
-		  <td align="center" colspan="2">
-		   <!-- 댓글 입력폼 Start -->
-			<% if(loginid!=null) { %>
-		   <form method="post" name="cFrm">
-				<table>
-					<tr  align="center">
-						<td width="50">닉네임</td>
-						<td align="left">
-							<input name="cNick" size="10" value="<%=loginNick%>" readonly>
-						</td>
-					</tr>
-					<tr align="center">
-						<td>내 용</td>
-						<td>
-						<input name="comment" size="50" placeholder="댓글을 남겨보세요"> 
-						<input type="button" value="등록" onclick="cInsert()"></td>
-					</tr>
-				</table>
-			 <input type="hidden" name="flag" value="insert">	
-			 <input type="hidden" name="num" value="<%=num%>">
-			 <input type="hidden" name="cnum">
-			 <input type="hidden" name="conum">
-		    <input type="hidden" name="nowPage" value="<%=nowPage%>">
-		    <input type="hidden" name="numPerPage" value="<%=numPerPage%>">
-			<input type="hidden" name="ip" value="<%=request.getRemoteAddr()%>">
-			   <%
-			   	if(!(keyWord==null||keyWord.equals(""))){
-			   %>
-		    <input type="hidden" name="keyField" value="<%=keyField%>">
-		    <input type="hidden" name="keyWord" value="<%=keyWord%>">
-			<%
-				}
-			%>
-			</form>
-			<% } %>
-		   <!-- 댓글 입력폼 End -->
-		 <hr/>
-  			<!-- 댓글 List Start -->
-			  <%
-			  	Vector<LeRcommentsBean> cvlist = lercmgr.getLeRComment(lernum);
-			      	if(!cvlist.isEmpty()){
-			  %>
-				 <table>
-				 <%
-					 	for(int i=0;i<cvlist.size();i++){
-					 		LeRcommentsBean lercbean = cvlist.get(i);
-	 		 	 			int cnum = lercbean.getNum();
-	 		 	 			String cnick = lercbean.getLer_nick();
-	 		 	 			String comment = lercbean.getLer_content();
-	 		 	 			String cregdate = lercbean.getLer_regdate();
-	 		 	 			int conum = lercbean.getLer_conum();
-	 		 	 			int depth = lercbean.getLer_depth();
-	 		 	 			String stopid=lercbean.getLer_id();
-
-			 				String dstyle = "";
-	 		 	 			if(depth==1) {
-	 		 	 				dstyle = "style=\"padding-left:30px;\"";	
-				 			}
-				 %>
-				 	
-				 	<tr>
-						<td <%=dstyle%> colspan="3" width="600"><b><%=cnick%></b></td>
-					</tr>
-					<tr>
-						<td <%=dstyle%> colspan="2"><%=comment%></td>
-						<% 
-						if(loginNick!=null) {
-							if(loginNick.equals(cnick)||lermgr.checkM(loginid)==0) { %>
-						<td align="center" valign="middle">
-							<input type="button" value="삭제"
-							onclick="cDel('<%=conum%>','<%=cnum%>','<%=depth%>')">
-						</td>
-			<% 	}%>
-							<td align="left" valign="middle">
-							<input type="button" value="댓글신고"
-							onclick="javascript:goCReport
-							('<%=cnum%>','<%=depth%>','<%=stopid%>')">
-							
-						</td>
-						<%} %>
-					</tr>
-					<tr>
-						<td <%=dstyle%> colspan="3">
-						<%=cregdate%>
-						<% if(loginid!=null) { %>
-						<a href="javascript:onlerReply<%=i%>();">답글쓰기</a>
-						<% } %>
-						
-						<!-- 답글쓰기 Start -->
-						
-						<script>
-						 	function onlerReply<%=i%>() {
-						 		document.getElementById("lerReply<%=i%>").style.display = 'block';
-						 	}
-						 	function offlerReply<%=i%>() {
-						 		document.getElementById("lerReply<%=i%>").style.display = 'none';
-						 	}
-						 	function rInsert<%=i%>() {
-						 		if(document.lerFrm<%=i%>.comment.value==""){
-						 			alert("댓글을 입력하세요.");
-						 			document.lerFrm<%=i%>.comment.focus();
-						 			return;
-						 		}
-						 		document.lerFrm<%=i%>.submit();
-						 	}
-				 		</script>
-						<div id="lerReply<%=i%>" class="lerReply">
-							<form method="post" name="lerFrm<%=i%>">
-								<table>
-									<tr align="center">
-										<td width="50">닉네임</td>
-										<td align="left">
-											<input name="cid" size="10" value="<%=loginNick%>" readonly>
-										</td>
-									</tr>
-									<tr align="center">
-										<td>내 용</td>
-										<td>
-											<input name="comment" size="50" placeholder="댓글을 남겨보세요"> 
-											<input type="button" value="등록" onclick="rInsert<%=i%>()">
-											<input type="button" value="취소" onclick="offlerReply<%=i%>()">
-										</td>
-									</tr>
-								</table>
-							<input type="hidden" name="flag" value="insert1">
-							<input type="hidden" name="lernum" value="<%=lernum%>">
-							<input type="hidden" name="cnum">
-							<input type="hidden" name="conum" value="<%=conum%>">
-							<input type="hidden" name="depth" value="<%=depth%>">
-						    <input type="hidden" name="nowPage" value="<%=nowPage%>">
-						    <input type="hidden" name="numPerPage" value="<%=numPerPage%>">
-							<input type="hidden" name="ip" value="<%=request.getRemoteAddr()%>">
-						    <%
-						  	 	if(!(keyWord==null||keyWord.equals(""))){
-						    %>
-						    <input type="hidden" name="keyField" value="<%=keyField%>">
-						    <input type="hidden" name="keyWord" value="<%=keyWord%>">
-							<%
-								}
-							%>
-							</form>
-						</div>
-						
-						<!-- 답글쓰기 End -->
-						
-						</td>
-					</tr>
-				 <% }//---for%>
-				 </table>	
-			 <hr/>
-			 <% } %>
-			 <!-- 댓글 List End -->
-		 [ <a href="javascript:list();" >리스트</a>
-		 <% 
-		 if(loginNick!=null) {
-			 if(loginNick.equals(nickname)||lermgr.checkM(loginid)==0) { %>
-			 | <a href="le_ReviewUpdate.jsp?num=<%=num%>&id=<%=id%>&lernum=<%=lernum%>&numPerPage=<%=numPerPage%>&nowPage=<%=nowPage%><%
-  	 	if(!(keyWord==null||keyWord.equals(""))){
-		     %>&keyField=<%=keyField%>&keyWord=<%=keyWord%><%}%>" >수 정</a> |
-			 <a href="le_ReviewDelete.jsp?num=<%=num%>&id=<%=id%>&lernum=<%=lernum%>&numPerPage=<%=numPerPage%>&nowPage=<%=nowPage%><%
-  	 	if(!(keyWord==null||keyWord.equals(""))){
-		     %>&keyField=<%=keyField%>&keyWord=<%=keyWord%><%}%>">삭 제</a> 
-		 <% }
-		 } %>
-		 ]<br/>
-		  </td>
-		 </tr>
-		</table>
-
-
-		<form name="listFrm" method="post">
-			<input type="hidden" name="nowPage" value="<%=nowPage%>">
-			<input type="hidden" name="numPerPage" value="<%=numPerPage%>">
-			<%if(!(keyWord==null||keyWord.equals(""))){%>
-			<input type="hidden" name="keyField" value="<%=keyField%>">
-			<input type="hidden" name="keyWord" value="<%=keyWord%>">
-			<%}%>
-		</form>
+				<!-- 답글쓰기 Start -->
+				
+				<script>
+				 	function onlerReply<%=i%>() {
+				 		document.getElementById("lerReply<%=i%>").style.display = 'block';
+				 	}
+				 	function offlerReply<%=i%>() {
+				 		document.getElementById("lerReply<%=i%>").style.display = 'none';
+				 	}
+				 	function rInsert<%=i%>() {
+				 		if(document.lerFrm<%=i%>.comment.value==""){
+				 			alert("댓글을 입력하세요.");
+				 			document.lerFrm<%=i%>.comment.focus();
+				 			return;
+				 		}
+				 		document.lerFrm<%=i%>.submit();
+				 	}
+		 		</script>
+				<div id="lerReply<%=i%>" class="lerReply">
+					<form method="post" name="lerFrm<%=i%>">
+						<table>
+							<tr>
+								<td><%=loginNick%>&nbsp;:&nbsp;</td>
+								<td>
+								<div id="inputdiv" style="width:500px; display:flex; backgound-color:white;">
+								<input name="comment" size="50" placeholder="댓글을 남겨보세요" style="flex:3;"> 
+								<input type="button" value="등록" onclick="rInsert<%=i%>()" style="flex:1; margin-right:5px;">
+								<input type="button" value="취소" onclick="offscReply<%=i%>()" style="flex:1;">
+								</div>
+								</td>
+							</tr>
+						</table>
+					<input type="hidden" name="cid" value="<%=loginNick%>">
+					<input type="hidden" name="flag" value="insert1">
+					<input type="hidden" name="lernum" value="<%=lernum%>">
+					<input type="hidden" name="cnum">
+					<input type="hidden" name="conum" value="<%=conum%>">
+					<input type="hidden" name="depth" value="<%=depth%>">
+				    <input type="hidden" name="nowPage" value="<%=nowPage%>">
+				    <input type="hidden" name="numPerPage" value="<%=numPerPage%>">
+					<input type="hidden" name="ip" value="<%=request.getRemoteAddr()%>">
+				    <%
+				  	 	if(!(keyWord==null||keyWord.equals(""))){
+				    %>
+				    <input type="hidden" name="keyField" value="<%=keyField%>">
+				    <input type="hidden" name="keyWord" value="<%=keyWord%>">
+					<%
+						}
+					%>
+					</form>
+				</div>
+				
+				<!-- 답글쓰기 End -->
+				
+				</td>
+			</tr>
+		 <% }//---for%>
+		 </table>	
+	 <hr/>
+	 <% } %>
+		 <!-- 댓글 List End -->
+		 <!-- 댓글 입력폼 Start -->
+		<% if(loginid!=null) { %>
+	   <form method="post" name="cFrm">
+	   <div id="inputdiv" style="width:97%; background-color:white;">
+			<table width="97%">
+				<tr>
+					<td colspan="4"><%=loginNick%></td>
+				</tr>
+				<tr>
+					<td colspan="3" width="90%">
+						<input name="comment"  placeholder="댓글을 남겨보세요" style="width:95%; height:30px;"> 
+					</td>
+					<td align="right">
+						<input type="button" value="등록" onclick="cInsert()" style=" height:30px;">
+					</td>
+				</tr>
+			</table>
 		</div>
+		<input type="hidden" name="cid" value="<%=loginNick%>">
+		<input type="hidden" name="flag" value="insert">	
+		<input type="hidden" name="num" value="<%=num%>">
+		<input type="hidden" name="cnum">
+		<input type="hidden" name="conum">
+	    <input type="hidden" name="nowPage" value="<%=nowPage%>">
+	    <input type="hidden" name="numPerPage" value="<%=numPerPage%>">
+		<input type="hidden" name="ip" value="<%=request.getRemoteAddr()%>">
+		   <%
+		   	if(!(keyWord==null||keyWord.equals(""))){
+		   %>
+	    <input type="hidden" name="keyField" value="<%=keyField%>">
+	    <input type="hidden" name="keyWord" value="<%=keyWord%>">
+		<%
+			}
+		%>
+		</form>
+		<% } %>
+	   <!-- 댓글 입력폼 End -->
+	 [ <a href="javascript:list();" >리스트</a>
+	 <% 
+	 if(loginNick!=null) {
+		 if(loginNick.equals(nickname)||lermgr.checkM(loginid)==0) { %>
+		 | <a href="le_ReviewUpdate.jsp?num=<%=num%>&id=<%=id%>&lernum=<%=lernum%>&numPerPage=<%=numPerPage%>&nowPage=<%=nowPage%><%
+ 	 	if(!(keyWord==null||keyWord.equals(""))){
+	     %>&keyField=<%=keyField%>&keyWord=<%=keyWord%><%}%>" >수 정</a> |
+		 <a href="le_ReviewDelete.jsp?num=<%=num%>&id=<%=id%>&lernum=<%=lernum%>&numPerPage=<%=numPerPage%>&nowPage=<%=nowPage%><%
+ 	 	if(!(keyWord==null||keyWord.equals(""))){
+	     %>&keyField=<%=keyField%>&keyWord=<%=keyWord%><%}%>">삭 제</a> 
+	 <% }
+	 } %>
+	 ]<br/>
+	  </td>
+	 </tr>
+	</table>
+
+
+	<form name="listFrm" method="post">
+		<input type="hidden" name="nowPage" value="<%=nowPage%>">
+		<input type="hidden" name="numPerPage" value="<%=numPerPage%>">
+		<%if(!(keyWord==null||keyWord.equals(""))){%>
+		<input type="hidden" name="keyField" value="<%=keyField%>">
+		<input type="hidden" name="keyWord" value="<%=keyWord%>">
+		<%}%>
+	</form>
+	
 <!-- 읽기 End -->		
 		
-				</div>
-				</td>
-			</tr>
-		</table>
-		<br>
+</div>
+
 </body>
 <%@ include file="../alcinfo/footer.jsp"%>
 </html>

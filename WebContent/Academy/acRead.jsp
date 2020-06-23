@@ -27,7 +27,7 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>Team Read</title>
+<title>우리 학원 어디?-학원 리뷰</title>
 
 <link href="style.css" rel="stylesheet" type="text/css">
 <script>
@@ -37,7 +37,7 @@
 			
 		}
 		function goReport() {
-			url = "../Report/reportReceiptAInf.jsp?stopid=<%=num%>&stopurl=../Academy/acRead.jsp?num=<%=num%>";
+			url = "../Report/reportReceiptAInf.jsp?stopid=<%=num%>";
 			window.open(url, "GoReport", "width=900, height=560, top=200, left=300");
 		}
 		function goErr(){

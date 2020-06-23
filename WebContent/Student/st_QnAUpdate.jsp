@@ -43,7 +43,7 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>Team Read</title>
+<title>우리 학원 어디?-학생 문의</title>
 <style>
 #list td {
 	border-bottom: 1px solid lightgray;
@@ -245,7 +245,7 @@ function goReport() {
 				
 					<div style="border:10px solid #36ada9; border-radius:15px; padding:20px">
 					<h2><img src="../img/questionmark.png" width="40" height="40">&nbsp;문의 하기</h2>	
-					<hr style="border:1px solid #F88C65;">
+					<hr style="border:1px solid #36ada9;">
 					<form name="stqupdateFrm" method="post" action="st_QnAUpdateProc.jsp">
 					<table width="800" cellpadding="4">
 						<tr>
