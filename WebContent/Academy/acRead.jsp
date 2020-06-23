@@ -27,7 +27,7 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>Team Read</title>
+<title>우리 학원 어디?-학원 리뷰</title>
 
 <link href="style.css" rel="stylesheet" type="text/css">
 <script>

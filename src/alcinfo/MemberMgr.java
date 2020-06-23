@@ -50,9 +50,9 @@ public class MemberMgr {
 		String a="";
 		try {
 			con = pool.getConnection();
-			sql = "select id, grade from member where id="+id
+			sql = "select id, grade from member where id='"+id+"'"
 					+ " union"
-					+ " select id, grade from letea where id="+id;
+					+ " select id, grade from letea where id='"+id+"'";
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 
@@ -73,6 +73,7 @@ public class MemberMgr {
 		PreparedStatement pstmt = null;
 		String sql = null;
 		boolean flag=false;
+		System.out.println("그레이드는"+grade);
 		try {
 			con = pool.getConnection();
 			if(grade==1) {
@@ -216,7 +217,7 @@ public class MemberMgr {
 		return mbean;
 	}	
 	
-	//占쎈린占쎄문 占쎌젟癰귨옙 占쎈쾻嚥≪빜釉�疫뀐옙
+	
 	public boolean insertStudent(String id, String stclass, String stetc) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -239,4 +240,5 @@ public class MemberMgr {
 		}
 		return flag;
 	}
+	
 }

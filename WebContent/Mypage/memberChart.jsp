@@ -1,52 +1,106 @@
+<%@page import="org.json.simple.JSONArray"%>
 <%@ page contentType="text/html; charset=utf-8"%>
+<jsp:useBean id="mgr" class="member.MemberMgr"></jsp:useBean>
+<jsp:useBean id="Tmgr" class="alcinfo.LeteaMgr"></jsp:useBean>
 <%
 		request.setCharacterEncoding("utf-8");
+		JSONArray ratio=mgr.getRatio();
+		String st=ratio.toString();
+		int member=mgr.countMember();
+		int[] tea=Tmgr.countTea();
+		JSONArray countSchool_grade=mgr.countSchool_grade();
+		String school_grade=countSchool_grade.toString();
+		JSONArray countTeacher=Tmgr.getAge();
+		String teacher=countTeacher.toString();
+		int total=member+tea[0]+tea[1];
+		
 %>
 <html>
 <head>
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript">
-      google.charts.load('current', {'packages':['corechart']});
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+      google.charts.setOnLoadCallback(columnChart1);
+      google.charts.setOnLoadCallback(columnChart2);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable(<%=st%>);
+
+        var options = {
+          title: '성별 비율',
+          pieHole: 0.2,
+          colors:['#0099FF','#FF6699']
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('donutChart'));
+        chart.draw(data, options);
+      }
       
-     
-  		$.ajax({
-  			dataType:"text",
-  			
-  			url:'ratioChart.jsp',
-  			success:function(result){
-  				drawChart(result);
-  			}, 
-  			error:function(request, error){
-  				alert("에러");
-  				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-  			} 
-  		});
-   
-    	 
-      function drawChart(arrayList) {
-			
-    	  arrayList = eval('('+arrayList+')');
 
-    	  var dataTable = new google.visualization.DataTable();
-    		dataTable.addColumn('string','gender');
-    		dataTable.addColumn('number','count');
-    		dataTable.addRows(arrayList);
-    		
-    		
-          var options = {
-            title: '남녀 비율'
-          };
+  	function columnChart1() {
+  		
+  		var dataTable1 = new google.visualization.arrayToDataTable(<%=school_grade%>);
+  		// 옵션객체 준비
+  		var options = {
+  			title : '학교 구분 별 학생 수',
+  			legend : 'top',
+  			colors : [ '#FFCC00' ]
+  		};
+  		// 차트를 그릴 영역인 div 객체를 가져옴
+  		var objDiv = document.getElementById('gradeChart');
+  		// 인자로 전달한 div 객체의 영역에 컬럼차트를 그릴수 있는 차트객체를 반환
+  		var chart = new google.visualization.ColumnChart(objDiv);
+  		// 차트객체에 데이터테이블과 옵션 객체를 인자로 전달하여 차트 그리는 메소드
+  		chart.draw(dataTable1, options);
+  		/* var chart = new google.charts.Bar(objDiv);
+  		// 차트객체에 데이터테이블과 옵션 객체를 인자로 전달하여 차트 그리는 메소드
+  		chart.draw(dataTable,google.charts.Bar.convertOptions(options)); */
+  		// drawColumnChart1()의 끝
+  		
+  	}
+	function columnChart2() {
+  		var dataTable1 = new google.visualization.arrayToDataTable(<%=teacher%>);
+  		// 옵션객체 준비
+  		var options = {
+  			title : '연령대별 선생님 수',
+  			legend : 'top',
+  			colors : [ '#FF9900' ]
+  		};
+  		// 차트를 그릴 영역인 div 객체를 가져옴
+  		var objDiv = document.getElementById('teacherChart');
+  		// 인자로 전달한 div 객체의 영역에 컬럼차트를 그릴수 있는 차트객체를 반환
+  		var chart = new google.visualization.ColumnChart(objDiv);
+  		// 차트객체에 데이터테이블과 옵션 객체를 인자로 전달하여 차트 그리는 메소드
+  		chart.draw(dataTable1, options);
+  		/* var chart = new google.charts.Bar(objDiv);
+  		// 차트객체에 데이터테이블과 옵션 객체를 인자로 전달하여 차트 그리는 메소드
+  		chart.draw(dataTable,google.charts.Bar.convertOptions(options)); */
+  		// drawColumnChart1()의 끝
+  		
+  	}
+    </script>
+  </head>
+  <style>
+ #graphDiv2{
+ 	display:flex;
+ }
+ #donutChart{
+ 	border-right: 1px solid lightgray;
+ }
+ 
+  </style>
+  <body>
+  <div id="frame"  align="left">
+  	<div>
+	  	<div><h2>총 회원 수  <%=total %> 명</h2></div>
+	  	<div><h4>학생 수 : <%=member %> 명 선생님 수: <%=tea[0] %> 명 학원장 수: <%=tea[1] %> 명 </h4></div>
+  	</div>
+    <div id="graphDiv2">
+   		<div id="donutChart" style="height:450px; flex:1.4;" ></div>
+   		<div id="gradeChart" style="height: 500px; flex:1;"></div>
+   		<div id="teacherChart" style=" height: 500px; flex:1;"></div>
+    </div>
+    </div>
 
-          var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-
-          chart.draw(data, options);
-        }
-</script>
-</head>
-<body>
-<div>
-<h2>총 인원 수 :  명</h2>
-<div id="piechart" style="width: 900px; height: 500px;"></div>
-</div>
 </body>
 </html>

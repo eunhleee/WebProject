@@ -19,6 +19,7 @@
 %>
 <html>
 <head>
+<title>우리학원 어디?-학원 문의 게시판</title>
 <style>
 #inputdiv{
 	margin:10px;

@@ -124,7 +124,7 @@
 
 #title td {
 	color: white;
-	background-color: #36ada9;
+	background-color: #F88C65;
 }
 
 a {

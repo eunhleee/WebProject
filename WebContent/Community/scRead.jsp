@@ -150,29 +150,29 @@ a:hover {
 
 	<jsp:include page="../alcinfo/headerSearch.jsp"></jsp:include>
 
+<!-- 글읽기 Start -->
+
 		<div id="readDiv">
 		<table align="center" width="100%" cellspacing="3" bgcolor="white">
 		
 		 <tr>
 		  <td>
-		   <table cellpadding="3" cellspacing="0" width="100%" > 
+		   <table cellpadding="3" cellspacing="0" width="100%" >
 		   <tr height="100"> 
-			    <td colspan="7"><span style="font-size:30px;"><%=title%></span> 
+			    <td colspan="7">
+			    <span style="font-size:30px;"><%=title%></span> 
 			    <% if(loginid!=null) {%>		    
-				 <input type="button" value="신고" onclick="javascript:goRep();" style="float:right;">
-				  <%}%></td>
-			    
+				<input type="button" value="신고" onclick="javascript:goRep();" style="float:right;">
+				<%}%></td>
 		   </tr>
 		    <tr> 
 				<td align="center" bgcolor="#FCBC7E" width="10%" style="color:white; font-weight:bold;" > 닉 네 임</td>
 				<td bgcolor="#FAF8EB" width="10%"><%=id%></td>
 				<td align="center" bgcolor="#FCBC7E" width="10%" style="color:white; font-weight:bold;"> 등록날짜 </td>
-				<td bgcolor="#FAF8EB" width="10%"><%=regdate%></td>
+				<td bgcolor="#FAF8EB" width="15%"><%=regdate%></td>
 				<td align="center" bgcolor="#FCBC7E" width="10%" style="color:white; font-weight:bold;">조회수</td>
-				<td bgcolor="#FAF8EB"  colspan="3"><%=count%></td>
-			    
+				<td bgcolor="#FAF8EB" colspan="3"><%=count%></td>
 			</tr>
-		 
 		   <tr> 
 		     <td align="center" bgcolor="#FCBC7E" style="color:white; font-weight:bold;">첨부파일</td>
 		     <td bgcolor="#FAF8EB" colspan="5">
@@ -218,9 +218,10 @@ a:hover {
 	 		 	 			int conum = sccbean.getStuc_conum();
 	 		 	 			int depth = sccbean.getStuc_depth();
 	 		 	 			String stopid= sccbean.getStuc_id();
-			 				String dstyle = "";
+			 				String dstyle = "", dstyle1 = "";
 	 		 	 			if(depth==1) {
-	 		 	 				dstyle = "style=\"padding-left:30px;\"";	
+	 		 	 				dstyle = "style=\"padding-left:30px;\"";
+	 		 	 				dstyle1 = "padding-left:30px;";
 				 			}
 				 %>
 				 	
@@ -233,21 +234,17 @@ a:hover {
 						<% 
 						if(loginNick!=null) {
 							if(loginNick.equals(cnick)||scmgr.checkM(loginid)==0) { %>
-						
 							<input type="button" value="삭제"
 							onclick="cDel('<%=conum%>','<%=cnum%>','<%=depth%>')">
-							
-						<%}%>
+							<%}%>
 							<input type="button" value="댓글신고" 
 							onclick="javascript:goCReport
 							('<%=sccbean.getNum()%>','<%=sccbean.getStuc_depth()%>','<%=stopid%>')">
-							
-						</td>
 						<%}%>
-						
+						</td>
 					</tr>
 					<tr>
-						<td <%=dstyle%> colspan="3" style="font-size:12px; color:gray;">
+						<td colspan="3" style="font-size:12px; color:gray; <%=dstyle1%>">
 						<%=cregdate%>
 						<% if(loginid!=null) { %>
 						<a onclick="onscReply<%=i%>();">답글쓰기</a>  
@@ -276,7 +273,7 @@ a:hover {
 						<div id="scReply<%=i%>" class="scReply">
 							<form method="post" name="crFrm<%=i%>">
 								<table>
-									<tr >
+									<tr>
 										<td><%=loginNick%>&nbsp;:&nbsp;</td>
 										<td>
 										<div id="inputdiv" style="width:500px; display:flex; backgound-color:white;">
@@ -287,6 +284,7 @@ a:hover {
 										</td>
 									</tr>
 								</table>
+							<input type="hidden" name="cid" value="<%=loginNick%>">
 							<input type="hidden" name="flag" value="insert1">
 							<input type="hidden" name="num" value="<%=num%>">
 							<input type="hidden" name="cnum">
@@ -321,9 +319,9 @@ a:hover {
 			
 			 <% if(loginid!=null) { %>
 		   <form method="post" name="cFrm">
-			   <div id="inputdiv" style="width:97%; backgound-color:white;">
+			   <div id="inputdiv" style="width:97%; background-color:white;">
 					<table width="97%">
-						<tr >
+						<tr>
 							<td colspan="4"><%=loginNick%></td>
 						</tr>
 						<tr>
@@ -336,10 +334,11 @@ a:hover {
 						</tr>
 					</table>
 				</div>
-			 <input type="hidden" name="flag" value="insert">	
-			 <input type="hidden" name="num" value="<%=num%>">
-			 <input type="hidden" name="cnum">
-			 <input type="hidden" name="conum">
+			<input type="hidden" name="cid" value="<%=loginNick%>">
+			<input type="hidden" name="flag" value="insert">	
+			<input type="hidden" name="num" value="<%=num%>">
+			<input type="hidden" name="cnum">
+			<input type="hidden" name="conum">
 		    <input type="hidden" name="nowPage" value="<%=nowPage%>">
 		    <input type="hidden" name="numPerPage" value="<%=numPerPage%>">
 			<input type="hidden" name="ip" value="<%=request.getRemoteAddr()%>">
@@ -384,6 +383,7 @@ a:hover {
 			<%}%>
 		</form>
 		</div>
+<!-- 글읽기 End -->
 	
 	<jsp:include page="../alcinfo/footer.jsp"/>
 </body>

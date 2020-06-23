@@ -1,4 +1,6 @@
 <!-- 과외 리뷰 글쓰기 -->
+<%@page import="java.util.Calendar"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="alcinfo.MemberBean"%>
 <%@page import="alcinfo.LessonBean"%>
 <%@page import="alcinfo.UtilMgr"%>
@@ -15,6 +17,9 @@
 	String keyWord = request.getParameter("keyWord");
 	String loginid = (String)session.getAttribute("idKey");
 	String prevurl = request.getHeader("referer");
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    Calendar today = Calendar.getInstance();
+ 	String strToday = sdf.format(today.getTime());
 	String id = "";
 	String url = "LessonMain.jsp";
 	LessonBean lebean = null;
@@ -35,8 +40,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Team Read</title>
+<title>우리 학원 어디?-과외 리뷰</title>
 
+<script src="./grade.js"></script>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -121,7 +127,72 @@ function graph(){
 
 	
 </script>
+<style>
+#inputdiv2{
+	margin:10px;
+	width:490px;
+	border:1px solid gray;
+	border-radius: 6px;
+	padding:3px;
+}
+#inputdiv2 input{
+	width:480px;
+	border:none;
+	font-size:15px;
+}
 
+#inputdiv3{
+	margin:10px;
+	width:200px;
+	border:1px solid gray;
+	border-radius: 6px;
+	padding:3px;
+}
+
+#inputdiv3 input{
+	width:180px;
+	border:none;
+	font-size:15px;
+	
+}
+
+#textareadiv{
+	margin:10px;
+	width:490px;
+	border:1px solid gray;
+	border-radius: 6px;
+	padding:3px;
+}
+#textareadiv textarea{
+	border:none;
+	font-size:15px;
+	width:480px;
+}
+
+.starR1{
+    background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat -52px 0;
+    background-size: auto 100%;
+    width: 15px;
+    height: 30px;
+    float:left;
+    text-indent: -9999px;
+    cursor: pointer;
+}
+.starR2{
+    background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat right 0;
+    background-size: auto 100%;
+    width: 15px;
+    height: 30px;
+    float:left;
+    text-indent: -9999px;
+    cursor: pointer;
+}
+.starR1.on{background-position:0px 0px;}
+.starR2.on{background-position:-15px 0px;}
+.starRev {
+	margin-left: 10px;
+}
+</style>
 </head>
 <body>
 
@@ -209,50 +280,69 @@ function graph(){
 				</div>
 				</td>
 				<td width="70%" align="center">
-				<div style="border:10px solid #36ada9; border-radius:15px; padding:20px">
 				
 <!-- 글쓰기 Start -->	
-			<table width="600" cellpadding="3">
-				<tr>
-					<td height="25" align="center"><%=lebean.getName()%>선생님 리뷰</td>
-				</tr>
-			</table>
+
+		<div style="border:10px solid #36ada9; border-radius:15px; padding:20px">
+			<h2><%=lebean.getName()%>선생님 리뷰</h2>
+			<hr style="border:1px solid #36ada9;">
 			<br/>
 			<form name="lerpostFrm" method="post" action="le_ReviewPostProc.jsp">
-			<table width="600" cellpadding="3" align="center" border="1">
+			<table width="600" cellpadding="3" align="center">
 				<tr>
 					<td align=center>
 					<table align="center">
 						<tr>
-							<td>제 목</td>
+							<td>작성자</td>
 							<td>
-							<input name="lertitle" size="50" maxlength="30"></td>
+							<div id="inputdiv3">
+							<input size="50" maxlength="30" disabled="disabled"
+							value="<%=id%>">
+							</div>
+							</td>
+							<td>작성일</td>
+							<td>
+							<div id="inputdiv3">
+							<input size="50" maxlength="30" disabled="disabled"
+							value="<%=strToday%>">
+							</div>
+							</td>
+						</tr>
+						<tr>
+							<td>제 목</td>
+							<td colspan="3">
+							<div id="inputdiv2">
+							<input name="lertitle" size="50" maxlength="30">
+							</div>
+							</td>
 						</tr>
 						<tr>
 							<td>평 점</td>
-							<td>
-								<select name="lerstar">
-									<option value="5" selected>5점</option>
-									<option value="4.5">4.5점</option>
-									<option value="4">4점</option>
-									<option value="3.5">3.5점</option>
-									<option value="3">3점</option>
-									<option value="2.5">2.5점</option>
-									<option value="2">2점</option>
-									<option value="1.5">1.5점</option>
-									<option value="1">1점</option>
-									<option value="0.5">0.5점</option>
-									<option value="0">0점</option>
-								</select>
+							<td colspan="3">
+							<div class="starRev">
+							  <span class="starR1 on" id="star0" onclick="starclick0()">별1_왼쪽</span>
+							  <span class="starR2" id="star1" onclick="starclick1()">별1_오른쪽</span>
+							  <span class="starR1" id="star2" onclick="starclick2()">별2_왼쪽</span>
+							  <span class="starR2" id="star3" onclick="starclick3()">별2_오른쪽</span>
+							  <span class="starR1" id="star4" onclick="starclick4()">별3_왼쪽</span>
+							  <span class="starR2" id="star5" onclick="starclick5()">별3_오른쪽</span>
+							  <span class="starR1" id="star6" onclick="starclick6()">별4_왼쪽</span>
+							  <span class="starR2" id="star7" onclick="starclick7()">별4_오른쪽</span>
+							  <span class="starR1" id="star8" onclick="starclick8()">별5_왼쪽</span>
+							  <span class="starR2" id="star9" onclick="starclick9()">별5_오른쪽</span>
+							  <input type="hidden" name="lerstar" value="0.5">
+							</div>
 							</td>
 						</tr>
 						<tr>
 							<td>내 용</td>
-							<td><textarea name="lercontent" rows="10" cols="50"></textarea></td>
+							<td colspan="3">
+							<div id="textareadiv">
+							<textarea name="lercontent" rows="10" cols="50"></textarea>
+							</div></td>
 						</tr>
 						<tr>
-							<td colspan="2">
-						
+							<td colspan="4" align="center">
 								 <input type="submit" value="확인">
 								 <input type="reset" value="다시쓰기">
 								 <input type="button" value="취소"
@@ -278,11 +368,8 @@ function graph(){
 				}
 			%>
 			</form>
-				
-				
 							
 <!-- 글쓰기 End -->				
-				
 				
 				</div>
 				</td>
