@@ -130,6 +130,7 @@ function numPerFn(numPerPage){//5개보기,10개보기 등등 보기리스트 �
 }
 
 #title td {
+	height:30px;
 	color: white;
 	background-color: #36ada9;
 }

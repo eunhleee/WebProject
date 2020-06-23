@@ -31,11 +31,7 @@
 	google.charts.setOnLoadCallback(columnChart3);
 	function columnChart1(){
 		var dataTable1 = new google.visualization.arrayToDataTable(<%=st%>);
-		<%-- dataTable1.addColumn('string', 'Month');
-		dataTable1.addColumn('number', 'Sales');
-		// 실 데이터를 가진 데이터테이블 객체를 반환하는 메소드
-		var arrayList = eval('(' + <%=st%> + ')');
-		dataTable1.addRows(arrayList); --%>
+		
 		// 옵션객체 준비
 		var options = {
 			title : '월별 매출',
