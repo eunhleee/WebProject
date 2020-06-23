@@ -64,7 +64,7 @@
 		<table width="70%" align="center">
 	<tr> 
 	<td align="center">
-		<table width="100%" style="font-size:20; background: rgb(250,248,235);"> 
+		<table width="100%" style="background: rgb(250,248,235);"> 
 		<tr> 
 		<td width="25%" align="center">
 		<img src="../img/<%=leBean.getImgname() %>" width="100%" height="250">

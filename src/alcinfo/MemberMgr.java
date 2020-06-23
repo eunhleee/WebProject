@@ -166,7 +166,7 @@ public class MemberMgr {
 		MemberBean mbean = new MemberBean();
 		try {
 			con = pool.getConnection();
-			sql = "SELECT imgname, name, gender, substr(address,1,instr(address,'援� ')+1) address, phone, school_name, school_grade, grade from member where id = ?;";
+			sql = "SELECT imgname, name, gender, substr(address,1,instr(address,'로 ')+1) address, phone, school_name, school_grade, grade from member where id = ?;";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
