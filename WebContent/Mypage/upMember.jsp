@@ -413,7 +413,7 @@ function win_close(){
 								<div id="inputdiv" style="width:270px;">
 									<input type="text" id="address" name="imaddress1"
 									value="<%=bean.getAddress()%>"
-									style="width:185px; height:30px;" >
+									style="width:185px; height:30px;">
 									<input type="button" style="width:70px; height:30px;"
 									onClick="openDaumZipAddress();" value="주소찾기">
 								</div>

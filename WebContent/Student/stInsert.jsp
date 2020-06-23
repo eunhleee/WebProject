@@ -19,8 +19,8 @@
 	alert("학생만 이용 가능합니다.");
 	history.back();
 </script>
-<%		}
-	}
+<%		} 
+}
 %>
 <script type="text/javascript">
 	function stregister() {
@@ -51,13 +51,13 @@
 		<table width="70%" align="center">
 	<tr> 
 	<td align="center">
-		<table width="100%" border="1" style="font-size:20; background: rgb(250,248,235);"> 
+		<table width="100%" style="font-size: 20; background: rgb(250, 248, 235);"> 
 		<tr> 
 		<td width="25%" align="center">
-		<img src="img/<%=mBean.getImgname() %>" width="250" height="250">
+		<img src="../img/<%=mBean.getImgname() %>" width="100%" height="250"></td>
 		</td>
 		<td width="60%" height="100%">
-			<table width="100%" border="1" >
+			<table width="100%">
 				<tr height="40">
 					<td width="30%">학생명 / 성별</td>
 					<td width="70%"><%=mBean.getName()%> / <%=mBean.getGender() %></td>
