@@ -1,5 +1,6 @@
 <!-- 13p 7.신고접수창 학원 잘못된 정보-->
 <!-- reportReceipt.jsp -->
+<%@page import="java.text.SimpleDateFormat"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page import ="java.util.*,alcinfo.*"%>
 <jsp:useBean id="rBean" class="alcinfo.MemberBean"/>
@@ -12,6 +13,12 @@
 	int stuc_depth=UtilMgr.parseInt(request,"stuc_depth");
 
 	 String stopid = request.getParameter("stopid").trim();
+	 
+	//추가 id, sdf, today, strToday
+	String id =(String)session.getAttribute("idKey");
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	Calendar today = Calendar.getInstance();
+	String strToday = sdf.format(today.getTime());
 
 %>
 <html>
@@ -21,67 +28,150 @@
 	function singo(){
 		if(document.repFrm.retitle.value==""){
 			alert("제목을 입력 하세요");
+			document.repFrm.retitle.focus();
 			return;
 		}
 		 if(document.repFrm.regroup.value=="")
 		{
 			alert("신고분류를 선택하세요");
+			document.repFrm.regroup.focus();
 			return;
 
 		}
 		if(document.repFrm.recontent.value==""){
 			alert("내용을 입력 하세요");
+			document.repFrm.recontent.focus();
 			return;
 		} 
 		if(document.repFrm.retitle.value!=""&&document.repFrm.regroup.value!=""&&document.repFrm.recontent.value!=""){
 		 	var stopurl=document.referrer
 			document.repFrm.stopurl.value=stopurl;
-		document.repFrm.action="scCReportProc.jsp?stopid=<%=stopid%>&renum=<%=renum%>&conum=<%=conum%>&stuc_depth=<%=stuc_depth%>";
+			document.repFrm.action="scCReportProc.jsp?stopid=<%=stopid%>&renum=<%=renum%>&conum=<%=conum%>&stuc_depth=<%=stuc_depth%>";
 	}
 		document.repFrm.submit();
 	}
 </script>
+<style>
+.frame{
+	padding:10px; 
+	border:8px solid red; 
+	border-radius: 10px;
+	width:830px;
+}
+#inputdiv{
+	margin:10px;
+	width:490px;
+	border:1px solid gray;
+	border-radius: 6px;
+	padding:3px;
+}
+#inputdiv input{
+	width:480px;
+	border:none;
+	font-size:15px;
+}
+
+#inputdiv1{
+	margin:10px;
+	width:200px;
+	border:1px solid gray;
+	border-radius: 6px;
+	padding:3px;
+}
+
+#inputdiv1 input{
+	width:180px;
+	border:none;
+	font-size:15px;
+	
+}
+
+#textareadiv{
+	margin:10px;
+	width:490px;
+	border:1px solid gray;
+	border-radius: 6px;
+	padding:3px;
+}
+#textareadiv textarea{
+	border:none;
+	font-size:15px;
+	width:480px;
+}
+</style>
 </head>
 
 <body>
 <div class="frame">
     <div class="content">
+    <h2><img src="../img/siren.png" width="30" height="30">&nbsp;댓글 신고하기</h2>
+    <hr style="border:1px solid red;">
     	<form name="repFrm" method="post">
-		<table width="300">
+		<table width="800"  cellpadding="3" align="center">
 		<tr>
 		<td><input type="hidden" name="kind" value="커뮤니티게시판댓글"></td>	
 		<td><input type="hidden" name="reid" value="<%=session.getAttribute("idKey")%>"></td>
 		</tr>
 		<tr>
-		<td><input type="text" name="retitle" placeholder="제목을 입력하세요"><br></td>
-		</tr>
-		<tr>
-		<td>
-			<select name=regroup>
-			<option value="회원신고">회원신고
-			<option value="게시글신고" selected>게시글신고
-			<option value="잘못된정보신고">잘못된정보신고
-		</select>
-		</td> 
-		<td>
-		<input type="hidden" name="stopid" value="<%=stopid%>">
+			<td  align="center">
+				<table align="center" >
+						<tr align="center">
+							<td>작성자</td>
+							<td>
+								<div id="inputdiv1" >
+									<input name="stqtitle" size="50" maxlength="30" disabled="disabled" value="<%=id%>">
+								</div>
+							</td>
+							<td>작성일</td>
+							<td>
+								<div id="inputdiv1">
+									<input name="stqtitle" size="50" maxlength="30" disabled="disabled" value="<%=strToday%>">
+								</div>
+							</td>
+						</tr>
+						<tr align="center">
+							<td>제목</td>
+							<td colspan="3">
+								<div id="inputdiv">
+								<input type="text" name="retitle" placeholder="제목을 입력하세요">
+								</div>
+							</td>
+						</tr>
+						<tr align="center">
+							<td>신고분류</td>
+							<td colspan="3">
+								<div id="inputdiv">
+								<input type="text" name="regroup" value="댓글신고" readonly >
+								</div>
+							</td> 
+						</tr>
+						<tr align="center">
+							<td>내용</td>
+							<td colspan="3">
+								<div id="textareadiv">
+								<textarea rows="10" cols="45" name="recontent" placeholder="내용을 입력하세요"></textarea>
+								</div>
+							</td>
+							<td>
+							<input type="hidden" name="stopid" value="<%=stopid%>">
+							</td>
+						</tr>
+						<tr align="center">
+							<td  colspan="4" align="center">
+						<input type="submit" value="신고" onClick="singo()">
+						</td>
+						</tr>
+						<tr><td>
+						<input type="hidden" name="reip" value="<%=request.getRemoteAddr()%>">
+						</td>
+						<td><input type="hidden" name="restate" value="접수중"></td>
+						<td><input type="hidden" name="renum" value="<%=renum%>"></td>
+						<td><input type="hidden" name="conum" value="<%=conum%>"></td>
+						<td><input type="hidden" name="stuc_depth" value="<%=stuc_depth%>"></td>
+						<td><input type="hidden" name="stopurl"></td>
+						</tr>
+		</table>
 		</td>
-		</tr>
-		<tr><td>
-		<textarea rows="10" cols="45" name="recontent" placeholder="내용을 입력하세요"></textarea><br>
-		</td></tr>
-		<tr><td>
-		<input type="submit" value="신고" onClick="singo()">
-		</td></tr>
-		<tr><td>
-		<input type="hidden" name="reip" value="<%=request.getRemoteAddr()%>">
-
-		</td>
-		<td><input type="hidden" name="restate" value="접수중"></td>
-		<td><input type="hidden" name="renum" value="<%=renum%>"></td>
-		<td><input type="hidden" name="conum" value="<%=conum%>"></td>
-		<td><input type="hidden" name="stuc_depth" value="<%=stuc_depth%>"></td>
-		<td><input type="hidden" name="stopurl"></td>
 		</tr>
 		</table>
 		</form>

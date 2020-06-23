@@ -44,6 +44,8 @@
 <script src="script.js"></script>
 </head>
 <body>
+<%@ include file="../alcinfo/headerSearch.jsp"%>
+<br>
 <br>
 	<form name="stForm" method="post" action="stInsertProc.jsp">
 		<table width="70%" align="center">

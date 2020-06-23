@@ -266,6 +266,7 @@ public class MemberMgr {
 
 		return bean;
 	}
+	
 	public MemberBean getGrade(String id) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -291,8 +292,9 @@ public class MemberMgr {
 			pool.freeConnection(con, pstmt, rs);
 		}
 		return bean;
-	}
 
+	}
+		
 	
 	public String memberNick(String id) {
 		Connection con = null;
