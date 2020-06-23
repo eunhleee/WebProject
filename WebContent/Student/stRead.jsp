@@ -44,6 +44,7 @@
 <script>
 
 google.charts.load("current",{packages:['corechart']});
+google.charts.setOnLoadCallback(columnChart1);
 
 function columnChart1(arrayList) {
 	// 실 데이터를 가진 데이터테이블 객체를 반환하는 메소드
@@ -99,7 +100,7 @@ function deleteT(){
  
 
 function goReport() {
-	url = "../Report/reportReceiptSInf.jsp?stopid=<%=mbean.getId()%>&stopurl=../Student/stRead.jsp?stunum=<%=stunum%>";
+	url = "../Report/reportReceiptSInf.jsp?stopid=<%=mbean.getId()%>";
 	window.open(url, "GoReport", "width=900, height=560, top=200, left=300");
 }
 	

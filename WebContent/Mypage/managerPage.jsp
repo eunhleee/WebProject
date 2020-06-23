@@ -47,17 +47,17 @@
 					<tr>
 						<td id="nav_td"><a href="../Mypage/managerPage.jsp?pageValue=salesList">매출 현황</a></td>
 						<td id="nav_td"><a href="../Mypage/managerPage.jsp?pageValue=memberChart">회원 현황</a></td>
-						<td id="nav_td"><a href="../Mypage/managerPage.jsp?pageValue=reportList">신고 접수건</a></td>
-						<td id="nav_td"><a href="../Mypage/managerPage.jsp?pageValue=memberControl">회원 관리</a></td>
+						<td id="nav_td"><a href="../Report/MGMemberControl.jsp">신고 접수건</a></td>
+						<td id="nav_td"><a href="../Report/StateManagement.jsp">회원 관리</a></td>
 					</tr>
 				</table>
 			</div>
 			<!--nav-->
 			<div id="graphList">
 				<% if(pageValue.equals("salesList")){%>
-					 <jsp:include page="../Mypage/salesList.jsp"></jsp:include>
+					 <jsp:include page="salesList.jsp"></jsp:include>
 				<%} else if(pageValue.equals("memberChart")){%>
-					<jsp:include page="../Mypage/memberChart.jsp"></jsp:include>
+					<jsp:include page="memberChart.jsp"></jsp:include>
 				<%} else if(pageValue.equals("reportList")){%>
 					<jsp:include page="../Report/MGMemberControl.jsp"></jsp:include>
 				<%} else if(pageValue.equals("memberControl")){%>
