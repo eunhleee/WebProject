@@ -17,13 +17,12 @@
 	
 	String stopid= request.getParameter("stopid").trim();
 	mgr.reportBoardcom(bean,stopurl);
-	response.sendRedirect("scCReport.jsp?stopid="+stopid+"&renum="+renum+"&conum="+conum+"&stuc_depth="+stuc_depth);
 	
 %>
 <script>
-alert(renum);
-alert(conum);
-
+	alert("신고가 접수되었습니다.");
+	window.close();
 </script>
+
 
 

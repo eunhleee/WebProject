@@ -19,7 +19,8 @@
 	System.out.println(stopurl);
 
 	mgr.reportBoard(bean,stopurl);
-	response.sendRedirect("leQReport.jsp?stopid="+stopid+"&renum="+renum);
-
 %>
-
+<script>
+	alert("신고가 접수되었습니다.");
+	window.close();
+</script>
