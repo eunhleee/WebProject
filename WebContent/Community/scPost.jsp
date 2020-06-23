@@ -209,7 +209,7 @@ a:hover {
 							<td>내 용</td>
 							<td colspan="3">
 							<div id="textareadiv">
-							<textarea name="stqcontent" rows="10" cols="50"></textarea>
+							<textarea name="sccontent" rows="10" cols="50"></textarea>
 							</div>
 							</td>
 						</tr>
