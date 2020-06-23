@@ -124,7 +124,7 @@ function goErr(){
 							<td width="25%" align="center">
 							<img src="../img/<%=stbean.getImgname() %>" width="100%" height="250"></td>
 							<td width="60%" height="100%">
-								<table width="100%" style="font-size: 20;">
+								<table width="100%">
 									<tr height="40">
 										<td width="30%">학생명 / 성별</td>
 										<td width="70%"><%=stbean.getName()%> / <%=stbean.getGender() %></td>

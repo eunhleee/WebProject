@@ -136,7 +136,7 @@
 			</td>
 		</tr>
 	</table>
-					
+	
 		<input type="hidden" name="restate" value="접수중">
 		<input type="hidden" name="stopid" value="<%=stopid%>">
 		<input type="hidden" name="reip" value="<%=request.getRemoteAddr()%>">
