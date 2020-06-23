@@ -359,13 +359,13 @@ public class AcademyMgr {
 					}
 					return bean;
 				}
-				public void Upstate(String id) {
+				public void Upstate(String id,String aca_state) {
 					Connection con = null;
 					PreparedStatement pstmt = null;
 					String sql = null;
 					try {
 						con = pool.getConnection();
-						sql = "update acapply set aca_state='완료' where aca_id='"+id+"'";
+						sql = "update acapply set aca_state='"+aca_state+"'where aca_id='"+id+"'";
 						pstmt = con.prepareStatement(sql);
 						//pstmt.setString(1, id);
 						pstmt.executeUpdate();

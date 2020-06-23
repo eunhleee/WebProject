@@ -36,6 +36,7 @@ function Permit(aca_id,aca_state){
 						}else{
 							for(int i=0;i<mvlist.size();i++){
 								AcademyBean mbean=mvlist.get(i);
+								if(mbean.getAca_state().equals("진행중")){
 					%>
 
 </head>
@@ -79,12 +80,15 @@ function Permit(aca_id,aca_state){
 	
 </td>
 </tr>
-<%} }%>
+<%}
+else{i++;}}}
+%>
 </table>
 <form name="permitFrm" method="post">
 		<input type="hidden" name="aca_id">
 		<input type="hidden" name="aca_state">
 
 </form>
+
 </body>
 </html>
