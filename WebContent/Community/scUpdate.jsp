@@ -1,8 +1,11 @@
 <!-- scUpdate.jsp -->
+<%@page import="java.util.Calendar"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="alcinfo.SCommentBean"%>
 <%@page import="alcinfo.SCommunityBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<jsp:useBean id="Mmgr" class="member.MemberMgr"></jsp:useBean>
 <%
 	request.setCharacterEncoding("UTF-8");
 	String pageValue=request.getParameter("pageValue");
@@ -12,19 +15,41 @@
 	String numPerPage = request.getParameter("numPerPage");
 	String keyField = request.getParameter("keyField");	
 	String keyWord = request.getParameter("keyWord");
+
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    Calendar today = Calendar.getInstance();
+ 	String strToday = sdf.format(today.getTime());
+ 	
 	SCommunityBean bean = (SCommunityBean)session.getAttribute("bean");
 	String title = bean.getSc_title();
 	String nick = bean.getSc_nick(); 
 	String content = bean.getSc_content();
 	//scRead.jsp에서 session에 빈즈 단위로 저장 했기 때문에 파일명도 가져 올 수 있다.
 	String filename = bean.getSc_filename();
+
+	String category="";
+	if(request.getParameter("pageValue").equals("free")){
+		category="자유게시판";
+	}
+	else if(request.getParameter("pageValue").equals("academy")){
+		category="학원 Q&A";
+	}
+	else if(request.getParameter("pageValue").equals("lesson")){
+		category="과외 Q&A";
+	}
+	else if(request.getParameter("pageValue").equals("onlyst")){
+		category="학생 전용 게시판";
+	}
+	else if(request.getParameter("pageValue").equals("onlyte")){
+		category="선생님 전용 게시판";
+	}
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>우리학원 어디?-자유게시판</title>
+<title>우리학원 어디?-커뮤니티</title>
 <script>
 	function check() {
 	   document.updateFrm.submit();
@@ -48,64 +73,172 @@ a {
 a:hover {
 	color: gray;
 }
+
+#insertMember{
+	float: right;
+	margin-right:350px;
+  	width: 800px;
+  	border: 10px solid #F88C65; 
+	border-radius:10px;
+	padding:20px 40px;
+	margin-top:50px;
+}
+#categoryframe{
+	margin-left:280px;
+	margin-right:80px;
+	margin-top:50px;
+	float:left;
+	border:10px solid #FCBC7E;
+	border-radius:15px;
+	background-color:white;
+	width:250px;
+	height:300px;
+	padding:30px 0px;
+	background-color:#FAF8EB;
+}
+ 
+ 
+ #atag {
+ 	margin-left:50px;
+ 	height:40px;
+ 	line-height:40px;
+ 	width:170px;
+ 	display: block;
+ }
+ 
+ 
+ #atag:hover{
+ 	background-color:white;
+ 	border-radius: 10px;
+ }
+
+#inputdiv2{
+	margin:10px;
+	width:490px;
+	border:1px solid gray;
+	border-radius: 6px;
+	padding:3px;
+}
+#inputdiv2 input{
+	width:480px;
+	border:none;
+	font-size:15px;
+}
+
+#inputdiv3{
+	margin:10px;
+	width:200px;
+	border:1px solid gray;
+	border-radius: 6px;
+	padding:3px;
+}
+
+#inputdiv3 input{
+	width:180px;
+	border:none;
+	font-size:15px;
+	
+}
+
+#textareadiv{
+	margin:10px;
+	width:490px;
+	border:1px solid gray;
+	border-radius: 6px;
+	padding:3px;
+}
+#textareadiv textarea{
+	border:none;
+	font-size:15px;
+	width:480px;
+}
 </style>
 </head>
 <body>
 
 	<jsp:include page="../alcinfo/headerSearch.jsp"></jsp:include>
-
-	<div style="display: flex; margin-left: 15%; margin-right: 15%">
-
-		<div
-			style="width: 50px; text-align: left; flex: 4; border: 1px solid black; margin-right: 10%; padding: 40px 40px;">
-			<h3>커뮤니티</h3>
-			<a href="communityList.jsp">&#149; 자유게시판</a><br>
-			<br>
-
+	<table>
+		<tr>
+		<td style="vertical-align:top">
+		
+		<div id="categoryframe">
+			<h3 style="margin-left:50px;">커뮤니티</h3>
+			<div id="atag"><a href="communityList.jsp?pageValue=free">&#149; 자유게시판</a></div>
+			<div id="atag"><a href="communityList.jsp?pageValue=academy">&#149; 학원 Q&A</a></div>
+			<div id="atag"><a href="communityList.jsp?pageValue=lesson">&#149; 과외 Q&A</a></div>
+			<div id="atag"><a 
+			<%if(Mmgr.checkM(scid)==0||Mmgr.checkM(scid)==1) {%>
+			href="communityList.jsp?pageValue=onlyst"
+			<%} else { %>
+			href="javascript:clalert1()"
+			<%} %>
+			>&#149; 학생 전용 게시판</a></div>
+			<div id="atag"><a 
+			<%if(Mmgr.checkM(scid)==0||Mmgr.checkM(scid)==2||Mmgr.checkM(scid)==3) {%>
+			href="communityList.jsp?pageValue=onlyte"
+			<%} else { %>
+			href="javascript:clalert2()"<%} %>
+			>&#149; 선생님 전용 게시판</a></div>
 		</div>
-		<div align="center">
-			<br/>
-			<table width="600" cellpadding="3">
-				<tr>
-					<td height="25" align="center">글 수정</td>
-				</tr>
-			</table>
+		</td>
+		
+		<td>
+		<div id="insertMember" class="insertMember1" align="left">
+			<h2><img src="../img/questionmark2.png" width="40" height="40">&nbsp;글쓰기</h2>	
+			<hr style="border:1px solid #F88C65;">	
 			<br/>
 			<form name="scupdateFrm" method="post" action="scUpdate?pageValue=<%=pageValue %>&numPerPage=<%=numPerPage%>&nowPage=<%=nowPage%><%
   	 	if(!(keyWord==null||keyWord.equals(""))){
 		     %>&keyField=<%=keyField%>&keyWord=<%=keyWord%><%}%>"
 			enctype="multipart/form-data">
-			<table width="600" cellpadding="3" align="center" border="1">
+			<table width="700" cellpadding="3" align="center">
 				<tr>
 					<td align=center>
 					<table align="center">
 						<tr>
-							<td>제 목</td>
+							<td>작성자</td>
 							<td>
-								<input name="sctitle" size="50" maxlength="30" value="<%=title%>">
+								<div id="inputdiv3">
+									<input name="stqtitle" size="50" maxlength="30" disabled="disabled"
+									value="<%=nick%>">
+								</div>
+							</td>
+							<td>작성일</td>
+							<td>
+								<div id="inputdiv3">
+									<input name="stqtitle" size="50" maxlength="30" disabled="disabled"
+									value="<%=strToday%>">
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td>제 목</td>
+							<td colspan="3">
+							<div id="inputdiv2">
+							<input name="sctitle" size="50" maxlength="30" value="<%=title%>">
+							</div>
 							</td>
 						</tr>
 						<tr>
 							<td>내 용</td>
-							<td>
-								<textarea name="sccontent" rows="10" cols="50"><%=content%></textarea>
+							<td colspan="3">
+							<div id="textareadiv">
+							<textarea name="sccontent" rows="10" cols="50"><%=content%></textarea>
+							</div>
 							</td>
 						</tr>
 						<tr>
 						 <tr>
 			     			<td>파일찾기</td> 
-			     			<td>
-			     				<%=filename!=null?"첨부된 파일 : "+filename:"첨부된 파일이 없습니다."%>
+			     			<td colspan="3">
+			     				<input id="inputdiv3" value="<%=filename!=null?"첨부된 파일 : "+filename:"첨부된 파일이 없습니다."%>">
 			     				<input type="file" name="scfilename" size="50" maxlength="50"
 			     				style="border:1px;">
 			     			</td>
 			    		</tr>
 						<tr>
-							<td colspan="2"><hr/></td>
-						</tr>
-						<tr>
-							<td colspan="2">
-								 <input type="submit" value="확인">
+							<td colspan="4" align="center">
+								 <input type="submit" value="수정">
 								 <input type="reset" value="다시쓰기">
 								 <input type="button" value="취소"
 								 onClick="javascript:location.href='<%=request.getHeader("referer")%>'">
@@ -130,7 +263,9 @@ a:hover {
 			 %>
 			</form>
 		</div>
-	</div>
+		</td>
+		</tr>
+	</table>
 	<jsp:include page="../alcinfo/footer.jsp" />
 
 </body>

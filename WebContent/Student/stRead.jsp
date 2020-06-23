@@ -34,7 +34,7 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>Team Read</title>
+<title>우리 학원 어디?-학생 문의</title>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>

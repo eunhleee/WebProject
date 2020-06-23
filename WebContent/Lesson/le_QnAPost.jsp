@@ -20,6 +20,7 @@
 
 <html>
 <head>
+<title>우리 학원 어디?-과외 문의 게시판</title>
 <style>
 #inputdiv{
 	margin:10px;
