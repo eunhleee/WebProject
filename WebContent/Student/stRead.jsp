@@ -99,7 +99,7 @@ function deleteT(){
  
 
 function goReport() {
-	url = "../Report/reportReceiptSInf.jsp?stopid=<%=mbean.getId()%>&stopurl=../Student/stRead.jsp?stunum=<%=stunum%>";
+	url = "../Report/reportReceiptSInf.jsp?stopid=<%=mbean.getId()%>";
 	window.open(url, "GoReport", "width=900, height=560, top=200, left=300");
 }
 	
