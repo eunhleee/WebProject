@@ -261,9 +261,9 @@ public class MemberMgr {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
+
 			pool.freeConnection(con, pstmt);
 		}
-
 		return bean;
 	}
 	
@@ -291,11 +291,10 @@ public class MemberMgr {
 		} finally {
 			pool.freeConnection(con, pstmt, rs);
 		}
-		return bean;
 
+		return bean;
 	}
-		
-	
+
 	public String memberNick(String id) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -340,6 +339,7 @@ public class MemberMgr {
 		}
 		return grade;
 	}
+	
 	@SuppressWarnings("unchecked")
 	public JSONArray getRatio(){
 		Connection con = null;
@@ -373,6 +373,7 @@ public class MemberMgr {
 		}
 		return jsonArray;
 	}
+	
 	public int countMember() {
 		Connection con = null;
 		PreparedStatement pstmt = null;

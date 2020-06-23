@@ -25,12 +25,28 @@
 <head>
 <title>잘못된 과외정보 신고하기</title>
 <script type="text/javascript">
-	function gocheck(){
-		var stopurl=document.referrer
+function gocheck(){
+	if(document.repFrm.retitle.value==""){
+		alert("제목을 입력 하세요");
+		document.repFrm.retitle.focus();
+		return;
+	}
+	if(document.repFrm.regroup.value==""){
+		alert("신고분류를 선택하세요");
+		document.repFrm.regroup.focus();
+		return;
+	}
+	if(document.repFrm.recontent.value==""){
+		alert("내용을 입력 하세요");
+		document.repFrm.recontent.focus();
+		return;
+	} 
+	if(document.repFrm.retitle.value!=""&&document.repFrm.regroup.value!=""&&document.repFrm.recontent.value!=""){
+	 	var stopurl=document.referrer
 		document.repFrm.stopurl.value=stopurl;
-		document.repFrm.action="reportLInfProc.jsp?stopid=<%=stopid%>";
 		document.repFrm.submit();
 	}
+}
 </script>
 <style>
 .frame{
@@ -87,7 +103,7 @@
     <div class="content">
     <h2><img src="../img/siren.png" width="30" height="30">&nbsp;잘못된 정보 신고하기</h2>
     <hr style="border:1px solid red;">
-    	<form name="repFrm" method="post" action="reportAInfProc.jsp">
+    	<form name="repFrm" method="post" action="reportLInfProc.jsp">
 		<table width="800"  cellpadding="3" align="center">
 		<tr>
 			<td  align="center">
@@ -133,7 +149,7 @@
 						</tr>
 						<tr align="center">
 							<td  colspan="4" align="center">
-								<input type="submit" value="저장" onClick="gocheck()">
+								<input type="button" value="저장" onClick="gocheck()">
 							</td>
 						</tr>
 					</table>
