@@ -40,7 +40,41 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+<script type="text/javascript" src="../smartEditor/js/service/HuskyEZCreator.js" charset="utf-8"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
+<script type="text/javascript"> 
+var oEditors = [];
+$(function(){
+      nhn.husky.EZCreator.createInIFrame({
+          oAppRef: oEditors,
+          elPlaceHolder: "sccontent", //textarea에서 지정한 id와 일치해야 합니다. 
+          //SmartEditor2Skin.html 파일이 존재하는 경로
+          sSkinURI: "../smartEditor/SmartEditor2Skin.html",  
+          htParams : {
+              // 툴바 사용 여부 (true:사용/ false:사용하지 않음)
+              bUseToolbar : true,             
+              // 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
+              bUseVerticalResizer : false,     
+              // 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
+              bUseModeChanger : false,         
+              fOnBeforeUnload : function(){
+                   
+              }
+          }, 
+          fOnAppLoad : function(){
+              //기존 저장된 내용의 text 내용을 에디터상에 뿌려주고자 할때 사용
+              oEditors.getById["sccontent"].exec("PASTE_HTML", [" "]);
+          },
+          fCreator: "createSEditor2"
+      });
+      
+      //저장버튼 클릭시 form 전송
+      $("#save").click(function(){
+          oEditors.getById["sccontent"].exec("UPDATE_CONTENTS_FIELD", []);
+          $("#scpostfrm").submit();
+      });    
+});
+</script>
 <title>우리학원 어디?-커뮤니티</title>
 <style>
 #list td {
@@ -63,7 +97,7 @@ a:hover {
 #insertMember{
 	float: right;
 	margin-right:350px;
-  	width: 800px;
+  	width: 900px;
   	border: 10px solid #F88C65; 
 	border-radius:10px;
 	padding:20px 40px;
@@ -100,27 +134,27 @@ a:hover {
 
 #inputdiv2{
 	margin:10px;
-	width:490px;
+	width:570px;
 	border:1px solid gray;
 	border-radius: 6px;
 	padding:3px;
 }
 #inputdiv2 input{
-	width:480px;
+	width:500px;
 	border:none;
 	font-size:15px;
 }
 
 #inputdiv3{
 	margin:10px;
-	width:200px;
+	width:210px;
 	border:1px solid gray;
 	border-radius: 6px;
 	padding:3px;
 }
 
 #inputdiv3 input{
-	width:180px;
+	width:190px;
 	border:none;
 	font-size:15px;
 	
@@ -128,17 +162,9 @@ a:hover {
 
 #textareadiv{
 	margin:10px;
-	width:490px;
-	border:1px solid gray;
-	border-radius: 6px;
+	width:630px;
 	padding:3px;
 }
-#textareadiv textarea{
-	border:none;
-	font-size:15px;
-	width:480px;
-}
-
 </style>
 </head>
 <body>
@@ -178,7 +204,7 @@ a:hover {
   	 	if(!(keyWord==null||keyWord.equals(""))){
 		     %>&keyField=<%=keyField%>&keyWord=<%=keyWord%><%}%>"
 			enctype="multipart/form-data">
-			<table width="700" cellpadding="3" align="center">
+			<table width="750" cellpadding="3" align="center">
 				<tr>
 					<td align=center>
 					<table  align="center" >
@@ -209,7 +235,7 @@ a:hover {
 							<td>내 용</td>
 							<td colspan="3">
 							<div id="textareadiv">
-							<textarea name="sccontent" rows="10" cols="50"></textarea>
+							<textarea id="sccontent" name="sccontent" rows="10" cols="50"></textarea>
 							</div>
 							</td>
 						</tr>
@@ -222,7 +248,7 @@ a:hover {
 						<tr>
 							<td colspan="4" align="right">
 						
-								 <input type="submit" value="확인">
+								 <input type="submit" id="save" value="확인">
 								 <input type="reset" value="다시쓰기">
 								 <input type="button" value="취소"
 								 onClick="javascript:location.href='<%=request.getHeader("referer")%>'">
