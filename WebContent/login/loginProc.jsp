@@ -22,8 +22,15 @@
 	  MemberBean gBean =Mmgr.getGrade(lid);
 
 	  if(lresult){
-			 result=todate.compareTo(gBean.getMdate());
-			 System.out.println(result);
+						if(gBean.getMdate()==null||gBean.getMdate().length()==0){
+					   session.setAttribute("idKey",lid);
+					    session.setAttribute("idgrade",gBean.getGrade());
+					    lmsg = "로그인에 성공 하였습니다.";
+					    url=request.getHeader("referer");
+				}
+		else{
+		 result=todate.compareTo(gBean.getMdate());
+
 		if(result>0){
 	    session.setAttribute("idKey",lid);
 	    session.setAttribute("idgrade",gBean.getGrade());
@@ -31,7 +38,7 @@
 	    url=request.getHeader("referer");
 		  }else{
 			lmsg="회원의 신고로 정지 되셨습니다. 메일을 참조하여 주세요";
-		}
+		}}
 	  }
 	 
 	  
