@@ -113,7 +113,9 @@ public class AcreviewMgr {
 	public void insertAcr(AcreviewBean bean) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		String sql = null;
+		int avg=0;
 		try {
 			con = pool.getConnection();
 			sql = "insert acreview(ac_serialnum,ac_title,ac_content,ac_ip,ac_star,"
@@ -128,6 +130,22 @@ public class AcreviewMgr {
 			pstmt.setString(6, memberNick(bean.getAc_id()));
 			pstmt.setString(7, bean.getAc_id());
 			pstmt.executeUpdate();
+			
+			
+			  sql = "SELECT AVG(ac_star) FROM acreview WHERE ac_serialnum=?"; 
+			  pstmt =  con.prepareStatement(sql); 
+			  pstmt.setInt(1, bean.getAc_serialnum());
+			  rs=pstmt.executeQuery(); 
+			  if(rs.next()) { 
+				  avg=rs.getInt(1);
+				  }
+			  sql = "update academy set star=? where num=?";
+			  pstmt = con.prepareStatement(sql);
+			  pstmt.setInt(1, avg); 
+			  pstmt.setInt(2, bean.getAc_serialnum());
+			  pstmt.executeUpdate();
+			 
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

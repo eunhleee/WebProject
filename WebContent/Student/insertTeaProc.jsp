@@ -5,7 +5,8 @@
 <jsp:useBean id="lebean" class="alcinfo.LeteaBean" />
 <jsp:useBean id="stbean" class="alcinfo.StudentBean" />
 
-<jsp:useBean id="mgr" class="alcinfo.StudentMgr" />
+<jsp:useBean id="mgr" class="alcinfo.StinsertMgr" />
+<jsp:useBean id="smgr" class="alcinfo.StudentMgr" />
 <jsp:useBean id="lmgr" class="alcinfo.LessonMgr" />
 
 <jsp:setProperty property="*" name="lebean"/>
@@ -17,7 +18,7 @@
 		String msg="신청에 실패하였습니다.";
 		String teaid=(String)session.getAttribute("idKey");
 		LessonBean lbean=lmgr.getId(teaid);
-		stbean = mgr.getStudent(stunum);
+		stbean = smgr.getStudent(stunum);
 		stbean.setNum(stunum); 
 		if(lbean.getName()==null){
 			msg="신청 권한이 없습니다.";

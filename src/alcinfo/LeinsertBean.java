@@ -1,4 +1,4 @@
-//10.╟З©э╫ец╩╣П╨Я
+//10.О©╫О©╫О©╫э╫О©╫ц╩О©╫О©╫О©╫
 //lessoninsert
 package alcinfo;
 
@@ -6,11 +6,33 @@ public class LeinsertBean {
 	private String l_title;
 	private int l_num;
 	private String l_teacharid;
+	private String l_stphone;
 	private String l_stuid;
 	private String l_stname;
 	private String l_staddress;
 	private String l_state;
-	private String date;
+	private String l_date;
+	private String l_teaname;
+	private String l_teaclass;
+	
+	public String getL_stphone() {
+		return l_stphone;
+	}
+	public void setL_stphone(String l_stphone) {
+		this.l_stphone = l_stphone;
+	}
+	public String getL_teaname() {
+		return l_teaname;
+	}
+	public void setL_teaname(String l_teaname) {
+		this.l_teaname = l_teaname;
+	}
+	public String getL_teaclass() {
+		return l_teaclass;
+	}
+	public void setL_teaclass(String l_teaclass) {
+		this.l_teaclass = l_teaclass;
+	}
 	public String getL_title() {
 		return l_title;
 	}
@@ -53,10 +75,10 @@ public class LeinsertBean {
 	public void setL_state(String l_state) {
 		this.l_state = l_state;
 	}
-	public String getDate() {
-		return date;
+	public String getL_date() {
+		return l_date;
 	}
-	public void setDate(String date) {
-		this.date = date;
+	public void setL_date(String l_date) {
+		this.l_date = l_date;
 	}
 }

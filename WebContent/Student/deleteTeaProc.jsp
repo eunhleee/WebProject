@@ -3,7 +3,8 @@
 <%@ page contentType="text/html; charset=utf-8"%>
 <jsp:useBean id="sbean" class="alcinfo.StudentBean" />
 <jsp:useBean id="lemgr" class="alcinfo.LeteaMgr" />
-<jsp:useBean id="mgr" class="alcinfo.StudentMgr" />
+<jsp:useBean id="smgr" class="alcinfo.StudentMgr" />
+<jsp:useBean id="mgr" class="alcinfo.StinsertMgr" />
 
 
 <%
@@ -13,7 +14,7 @@
 		String teaid=(String)session.getAttribute("idKey");
 		LeteaBean lbean=lemgr.getId(teaid);
 		lbean.setId(teaid);
-		sbean=mgr.getStudent(stunum);
+		sbean=smgr.getStudent(stunum);
 		if(!mgr.getTea(teaid,stunum)){
 			msg="신청 이력이 없는 과외입니다.";
 		}

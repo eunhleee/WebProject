@@ -69,9 +69,11 @@ input:checked+label {
 	<div class="main">
 		<input id="tab1" type="radio" name="tabs" checked>
 		<!--디폴트 메뉴-->
-		<label for="tab1">평점순</label> <input id="tab2" type="radio"
-			name="tabs"> <label for="tab2">조회순</label> <input id="tab3"
-			type="radio" name="tabs"> <label for="tab3">리뷰순</label>
+		<label for="tab1">평점순</label>
+		 <input id="tab2" type="radio" name="tabs"> 
+		 <label for="tab2">조회순</label> 
+		 <input id="tab3" type="radio" name="tabs"> 
+		 <label for="tab3">리뷰순</label>
 
 
 
