@@ -18,9 +18,11 @@ if(session.getAttribute("idKey")==null||session.getAttribute("idKey").equals("")
 	String id=(String)session.getAttribute("idKey");
 	MemberBean bean=mgr.getUpMember(id);
 	int grade=(Integer)session.getAttribute("idgrade");
-
+	if(bean.getBirth()==null||bean.getBirth().length()==0){
+		System.out.println("값이 들어오지 않았습니다.");
+	}
 	int to=Integer.parseInt(bean.getBirth().substring(4,6)); 
-	int to2=Integer.parseInt(bean.getBirth().substring(6,8));
+	int to2=Integer.parseInt(bean.getBirth().substring(6,8));//바뀜
 	
 	System.out.println("pic"+bean.getImgname());
 	

@@ -184,6 +184,8 @@ a:hover {
 						<td id="nav_td"><a href="../Mypage/managerPage.jsp?pageValue=memberChart">회원 현황</a></td>
 						<td id="nav_td"><a href="../Report/MGMemberControl.jsp">신고 접수건</a></td>
 						<td id="nav_td"><a href="../Report/StateManagement.jsp">회원 관리</a></td>
+						<td id="nav_td"><a href="../Mypage/requestAclist.jsp">학원장 접수 관리</a></td>
+						
 					</tr>
 				</table>
 			</div>

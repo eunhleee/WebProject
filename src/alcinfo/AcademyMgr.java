@@ -266,7 +266,7 @@ public class AcademyMgr {
 						con = pool.getConnection();
 							//
 							sql = "select num,aca_num, aca_name, aca_identity , aca_business, aca_state,aca_id"
-									+ " from acapply";
+									+ " from acapply where aca_state='진행중'";
 						pstmt = con.prepareStatement(sql);
 						rs = pstmt.executeQuery();
 						while(rs.next()) { 
