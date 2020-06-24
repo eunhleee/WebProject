@@ -67,15 +67,14 @@ public class LessonMgr {
 				}
 				else {
 					sql = "select le.num,le.id,tea.name,le.class,tea.area,le.star,le.count "
-							+ " from lesson le,letea tea where le.id=tea.id and le.class like ? order by ?  desc";
+							+ " from lesson le,letea tea where le.id=tea.id and le.class like ? order by "+sort+"  desc";
 					
 					pstmt = con.prepareStatement(sql);
 					pstmt.setString(1,"%"+pageValue+"%");
-					pstmt.setString(2, "le."+sort);
 					
 				}
 				
-				rs = pstmt.executeQuery();// select 占쏙옙占쏙옙
+				rs = pstmt.executeQuery();
 				while(rs.next()) {
 					LessonBean bean = new LessonBean();
 					bean.setNum(rs.getInt("le.num"));
@@ -110,6 +109,7 @@ public class LessonMgr {
 			sql = "select le.num,le.id,tea.name,le.class,tea.area,le.star,le.count "
 					+ " from lesson le,letea tea where le.id=tea.id order by le.count desc";
 			pstmt = con.prepareStatement(sql);
+			
 			
 			rs = pstmt.executeQuery();//select 占쏙옙占쏙옙
 			while(rs.next()) {

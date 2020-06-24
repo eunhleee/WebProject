@@ -17,7 +17,6 @@ if(session.getAttribute("idKey")==null||session.getAttribute("idKey").equals("")
 	else{
 	String id=(String)session.getAttribute("idKey");
 	MemberBean bean=mgr.getUpMember(id);
-	int grade=(Integer)session.getAttribute("idgrade");
 
 	int to=Integer.parseInt(bean.getBirth().substring(4,6)); 
 	int to2=Integer.parseInt(bean.getBirth().substring(6,8));
@@ -134,7 +133,7 @@ function win_close(){
 			document.imFrm.imnickname.focus();
 			return;
 		}
-		url = "../alcinfo/nickCheck.jsp?imnick="+document.imFrm.imnickname.value;
+		url = "nickCheck.jsp?imnick="+document.imFrm.imnickname.value;
 		window.open(url, "NICKCheck", "width=300, height=150, top=200, left=400");
 	}
 

@@ -1,6 +1,7 @@
 
 <!-- 학원 과목별 정보리스트 -->
 
+<%@page import="alcinfo.UtilMgr"%>
 <%@page import="alcinfo.AcademyBean"%>
 <%@page import="java.util.Vector"%>
 <%@ page contentType="text/html; charset=utf-8"%>
@@ -10,9 +11,27 @@
 	String pageValue = request.getParameter("pageValue");
 	String sort = request.getParameter("sort");
 	Vector<AcademyBean> Avlist = new Vector<AcademyBean>();
+	int maxPage;
+	int maxPage1=6;
+	if(request.getParameter("maxPage")==null){
+		maxPage=6;
+	}
+	else{
+		maxPage=UtilMgr.parseInt(request,"maxPage");
+	}
+	
 %>
 <html>
 <head>
+
+<script>
+ function morePage(){
+	location.href="../Academy/upPageStar.jsp?maxPage=<%=maxPage%>&pageValue=<%=pageValue%>";
+ }
+ function morePage1(){
+	 location.href="../Academy/upPageCount.jsp?maxPage1=<%=maxPage1%>&pageValue=<%=pageValue%>";
+ }
+</script>
 <style>
 .main {
 	align: center;
@@ -29,7 +48,7 @@ section {
 }
 
 /*라디오버튼 숨김*/
-#tab1, #tab2, #tab3 {
+#tab1, #tab2 {
 	display: none;
 }
 
@@ -56,9 +75,14 @@ input:checked+label {
 	border-bottom: 1px solid #ffffff;
 }
 
-#tab1:checked ~ #content1, #tab2:checked ~ #content2, #tab3:checked ~
-	#content3 {
+#tab1:checked ~ #content1, #tab2:checked ~ #content2{
 	display: block;
+}
+#btnmore{
+	border:none;
+	background-color:white;
+	text-size:20px;
+	text-decoration:underline;
 }
 </style>
 </head>
@@ -69,9 +93,7 @@ input:checked+label {
 		<label for="tab1">평점순</label> 
 		<input id="tab2" type="radio" name="tabs"> 
 		<label for="tab2">조회순</label> 
-		<input id="tab3" type="radio" name="tabs">
-		<label for="tab3">리뷰순</label>
-
+	
 		<section class="gallery-block cards-gallery" id="content1">
 			<div class="container">
 				<div class="heading">
@@ -80,8 +102,9 @@ input:checked+label {
 				<br>
 				<div class="row">
 					<%
-						Avlist = Amgr.getBestBoard(pageValue, "star");
+						Avlist = Amgr.getBestBoard(pageValue, "star",maxPage);
 						int listsize = Avlist.size();
+	
 						for (int i = 0; i < listsize; i++) {
 							AcademyBean Abean = Avlist.get(i);
 							//imgname, ac_name,group2, ac_tel,star,count
@@ -120,6 +143,8 @@ input:checked+label {
 
 				</div>
 			</div>
+			<input id="btnmore" type="button" onclick="javascript:morePage();" value="학원 더 보기">
+			
 		</section>
 
 		<section class="gallery-block cards-gallery" id="content2">
@@ -130,7 +155,7 @@ input:checked+label {
 				<br>
 				<div class="row">
 					<%
-						Avlist = Amgr.getBestBoard(pageValue, "count");
+						Avlist = Amgr.getBestBoard(pageValue, "count",maxPage1);
 
 						for (int i = 0; i < Avlist.size(); i++) {
 							AcademyBean Abean = Avlist.get(i);
@@ -170,56 +195,9 @@ input:checked+label {
 
 				</div>
 			</div>
+			<input id="btnmore" type="button" onclick="javascript:morePage1();" value="학원 더 보기">
 		</section>
 
-		<section class="gallery-block cards-gallery" id="content3">
-			<div class="container">
-				<div class="heading">
-					<h2>List</h2>
-				</div>
-				<br>
-				<div class="row">
-					<%
-						Avlist = Amgr.getBestBoard(pageValue, "star");
-						for (int i = 0; i < Avlist.size(); i++) {
-							AcademyBean Abean = Avlist.get(i);
-							//imgname, ac_name,group2, ac_tel,star,count
-							int num = Abean.getNum();
-							String img = Abean.getImgname();
-							String name = Abean.getAc_name();
-							String group2 = Abean.getGroup2();
-							String tel = Abean.getAc_tel();
-							float star = Abean.getStar();
-							int count = Abean.getCount();
-							if (tel.equals(""))
-								tel = "번호 정보가 없습니다.";
-					%>
-					<div class="col-md-6 col-lg-4">
-						<div class="card border-0 transform-on-hover">
-							<a class="lightbox" href="acRead.jsp?num=<%=num%>"> <img
-								src="img/no_image.jpg" alt="Card Image" class="card-img-top">
-							</a>
-							<div class="card-body">
-								<h6>
-									<a href="acRead.jsp?num=<%=num%>"><%=name%></a>
-								</h6>
-								<p class="text-muted card-text"><%=group2%>
-									<br>
-									<%=tel%></p>
-							</div>
-							<div align="right" style="margin-right: 20px;">
-								<img src="img/star.png" width="15" height="15"><%=star%>
-								(<%=count%>)
-							</div>
-						</div>
-					</div>
-					<%
-						}
-					%>
-
-				</div>
-			</div>
-		</section>
 	</div>
 </body>
 </html>

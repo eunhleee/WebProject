@@ -2,7 +2,7 @@
 <%@ page contentType="text/html; charset=utf-8"%>
 <jsp:useBean id="lebean" class="alcinfo.LessonBean"></jsp:useBean>
 <jsp:useBean id="mbean" class="alcinfo.MemberBean"></jsp:useBean>
-<jsp:useBean id="mgr" class="alcinfo.LessonMgr" />
+<jsp:useBean id="mgr" class="alcinfo.LeinsertMgr" />
 <jsp:setProperty property="*" name="lebean"/>
 <jsp:setProperty property="*" name="mbean"/>
 <%
