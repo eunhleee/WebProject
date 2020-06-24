@@ -7,6 +7,8 @@
 <jsp:useBean id="mpbean" class="alcinfo.LeteaBean"/>
 <jsp:setProperty property="*" name="mpbean"/>
 <jsp:useBean id="mgr" class="alcinfo.MemberMgr"/>
+<jsp:useBean id="amgr" class="alcinfo.AcademyMgr"/>
+
     
 <%
 if(session.getAttribute("idKey")==null||session.getAttribute("idKey").equals("")){
@@ -139,6 +141,19 @@ function win_close(){
 	function imgcheck(){
 		url = "../Mypage/ImgProc.jsp";
 		window.open(url, "imggo", "width=500, height=500, top=200, left=200");
+	}
+	function acquestion(id){
+		msg="선생님으로 권한을 변경하시겠습니까?";
+		if(confirm(msg)){
+			<%
+			amgr.Uptea(id);
+		    session.setAttribute("idgrade",bean.getGrade());
+			%>
+			alert("변경되셨습니다.");
+			window.location.reload();
+		}else{
+			
+		}
 	}
 </script>
 <style>

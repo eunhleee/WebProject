@@ -32,6 +32,7 @@ public class MemberMgr {
 				bean.setName(rs.getString(1));
 				bean.setAddress(rs.getString(2));
 				bean.setPhone(rs.getString(3));
+
 				
 			} 
 			
@@ -150,7 +151,7 @@ public class MemberMgr {
 			}
 			return bean;
 		}
-	
+		
 	public MemberBean getMember(String id) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -210,7 +211,6 @@ public class MemberMgr {
 		return mbean;
 	}	
 	
-	
 	public boolean insertStudent(String id, String stclass, String stetc) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -233,5 +233,4 @@ public class MemberMgr {
 		}
 		return flag;
 	}
-	
 }

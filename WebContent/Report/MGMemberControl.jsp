@@ -339,11 +339,8 @@ a:hover {
 </div>
 		<!-- //container -->
 		<div class="footer">
-			<p style="margin-left:15%;" class="copyright">&copy;copy</p>
+			<p style="text-align:left; margin-left:15%" class="copyright">&copy;copy</p>
 		</div>
-		<!-- //footer -->
-		<jsp:include page="../alcinfo/footer.jsp" />
-	</div>
 	<!-- //frame -->
 </body>
 </html>

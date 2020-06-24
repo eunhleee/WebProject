@@ -233,6 +233,30 @@ public class LeteaMgr {
 		return jsonArray;
 	} 
 	
+	public int checkM(String id) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		int grade = 5;
+		try {
+			con = pool.getConnection();
+			sql = "select grade from member where id=? "
+					+ "union "
+					+ "select grade from letea where id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setString(2, id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) grade = rs.getInt(1);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt, rs);
+		}
+		return grade;
+	}
+	
 
 	//upTeacher.jsp select
 		public LeteaBean getUpTeacher(String id) {

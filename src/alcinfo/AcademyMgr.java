@@ -25,7 +25,7 @@ public class AcademyMgr {
 	
 	
 	
-	public Vector<AcademyBean> getBestBoard(String pageValue,String sort){
+	public Vector<AcademyBean> getBestBoard(String pageValue,String sort,int maxPage){
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -34,15 +34,15 @@ public class AcademyMgr {
 		try {
 			con = pool.getConnection();
 			if(pageValue.equals("top")) {
-			sql = "select num,imgname, ac_name,group2, ac_tel,star,count from academy order by star desc";
+			sql = "select num,imgname, ac_name,group2, ac_tel,star,count from academy order by star desc ";
 			pstmt = con.prepareStatement(sql);
 			}
 			else {
 				sql = "select num,imgname, ac_name,group2, ac_tel,star,count from academy "
-						+ " where group1 like ? order by ? desc";
+						+ " where group1 like ? order by "+sort+" desc limit 0,?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, pageValue+"%");
-				pstmt.setString(2, sort);
+				pstmt.setInt(2, maxPage);
 				
 			}
 			
@@ -140,21 +140,22 @@ public class AcademyMgr {
 			Vector<AcademyBean> vlist=new Vector<AcademyBean>();
 			try {
 				con = pool.getConnection();
-				if(keyWord.equals("怨쇳븰")) {
-					sql = "select num,imgname, ac_name,group2, ac_tel,star,count from academy "
-							+" where ac_name like '%怨쇳븰%' and ac_name not in	 ( select ac_name  from academy where ac_name like '%�떒怨쇳븰�썝')";
-					pstmt = con.prepareStatement(sql);
+				if(keyWord.equals("과학")) {
+				
+				  sql = "select num,imgname, ac_name,group2, ac_tel,star,count from academy "
+				  +" where ac_name like '과학%' and ac_name not in	 ( select ac_name  from academy where ac_name like '%단과학원')"
+				  ; pstmt = con.prepareStatement(sql);
+				 
 				}
 				else if(!keyWord.trim().equals("")||keyWord!=null) {
 					
 				
 				sql = "select num,imgname, ac_name,group2, ac_tel,star,count from academy "
-					+ " where ac_name like ? or ac_address like ? or group1 like ? or group2 like ?";
+					+ " where ac_name like ? or ac_address like ? ";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, "%"+keyWord+"%");
 				pstmt.setString(2, "%"+keyWord+"%");
-				pstmt.setString(3, "%"+keyWord+"%");
-				pstmt.setString(4, "%"+keyWord+"%");
+			
 				}
 				
 				
@@ -335,7 +336,6 @@ public class AcademyMgr {
 					ResultSet rs = null;
 					String sql = null;
 					MemberBean bean = new MemberBean();
-					String a="";
 					try {
 						con = pool.getConnection();
 						sql = "SELECT DISTINCT(a.id),a.phone"
@@ -375,5 +375,38 @@ public class AcademyMgr {
 						pool.freeConnection(con, pstmt);
 					}
 				}	
+				public void Uptea(String id) {
+					Connection con = null;
+					PreparedStatement pstmt = null;
+					String sql = null;
+					
+					try {
+						con = pool.getConnection();
+						sql = "update letea set grade=2 where id='"+id+"'";
+						pstmt = con.prepareStatement(sql);
+						pstmt.executeUpdate();
+					} catch (Exception e) {
+						e.printStackTrace();
+					} finally {
+						pool.freeConnection(con, pstmt);
+					}
+				}	
+				public void Upac(String id) {
+					Connection con = null;
+					PreparedStatement pstmt = null;
+					String sql = null;
+					
+					try {
+						con = pool.getConnection();
+						sql = "update letea set grade=3 where id='"+id+"'";
+						pstmt = con.prepareStatement(sql);
+						pstmt.executeUpdate();
+					} catch (Exception e) {
+						e.printStackTrace();
+					} finally {
+						pool.freeConnection(con, pstmt);
+					}
+				}
+				
 	}
 

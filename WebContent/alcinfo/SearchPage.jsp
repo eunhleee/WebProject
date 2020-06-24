@@ -1,3 +1,4 @@
+<%@page import="alcinfo.UtilMgr"%>
 <%@page import="alcinfo.StudentBean"%>
 <%@page import="alcinfo.LessonBean"%>
 <%@page import="alcinfo.AcademyBean"%>
@@ -9,6 +10,14 @@
 <%
 		request.setCharacterEncoding("utf-8");
 		String keyWord=request.getParameter("keyWord");
+		int maxPage;
+		if(request.getParameter("maxPage")==null){
+			maxPage=6;
+		}
+		else{
+			maxPage=UtilMgr.parseInt(request,"maxPage");
+		}
+		
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -23,6 +32,19 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css" />
 <link rel="stylesheet" href="cards-gallery.css">
+<script>
+	function morePage(){
+		location.href="upPageSearch.jsp?maxPage=<%=maxPage%>&keyWord=<%=keyWord%>";
+	}
+</script>
+<style type="text/css">
+#btnmore{
+	border:none;
+	background-color:white;
+	text-size:20px;
+	text-decoration:underline;
+}
+</style>
 </head>
 <body>
 
@@ -40,8 +62,11 @@
 		<div class="row">
 			<%
 	        	Vector<AcademyBean> Avlist=Amgr.getSearchList(keyWord);
-	        	//int listsize=vlist.size();
-	        	for(int i=0;i<Avlist.size();i++){
+	        	int alistsize=Avlist.size();
+	        	if(alistsize>=6){
+	        		alistsize=maxPage;
+	        	}
+	        	for(int i=0;i<alistsize;i++){
 	        		
 	        		AcademyBean Abean=Avlist.get(i);
 	        		//imgname, ac_name,group2, ac_tel,star,count
@@ -76,6 +101,7 @@
 			<%} %>
 
 		</div>
+		<input id="btnmore" type="button" onclick="javascript:morePage();" value="검색 결과 더 보기">
 	</div>
 	<br>
 	<hr>

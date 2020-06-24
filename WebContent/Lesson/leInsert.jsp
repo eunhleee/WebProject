@@ -13,7 +13,7 @@
 		history.back();
 	</script>
 <%	} else {
-		if(grade != 2) {
+		if(leMgr.checkM(id)==1 || leMgr.checkM(id)==3) {
 %>
 <script>
 	alert("선생님만 이용 가능합니다.");
@@ -89,7 +89,7 @@
 				</tr>
 				<tr height="35">
 					<td width="30%">과외중인 학생 수</td>
-					<td width="70%"><input name="lestudent" type="text" onKeyPress="return checkNum(event)" placeholder="과외중인 학생 수를 입력하시오.(없으면 0명)" style="width:300; height:30;"></td>
+					<td width="70%"><input name="lestudent" type="text" onKeyPress="return checkNum(event)" placeholder="과외중인 학생 수를 입력하시오.(없으면 0명)" style="width:300; height:30; font-size:13px;"></td>
 				</tr>
 				<tr height="40">
 					<td width="30%">재학(졸업)중인 학교</td>

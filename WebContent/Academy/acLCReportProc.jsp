@@ -18,6 +18,9 @@
 	String stopurl="../"+t.substring(count+1);
 
 	mgr.reportBoardcom(bean,stopurl);
-	response.sendRedirect("acLCReport.jsp?stopid="+stopid+"&renum="+renum+"&conum="+conum+"&stuc_depth="+stuc_depth);
 	
 %>
+<script>
+	alert("신고가 접수되었습니다.");
+	window.close();
+</script>

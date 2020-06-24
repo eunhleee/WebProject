@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.*,alcinfo.*"%>
 <jsp:useBean id="mMgr" class="alcinfo.MemberMgr" />
+<jsp:useBean id="leMgr" class="alcinfo.LeteaMgr" />
 <%	request.setCharacterEncoding("UTF-8");
 	String id = (String)session.getAttribute("idKey");
 	MemberBean mBean = mMgr.getMember(id);
@@ -13,7 +14,7 @@
 		history.back();
 	</script>
 <%	} else {
-		if(grade != 1) {
+		if(leMgr.checkM(id)==2 || leMgr.checkM(id)==3 ) {
 %>
 <script>
 	alert("학생만 이용 가능합니다.");

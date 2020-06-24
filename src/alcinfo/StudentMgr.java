@@ -98,7 +98,7 @@ public class StudentMgr {
 			try {
 				con = pool.getConnection();
 				if(!keyWord.trim().equals("")||keyWord!=null) {
-					//�뜝�떙�궪�삕�뜝�룞�삕 �뜝�떍�땶怨ㅼ삕�뜝占�
+					
 				
 				sql = "select st.num,me.imgname,me.name,st.class,me.school_name,me.school_grade,st.count from student st,member me " + 
 						" where st.id=me.id and ( me.name like ? or st.class like ? or school_name like ?)";

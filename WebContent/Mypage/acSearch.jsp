@@ -68,15 +68,18 @@
 
 						res += "<tr>";
 						res += "<td width='100' height='15' align='center' style='font-size:15;' bgcolor='#D0E6FC'><br>"
-							+ user_num + "<br></td>";
+							+"<a href=\"javascript:sendChildValue(\'"+user_name+"\',\'"+user_num+"\')\">"	
+						+ user_num + "</a><br></td>";
 						res += "<td width='180' height='15' align='center' style='font-size:15;' bgcolor='white'><br>"
 						+"<a href=\"javascript:sendChildValue(\'"+user_name+"\',\'"+user_num+"\')\">"
 								+ user_name + "</a><br></td>";
 								
 						res += "<td width='500' height='15' align='center' style='font-size:15;' bgcolor='#D0E6FC'><br>"
-									+ user_address + "<br></td>";
+							+"<a href=\"javascript:sendChildValue(\'"+user_name+"\',\'"+user_num+"\')\">"			
+						+ user_address + "</a><br></td>";
 
 						res += "</tr>";
+
 					}
 				}
 				res += "</table>";
@@ -91,34 +94,36 @@
 			getData();
 	}
 	function sendChildValue(name,num){
-	opener.setChildValue(name,num);
-	window.close();
-		}
+		window.opener.setChildValue(name,num); 
+			window.close()
+			}
 </script>
 
 </head>
 <body>
 	<div id='div_main' width='380' height="300"
-		style="visibility: visible; position: absolute; left: 0px; top: 115px; z-index: 1;">
+		style="visibility: visible; position: absolute; left: 100px; top: 55px; z-index: 1;">
 		<table border='0' width='380' cellpadding='0' cellspacing='0'>
 			<form name="form_main" onSubmit="javascript:return false;">
 				<tr>
 					<td width='145'></td>
 					<td width='145' align='right'>
-					<input type='text'
-						name='txt_user_name' size='15' value='' maxlength='10'
+					<input type='text'  
+						name='txt_user_name' size='15' maxlength='10'
 						style='width: 140px; font-size: 15; text-align: left;'
 						onkeyup='javascript:searchData();'></td>
-					<td width='145'><img src='./img/search.gif' width='145'
-						height='100' onClick='javascript:searchData();'></td>
+					<td width='45'><img src='../img/search.svg' width='45'
+						height='50' onClick='javascript:searchData();' style="margin-left:15px;"></td>
 					<td width='145'></td>
+			    <input type="text" id="cInput" value="3">
+
 				</tr>
 			</form>
 		</table>
 	</div>
 
 	<div id='div_res' width='380'
-		style="visibility: visible; position: absolute; left: 0px; top: 215px; z-index: 1;">
+		style="visibility: visible; position: absolute; left: 0px; top: 115px; z-index: 1;">
 		<table border='1' width='580' cellpadding='10' cellspacing='0'>
 			<tr>
 				<td align='center' style="width =: 550px; font-size: 20"

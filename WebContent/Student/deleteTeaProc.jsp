@@ -1,3 +1,4 @@
+<%@page import="alcinfo.Smssend"%>
 <%@page import="alcinfo.LeteaBean"%>
 <%@page import="alcinfo.UtilMgr"%>
 <%@ page contentType="text/html; charset=utf-8"%>
@@ -10,6 +11,8 @@
 <%
 		request.setCharacterEncoding("utf-8");
 		int stunum=UtilMgr.parseInt(request,"stunum");
+		String phone=request.getParameter("phone");
+
 		String msg="취소에 실패하였습니다.";
 		String teaid=(String)session.getAttribute("idKey");
 		LeteaBean lbean=lemgr.getId(teaid);
@@ -20,6 +23,7 @@
 		}
 		else if(mgr.deleteTea(sbean, lbean)){
 			msg="취소하였습니다.";
+			Smssend.send("[우리학원어디]\n"+teaid+"님이 취소를 하셨습니다.",phone);
 		}
 %>
 <script>
