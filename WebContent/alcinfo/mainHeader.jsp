@@ -1,7 +1,9 @@
 <!-- 헤더2 -->
 <%@ page language="java" pageEncoding="UTF-8"%>
+<jsp:useBean id="HeaderMmgr" class="member.MemberMgr"></jsp:useBean>
 <%
 	int random = (int) (Math.random() * 10 + 1);
+	int logingrade = HeaderMmgr.checkM((String)session.getAttribute("idKey"));
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -84,14 +86,15 @@
 			<input type="button" onclick="openloginMain();" class="openlm" value="로그인">
 			<%}else{ %>
 			<input type="button" onclick="openlogoutProc();" class="openlm" value="로그아웃">
-			<% if((Integer)session.getAttribute("idgrade")==0){%>
+			<% if(logingrade==0){%>
 			<a href="../Mypage/managerPage.jsp?pageValue=salesList">관리자페이지</a>
-			<%}else{
-			if((Integer)session.getAttribute("idgrade")==1){%>
+			<%}
+			if(logingrade==1){%>
 			<a href="../Mypage/upMember.jsp">마이페이지</a>
-			<%}else if((Integer)session.getAttribute("idgrade")==2||(Integer)session.getAttribute("idgrade")==3){ %>
-			<a href="../Mypage/upTeacher.jsp">마이페이지</a>
-			<%		}
+			<%}
+			if(logingrade==2||logingrade==3){ %>
+			<a href="../Mypage/upTeachar.jsp">마이페이지</a>
+			<%
 				}
 			} %>
 		</div>

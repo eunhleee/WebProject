@@ -165,9 +165,6 @@ select {
 								<textarea rows="10" cols="45" name="recontent" placeholder="내용을 입력하세요"></textarea>
 								</div>
 							</td>
-							<td>
-							<input type="hidden" name="stopid" value="<%=stopid%>">
-							</td>
 						</tr>
 						<tr>
 						<td  colspan="4" align="center">

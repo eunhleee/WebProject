@@ -15,7 +15,7 @@
 	String numPerPage = request.getParameter("numPerPage");	
 	String keyField = request.getParameter("keyField");	
 	String keyWord = request.getParameter("keyWord");
-	String loginid = (String)session.getAttribute("idKey");
+	/* String loginid = (String)session.getAttribute("idKey"); */
 	String prevurl = request.getHeader("referer");
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     Calendar today = Calendar.getInstance();
@@ -195,8 +195,7 @@ function graph(){
 </style>
 </head>
 <body>
-
-	
+<%@ include file="../alcinfo/headerSearch.jsp"%>
 	<br>
 	<br>
 	<form name="cart" action="">

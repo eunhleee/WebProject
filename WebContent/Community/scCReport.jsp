@@ -107,7 +107,7 @@
     <h2><img src="../img/siren.png" width="30" height="30">&nbsp;댓글 신고하기</h2>
     <hr style="border:1px solid red;">
     	<form name="repFrm" method="post">
-		<table width="800"  cellpadding="3" align="center">
+		<table style="width:800; cellpadding:3; align:center;">
 		<tr>
 		<td><input type="hidden" name="kind" value="커뮤니티게시판댓글"></td>	
 		<td><input type="hidden" name="reid" value="<%=session.getAttribute("idKey")%>"></td>

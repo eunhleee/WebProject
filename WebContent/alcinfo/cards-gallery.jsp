@@ -33,7 +33,7 @@
 			<div class="row">  
 				<%
 			
-	        	Vector<AcademyBean> Avlist=Amgr.getBestBoard("top","star");
+	        	Vector<AcademyBean> Avlist=Amgr.getBestBoard("top","le.star",6);
 	        	//int listsize=vlist.size();
 	        	for(int i=0;i<6;i++){
 	        		AcademyBean Abean=Avlist.get(i);
@@ -45,7 +45,7 @@
 	        		String tel=Abean.getAc_tel();
 	        		float star=Abean.getStar();
 	        		int count=Abean.getCount();
-	        		if(tel.equals("")) tel="번호 정보가 없습니다.";
+	        		if(tel==null) tel="번호 정보가 없습니다.";
 	        %>
 				<div class="col-md-6 col-lg-4">
 					<div class="card border-0 transform-on-hover">
@@ -82,9 +82,10 @@
 			<br>
 			<div class="row">
 				<%
-	              Vector<LessonBean> Lvlist=Lmgr.getBestBoard("top","star");
-	        	//int listsize=vlist.size();
-	        	for(int i=0;i<Lvlist.size();i++){
+	              Vector<LessonBean> Lvlist=Lmgr.getBestBoard("top","le.star");
+	        	int listsize=Lvlist.size();
+	        	if(listsize>=6){listsize=6;}
+	        	for(int i=0;i<listsize;i++){
 	        		LessonBean Lbean=Lvlist.get(i);
 	        		//le.num,tea.name,tea.class,tea.area,le.star,le.count
 	        		int num=Lbean.getNum();

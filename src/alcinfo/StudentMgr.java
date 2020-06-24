@@ -98,7 +98,7 @@ public class StudentMgr {
 			try {
 				con = pool.getConnection();
 				if(!keyWord.trim().equals("")||keyWord!=null) {
-					//�뜝�떙�궪�삕�뜝�룞�삕 �뜝�떍�땶怨ㅼ삕�뜝占�
+					
 				
 				sql = "select st.num,me.imgname,me.name,st.class,me.school_name,me.school_grade,st.count from student st,member me " + 
 						" where st.id=me.id and ( me.name like ? or st.class like ? or school_name like ?)";
@@ -130,80 +130,7 @@ public class StudentMgr {
 			}
 			return vlist; 
 		}
-		public boolean insertTea(StudentBean sbean,LessonBean lbean) {
-			Connection con = null;
-			PreparedStatement pstmt = null;
-			String sql = null;
-			boolean flag=false;
-			try {
-				con = pool.getConnection();
-				sql = "insert stinsert(num,stid,teaid,teaname,stclass,state,date )"
-						+ "values(?,?,?,?,?,'�떊泥��젒�닔',now())";
-				pstmt = con.prepareStatement(sql);
-				pstmt.setInt(1, sbean.getNum());
-				pstmt.setString(2, sbean.getId());
-				pstmt.setString(3, lbean.getId());
-				pstmt.setString(4, lbean.getName());
-				pstmt.setString(5, lbean.getLeclass());
-				if(pstmt.executeUpdate()==1) {
-					flag=true;
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			} finally {
-				pool.freeConnection(con, pstmt);
-			}
-			return flag;
-			
-		}
-		
-		public boolean deleteTea(StudentBean sbean,LeteaBean lbean) {
-			Connection con = null;
-			PreparedStatement pstmt = null;
-			String sql = null;
-			boolean flag=false;
-			try {
-				con = pool.getConnection();
-				sql = "delete from stinsert where stid=? and teaid=? ";
-				pstmt = con.prepareStatement(sql);
-				pstmt.setString(1, sbean.getId());
-				pstmt.setString(2, lbean.getId());
-
-				if(pstmt.executeUpdate()==1) {
-					flag=true;
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			} finally {
-				pool.freeConnection(con, pstmt);
-			}
-			return flag;
-		}
-		
-		public boolean getTea(String id,int num) {
-			Connection con = null;
-			PreparedStatement pstmt = null;
-			ResultSet rs = null;
-			String sql = null;
-			boolean flag=false;
-			try {
-				con = pool.getConnection();
-				sql = "select * from stinsert where teaid=? and num=?";
-				pstmt = con.prepareStatement(sql);
-				pstmt.setString(1, id);
-				pstmt.setInt(2, num);
-
-				rs = pstmt.executeQuery();
-				if(rs.next()) {
-					flag=true;
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			} finally {
-				pool.freeConnection(con, pstmt, rs);
-			}
-			return flag;
-		}
+	
 		
 		@SuppressWarnings("unchecked")
 		public JSONArray getCountTeachar(int num) {

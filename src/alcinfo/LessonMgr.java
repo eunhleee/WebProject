@@ -31,7 +31,7 @@ public class LessonMgr {
 		
 		try {
 			con = pool.getConnection();
-			sql = "select tea.name,tea.id,le.class from lesson le, letea tea where le.id=? and le.id=tea.id";
+			sql = "select tea.name,tea.id,le.class,tea.phone from lesson le, letea tea where le.id=? and le.id=tea.id";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
@@ -40,6 +40,7 @@ public class LessonMgr {
 				bean.setName(rs.getString("tea.name"));
 				bean.setId(rs.getString("tea.id"));
 				bean.setLeclass(rs.getString("le.class"));
+				bean.setPhone(rs.getString("tea.phone"));
 				
 			} 
 			
@@ -66,15 +67,14 @@ public class LessonMgr {
 				}
 				else {
 					sql = "select le.num,le.id,tea.name,le.class,tea.area,le.star,le.count "
-							+ " from lesson le,letea tea where le.id=tea.id and tea.class like ? order by ?  desc";
+							+ " from lesson le,letea tea where le.id=tea.id and le.class like ? order by "+sort+"  desc";
 					
 					pstmt = con.prepareStatement(sql);
 					pstmt.setString(1,"%"+pageValue+"%");
-					pstmt.setString(2, "le."+sort);
 					
 				}
 				
-				rs = pstmt.executeQuery();// select 占쏙옙占쏙옙
+				rs = pstmt.executeQuery();
 				while(rs.next()) {
 					LessonBean bean = new LessonBean();
 					bean.setNum(rs.getInt("le.num"));
@@ -109,6 +109,7 @@ public class LessonMgr {
 			sql = "select le.num,le.id,tea.name,le.class,tea.area,le.star,le.count "
 					+ " from lesson le,letea tea where le.id=tea.id order by le.count desc";
 			pstmt = con.prepareStatement(sql);
+			
 			
 			rs = pstmt.executeQuery();//select 占쏙옙占쏙옙
 			while(rs.next()) {
@@ -208,83 +209,6 @@ public class LessonMgr {
 	}
 	
 	
-	public boolean insertStudent(LessonBean lbean,MemberBean mbean) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		String sql = null;
-		boolean flag=false;
-		try {
-			
-			con = pool.getConnection();
-			sql = "insert leinsert(l_num,l_teacharid,l_stuid,l_stname,l_staddress,l_state,l_date )"
-					+ " values(?,?,?,?,?,'�떊泥��젒�닔',now())";
-			pstmt = con.prepareStatement(sql);
-
-			pstmt.setInt(1, lbean.getNum());
-			pstmt.setString(2, lbean.getId());
-			pstmt.setString(3, mbean.getId());
-			pstmt.setString(4, mbean.getName());
-			pstmt.setString(5, mbean.getAddress());
-			
-			
-			if(pstmt.executeUpdate()==1) {
-				flag=true;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			pool.freeConnection(con, pstmt);
-		}
-		return flag;
-		
-	}
-	
-	public boolean deleteStudent(LessonBean lbean,MemberBean mbean) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		String sql = null;
-		boolean flag=false;
-		try {
-			con = pool.getConnection();
-			sql = "delete from leinsert where l_teacharid=? and l_stuid=? ";
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, lbean.getId());
-			pstmt.setString(2, mbean.getId());
-
-			if(pstmt.executeUpdate()==1) {
-				flag=true;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			pool.freeConnection(con, pstmt);
-		}
-		return flag;
-	}
-	
-	public boolean getStudent(MemberBean mbean,String id) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		String sql = null;
-		boolean flag=false;
-		try {
-			con = pool.getConnection();
-			sql = "select * from leinsert where l_stuid=? and l_teacharid=?";
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, mbean.getId());
-			pstmt.setString(2, id);
-			rs = pstmt.executeQuery();
-			if(rs.next()) {
-				flag=true;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			pool.freeConnection(con, pstmt, rs);
-		}
-		return flag;
-	}
 	
 	
 	@SuppressWarnings("unchecked")

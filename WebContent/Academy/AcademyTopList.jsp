@@ -18,8 +18,8 @@
 		<br>
 		<div class="row">
 			<%
-				Vector<AcademyBean> Avlist = Amgr.getBestBoard("top", sort);
-				//int listsize=vlist.size();
+				Vector<AcademyBean> Avlist = Amgr.getBestBoard("top", sort,6);
+				
 				for (int i = 0; i < 6; i++) {
 					AcademyBean Abean = Avlist.get(i);
 					//imgname, ac_name,group2, ac_tel,star,count

@@ -211,22 +211,22 @@ function graph(){
 	function goRep() {
 		
 		url = "stQReport.jsp?stopid=<%=id%>&renum=<%=num%>";
-		window.open(url, "GoReport", 'width=360, height=300, top=200, left=300');
+		window.open(url, "GoReport", 'width=900, height=560, top=200, left=300');
 	}
 
 	function goCReport(conum,stuc_depth,stopid) {
 		url = "stQCReport.jsp?conum="+conum+"&stuc_depth="+stuc_depth+"&renum="+<%=num%>+"&stopid="+stopid;
-		window.open(url, "GoReport", "width=360, height=300, top=200, left=300");
+		window.open(url, "GoReport", "width=900, height=560, top=200, left=300");
 		}
 	function goRep() {
 		
 		url = "leLReport.jsp?stopid=<%=id%>&renum=<%=num%>";
-		window.open(url, "GoReport", 'width=360, height=300, top=200, left=300');
+		window.open(url, "GoReport", 'width=900, height=560, top=200, left=300');
 	}
 
 	function goCReport(conum,stuc_depth,stopid) {
 		url = "leLCReport.jsp?conum="+conum+"&stuc_depth="+stuc_depth+"&renum="+<%=num%>+"&stopid="+stopid;
-		window.open(url, "GoReport", "width=360, height=300, top=200, left=300");
+		window.open(url, "GoReport", "width=900, height=560, top=200, left=300");
 		}
 </script>
 
