@@ -58,11 +58,7 @@ var stopurl=document.referrer;
 		</tr>
 		<tr>
 		<td>
-			<select name=regroup>
-			<option value="회원신고">회원신고
-			<option value="게시글신고" selected>게시글신고
-			<option value="잘못된정보신고">잘못된정보신고
-		</select>
+		<td><input type="text" name="regroup" value="댓글신고" readonly="readonly"><br></td>
 		</td> 
 		<td>
 		<input type="hidden" name="stopid" value="<%=stopid%>">

@@ -276,15 +276,16 @@ public class MemberMgr {
 		String a="";
 		try {
 			con = pool.getConnection();
-			sql = "select id, grade from member where id="+"'"+id+"'"
+			sql = "select id, grade,mdate from member where id="+"'"+id+"'"
 					+ " union "
-					+ " select id, grade from letea where id="+"'"+id+"'";
+					+ " select id, grade,mdate from letea where id="+"'"+id+"'";
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 
 			if(rs.next()) {
 				bean.setGrade(rs.getInt("grade"));
-				System.out.println(rs.getString("grade"));
+				bean.setMdate(rs.getString("mdate"));
+
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -44,6 +44,7 @@
 <script>
 
 google.charts.load("current",{packages:['corechart']});
+google.charts.setOnLoadCallback(columnChart1);
 
 function columnChart1(arrayList) {
 	// 실 데이터를 가진 데이터테이블 객체를 반환하는 메소드
@@ -88,18 +89,18 @@ function graph(){
 function insert() // no ';' here
 {
     var elem = document.getElementById("myButton1");
-    location.href="insertTeaProc.jsp?stunum=<%=stunum%>";
+    location.href="insertTeaProc.jsp?stunum=<%=stunum%>&phone=<%=stbean.getPhone()%>";
 }
 function deleteT(){
 	var elem = document.getElementById("myButton2");
-    location.href="deleteTeaProc.jsp?stunum=<%=stunum%>";
+    location.href="deleteTeaProc.jsp?stunum=<%=stunum%>&phone=<%=stbean.getPhone()%>";
 	
 }
 
  
 
 function goReport() {
-	url = "../Report/reportReceiptSInf.jsp?stopid=<%=mbean.getId()%>&stopurl=../Student/stRead.jsp?stunum=<%=stunum%>";
+	url = "../Report/reportReceiptSInf.jsp?stopid=<%=mbean.getId()%>";
 	window.open(url, "GoReport", "width=900, height=560, top=200, left=300");
 }
 	
@@ -135,7 +136,7 @@ function goErr(){
 									</tr>
 									<tr height="40">
 										<td width="30%">전화번호</td>
-										<td width="70%"><%=stbean.getPhone() %></td>
+										<td width="70%"><%=stbean.getPhone()%></td>
 									</tr>
 									<tr height="35">
 										<td width="30%">원하는과목</td>

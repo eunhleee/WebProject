@@ -1,3 +1,4 @@
+<%@page import="alcinfo.Smssend"%>
 <%@page import="alcinfo.MemberBean"%>
 <%@page import="alcinfo.UtilMgr"%>
 <%@ page contentType="text/html; charset=utf-8"%>
@@ -11,6 +12,8 @@
 		request.setCharacterEncoding("utf-8");
 		String id=request.getParameter("id");
 		int num=UtilMgr.parseInt(request,"num");
+		String phone=request.getParameter("phone");
+
 		String msg="취소에 실패하였습니다.";
 		String stuid=(String)session.getAttribute("idKey");
 		MemberBean ebean=Mmgr.getId(stuid);
@@ -20,6 +23,8 @@
 		}
 		else if(mgr.deleteStudent(lebean, ebean)){
 			msg="취소하였습니다.";
+			Smssend.send("[우리학원어디]\n"+stuid+"님이 과외 신청을 취소 하셨습니다.",phone);
+
 		}
 %>
 <script>

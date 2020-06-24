@@ -1,3 +1,4 @@
+<%@page import="alcinfo.Smssend"%>
 <%@page import="alcinfo.LessonBean"%>
 
 <%@page import="alcinfo.UtilMgr"%>
@@ -14,6 +15,8 @@
 <%
 		request.setCharacterEncoding("utf-8");
 		int stunum=UtilMgr.parseInt(request,"stunum");
+		String phone=request.getParameter("phone");
+
 		String msg="신청에 실패하였습니다.";
 		String teaid=(String)session.getAttribute("idKey");
 		LessonBean lbean=lmgr.getId(teaid);
@@ -27,6 +30,8 @@
 		}
 		else if(mgr.insertTea(stbean, lbean)){
 			msg="신청하였습니다.";
+			Smssend.send("[우리학원어디]\n"+teaid+"님이 신청을 하셨습니다.",phone);
+
 		}
 %>
 <script>

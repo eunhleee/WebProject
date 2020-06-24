@@ -17,7 +17,10 @@
 	int count=t.indexOf("/Lesson");
 	String stopurl="../"+t.substring(count+1);
 
-	mgr.reportBoardcom(bean,stopurl);
-	response.sendRedirect("leLCReport.jsp?stopid="+stopid+"&renum="+renum+"&conum="+conum+"&stuc_depth="+stuc_depth);
-	
+	mgr.reportBoardcom(bean,stopurl);	
 %>
+<script>
+	alert("신고가 접수되었습니다.");
+	window.close();
+</script>
+

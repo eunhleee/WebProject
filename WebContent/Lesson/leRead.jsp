@@ -22,9 +22,7 @@
 		session.setAttribute("lebean", lebean);
 		mgr.upLeCount(num);
 		
-		lebean.setId(id);
-		  System.out.println("선생님아이디는"+id);
-		
+		lebean.setId(id);		
 %>
 <!DOCTYPE html>
 <html>
@@ -43,7 +41,6 @@ google.charts.load("current",{packages:['corechart']});
 
 function columnChart1(arrayList) {
 	// 실 데이터를 가진 데이터테이블 객체를 반환하는 메소드
-	 
 	
 	 arrayList = eval('('+arrayList+')');
 
@@ -94,13 +91,13 @@ function graph(){
 		{
 		    var elem = document.getElementById("myButton1");
 		    
-			location.href="insertStudentProc.jsp?id=<%=id%>&num=<%=lebean.getNum()%>";
+			location.href="insertStudentProc.jsp?id=<%=id%>&num=<%=lebean.getNum()%>&phone=<%=lebean.getPhone()%>";
 			   
 		}
 		
 		function cancel(){
 			var elem = document.getElementById("myButton2");
-			location.href="deleteStudentProc.jsp?id=<%=id%>&num=<%=lebean.getNum()%>";
+			location.href="deleteStudentProc.jsp?id=<%=id%>&num=<%=lebean.getNum()%>&phone=<%=lebean.getPhone()%>";
 		}
 		
 	

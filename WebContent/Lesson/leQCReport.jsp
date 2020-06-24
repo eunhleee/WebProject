@@ -57,13 +57,7 @@ var stopurl=document.referrer;
 		<td><input type="text" name="retitle" placeholder="제목을 입력하세요"><br></td>
 		</tr>
 		<tr>
-		<td>
-			<select name=regroup>
-			<option value="회원신고">회원신고
-			<option value="게시글신고" selected>게시글신고
-			<option value="잘못된정보신고">잘못된정보신고
-		</select>
-		</td> 
+		<td><input type="text" name="regroup" value="댓글신고" readonly="readonly"><br></td>
 		<td>
 		<input type="hidden" name="stopid" value="<%=stopid%>">
 		</td>
