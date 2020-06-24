@@ -7,6 +7,9 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%
 		request.setCharacterEncoding("UTF-8");
+		if(session.getAttribute("idKey")==null||session.getAttribute("idKey").equals("")){
+			response.sendRedirect("../alcinfo/cards-gallery.jsp");
+		}
  		String id=(String)session.getAttribute("idKey");
 %>
 
