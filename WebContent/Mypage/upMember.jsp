@@ -263,20 +263,8 @@ function win_close(){
 	<div id="atag"><a href="../Mypage/upMember.jsp">&#149; 개인 정보 수정</a></div>
 	<div id="atag"><a href="../Mypage/myBoard.jsp">&#149; 내가 쓴 글</a></div>
 	<div id="atag"><a href="../Mypage/MyReportList.jsp">&#149; 나의 신고</a></div>
-	<div id="atag"><a href="">&#149; 신청한 과외</a></div>
-	<div id="atag"><a href="">&#149; 신청 받은 과외</a></div>	
-	<% 
-	
-		if(bean.getGrade()==2){	
-	%>
-		<div id="atag"><a href="../Mypage/academyApply.jsp">&#149; 권한 변경 신청</a></div>
-	<%
-		}
-		else if(bean.getGrade()==3){%>
-		<div id="atag"><a href="javascript:void(0);" onclick="javascript:acquestion();">&#149; 권한 변경 신청</a></div>
-		<%}
-	%>
-
+	<div id="atag"><a href="../Mypage/myLesson.jsp">&#149; 신청한 과외</a></div>
+	<div id="atag"><a href="../Mypage/myReceiveLesson.jsp">&#149; 신청 받은 과외</a></div>
 	
 </div>
 <div id="insertMember" class="insertMember1" align="left">

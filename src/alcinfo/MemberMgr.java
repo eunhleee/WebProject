@@ -23,7 +23,7 @@ public class MemberMgr {
 		
 		try {
 			con = pool.getConnection();
-			sql = "select name,address from member where id=?";
+			sql = "select name,address,phone from member where id=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
@@ -31,7 +31,7 @@ public class MemberMgr {
 				
 				bean.setName(rs.getString(1));
 				bean.setAddress(rs.getString(2));
-
+				bean.setPhone(rs.getString(3));
 				
 			} 
 			

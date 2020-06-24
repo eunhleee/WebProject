@@ -4,7 +4,7 @@
 <%@ page contentType="text/html; charset=utf-8"%>
 <jsp:useBean id="lebean" class="alcinfo.LessonBean" />
 <jsp:useBean id="Mmgr" class="alcinfo.MemberMgr" />
-<jsp:useBean id="mgr" class="alcinfo.LessonMgr" />
+<jsp:useBean id="mgr" class="alcinfo.LeinsertMgr" />
 
 <jsp:setProperty property="*" name="lebean"/>
 
@@ -21,7 +21,7 @@
 		if(ebean.getName()==null){
 			msg="신청 권한이 없습니다.";
 		}
-		else if(mgr.getStudent(ebean,stuid)){
+		else if(!mgr.getStudent(ebean,stuid)){
 			msg="이미 신청된 과외입니다.";
 		}
 		else if(mgr.insertStudent(lebean, ebean)){

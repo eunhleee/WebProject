@@ -45,7 +45,7 @@
 	        		String tel=Abean.getAc_tel();
 	        		float star=Abean.getStar();
 	        		int count=Abean.getCount();
-	        		if(tel.equals("")) tel="번호 정보가 없습니다.";
+	        		if(tel==null) tel="번호 정보가 없습니다.";
 	        %>
 				<div class="col-md-6 col-lg-4">
 					<div class="card border-0 transform-on-hover">
