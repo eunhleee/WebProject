@@ -63,7 +63,7 @@
 <html>
 <head>
 <title>관리자-신고접수건관리</title>
-<link href="MyReportListStyle.css" rel="stylesheet">
+<!-- <link href="MyReportListStyle.css" rel="stylesheet"> -->
 
 <script type="text/javascript">
 function smupdate(renum,plusdate,num,contents,stopid) {
@@ -119,7 +119,7 @@ function numPerFn(numPerPage){//5개보기,10개보기 등등 보기리스트 �
 <style>
 #content{
 	margin : auto;
-  	width: 70%;
+  	width: 98.5%;
   	border: 10px solid #36ada9; 
 	border-radius:10px;
 	margin-top:50px;
@@ -309,11 +309,9 @@ a:hover {
 		</div>
 		<!-- //container -->
 		<div class="footer">
-			<p style="margin-left:15%;" class="copyright">&copy;copy</p>
+			<p style="text-align: left;" class="copyright">&copy;copy</p>
 		</div>
-		<!-- //footer -->
-		<jsp:include page="../alcinfo/footer.jsp" />
-	</div>
+
 	<!-- //frame -->
 </body>
 </html>

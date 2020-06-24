@@ -107,7 +107,7 @@
 <style>
 #content{
 	margin : auto;
-  	width: 70%;
+  	width: 100%;
   	border: 10px solid #36ada9; 
 	border-radius:10px;
 	margin-top:50px;
@@ -295,11 +295,8 @@ a:hover {
 </div>
 		<!-- //container -->
 		<div class="footer">
-			<p style="margin-left:15%;" class="copyright">&copy;copy</p>
+			<p style="text-align:left; margin-left:15%" class="copyright">&copy;copy</p>
 		</div>
-		<!-- //footer -->
-		<jsp:include page="../alcinfo/footer.jsp" />
-	</div>
 	<!-- //frame -->
 </body>
 </html>
