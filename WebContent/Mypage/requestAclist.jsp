@@ -1,4 +1,5 @@
 <!-- requestAclist.jsp -->
+<%@page import="alcinfo.LeteaBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="alcinfo.UtilMgr"%>
@@ -78,7 +79,18 @@ a:hover {
 	width:70%;
 }
 
-
+#novalue{
+	margin-bottom:50px;
+	margin-top:50px;
+	padding:50px; 
+	text-algin:center; 
+	background-color:#FBC1AD;
+	color:White;	
+	border: none;
+	border-radius:20px;
+	font-weight: bold;
+	
+}
 </style>
 </head>
 <meta charset="UTF-8">
@@ -100,16 +112,21 @@ a:hover {
 			</div>
 <title>학원장 신청목록</title>
 <script type="text/javascript">
-function noPermit(aca_id,aca_state){
-	document.permitFrm.aca_id.value=aca_id;
+function noPermit(aca_id,aca_state,aca_num,name){
+	document.permitFrm.name.value=name;
     document.permitFrm.aca_state.value=aca_state;
-	document.permitFrm.action="requestAclistProc.jsp?flag=noPermit";
+    document.permitFrm.aca_num.value=aca_num;
+    document.permitFrm.aca_id.value=aca_id;
+	document.permitFrm.action="requestAclistProc.jsp?flag=noPermit&name="+name;
 	document.permitFrm.submit();
 }
-function Permit(aca_id,aca_state){
+function Permit(aca_id,aca_state,aca_num,name){
+	document.permitFrm.name.value=name;
+
 	document.permitFrm.aca_id.value=aca_id;
     document.permitFrm.aca_state.value=aca_state;
-	document.permitFrm.action="requestAclistProc.jsp?flag=Permit";
+    document.permitFrm.aca_num.value=aca_num;
+	document.permitFrm.action="requestAclistProc.jsp?flag=Permit&name="+name;
 	document.permitFrm.submit();
 }
 </script>
@@ -119,8 +136,9 @@ function Permit(aca_id,aca_state){
 	Vector<AcademyBean> mvlist=aMgr.mGMList();
 	int listStze = mvlist.size();
 	if(mvlist.isEmpty()){
-	out.println("신청된 것이 없습니다.");
-	}else{
+		%>
+		<input id="novalue" type="text" value="신청된 것이 없습니다." readonly="readonly">
+	<%}else{
 		for(int i=0;i<mvlist.size();i++){
 		AcademyBean mbean=mvlist.get(i);
 		if(i%2==0){%>
@@ -161,9 +179,10 @@ function Permit(aca_id,aca_state){
 			</tr>
 			<tr>
 				<td colspan="2" align="right" style="padding-top:15px; padding-bottom:30px; " >
-				<input   " type="submit" value="비허가" onclick="noPermit('<%=mbean.getAca_id()%>','<%=mbean.getAca_state()%>')">
-				<input style="margin-right:30px;" type="submit" value="허가" onclick="Permit('<%=mbean.getAca_id()%>','<%=mbean.getAca_state()%>')">
-	
+				<input type="submit" value="비허가"
+				 onclick="noPermit('<%=mbean.getAca_id()%>','<%=mbean.getAca_state()%>','<%=mbean.getAca_num()%>','<%=mbean.getName()%>')">
+				<input style="margin-right:30px;" type="submit" value="허가" 
+				onclick="Permit('<%=mbean.getAca_id()%>','<%=mbean.getAca_state()%>','<%=mbean.getAca_num()%>','<%=mbean.getName()%>')">
 				</td>
 			</tr>
 		</table>
@@ -174,9 +193,9 @@ function Permit(aca_id,aca_state){
 <%}}}%>
 </table>
 <form name="permitFrm" method="post">
+		<input type="hidden" name="aca_num">
 		<input type="hidden" name="aca_id">
 		<input type="hidden" name="aca_state">
-
 </form>
 		<jsp:include page="../alcinfo/footer.jsp" />
 
