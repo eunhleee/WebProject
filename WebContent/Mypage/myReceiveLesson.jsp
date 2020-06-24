@@ -1,21 +1,26 @@
 
+<%@page import="alcinfo.StinsertBean"%>
 <%@page import="alcinfo.LeinsertBean"%>
 <%@page import="alcinfo.UtilMgr"%>
 <%@page import="alcinfo.ReportBean"%>
 <%@page import="java.util.Vector"%>
-<jsp:useBean id="mgr" class="alcinfo.LeinsertMgr"/>
+<jsp:useBean id="mgr" class="alcinfo.StinsertMgr"/>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%
+		
 		request.setCharacterEncoding("UTF-8");
  		String id=(String)session.getAttribute("idKey");
+
 %>
 
 <html>
 <head>
 
-<title>신청한 과외</title>
+<title>신청받은 과외</title>
 <script type="text/javascript">
-
+ function changeState(teaid){
+	 location.href="changeStateLesson.jsp?teaid="+teaid;
+ }
 </script>
 <style>
 #totalframe{
@@ -102,7 +107,7 @@ select{
     <!--nav-->
   <div id="insertMember" class="insertMember1" align="left">
 	
-	<div><h2>신청한 과외</h2></div>
+	<div><h2>신청받은 과외</h2></div>
 		<table >
 		<tr>
 			<td align="center" colspan="2" width="800">
@@ -111,11 +116,13 @@ select{
 			<tr id="title" align="center">
 				<td>선생님 성함</td>
 				<td>과목</td>
+				<td>번호</td>
 				<td>상태</td>
 				<td>접수 날짜</td>
+				<td>상태 변경</td>
 			</tr>
 			<%
-				Vector<LeinsertBean> vlist = mgr.getMyLessonList(id);
+				Vector<StinsertBean> vlist = mgr.getReceiveLessonList(id);
 				int listSize = vlist.size();//브라우저 화면에 표시될 게시물 번호
 				if(vlist.isEmpty()){
 					%>
@@ -131,13 +138,15 @@ select{
 		%>
 	
 		<%for(int i=0;i<listSize;i++){
-			LeinsertBean bean=vlist.get(i);
+			StinsertBean bean=vlist.get(i);
 		%>
 			<tr id="list" align="center">
-			<td><%=bean.getL_teaname()%></td>
-			<td><%=bean.getL_teaclass()%></td>
-			<td><%=bean.getL_state()%></td>
-			<td><%=bean.getL_date()%></td>
+			<td><%=bean.getTeaname()%></td>
+			<td><%=bean.getStclass()%></td>
+			<td><%=bean.getTeaphone()%></td>
+			<td><%=bean.getState()%></td>
+			<td><%=bean.getDate()%></td>
+			<td><input type="button" onclick="javascript:changeState('<%=bean.getTeaid() %>');" value="처리 완료" ></td>
 			</tr>
 			<%}//for%>
 		</table>
