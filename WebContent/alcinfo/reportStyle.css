@@ -1,0 +1,53 @@
+
+.frame{
+	padding:10px; 
+	border:8px solid red; 
+	border-radius: 10px;
+	width:830px;
+}
+#inputdiv{
+	margin:10px;
+	width:490px;
+	border:1px solid gray;
+	border-radius: 6px;
+	padding:3px;
+}
+#inputdiv input{
+	width:480px;
+	border:none;
+	font-size:15px;
+}
+
+#inputdiv1{
+	margin:10px;
+	width:200px;
+	border:1px solid gray;
+	border-radius: 6px;
+	padding:3px;
+}
+
+#inputdiv1 input{
+	width:180px;
+	border:none;
+	font-size:15px;
+	
+}
+
+#textareadiv{
+	margin:10px;
+	width:490px;
+	border:1px solid gray;
+	border-radius: 6px;
+	padding:3px;
+}
+#textareadiv textarea{
+	border:none;
+	font-size:15px;
+	width:480px;
+}
+select {
+     width: 100%;
+     border-width: 0;    
+     outline: none;
+     font-size:16px;
+}
