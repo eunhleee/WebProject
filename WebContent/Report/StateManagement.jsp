@@ -8,6 +8,7 @@
 
 <%
 	request.setCharacterEncoding("UTF-8");
+	String pageValue=request.getParameter("pageValue");
 		//검색에 필요한 변수
 		int totalRecord=0;//총 게시물 수
 		int numPerPage=10;//페이지당 레코드 개수(5,10,15,30)
@@ -63,7 +64,6 @@
 <html>
 <head>
 <title>관리자-신고접수건관리</title>
-<link href="MyReportListStyle.css" rel="stylesheet">
 
 <script type="text/javascript">
 function smupdate(renum,plusdate,num,contents,stopid) {
@@ -119,7 +119,7 @@ function numPerFn(numPerPage){//5개보기,10개보기 등등 보기리스트 �
 <style>
 #content{
 	margin : auto;
-  	width: 70%;
+  	width: 100%;
   	border: 10px solid #36ada9; 
 	border-radius:10px;
 	margin-top:50px;
@@ -141,13 +141,53 @@ a {
 a:hover {
 	color: gray;
 }
+
+#nav_table tr {
+	border:5px solid #56C8D3;
+}
+
+#nav_td {
+	text-align: center;
+	width:330px;
+	height: 100px;
+	border: none;
+	
+}
+
+#nav_td a {
+	color: black;
+	text-decoration: none;
+}
+
+#nav_td a:hover {
+	color: white;
+	font-weight: bold;
+}
+
+#nav_td:hover {
+	background-color: #56C8D3;
+}
+#graphList{
+	width:70%;
+}
 </style>
 </head>
+
 <body>
-	<div class="frame">
-		<div class="container">
-			
-			<!--nav-->
+<jsp:include page="../alcinfo/headerSearch.jsp" />
+	<div id="frame" >
+		<div id="container" align="center">
+			<div id="total" align="center">
+				<table id="nav_table">
+					<tr>
+						<td id="nav_td"><a href="../Mypage/managerPage.jsp?pageValue=salesList">매출 현황</a></td>
+						<td id="nav_td"><a href="../Mypage/managerPage.jsp?pageValue=memberChart">회원 현황</a></td>
+						<td id="nav_td"><a href="../Report/MGMemberControl.jsp">신고 접수건</a></td>
+						<td id="nav_td"><a href="../Report/StateManagement.jsp">회원 관리</a></td>
+					</tr>
+				</table>
+			</div>
+			<div id="graphList">
 			<div id="content" class="content">
 				<form style="margin-top:30;" name="searchF">
 					<table align="center" width="600" cellpadding="4" cellspacing="0">
@@ -172,7 +212,8 @@ a:hover {
 		Total : <%=totalRecord%>Articles(
 		<font color="red"><%=nowPage+"/"+totalPage%>Pages</font>)
 		</td>
-		<td align="right"><form name="npFrm" method="post">
+		<td align="right">
+		<form name="npFrm" method="post">
 					<select name="numPerPage" size="1" onchange="numPerFn(this.form.numPerPage.value)">
     					<option value="5">5개 보기</option>
     					<option value="10" selected>10개 보기</option>
@@ -279,6 +320,7 @@ a:hover {
 	</td>
 	</tr>
 </table>
+</div>
 <hr width="90%">
 			</div>
 			<form name="listFr" method="post">
@@ -313,7 +355,6 @@ a:hover {
 		</div>
 		<!-- //footer -->
 		<jsp:include page="../alcinfo/footer.jsp" />
-	</div>
 	<!-- //frame -->
 </body>
 </html>

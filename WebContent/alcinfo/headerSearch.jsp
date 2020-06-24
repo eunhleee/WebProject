@@ -97,9 +97,14 @@ function openlogoutProc(){
 
 			<% if((Integer)session.getAttribute("idgrade")==0){%>
 			<a href="../Mypage/managerPage.jsp?pageValue=salesList">관리자페이지</a>
-			<%}else{%>
+			<%}else{
+			if((Integer)session.getAttribute("idgrade")==1){%>
 			<a href="../Mypage/upMember.jsp">마이페이지</a>
-			<%}} %>
+			<%}else if((Integer)session.getAttribute("idgrade")==2||(Integer)session.getAttribute("idgrade")==3){ %>
+			<a href="../Mypage/upTeacher.jsp">마이페이지</a>
+			<%		}
+				}
+			} %>
 		</div>
 	</div>
 

@@ -1,14 +1,8 @@
-<!-- upMember.jsp -->
-
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@page import="alcinfo.MemberBean"%>
-<jsp:useBean id="mpmgr" class="alcinfo.MemberMgr"/>
+<%@page import="alcinfo.LeteaBean"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> 
 <jsp:useBean id="mpbean" class="alcinfo.LeteaBean"/>
 <jsp:setProperty property="*" name="mpbean"/>
-<jsp:useBean id="mgr" class="alcinfo.MemberMgr"/>
-<jsp:useBean id="amgr" class="alcinfo.AcademyMgr"/>
-
+<jsp:useBean id="mgr" class="alcinfo.LeteaMgr"/>
     
 <%
 if(session.getAttribute("idKey")==null||session.getAttribute("idKey").equals("")){
@@ -16,7 +10,7 @@ if(session.getAttribute("idKey")==null||session.getAttribute("idKey").equals("")
 	}
 	else{
 	String id=(String)session.getAttribute("idKey");
-	MemberBean bean=mgr.getUpMember(id);
+	LeteaBean bean=mgr.getUpTeacher(id);
 	int grade=(Integer)session.getAttribute("idgrade");
 
 	int to=Integer.parseInt(bean.getBirth().substring(4,6)); 
@@ -142,19 +136,6 @@ function win_close(){
 		url = "../Mypage/ImgProc.jsp";
 		window.open(url, "imggo", "width=500, height=500, top=200, left=200");
 	}
-	function acquestion(id){
-		msg="선생님으로 권한을 변경하시겠습니까?";
-		if(confirm(msg)){
-			<%
-			amgr.Uptea(id);
-		    session.setAttribute("idgrade",bean.getGrade());
-			%>
-			alert("변경되셨습니다.");
-			window.location.reload();
-		}else{
-			
-		}
-	}
 </script>
 <style>
 #totalframe{
@@ -260,23 +241,12 @@ function win_close(){
 <div id="totalframe">
 <div id="categoryframe">
 	<h3 style="margin-left:50px;">마이 페이지</h3>
-	<div id="atag"><a href="../Mypage/upMember.jsp">&#149; 개인 정보 수정</a></div>
-	<div id="atag"><a href="../Mypage/myBoard.jsp">&#149; 내가 쓴 글</a></div>
+	<div id="atag"><a href="../Mypage/upTeacher.jsp">&#149; 개인 정보 수정</a></div>
+	<div id="atag"><a href="">&#149; 내가 쓴 글</a></div>
 	<div id="atag"><a href="../Mypage/MyReportList.jsp">&#149; 나의 신고</a></div>
 	<div id="atag"><a href="">&#149; 신청한 과외</a></div>
-	<div id="atag"><a href="">&#149; 신청 받은 과외</a></div>	
-	<% 
-	
-		if(bean.getGrade()==2){	
-	%>
-		<div id="atag"><a href="../Mypage/academyApply.jsp">&#149; 권한 변경 신청</a></div>
-	<%
-		}
-		else if(bean.getGrade()==3){%>
-		<div id="atag"><a href="javascript:void(0);" onclick="javascript:acquestion();">&#149; 권한 변경 신청</a></div>
-		<%}
-	%>
-
+	<div id="atag"><a href="">&#149; 신청 받은 과외</a></div>
+	<div id="atag"><a href="">&#149; 권한 변경 신청</a></div>
 	
 </div>
 <div id="insertMember" class="insertMember1" align="left">
@@ -440,7 +410,7 @@ function win_close(){
 								<div id="inputdiv" style="width:270px;">
 									<input type="text" id="address" name="imaddress1"
 									value="<%=bean.getAddress()%>"
-									style="width:185px; height:30px;">
+									style="width:185px; height:30px;" >
 									<input type="button" style="width:70px; height:30px;"
 									onClick="openDaumZipAddress();" value="주소찾기">
 								</div>
@@ -476,6 +446,16 @@ function win_close(){
 								<div id="inputdiv" style="width:270px;">
 									<input type="text" style="width:260px; height:30px;"
 									name="imschoolname" value="<%=bean.getSchool_name()%>">
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td width="100px" align="center">&nbsp;수업 가능 지역</td>
+							<td >
+								<div id="inputdiv" style="width:270px;">
+									<input type="text" style="width:260px; height:30px;"
+									name="imsarea" value="<%=bean.getArea()%>">
 								</div>
 							</td>
 						</tr>

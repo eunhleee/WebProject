@@ -335,7 +335,6 @@ public class AcademyMgr {
 					ResultSet rs = null;
 					String sql = null;
 					MemberBean bean = new MemberBean();
-					String a="";
 					try {
 						con = pool.getConnection();
 						sql = "SELECT DISTINCT(a.id),a.phone"
@@ -375,5 +374,38 @@ public class AcademyMgr {
 						pool.freeConnection(con, pstmt);
 					}
 				}	
+				public void Uptea(String id) {
+					Connection con = null;
+					PreparedStatement pstmt = null;
+					String sql = null;
+					
+					try {
+						con = pool.getConnection();
+						sql = "update letea set grade=2 where id='"+id+"'";
+						pstmt = con.prepareStatement(sql);
+						pstmt.executeUpdate();
+					} catch (Exception e) {
+						e.printStackTrace();
+					} finally {
+						pool.freeConnection(con, pstmt);
+					}
+				}	
+				public void Upac(String id) {
+					Connection con = null;
+					PreparedStatement pstmt = null;
+					String sql = null;
+					
+					try {
+						con = pool.getConnection();
+						sql = "update letea set grade=3 where id='"+id+"'";
+						pstmt = con.prepareStatement(sql);
+						pstmt.executeUpdate();
+					} catch (Exception e) {
+						e.printStackTrace();
+					} finally {
+						pool.freeConnection(con, pstmt);
+					}
+				}
+				
 	}
 

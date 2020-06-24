@@ -546,8 +546,7 @@ public class ReportMgr {
 		return totalCount;
 	}
 	////
-	public Vector<ReportBean> SMList(String keyField, 
-			String keyWord,int start, int cnt){
+	public Vector<ReportBean> SMList(String keyField, String keyWord,int start, int cnt){
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -581,7 +580,7 @@ public class ReportMgr {
 						+" UNION"
 						+" SELECT NAME,id,email"
 						+" FROM letea) a"
-						+" WHERE report.stopid=a.id and " + keyField 
+						+" WHERE report.stopid=a.id and a." + keyField 
 						+" like ? limit ?,?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, "%"+keyWord+"%");

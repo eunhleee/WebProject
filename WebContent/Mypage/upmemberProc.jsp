@@ -11,13 +11,13 @@
 	String mon="";
 	String day="";
 	if(request.getParameter("imbirthm").length()>2){
-		mon="0"+request.getParameter("imbirthm").length();
+		mon="0"+request.getParameter("imbirthm");
 	}
 	else{
 		mon=request.getParameter("imbirthm");
 	}
 	if(request.getParameter("imbirthd").length()>2){
-		day="0"+request.getParameter("imbirthd").length();
+		day="0"+request.getParameter("imbirthd");
 	}
 	else{
 		day=request.getParameter("imbirthd");

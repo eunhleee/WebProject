@@ -232,4 +232,47 @@ public class LeteaMgr {
 		}
 		return jsonArray;
 	} 
+	
+
+	//upTeacher.jsp select
+		public LeteaBean getUpTeacher(String id) {
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String sql = null;
+			LeteaBean bean = new LeteaBean();
+			
+			try {
+				con = pool.getConnection();
+				sql = "SELECT DISTINCT(a.id),a.name,a.email,a.gender,a.passwd,a.nickname,a.birth,a.area," + 
+						" a.phone,a.address,a.school_name,a.school_grade,a.imgname"
+						+" FROM letea a "
+						+" WHERE a.id='"+id+"'";
+				pstmt = con.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+
+				if(rs.next()) {
+					bean.setId(rs.getString("a.id"));
+					bean.setName(rs.getString("a.name"));
+					bean.setEmail(rs.getString("a.email"));
+					bean.setGender(rs.getString("a.gender"));
+					bean.setPasswd(rs.getString("a.passwd"));
+					bean.setNickname(rs.getString("a.nickname"));
+					bean.setBirth(rs.getString("a.birth"));
+					bean.setArea(rs.getString("a.area"));
+					bean.setPhone(rs.getString("a.phone"));
+					bean.setAddress(rs.getString("a.address"));
+					bean.setSchool_name(rs.getString("a.school_name"));
+					bean.setSchool_grade(rs.getString("a.school_grade"));
+					bean.setImgname(rs.getString("a.imgname"));
+
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				pool.freeConnection(con, pstmt, rs);
+			}
+			return bean;
+		}
+	
 }

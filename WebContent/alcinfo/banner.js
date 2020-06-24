@@ -4,7 +4,7 @@ $(function() {
 
 	
 	var width = 1600; 
-	var height = 350; 
+	var height = 400; 
 	var animationSpeed = 1000; 
 	var pause = 5000; 
 	var totalSlides = 7;
