@@ -12,6 +12,8 @@
 
 %>
 <html>
+<link href="../alcinfo/fontStyle.css" rel="stylesheet">
+
 <head>
 <title>학생문의 게시판신고</title>
 <script type="text/javascript">

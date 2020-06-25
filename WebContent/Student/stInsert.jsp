@@ -42,9 +42,11 @@
 <head>
 <title>학생 등록하기</title>
 <link href="style.css" rel="stylesheet" type="text/css">
+<link href="../alcinfo/fontStyle.css" rel="stylesheet">
 <script src="script.js"></script>
 </head>
 <body>
+
 <%@ include file="../alcinfo/headerSearch.jsp"%>
 <br>
 <br>

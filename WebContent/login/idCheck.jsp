@@ -10,6 +10,8 @@
 <html>
 <head>
 <title>ID 중복체크</title>
+<link href="../alcinfo/fontStyle.css" rel="stylesheet">
+
 </head>
 <body>
 <div align="center">

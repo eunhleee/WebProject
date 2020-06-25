@@ -49,6 +49,19 @@ function goAclist() {
 <meta charset="UTF-8">
 <title>학원장 신청(권한변경)</title>
 <style>
+@font-face { 
+font-family: 'Godo'; font-style: normal;
+font-weight: 400;
+src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoM.woff2') format('woff2'), 
+	url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoM.woff') format('woff'); }
+@font-face {
+	font-family: 'Godo'; font-style: normal;
+	font-weight: 700; 
+ 	src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoB.woff2') format('woff2'),
+url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoB.woff') format('woff'); } 
+ 	.godo * { font-family: 'Godo', sans-serif; }
+ body{
+ 	font-family:'Godo';}
 #totalframe{
 	background-color:#FAF8EB;
 	display:flex;

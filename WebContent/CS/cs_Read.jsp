@@ -65,6 +65,19 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>우리학원 어디?-고객센터</title>
 <style>
+@font-face { 
+font-family: 'Godo'; font-style: normal;
+font-weight: 400;
+src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoM.woff2') format('woff2'), 
+	url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoM.woff') format('woff'); }
+@font-face {
+	font-family: 'Godo'; font-style: normal;
+	font-weight: 700; 
+ 	src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoB.woff2') format('woff2'),
+url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoB.woff') format('woff'); } 
+ 	.godo * { font-family: 'Godo', sans-serif; }
+ body{
+ 	font-family:'Godo';}
 #readDiv{
 	margin-top:50px;
 	margin-left:10%;
@@ -131,12 +144,12 @@ function cDel(conum, cnum, depth) {
 function goRep() {
 	
 	url = "csReport.jsp?stopid=<%=id%>&renum=<%=num%>";
-	window.open(url, "GoReport", 'width=360, height=300, top=200, left=300');
+	window.open(url, "GoReport", "width=900, height=560, top=200, left=300");
 }
 
 function goCReport(conum,ccr_depth,stopid) {
 	url = "csCReport.jsp?conum="+conum+"&ccr_depth="+ccr_depth+"&renum="+<%=num%>+"&stopid="+stopid;
-	window.open(url, "GoReport", "width=360, height=300, top=200, left=300");
+	window.open(url, "GoReport", "width=900, height=560, top=200, left=300");
 }
 </script>
 </head>
