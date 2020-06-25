@@ -124,7 +124,7 @@
 					<table width="100%" style="font-size: 20; background: rgb(250, 248, 235);">
 						<tr>
 							<td width="25%" align="center">
-							<img src="../img/banner1.jpg" width="100%" height="250">
+							<img src="../AcademyImg/<%=bean.getImgname() %>" width="100%" height="250">
 							</td>
 							<td width="60%" height="100%">
 								<table width="100%" style="font-size: 20;">

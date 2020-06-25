@@ -283,7 +283,7 @@ function win_close(){
 						<tr>
 
 							<td rowspan="5" align="center" style="background-color:white; width:270px; border-radius: 10px;">
-								<img src="../img/<%=bean.getImgname()%>" style="margin-bottom:10px;width:250px; height:200px; "><br>
+								<img src="../StudentImg/<%=bean.getImgname()%>" style="margin-bottom:10px;width:250px; height:200px; "><br>
 								<input type="button" onclick="imgcheck();" value="이미지수정">
 							</td>
 							<td width="200px" align="center">&nbsp;아이디</td>

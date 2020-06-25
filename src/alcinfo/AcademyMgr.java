@@ -122,6 +122,7 @@ public class AcademyMgr {
 					bean.setAc_name(rs.getString("ac_name"));
 					bean.setGroup1(rs.getString("group1"));
 					bean.setGroup2(rs.getString("group2"));
+					bean.setImgname(rs.getString("imgname"));
 					bean.setAc_address(rs.getString("ac_address"));
 					bean.setAc_tel(rs.getString("ac_tel"));
 				}
