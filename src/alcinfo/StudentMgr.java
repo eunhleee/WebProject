@@ -165,7 +165,7 @@ public class StudentMgr {
 				return jsonArray;
 		}
 		
-		//Count Up : 議고쉶�닔 利앷�
+		//Count Up : 조회수 증가
 				public void upStCount(int num) {
 					Connection con = null;
 					PreparedStatement pstmt = null;
@@ -183,5 +183,21 @@ public class StudentMgr {
 					}
 				}
 		
-		
+		//등록한 글 삭제하기
+		public void deleteStudent(int num) {
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			String sql = null;
+			try {
+				con = pool.getConnection();
+				sql = "delete from student where num=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, num);
+				pstmt.executeUpdate();
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				pool.freeConnection(con, pstmt);
+			}
+		}
 }

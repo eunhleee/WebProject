@@ -90,7 +90,9 @@ margin-bottom:50px;
 <td id="td"><a href="LessonMain.jsp?pageValue=사회">사회</a></td>
 <td id="td"><a href="LessonMain.jsp?pageValue=과학">과학</a></td>
 <td id="td"><a href="LessonMain.jsp?pageValue=영어">영어</a></td>
+<%if(id!=null) {%>
 <td id="insert"><a href="javascript:insertLesson()">등록</a></td>
+<%} %>
 </tr>
 </table>
 </div>

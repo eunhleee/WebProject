@@ -9,7 +9,7 @@
 	if(id==null){
 %>
 	<script>
-		alert("로그인을 해주세요.");
+		alert("로그인 후 이용가능합니다.");
 		history.back();
 	</script>
 <%	} else {
@@ -67,7 +67,7 @@
 		<table width="100%" style="background: rgb(250,248,235);"> 
 		<tr> 
 		<td width="25%" align="center">
-		<img src="../img/<%=leBean.getImgname() %>" width="100%" height="250">
+		<img src="../TeacherImg/<%=leBean.getImgname() %>" width="100%" height="250">
 		</td>
 		<td width="60%" height="100%">
 			<table width="100%">

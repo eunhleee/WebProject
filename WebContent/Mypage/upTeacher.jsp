@@ -133,7 +133,7 @@ function win_close(){
 
 	function imgcheck(){
 		url = "../Mypage/ImgProc2.jsp";
-		window.open(url, "imggo", "width=500, height=500, top=200, left=200");
+		window.open(url, "imggo", "width=350, height=400, top=50, left=50");
 	}
 	
 	function acquestion(id){
@@ -285,7 +285,7 @@ function win_close(){
 						<tr>
 
 							<td rowspan="5" align="center" style="background-color:white; width:270px; border-radius: 10px;">
-								<img src="../img/<%=bean.getImgname()%>" style="margin-bottom:10px;width:250px; height:200px; "><br>
+								<img src="../TeacherImg/<%=bean.getImgname()%>" style="margin-bottom:10px;width:250px; height:200px; "><br>
 								<input type="button" onclick="imgcheck();" value="이미지수정">
 							</td>
 							<td width="200px" align="center">&nbsp;아이디</td>

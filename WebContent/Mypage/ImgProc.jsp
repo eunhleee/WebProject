@@ -3,9 +3,7 @@
 <jsp:useBean id="pmgr" class="alcinfo.ReportMgr" />
 <%
 	String id = (String) session.getAttribute("idKey");
-	//if (id == null)
-	//	response.sendRedirect("login.jsp");
-	//ReportBean mbean = pmgr.getPMember(id);
+
 %>
 <!DOCTYPE html>
 <html>
@@ -23,17 +21,78 @@
 		document.frm1.submit();
 	}
 </script>
+<style>
+body{
+background-color: #F8FFFF;
+overflow:hidden;
+display:flex;
+
+hight:100%;
+width:100%;
+
+}
+.right {
+	position:absolute;
+	text-align: center;
+	float:right;
+	bottom: 5%;
+	right: 10%;
+	
+}
+#id_photo{
+	position:absolute;
+
+	bottom: 15%;
+	left: 5%;
+}
+button {
+	-webkit-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+	-moz-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+	-ms-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+	-o-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+	transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+	display: block;
+	margin: 10px auto;
+	max-width: 180px;
+	text-decoration: none;
+	border:0px;
+	border-radius: 4px;
+	padding: 5px 10px;
+}
+
+
+button.btn {
+	color: #353535;
+	box-shadow: rgba(248, 180, 207, 0.4) 0 0px 0px 2px inset;
+}
+
+button.btn:hover {
+	color: rgba(255, 255, 255, 0.85);
+	box-shadow: rgba(248, 180, 207, 0.7) 0 0px 0px 40px inset;
+}
+
+.total{
+}
+.post_btn{
+
+}
+#imageCanvas{
+}
+.preview{
+hight:500px;
+}
+</style>
 </head>
 <body>
-<div data-role="content">
+<div data-role="content" class="total">
 			<form method="post" name="frm" action="ImgUp"
 				enctype="multipart/form-data" class="post_form">
-				<div class="preview">
+				<div class="preview" >
+				<h4 align="center"> 이미지를 업로드 해주세요</h4>
 					<div class="upload">
-						<div class="post_btn">
+						<div class="post_btn" >
 							<div class="plus_icon"></div>
-							<p>프로필 사진 변경</p>
-							<canvas id="imageCanvas"></canvas>
+							<canvas id="imageCanvas" style="padding-left:40px; higth:400px;"></canvas>
 						</div>
 					</div>
 				</div>
@@ -42,7 +101,9 @@
 				</p>
 				
 				<input type="hidden" value="<%=id%>" name="id"> 
-				<input type="button" value="저장" onclick="send()">
+				<div class="right">
+				<button type="button" onclick="send()" class="btn">저장</button>
+				</div>
 			</form>
 		
 		<form method="post" name="frm1"></form>
@@ -61,9 +122,9 @@
 			reader.onload = function(event) {
 				var img = new Image();
 				img.onload = function() {
-					canvas.width = 300;
+					canvas.width = 250;
 					canvas.height = 300;
-					ctx.drawImage(img, 0, 0, 300, 300);
+					ctx.drawImage(img, 0, 0, 250, 230);
 				};
 				img.src = event.target.result;
 			};

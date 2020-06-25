@@ -86,6 +86,7 @@ input:checked+label {
 						for (int i = 0; i < listsize; i++) {
 							LessonBean Lbean = Lvlist.get(i);
 							int num = Lbean.getNum();
+							String img = Lbean.getImgname();
 							String id = Lbean.getId();
 							String name = Lbean.getName();
 							String leclass = Lbean.getLeclass();
@@ -95,12 +96,25 @@ input:checked+label {
 					%>
 					<div class="col-md-6 col-lg-4">
 						<div class="card border-0 transform-on-hover">
-							<a class="lightbox" href="leRead.jsp?num=<%=num %>&id=<%=id%>"> <img
-								src="../img/no_image.jpg" alt="Card Image" class="card-img-top">
+							<a class="lightbox" 
+							<%if((String)session.getAttribute("idKey")==null) {%>
+							href="javascript:alert('로그인 후 이용가능합니다.');"
+							<%} else { %>
+							href="leRead.jsp?num=<%=num %>&id=<%=id%>"
+							<%} %>
+							>
+								<img src="../TeacherImg/<%=img %>" alt="Card Image" class="card-img-top">
 							</a>
 							<div class="card-body">
 								<h6>
-									<a href="leRead.jsp?num=<%=num %>&id=<%=id%>"><%=name%></a>
+									<a
+									<%if((String)session.getAttribute("idKey")==null) {%>
+									href="javascript:alert('로그인 후 이용가능합니다.');"
+									<%} else { %>
+									href="leRead.jsp?num=<%=num %>&id=<%=id%>"
+									<%} %>>
+									<%=name%>
+									</a>
 								</h6>
 								<p class="text-muted card-text"><%=leclass%>
 									<br>
@@ -146,12 +160,22 @@ input:checked+label {
 					%>
 					<div class="col-md-6 col-lg-4">
 						<div class="card border-0 transform-on-hover">
-							<a class="lightbox" href="leRead.jsp?num=<%=num %>&id=<%=id%>"> <img
-								src="../TeacherImg/<%=img %>" width="350" height="200" alt="Card Image" class="card-img-top">
+							<a class="lightbox" 
+							<%if((String)session.getAttribute("idKey")==null) {%>
+							href="javascript:alert('로그인 후 이용가능합니다.');"
+							<%} else { %>
+							href="leRead.jsp?num=<%=num %>&id=<%=id%>"
+							<%} %>> 
+							<img src="../TeacherImg/<%=img %>" width="350" height="200" alt="Card Image" class="card-img-top">
 							</a>
 							<div class="card-body">
 								<h6>
-									<a href="leRead.jsp?num=<%=num %>&id=<%=id%>"><%=name%></a>
+									<a
+									<%if((String)session.getAttribute("idKey")==null) {%>
+									href="javascript:alert('로그인 후 이용가능합니다.');"
+									<%} else { %> 
+									href="leRead.jsp?num=<%=num %>&id=<%=id%>"<%} %>><%=name%>
+									</a>
 								</h6>
 								<p class="text-muted card-text"><%=leclass%>
 									<br>

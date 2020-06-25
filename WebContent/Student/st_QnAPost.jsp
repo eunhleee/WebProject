@@ -242,7 +242,7 @@ function goReport() {
 			<tr>
 			<td>
 			<div style="padding:20px 30px;">
-				<img src="../img/<%=stbean.getImgname() %>" width="300" height="250">
+				<img src="../StudentImg/<%=stbean.getImgname() %>" width="300" height="250">
 			</div>
 			</td>
 			<td  align="center" rowspan="2">
