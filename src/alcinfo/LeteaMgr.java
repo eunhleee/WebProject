@@ -298,5 +298,27 @@ public class LeteaMgr {
 			}
 			return bean;
 		}
-	
+		public LeteaBean getgrade(String id) {
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String sql = null;
+			LeteaBean bean = new LeteaBean();
+			String a="";
+			try {
+				con = pool.getConnection();
+				sql = "SELECT grade from letea where id='"+id+"'";
+				pstmt = con.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+
+				if(rs.next()) {
+					bean.setGrade(rs.getInt("grade"));
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				pool.freeConnection(con, pstmt, rs);
+			}
+			return bean;
+		}
 }

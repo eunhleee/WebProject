@@ -32,7 +32,7 @@
 			<br>  
 			<div class="row">  
 				<%
-			
+				System.out.println("값은"+session.getAttribute("idKey")+"2"+session.getAttribute("idgrade"));
 	        	Vector<AcademyBean> Avlist=Amgr.getBestBoard("top","le.star",6);
 	        	//int listsize=vlist.size();
 	        	for(int i=0;i<6;i++){

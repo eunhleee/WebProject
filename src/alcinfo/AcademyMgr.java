@@ -18,7 +18,7 @@ public class AcademyMgr {
 	private static final String UPLOAD = "C:/WerPro4/WebProject/WebContent/authority/";
 	private static final String ENCTYPE = "UTF-8";
 	private static final int MAXSIZE = 10*1024*1024;
-	
+
 	public AcademyMgr(){
 		pool=DBConnectionMgr.getInstance();
 	}
@@ -449,6 +449,6 @@ public class AcademyMgr {
 						pool.freeConnection(con, pstmt);
 					}
 				}	
-				
+			
 	}
 

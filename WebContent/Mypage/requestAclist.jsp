@@ -5,9 +5,12 @@
 <%@page import="alcinfo.UtilMgr"%>
 <%@page import="alcinfo.AcademyBean"%>
 <%@page import="java.util.Vector"%>
+<%@page import="alcinfo.LeteaBean"%>
+
 <jsp:useBean id="aMgr" class="alcinfo.AcademyMgr" />
 <%
 	request.setCharacterEncoding("UTF-8");
+
 %>
 <!DOCTYPE html>
 <html>
