@@ -24,7 +24,7 @@ public class ReportMgr {
 		pool = DBConnectionMgr.getInstance();
 
 	}
-	// img update : 
+	
 		public void insertPBlog(HttpServletRequest req) {
 			Connection con = null;
 			PreparedStatement pstmt = null;

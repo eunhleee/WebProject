@@ -48,6 +48,25 @@
 		}
 </script>
 <style>
+.totalFrame{
+	background-color:#FAF8EB;
+	padding:40px 0px;
+	margin-top:-40px;
+}
+.tdBorder{
+	border-right:3px solid #56C8D3;
+}
+
+#readDiv{
+	margin-left:10%;
+	margin-bottom:40px;
+	width:79%;
+	align:center;
+	background-color:white;
+	border: 10px solid #36ada9; 
+	border-radius:10px;
+	padding:20px 40px;
+}
 #inputdiv2{
 	margin:10px;
 	width:490px;
@@ -118,107 +137,29 @@
 	<%@ include file="../alcinfo/headerSearch.jsp"%>
 	<br>
 	<br>
-		<table width="70%" align="center">
-			<tr>
-				<td align="center">
-					<table width="100%" style="font-size: 20; background: rgb(250, 248, 235);">
-						<tr>
-							<td width="25%" align="center">
-							<img src="../AcademyImg/<%=bean.getImgname() %>" width="100%" height="250">
-							</td>
-							<td width="60%" height="100%">
-								<table width="100%" style="font-size: 20;">
-									<tr height="50">
-										<td width="30%">학원명</td>
-										<td width="70%"><%=bean.getAc_name()%></td>
-									</tr>
-									<tr height="50">
-										<td width="30%">교습계열</td>
-										<td width="70%"><%=bean.getGroup1()%></td>
-									</tr>
-									<tr height="50">
-										<td width="30%">교습과정</td>
-										<td width="70%"><%=bean.getGroup2()%></td>
-									</tr>
-									<tr height="50">
-										<td width="30%">학원주소</td>
-										<td width="100%"><a href=""
-											style="color: black; text-decoration: none;"><%=bean.getAc_address()%></a></td>
-									</tr>
-									<tr height="50">
-										<td width="30%">전화번호</td>
-										<td width="70%"><%=bean.getAc_tel()%></td>
-									</tr>
-								</table>
-							</td>
-							<td width="15%" align="center">
-								<table>
-									<tr>
-										<td><input type="button" value="문의하기"
-											style="font-size: 20;" onclick="moveQnA();"></td>
-									</tr>
-									<tr>
-										<td><input type="submit" value="잘못된정보 신고하기"
-											style="font-size: 20;" onclick="goReport();"></td>
-											
-									</tr>
-								</table>
-							</td>
-						</tr>
-					</table>
-				</td>
+	<!-- 읽기 Start -->
+<div class="totalFrame" align="center">
+	<div id="readDiv">
+		<form name="acrupdateFrm" method="post" action="ac_ReviewUpdateProc.jsp">
+		<table align="center" cellspacing="3" width="100%" bgcolor="white">
+		 <tr>
+		  <td>
+		   <table cellpadding="3" cellspacing="0" width="100%"> 
+		    <tr height="100">
+		    <td colspan="8">
+		 	  <input name="acrtitle" size="50" maxlength="30" value="<%=title%>" style="font-size:30px;">
+		    <% if(loginid!=null) {%>		    
+			 <input type="button" value="신고" onclick="javascript:goRep();" style="float:right;">
+			  <%}%></td>
 			</tr>
-		</table>
-		<br>
-		<br>
-		<table width="70%" height="300" align="center" >
-			<tr>
-			
-				<td width="30%" align="center">
-				<div style="border:10px solid #FCBC7E; border-radius:15px; padding:20px">
-					<jsp:include page="mapJsp.jsp">
-					<jsp:param value='<%=URLEncoder.encode(bean.getAc_address(),"UTF-8")%>' name="address" />
-					</jsp:include>
-				</div>
-					</td>
-				<td width="70%"  align="center">
-				
-<!---- 글수정 Start ---->
-
-			<div style="border:10px solid #36ada9; border-radius:15px; padding:20px">
-				<h2><%=bean.getAc_name()%> 리뷰</h2>	
-				<hr style="border:1px solid #36ada9;"><br/>
-				<form name="acrupdateFrm" method="post" action="ac_ReviewUpdateProc.jsp">
-				<table width="600" cellpadding="3" align="center">
-					<tr>
-						<td align=center>
-						<table align="center">
-							<tr>
-								<td>작성자</td>
-								<td>
-								<div id="inputdiv3">
-								<input size="50" maxlength="30" disabled="disabled"
-								value="<%=loginid%>">
-								</div>
-								</td>
-								<td>작성일</td>
-								<td>
-								<div id="inputdiv3">
-								<input size="50" maxlength="30" disabled="disabled"
-								value="<%=strToday%>">
-								</div>
-								</td>
-							</tr>
-							<tr>
-								<td>제 목</td>
-								<td colspan="3">
-								<div id="inputdiv2">
-									<input name="acrtitle" size="50" maxlength="30" value="<%=title%>">
-								</div>
-								</td>
-							</tr>
-							<tr>
-							<td>평 점</td>
+		    <tr height="20"> 
+				<td class="tdBorder" width="6%" > 닉 네 임</td>
+				<td  width="10%">&nbsp;<%=loginid%></td>
+				<td class="tdBorder" width="6%" > 등록날짜 </td>
+				<td width="10%">&nbsp;<%=strToday%></td>
+				<td class="tdBorder" width="6%" > 조 회 수</td>
+				<td  width="10%">&nbsp;<%=acrbean.getAc_count()%></td>
+				<td class="tdBorder" width="6%">평 점</td>
 								<td colspan="3">
 									<div class="starRev">
 									<% String[] st = new String[10];
@@ -238,50 +179,43 @@
 									  <input type="hidden" name="acrstar" value="<%=star%>">
 									</div>
 								</td>
-							</tr>
-							<tr>
-								<td>내 용</td>
-								<td colspan="3">
-								<div id="textareadiv">
-									<textarea name="acrcontent" rows="10" cols="50"><%=content%></textarea>
-								</div>
-								</td>
-							</tr>
-							<tr>
-								<td colspan="4" align="center">
-									 <input type="submit" value="수정">
-									 <input type="reset" value="다시쓰기">
-									 <input type="button" value="취소"
-									 onClick="javascript:location.href='<%=request.getHeader("referer")%>'">
-								</td>
-							</tr>
-						</table>
-						</td>
-					</tr>
-				</table>
-				 <input type="hidden" name="acrnick" value="<%=nick%>">
-				 <input type="hidden" name="acrip" value="<%=request.getRemoteAddr()%>">
-				 <input type="hidden" name="nowPage" value="<%=nowPage %>">
-				 <input type="hidden" name="num" value="<%=num%>">
-				 <input type='hidden' name="acrnum" value="<%=acrnum%>">
-				 <input type='hidden' name="numPerPage" value="<%=numPerPage%>">
-				 <%
-			  	 	if(!(keyWord==null||keyWord.equals(""))){
-			     %>
-			     <input type="hidden" name="keyField" value="<%=keyField%>">
-			     <input type="hidden" name="keyWord" value="<%=keyWord%>">
-			 	 <%
-					}
-				 %>
-				</form>
-			</div>
-					
-<!---- 글수정 End ---->
-
+			</tr>
+		   
+		   <tr><td colspan="8"><hr style="border:1px solid lightgray;"></td>
+		   <tr> 
+		    <td colspan="6" height="200"><textarea name="acrcontent" rows="10" cols="100"><%=content%></textarea></td>
+		   </tr>
+		   <tr>
+				<td colspan="4" align="center">
+					 <input type="submit" value="수정">
+					 <input type="reset" value="다시쓰기">
+					 <input type="button" value="취소"
+					 onClick="javascript:location.href='<%=request.getHeader("referer")%>'">
 				</td>
 			</tr>
 		</table>
-		<br>
+		</td>
+	</tr>
+</table>
+ <input type="hidden" name="acrnick" value="<%=nick%>">
+ <input type="hidden" name="acrip" value="<%=request.getRemoteAddr()%>">
+ <input type="hidden" name="nowPage" value="<%=nowPage %>">
+ <input type="hidden" name="num" value="<%=num%>">
+ <input type='hidden' name="acrnum" value="<%=acrnum%>">
+ <input type='hidden' name="numPerPage" value="<%=numPerPage%>">
+ <%
+ 	 	if(!(keyWord==null||keyWord.equals(""))){
+    %>
+    <input type="hidden" name="keyField" value="<%=keyField%>">
+    <input type="hidden" name="keyWord" value="<%=keyWord%>">
+	 <%
+	}
+ %>
+</form>
+<br>
+</div>
+	<%@ include file="../alcinfo/footer.jsp"%>
+</div>
 </body>
-<%@ include file="../alcinfo/footer.jsp"%>
+
 </html>
