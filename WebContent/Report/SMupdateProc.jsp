@@ -11,25 +11,24 @@
 <jsp:useBean id="bean" class="alcinfo.ReportBean"/>
 <jsp:setProperty property="*" name="bean"/>
  <%
- 	//String plusdate=request.getParameter();
-	//int newdate=Integer.request.getParameter("newdate");
+
 	int plusdate= Integer.parseInt(request.getParameter("plusdate"));
-	System.out.println("n 값은"+request.getParameter("num"));
 	String contents= request.getParameter("contents");
 	String stopid=request.getParameter("stopid");
 	ReportBean mBean =rMgr.getEmail(stopid);
 	ReportBean gBean =rMgr.getGrade(stopid);
 	boolean result=mgr.sMupdate(bean,plusdate,stopid,gBean.getGrade());
+	boolean result2=mgr.rMupdate(bean,plusdate,stopid);
+
 	int num=Integer.parseInt(request.getParameter("num"));
 
 	String msg="수정에 실패하였습니다.";
-	String title="부적절한 활동으로 인해 정지되셨습니다.";
+	String title="[우리학원어디]부적절한 활동으로 인해 정지되셨습니다.";
 	String content="";
 	if(result){
-/* 		mgr.deleteSM(num);
- */		
+
  		msg="수정하였습니다.";
-		content=contents+"의 사유로 인해 신고당하셨습니다. 오늘부터 "+plusdate+"일간 계정이 정지됩니다.";
+		content="[우리학원어디]\n"+contents+"의 사유로 인해 신고당하셨습니다. 오늘부터 "+plusdate+"일간 계정이 정지됩니다.";
 		GmailSend.send(title, content,mBean.getEmail());
 		
 	}

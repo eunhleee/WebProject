@@ -113,7 +113,7 @@ input:checked+label {
 							String name = Abean.getAc_name();
 							String group2 = Abean.getGroup2();
 							String tel = Abean.getAc_tel();
-							float star = Abean.getStar();
+							double star = Abean.getStar();
 							int count = Abean.getCount();
 							if (tel.equals(""))
 								tel = "번호 정보가 없습니다.";

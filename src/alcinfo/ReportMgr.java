@@ -419,7 +419,7 @@ public class ReportMgr {
 			System.out.println(bean.getRestate());
 			try {
 				con = pool.getConnection();
-				sql = "update report set restate=? where num=?";
+				sql = "update report set restate=?, newdate=now() where num=?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1,bean.getRestate());
 				pstmt.setInt(2,bean.getNum());
@@ -517,6 +517,27 @@ public class ReportMgr {
 		}
 		return flag;
 	}
+	public boolean rMupdate(ReportBean bean,int plusdate,String stopid) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String sql = null;
+		boolean flag = false;
+		try {
+			con = pool.getConnection();
+			sql = "update report set newdate=now(), restate='완료'"
+					+ "where stopid=?";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1,bean.getStopid());
+			if(pstmt.executeUpdate()==1) 
+				flag=true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt);
+		}
+		return flag;
+	}
 	public int rgetTotalCount(String keyField, String keyWord) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -564,7 +585,8 @@ public class ReportMgr {
 						+" UNION"
 						+" SELECT NAME,id,email"
 						+" FROM letea) a"
-						+" WHERE report.stopid=a.id limit ?,?";
+						+" WHERE report.stopid=a.id"
+						+ " limit ?,?";
 						
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, start);
@@ -581,7 +603,8 @@ public class ReportMgr {
 						+" SELECT NAME,id,email"
 						+" FROM letea) a"
 						+" WHERE report.stopid=a.id and a." + keyField 
-						+" like ? limit ?,?";
+						+" like ? "
+						+ "limit ?,?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, "%"+keyWord+"%");
 				pstmt.setInt(2, start);

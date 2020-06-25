@@ -18,9 +18,11 @@ if(session.getAttribute("idKey")==null||session.getAttribute("idKey").equals("")
 	String id=(String)session.getAttribute("idKey");
 	MemberBean bean=mgr.getUpMember(id);
 	int grade=(Integer)session.getAttribute("idgrade");
-
+	if(bean.getBirth()==null||bean.getBirth().length()==0){
+		System.out.println("값이 들어오지 않았습니다.");
+	}
 	int to=Integer.parseInt(bean.getBirth().substring(4,6)); 
-	int to2=Integer.parseInt(bean.getBirth().substring(6,8));
+	int to2=Integer.parseInt(bean.getBirth().substring(6,8));//바뀜
 	
 	System.out.println("pic"+bean.getImgname());
 	
@@ -134,7 +136,7 @@ function win_close(){
 			document.imFrm.imnickname.focus();
 			return;
 		}
-		url = "../alcinfo/nickCheck.jsp?imnick="+document.imFrm.imnickname.value;
+		url = "nickCheck.jsp?imnick="+document.imFrm.imnickname.value;
 		window.open(url, "NICKCheck", "width=300, height=150, top=200, left=400");
 	}
 
@@ -264,7 +266,19 @@ function win_close(){
 	<div id="atag"><a href="../Mypage/myBoard.jsp">&#149; 내가 쓴 글</a></div>
 	<div id="atag"><a href="../Mypage/MyReportList.jsp">&#149; 나의 신고</a></div>
 	<div id="atag"><a href="../Mypage/myLesson.jsp">&#149; 신청한 과외</a></div>
-	<div id="atag"><a href="../Mypage/myReceiveLesson.jsp">&#149; 신청 받은 과외</a></div>
+	<div id="atag"><a href="../Mypage/myReceiveLesson.jsp">&#149; 신청 받은 과외</a></div>	
+	<% 
+	
+		if(bean.getGrade()==2){	
+	%>
+		<div id="atag"><a href="../Mypage/academyApply.jsp">&#149; 권한 변경 신청</a></div>
+	<%
+		}
+		else if(bean.getGrade()==3){%>
+		<div id="atag"><a href="javascript:void(0);" onclick="javascript:acquestion();">&#149; 권한 변경 신청</a></div>
+		<%}
+	%>
+
 	
 </div>
 <div id="insertMember" class="insertMember1" align="left">

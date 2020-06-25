@@ -115,8 +115,6 @@
 					<td width='45'><img src='../img/search.svg' width='45'
 						height='50' onClick='javascript:searchData();' style="margin-left:15px;"></td>
 					<td width='145'></td>
-			    <input type="text" id="cInput" value="3">
-
 				</tr>
 			</form>
 		</table>

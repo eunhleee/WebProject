@@ -45,60 +45,67 @@
 
 		}
 </script>
+<style>
+
+.totalFrame{
+	background-color:#FAF8EB;
+	margin-top:-40px;
+	padding:40px 0px;
+}
+.subFrame{
+	width:70%;
+	border:1px solid gray;
+	background-color:white;
+	padding:30px 30px;
+	margin-bottom:40px;
+}
+.tdBorder{
+	border-right:3px solid #F88C65;
+}
+
+</style>
 </head>
-<body>
+<body >
 	<%@ include file="../alcinfo/headerSearch.jsp"%>
 	<br>
 	<br>
-		<table width="70%" align="center">
+	<div class="totalFrame" align="center">
+	<div class="subFrame">
+		<table width="100%" >
 			<tr>
-				<td align="center">
-					<table width="100%" style="font-size: 20; background: rgb(250, 248, 235);">
+				<td >
+					<table  style="font-size: 20;" >
 						<tr>
-							<td width="25%" align="center">
-							<img src="../img/banner1.jpg" width="100%" height="250">
-							</td>
-							<td width="60%" height="100%">
-								<table width="100%" style="font-size: 20;">
-									<tr height="50">
-										<td width="30%">학원명</td>
-										<td width="70%"><%=bean.getAc_name()%></td>
+						<td width="95%"><h1><%=bean.getAc_name()%></h1>
+						</td>
+						
+						<td><input type="button" value="문의하기" 	style="font-size: 20;" onclick="moveQnA();"></td>
+						<%	if(session.getAttribute("idKey")==null||session.getAttribute("idKey").equals("")){ %>
+							<td ><input type="button" value="잘못된정보 신고하기" style="font-size: 20;" onclick="goErr();"></td>
+						<%}else{%>
+							<td><input type="submit" value="잘못된정보 신고하기" style="font-size: 20;" onclick="goReport();"></td><%} %>
+						
+						</tr>
+						<tr>
+						<td width="70%">
+						<table width="80%" style="font-size: 17px;"  >
+									
+									<tr height="20">
+										<td class="tdBorder" width="8%">계열</td>
+										<td width="15%">&nbsp;<%=bean.getGroup1()%></td>
+										<td class="tdBorder" width="8%">과정</td>
+										<td width="15%">&nbsp;<%=bean.getGroup2()%></td>
+										<td class="tdBorder" width="8%">번호</td>
+										<td  colspan="3">&nbsp;<%=bean.getAc_tel()%></td>
 									</tr>
-									<tr height="50">
-										<td width="30%">교습계열</td>
-										<td width="70%"><%=bean.getGroup1()%></td>
-									</tr>
-									<tr height="50">
-										<td width="30%">교습과정</td>
-										<td width="70%"><%=bean.getGroup2()%></td>
-									</tr>
-									<tr height="50">
-										<td width="30%">학원주소</td>
-										<td width="100%"><a href=""
-											style="color: black; text-decoration: none;"><%=bean.getAc_address()%></a></td>
-									</tr>
-									<tr height="50">
-										<td width="30%">전화번호</td>
-										<td width="70%"><%=bean.getAc_tel()%></td>
-									</tr>
-								</table>
-							</td>
-							<td width="15%" align="center">
-								<table>
-									<tr>
-										<td><input type="button" value="문의하기"
-											style="font-size: 20;" onclick="moveQnA();"></td>
-									</tr>
-									<tr>
-									<%	if(session.getAttribute("idKey")==null||session.getAttribute("idKey").equals("")){ %>
-									<td><input type="button" value="잘못된정보 신고하기"
-									style="font-size: 20;" onclick="goErr();"></td>
-										<%}else{%><td><input type="submit" value="잘못된정보 신고하기"
-											style="font-size: 20;" onclick="goReport();"></td><%} %>
-											
+									<tr height="5"></tr>
+									<tr height="20">
+										<td class="tdBorder">주소</td>
+										<td colspan="5">&nbsp;<%=bean.getAc_address()%></td>	
 									</tr>
 								</table>
 							</td>
+							
 						</tr>
 					</table>
 				</td>
@@ -108,25 +115,34 @@
 		<br>
 		<table width="70%" height="300" align="center" >
 			<tr>
+			<td>
+				<div style="padding:20px">
+						<img src="../img/banner1.jpg" width="350" height="250">
+				</div>
+			</td>
+			<td  align="center" rowspan="2" >
+				<div style="border:10px solid #36ada9; border-radius:15px; padding:20px; height:100%;">
+					<jsp:include page="academyAskList.jsp"></jsp:include>
+					</div>
+				</td>
+			<tr>
 			
-				<td width="30%" align="center">
+				<td align="center">
 				<div style="border:10px solid #FCBC7E; border-radius:15px; padding:20px">
 					<jsp:include page="mapJsp.jsp">
 					<jsp:param value="<%=bean.getAc_address()%>" name="address" />
 					</jsp:include>
 				</div>
-					</td>
-				<td width="70%"  align="center">
-				<div style="border:10px solid #36ada9; border-radius:15px; padding:20px">
-					<jsp:include page="academyAskList.jsp"></jsp:include>
-					</div>
 				</td>
+				
 			</tr>
 		</table>
 		<br>
-
+		</div>
+		<%@ include file="../alcinfo/footer.jsp"%>
+</div>
 </body>
-<%@ include file="../alcinfo/footer.jsp"%>
+
 </html>
 <%
 	}

@@ -9,7 +9,6 @@
 <jsp:useBean id="acmgr" class="alcinfo.AcademyMgr" />
 <%
 	request.setCharacterEncoding("UTF-8");
-	String loginid = (String)session.getAttribute("idKey");
 	int acrnum = UtilMgr.parseInt(request, "acrnum");
 	String nowPage = request.getParameter("nowPage");
 	String numPerPage = request.getParameter("numPerPage");
@@ -115,7 +114,7 @@
 </style>
 </head>
 <body>
-	
+	<%@ include file="../alcinfo/headerSearch.jsp"%>
 	<br>
 	<br>
 		<table width="70%" align="center">

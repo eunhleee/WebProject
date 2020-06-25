@@ -20,7 +20,14 @@ public class AcademyBean {
 	private String aca_business;
 	private String aca_state;
 	private String aca_id;
+	private String name;
 
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	public String getAca_id() {
 		return aca_id;
 	}

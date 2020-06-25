@@ -115,7 +115,7 @@ public class AcreviewMgr {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = null;
-		int avg=0;
+		double avg=0;
 		try {
 			con = pool.getConnection();
 			sql = "insert acreview(ac_serialnum,ac_title,ac_content,ac_ip,ac_star,"
@@ -141,7 +141,7 @@ public class AcreviewMgr {
 				  }
 			  sql = "update academy set star=? where num=?";
 			  pstmt = con.prepareStatement(sql);
-			  pstmt.setInt(1, avg); 
+			  pstmt.setDouble(1, avg); 
 			  pstmt.setInt(2, bean.getAc_serialnum());
 			  pstmt.executeUpdate();
 			 

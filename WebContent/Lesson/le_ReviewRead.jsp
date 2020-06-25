@@ -78,12 +78,18 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <style>
+.totalFrame{
+	background-color:#FAF8EB;
+	padding:40px 0px;
+}
+
 #readDiv{
-	margin-top:50px;
-	margin-left:15%;
-	width:65%;
+	margin-bottom:40px;
+	margin-left:10%;
+	width:79%;
 	align:center;
-	border: 10px solid #F88C65; 
+	background-color:white;
+	border: 10px solid #36ada9; 
 	border-radius:10px;
 	padding:20px 40px;
 }
@@ -106,6 +112,9 @@ a:hover {
 }
 .lerReply {
 	display:none;
+}
+.tdBorder{
+	border-right:3px solid #56C8D3;
 }
 </style>
 
@@ -235,38 +244,38 @@ function graph(){
 <jsp:include page="../alcinfo/headerSearch.jsp"></jsp:include>
 
 <!-- 읽기 Start -->
-
+<div class="totalFrame">
 <div id="readDiv">
 	<table align="center" cellspacing="3" width="100%" bgcolor="white">
 	 <tr>
 	  <td>
 	   <table cellpadding="3" cellspacing="0" width="100%"> 
 	    <tr height="100"> 
-	    <td colspan="7">
+	    <td colspan="8">
 	    <span style="font-size:30px;"><%=title%></span> 
 	    <% if(loginid!=null) {%>		    
 		 <input type="button" value="신고" onclick="javascript:goRep();" style="float:right;">
 		  <%}%></td>
 		</tr>
-	    <tr height="30"> 
-			<td align="center" bgcolor="#FCBC7E" width="10%" style="color:white; font-weight:bold;" > 닉 네 임</td>
-			<td bgcolor="#FAF8EB" width="10%"><%=id%></td>
-			<td align="center" bgcolor="#FCBC7E" width="10%" style="color:white; font-weight:bold;"> 등록날짜 </td>
-			<td bgcolor="#FAF8EB" width="15%"><%=regdate%></td>
-			<td align="center" bgcolor="#FCBC7E" width="10%" style="color:white; font-weight:bold;">조회수</td>
-			<td bgcolor="#FAF8EB" colspan="3"><%=count%></td>
-		</tr>
-	   <tr> 
-	    <td align="center" bgcolor="#FCBC7E" width="10%" style="color:white; font-weight:bold;" > 평 점</td>
-	    <td bgcolor="#FFFFE8" colspan="5"><%=star%></td>
-	   </tr>
-	   <tr> 
-	    <td colspan="6" height="200"><span><%=content%></span></td>
-	   </tr>
-	   <tr>
-	    <td colspan="3" align="left">
-	    	댓글 <%=ccount%>
-	    </td>
+	    <tr height="20"> 
+				<td class="tdBorder" width="6%" > 닉 네 임</td>
+				<td  width="10%">&nbsp;<%=id%></td>
+				<td class="tdBorder" width="6%" > 등록날짜 </td>
+				<td width="10%">&nbsp;<%=regdate%></td>
+				<td class="tdBorder" width="6%" > 조 회 수</td>
+				<td  width="10%">&nbsp;<%=count%></td>
+				<td class="tdBorder" width="4%"  > 평 점</td>
+		    <td >&nbsp;<img src="../img/star.png" width="10" height="10"><%=star%></td>
+			</tr>
+		   
+		   <tr><td colspan="8"><hr style="border:1px solid lightgray;"></td>
+		   <tr> 
+		    <td colspan="6" height="200"><span><%=content%></span></td>
+		   </tr>
+		   <tr>
+		    <td colspan="3" align="left">
+		    	댓글 <%=ccount%>
+		    </td>
 	   </tr>
 	   </table>
 	  </td>
@@ -450,8 +459,9 @@ function graph(){
 	
 <!-- 읽기 End -->		
 		
-</div>
-
-</body>
+	</div>
 <%@ include file="../alcinfo/footer.jsp"%>
+</div>
+</body>
+
 </html>

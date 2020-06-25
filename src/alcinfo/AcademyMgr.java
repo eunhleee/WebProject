@@ -266,8 +266,9 @@ public class AcademyMgr {
 					try {
 						con = pool.getConnection();
 							//
-							sql = "select num,aca_num, aca_name, aca_identity , aca_business, aca_state,aca_id"
-									+ " from acapply";
+							sql = "select ac.num,ac.aca_num, ac.aca_name, ac.aca_identity, ac.aca_business, ac.aca_state,ac.aca_id" + 
+									",le.name"
+									+ " from acapply ac JOIN letea le ON ac.aca_id=le.id where aca_state='진행중'";
 						pstmt = con.prepareStatement(sql);
 						rs = pstmt.executeQuery();
 						while(rs.next()) { 
@@ -279,6 +280,7 @@ public class AcademyMgr {
 							bean.setAca_business(rs.getString(5));
 							bean.setAca_state(rs.getString(6));
 							bean.setAca_id(rs.getString(7));
+							bean.setName(rs.getString(8));
 
 							vlist.addElement(bean);
 						}
@@ -290,6 +292,7 @@ public class AcademyMgr {
 					}
 					return vlist;
 				}
+				
 				public boolean upAcstate(String id) {
 					Connection con = null;
 					PreparedStatement pstmt = null;
@@ -407,6 +410,45 @@ public class AcademyMgr {
 						pool.freeConnection(con, pstmt);
 					}
 				}
+				public LeteaBean getAcname(String id) {
+					Connection con = null;
+					PreparedStatement pstmt = null;
+					ResultSet rs = null;
+					String sql = null;
+					LeteaBean bean = new LeteaBean();
+					String a="";
+					try {
+						con = pool.getConnection();
+						sql = "SELECT name from letea where id='"+id+"'";
+						pstmt = con.prepareStatement(sql);
+						rs = pstmt.executeQuery();
+
+						if(rs.next()) {
+							bean.setName(rs.getString("name"));
+						}
+					} catch (Exception e) {
+						e.printStackTrace();
+					} finally {
+						pool.freeConnection(con, pstmt, rs);
+					}
+					return bean;
+				}
+				public void Upacnum(String id,int num) {
+					Connection con = null;
+					PreparedStatement pstmt = null;
+					String sql = null;
+					
+					try {
+						con = pool.getConnection();
+						sql = "update letea set ac_num="+num+" where id='"+id+"'";
+						pstmt = con.prepareStatement(sql);
+						pstmt.executeUpdate();
+					} catch (Exception e) {
+						e.printStackTrace();
+					} finally {
+						pool.freeConnection(con, pstmt);
+					}
+				}	
 				
 	}
 
