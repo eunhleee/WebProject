@@ -17,14 +17,14 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 public class ReportMgr {
 	private DBConnectionMgr pool;
 	File file = new File("");
-	private final String  SAVEFOLDER = "C:/WerPro4/WebProject/WebContent/img/";
+	private final String SAVEFOLDER = "C:/Users/admin/git/WebProject/WebContent/StudentImg/"; //학생 사진 경로
+	private final String SAVEFOLDER2 = "C:/Users/admin/git/WebProject/WebContent/TeacherImg/"; //과외선생님 사진 경로
 	private final String ENCTYPE = "UTF-8";
 	private int MAXSIZE = 5*1024*1024;
 	 public ReportMgr() {
 		pool = DBConnectionMgr.getInstance();
-
 	}
-	// img update : 
+	
 		public void insertPBlog(HttpServletRequest req) {
 			Connection con = null;
 			PreparedStatement pstmt = null;
@@ -63,7 +63,7 @@ public class ReportMgr {
 			try {
 				con = pool.getConnection();
 				MultipartRequest multi = 
-						new MultipartRequest(req, SAVEFOLDER, MAXSIZE, ENCTYPE,
+						new MultipartRequest(req, SAVEFOLDER2, MAXSIZE, ENCTYPE,
 								new DefaultFileRenamePolicy());
 				//DefaultFileRenamePolicy() -> 
 				String photo = null;

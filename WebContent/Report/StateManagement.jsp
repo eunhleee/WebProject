@@ -325,9 +325,11 @@ a:hover {
 		<a href="javascript:list()">[처음으로]</a>
 	</td>
 	</tr>
+	
 </table>
-</div>
 <hr width="90%">
+</div>
+
 			</div>
 			<form name="listFr" method="post">
 	<input type="hidden" name="reload" value="true">

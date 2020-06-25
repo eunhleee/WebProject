@@ -247,7 +247,7 @@ public class AcademyMgr {
 							pstmt.setString(4, multi.getFilesystemName("business"));
 						else
 							pstmt.setString(4,"no_image.jpg");
-						pstmt.setString(5,multi.getParameter("ac_id"));
+						pstmt.setString(5,multi.getParameter("aca_id"));
 
 						if(pstmt.executeUpdate()==1) flag = true;
 					} catch (Exception e) {

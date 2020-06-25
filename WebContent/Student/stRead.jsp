@@ -219,8 +219,8 @@ function goErr(){
 				<img src="../StudentImg/<%=stbean.getImgname() %>" width="300" height="250">
 			</div>
 			</td>
-			<td  align="center" rowspan="2">
-					<div style="border:10px solid #36ada9; border-radius:15px; padding:20px">
+			<td  align="center" rowspan="2" style="vertical-align: top;">
+					<div style="height:100%; border:10px solid #36ada9; border-radius:15px; padding:20px;">
 						<jsp:include page="studentAskList.jsp?stunum=<%=stunum %>"/>
 					</div>
 				</td>

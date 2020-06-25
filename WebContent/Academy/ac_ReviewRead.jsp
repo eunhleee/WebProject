@@ -171,7 +171,7 @@ a:hover {
 			 <input type="button" value="신고" onclick="javascript:goRep();" style="float:right;">
 			  <%}%></td>
 			</tr>
-		    <tr height="20"> 
+		    <tr height="30"> 
 				<td class="tdBorder" width="6%" > 닉 네 임</td>
 				<td  width="10%">&nbsp;<%=id%></td>
 				<td class="tdBorder" width="6%" > 등록날짜 </td>

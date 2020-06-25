@@ -53,6 +53,21 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <style>
+.totalFrame{
+	background-color:#FAF8EB;
+	padding:40px 0px;
+}
+
+#readDiv{
+	margin-bottom:40px;
+	margin-left:10%;
+	width:79%;
+	align:center;
+	background-color:white;
+	border: 10px solid #36ada9; 
+	border-radius:10px;
+	padding:20px 40px;
+}
 #list td {
 	border-bottom: 1px solid lightgray;
 }
@@ -133,6 +148,9 @@ a:hover {
 .starR2.on{background-position:-15px 0px;}
 .starRev {
 	margin-left: 10px;
+}
+.tdBorder{
+	border-right:3px solid #56C8D3;
 }
 </style>
 
@@ -246,167 +264,68 @@ function graph(){
 
 </head>
 <body>
-
-	<%@ include file="../alcinfo/headerSearch.jsp"%>
-	<br>
-	<br>
-	<form name="cart" action="">
-		<table width="70%" align="center">
-			<tr>
-				<td align="center">
-					<table width="100%" style="font-size: 20; background: rgb(250, 248, 235);">
-						<tr>
-							<td width="25%" align="center">
-							<img src="../TeacherImg/<%=lebean.getImgname() %>" width="100%" height="250">
-							</td>
-							<td width="60%" height="100%">
-								<table width="100%"  style="font-size: 20;">
-									<tr height="40">
-										<td width="30%">선생님명 / 성별</td>
-										<td width="70%"><%=lebean.getName()%> / <%=lebean.getGender() %></td>
-									</tr>
-									<tr height="40">
-										<td width="30%">과외가능지역</td>
-										<td width="70%"><%=lebean.getArea() %></td>
-									</tr>
-									<tr height="40">
-										<td width="30%">전화번호</td>
-										<td width="70%"><%=lebean.getPhone() %></td>
-									</tr>
-									<tr height="35">
-										<td width="30%">과외 가능한 과목</td>
-										<td width="70%"><%=lebean.getLeclass() %></td>
-									</tr>
-									<tr height="35">
-										<td width="30%">과외중인 학생 수</td>
-										<td width="70%"><%=lebean.getStudent() %>명</td>
-									</tr>
-									<tr height="40">
-										<td width="30%">재학(졸업)중인 학교</td>
-										<td width="70%"><%=lebean.getSchool_name() %></td>
-									</tr>
-									<tr height="40">
-										<td width="30%">비고</td>
-										<td width="70%"><%=lebean.getEtc() %></td>
-									</tr>
-
-								</table>
-							</td>
-							<td width="15%" align="center">
-								<table name="buttonTable">
-									<tr>
-										<td><input type="button" value="문의하기"
-											style="font-size: 20;" onclick="moveQnA();"></td>
-									</tr>
-									<tr>
-										<td><input type="button" value="잘못된정보 신고하기"
-											style="font-size: 20;" onclick="goReport();"></td>
-									</tr>
-									<tr>
-										<td><input type="button" value="신청하기" id="myButton1"
-											style="font-size: 20;" onclick="insert()"></input>
-											</td>
-									</tr>
-									<tr>
-										<td><input type="button" value="취소하기" id="myButton2"
-											style="font-size: 20;" onclick="cancel()"></input>
-											</td>
-									</tr>
-								</table>
-							</td>
-						</tr>
-					</table>
+<%@ include file="../alcinfo/headerSearch.jsp"%>
+<br>
+<br>
+<div class="totalFrame">
+<div id="readDiv">
+	<form name="lerupdateFrm" method="post" action="le_ReviewUpdateProc.jsp">
+		
+	<table align="center" cellspacing="3" width="100%" bgcolor="white">
+	 <tr>
+	  <td>
+	   <table cellpadding="3" cellspacing="0" width="100%"> 
+	    <tr height="100"> 
+	    <td colspan="8">
+	   <input name="lertitle" size="50" maxlength="30" value="<%=title%>" style="font-size:30px;">
+	    <% if(loginid!=null) {%>		    
+		 <input type="button" value="신고" onclick="javascript:goRep();" style="float:right;">
+		  <%}%></td>
+		</tr>
+	    <tr height="20"> 
+				<td class="tdBorder" width="6%" > 닉 네 임</td>
+				<td  width="10%">&nbsp;<%=id%></td>
+				<td class="tdBorder" width="6%" > 등록날짜 </td>
+				<td width="10%">&nbsp;<%=strToday%></td>
+				<td class="tdBorder" width="6%" > 조 회 수</td>
+				<td  width="10%">&nbsp;<%=lrbean.getLr_count()%></td>
+				<td class="tdBorder" width="6%">평 점</td>
+				<td colspan="3">
+					<div class="starRev">
+					<% String[] st = new String[10];
+					int intstar = (int)Math.round(star*2);
+					for(int i=0; i<intstar; i++) st[i]=" on";
+					for(int i=intstar; i<10; i++) st[i]="";%>
+					  <span class="starR1<%=st[0]%>" id="star0" onclick="starclick0()">별1_왼쪽</span>
+					  <span class="starR2<%=st[1]%>" id="star1" onclick="starclick1()">별1_오른쪽</span>
+					  <span class="starR1<%=st[2]%>" id="star2" onclick="starclick2()">별2_왼쪽</span>
+					  <span class="starR2<%=st[3]%>" id="star3" onclick="starclick3()">별2_오른쪽</span>
+					  <span class="starR1<%=st[4]%>" id="star4" onclick="starclick4()">별3_왼쪽</span>
+					  <span class="starR2<%=st[5]%>" id="star5" onclick="starclick5()">별3_오른쪽</span>
+					  <span class="starR1<%=st[6]%>" id="star6" onclick="starclick6()">별4_왼쪽</span>
+					  <span class="starR2<%=st[7]%>" id="star7" onclick="starclick7()">별4_오른쪽</span>
+					  <span class="starR1<%=st[8]%>" id="star8" onclick="starclick8()">별5_왼쪽</span>
+					  <span class="starR2<%=st[9]%>" id="star9" onclick="starclick9()">별5_오른쪽</span>
+					  <input type="hidden" name="lerstar" value="<%=star%>">
+					</div>
 				</td>
 			</tr>
-		</table>
-	</form>
-		<br>
-		<br>
-		<table width="70%" height="280" align="center">
-			<tr>
-				<td width="30%" align="center">
-				<div style="border:10px solid #FCBC7E; border-radius:15px; padding:20px">
-				<button type="button" id="btn" onclick="graph()" >그래프 보기</button>
-				<div id="column_chart_div1"  style="height: 440px; width:300px;"></div>
-				</div>
-				</td>
-				<td width="70%" align="center">
-<!-- 글수정 Start -->	
-
-	<div style="border:10px solid #36ada9; border-radius:15px; padding:20px">
-	<h2><%=lebean.getName()%>선생님 리뷰</h2>
-	<hr style="border:1px solid #36ada9;">
-		<br/>
-		<form name="lerupdateFrm" method="post" action="le_ReviewUpdateProc.jsp">
-		<table width="600" cellpadding="3" align="center">
-			<tr>
-				<td align=center>
-				<table align="center">
-					<tr>
-						<td>작성자</td>
-						<td>
-						<div id="inputdiv3">
-						<input size="50" maxlength="30" disabled="disabled"
-						value="<%=loginid%>">
-						</div>
-						</td>
-						<td>작성일</td>
-						<td>
-						<div id="inputdiv3">
-						<input size="50" maxlength="30" disabled="disabled"
-						value="<%=strToday%>">
-						</div>
-						</td>
-					</tr>
-					<tr>
-						<td>제 목</td>
-						<td colspan="3">
-						<div id="inputdiv2">
-						<input name="lertitle" size="50" maxlength="30" value="<%=title%>">
-						</div>
-						</td>
-					</tr>
-					<tr>
-						<td>평 점</td>
-						<td colspan="3">
-							<div class="starRev">
-							<% String[] st = new String[10];
-							int intstar = (int)Math.round(star*2);
-							for(int i=0; i<intstar; i++) st[i]=" on";
-							for(int i=intstar; i<10; i++) st[i]="";%>
-							  <span class="starR1<%=st[0]%>" id="star0" onclick="starclick0()">별1_왼쪽</span>
-							  <span class="starR2<%=st[1]%>" id="star1" onclick="starclick1()">별1_오른쪽</span>
-							  <span class="starR1<%=st[2]%>" id="star2" onclick="starclick2()">별2_왼쪽</span>
-							  <span class="starR2<%=st[3]%>" id="star3" onclick="starclick3()">별2_오른쪽</span>
-							  <span class="starR1<%=st[4]%>" id="star4" onclick="starclick4()">별3_왼쪽</span>
-							  <span class="starR2<%=st[5]%>" id="star5" onclick="starclick5()">별3_오른쪽</span>
-							  <span class="starR1<%=st[6]%>" id="star6" onclick="starclick6()">별4_왼쪽</span>
-							  <span class="starR2<%=st[7]%>" id="star7" onclick="starclick7()">별4_오른쪽</span>
-							  <span class="starR1<%=st[8]%>" id="star8" onclick="starclick8()">별5_왼쪽</span>
-							  <span class="starR2<%=st[9]%>" id="star9" onclick="starclick9()">별5_오른쪽</span>
-							  <input type="hidden" name="lerstar" value="<%=star%>">
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<td>내 용</td>
-						<td colspan="3">
-						<div id="textareadiv">
-							<textarea name="lercontent" rows="10" cols="50"><%=content%></textarea>
-						</div>
-						</td>
-					</tr>
-					<tr>
-						<td colspan="4" align="center">
-							 <input type="submit" value="수정">
-							 <input type="reset" value="다시쓰기">
-							 <input type="button" value="취소"
-							 onClick="javascript:location.href='<%=prevurl%>'">
-						</td>
-					</tr>
-				</table>
-				</td>
-			</tr>
+		   
+		   <tr><td colspan="8"><hr style="border:1px solid lightgray;"></td>
+		   <tr> 
+		    <td colspan="6" height="200"><textarea name="lercontent" rows="10" cols="100"><%=content%></textarea></td>
+		   </tr>
+		   <tr>
+			<td colspan="4" align="center">
+				 <input type="submit" value="수정">
+				 <input type="reset" value="다시쓰기">
+				 <input type="button" value="취소"
+				 onClick="javascript:location.href='<%=prevurl%>'">
+			</td>
+		</tr>
+	</table>
+	</td>
+</tr>
 		</table>
 		 <input type="hidden" name="lernick" value="<%=nickname%>">
 		 <input type="hidden" name="lerip" value="<%=request.getRemoteAddr()%>">
@@ -425,15 +344,17 @@ function graph(){
 			}
 		%>
 	</form>
-	</div>			
+		
 
 <!-- 글수정 End -->		
 		
 				
-				</td>
-			</tr>
-		</table>
 		<br>
+		</div>		
+		<%@ include file="../alcinfo/footer.jsp"%>
+</div>
+		
+
 </body>
-<%@ include file="../alcinfo/footer.jsp"%>
+
 </html>

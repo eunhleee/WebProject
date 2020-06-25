@@ -28,7 +28,6 @@
 	float:left;
 	border:10px solid #FCBC7E;
 	border-radius:15px;
-	background-color:white;
 	width:250px;
 	height:300px;
 	padding:30px 0px;

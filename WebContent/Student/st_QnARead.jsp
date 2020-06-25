@@ -74,14 +74,21 @@
 <meta charset="UTF-8">
 <title>우리 학원 어디?-학생 문의</title>
 <style>
+
+#totalFrame{
+
+	background-color:#FAF8EB;
+	padding:40px 0px;
+}
 #readDiv{
-	margin-top:50px;
-	margin-left:15%;
-	width:65%;
+	margin-bottom:40px;
+	margin-left:10%;
+	width:79%;
 	align:center;
-	border: 10px solid #F88C65; 
+	border: 10px solid #36ada9; 
 	border-radius:10px;
 	padding:20px 40px;
+	background-color:white;
 }
 #list td {
 	border-bottom: 1px solid lightgray;
@@ -99,6 +106,9 @@ a {
 
 a:hover {
 	color: gray;
+}
+.tdBorder{
+	border-right:3px solid #56C8D3;
 }
 .stqReply {
 	display:none;
@@ -201,25 +211,26 @@ function goCReport(conum,stuc_depth,stopid) {
 <jsp:include page="../alcinfo/headerSearch.jsp"></jsp:include>
 
 <!-- 글읽기 Start -->
+<div id="totalFrame">
 	<div id="readDiv">
 		<table align="center" cellspacing="3" width="100%" bgcolor="white">
 		 <tr>
 		  <td>
 		   <table cellpadding="3" cellspacing="0" width="100%">
 		    <tr height="100"> 
-			    <td colspan="7">
+			    <td colspan="6">
 			    <span style="font-size:30px;"><%=title%></span> 
 			    <% if(loginid!=null) {%>		    
 				<input type="button" value="신고" onclick="javascript:goRep();" style="float:right;">
 				<%}%></td>
 		 </tr>
-		    <tr> 
-				<td align="center" bgcolor="#FCBC7E" width="10%" style="color:white; font-weight:bold;" > 닉 네 임</td>
-				<td bgcolor="#FAF8EB" width="10%"><%=id%></td>
-				<td align="center" bgcolor="#FCBC7E" width="10%" style="color:white; font-weight:bold;"> 등록날짜 </td>
-				<td bgcolor="#FAF8EB" width="15%"><%=regdate%></td>
-				<td align="center" bgcolor="#FCBC7E" width="10%" style="color:white; font-weight:bold;">조회수</td>
-				<td bgcolor="#FAF8EB" colspan="3"><%=count%></td>
+		    <tr height="20"> 
+				<td class="tdBorder" width="8%" > 닉 네 임</td>
+				<td  width="10%">&nbsp;<%=id%></td>
+				<td class="tdBorder" width="8%" > 등록날짜 </td>
+				<td width="10%">&nbsp;<%=regdate%></td>
+				<td class="tdBorder" width="8%" > 조 회 수</td>
+				<td  >&nbsp;<%=count%></td>
 			</tr>
 		   <tr> 
 		    <td colspan="6" height="200"><span><%=content%></span></td>
@@ -398,8 +409,10 @@ function goCReport(conum,stuc_depth,stopid) {
 		 </tr>
 		</table>
 		</div>
+	<%@ include file="../alcinfo/footer.jsp"%>
+</div>
 <!-- 글읽기 End -->
 
 </body>
-<%@ include file="../alcinfo/footer.jsp"%>
+
 </html>

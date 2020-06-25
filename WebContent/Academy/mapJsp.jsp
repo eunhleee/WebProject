@@ -1,9 +1,10 @@
 <!-- 지도 출력 창 -->
+<%@page import="java.net.URLDecoder"%>
 <%@ page contentType="text/html; charset=utf-8"%>
 
 <%
 		request.setCharacterEncoding("utf-8");	
-		String address=request.getParameter("address");
+		String address=URLDecoder.decode(request.getParameter("address"),"UTF-8");
 		
 %>
 

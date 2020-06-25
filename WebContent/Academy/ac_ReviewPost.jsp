@@ -1,4 +1,5 @@
 <!-- 학원 리뷰 글쓰기 -->
+<%@page import="java.net.URLEncoder"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="alcinfo.UtilMgr"%>
@@ -7,7 +8,7 @@
 	pageEncoding="UTF-8"%>
 <jsp:useBean id="mgr" class="alcinfo.AcademyMgr" />
 <%
-	request.setCharacterEncoding("UTF-8");
+	request.setCharacterEncoding("UTF-8"); 
 	String nowPage = request.getParameter("nowPage");
 	String numPerPage = request.getParameter("numPerPage");
 	String keyField = request.getParameter("keyField");	
@@ -33,7 +34,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <title>우리 학원 어디?-학원 리뷰</title>
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="./grade.js"></script>
@@ -287,7 +288,7 @@ function moveQnA(){
 				<td align="center">
 				<div style="border:10px solid #FCBC7E; border-radius:15px; padding:20px">
 					<jsp:include page="mapJsp.jsp">
-					<jsp:param value="<%=bean.getAc_address()%>" name="address" />
+					<jsp:param value='<%=URLEncoder.encode(bean.getAc_address(),"UTF-8")%>' name="address" />
 					</jsp:include>
 				</div>
 				</td>
