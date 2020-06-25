@@ -15,7 +15,7 @@
 		new daum.Postcode({
 			oncomplete:function(data) {
 				jQuery("#postcode1").val(data.postcode1);
-				jQuery("#postcode2").val(data.postcode2);
+				jQuery("#postcode2").val(data.postcode2)
 				jQuery("#zonecode").val(data.zonecode);
 				jQuery("#address").val(data.address);
 				jQuery("#address_etc").focus();
@@ -40,6 +40,16 @@
 		}
 		url = "../login/nickCheck.jsp?imnick="+document.imFrm.imnickname.value;
 		window.open(url, "NICKCheck", "width=300, height=150, top=200, left=400");
+	}
+	function checkNum(e) {
+	    var keyVal = event.keyCode;
+    	if(((keyVal >= 48) && (keyVal <= 57))){
+        	return true;
+    	}
+   		else{
+        	alert("숫자만 입력가능합니다");
+        return false;
+    	}
 	}
 </script>
 <style>
@@ -201,7 +211,7 @@
 							<td width="100px">&nbsp;휴대폰번호</td>
 							<td >
 								<div id="inputdiv" style="width:270px;">
-									<input type="text" style="width:260px; height:30px;" placeholder=" '-' 빼고 입력" maxlength="11" name="imphone">
+									<input type="text" style="width:260px; height:30px;" onKeyPress="return checkNum(event)" placeholder=" '-' 빼고 입력" maxlength="11" name="imphone">
 								</div>
 							</td>
 						</tr>
@@ -263,7 +273,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td align="right"><button  id="btnJoin"  onclick="inputCheck();">가입신청</button></td>
+				<td align="right"><button type="button" id="btnJoin" onclick="inputCheck();">가입신청</button></td>
 			</tr>
 		</table>
 	</form>
