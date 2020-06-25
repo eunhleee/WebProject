@@ -28,11 +28,9 @@ public class MemberMgr {
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
-				
 				bean.setName(rs.getString(1));
 				bean.setAddress(rs.getString(2));
 				bean.setPhone(rs.getString(3));
-
 			} 
 			
 		} catch (Exception e) {

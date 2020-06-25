@@ -154,7 +154,7 @@ function win_close(){
 	background-color:#FAF8EB;
 	display:flex;
 	width:96.5%;
-	height:100%;
+	height:110%;
 	padding:30px;
 	
 }
