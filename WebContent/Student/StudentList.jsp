@@ -40,8 +40,8 @@
 							<a href="stRead.jsp?stunum=<%=num%>"><%=name %></a>
 						</h6>
 						<p class="text-muted card-text"><%=school_name %>
-							&nbsp;
-							<%=school_grade %></p>
+							&nbsp;	<%=school_grade %><br>
+							&nbsp;	<%=stclass %></p>
 					</div>
 					<div align="right" style="margin-right: 20px;">
 						(<%=count %>)

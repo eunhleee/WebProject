@@ -67,8 +67,8 @@
 <style>
 #readDiv{
 	margin-top:50px;
-	margin-left:15%;
-	width:65%;
+	margin-left:10%;
+	width:79%;
 	align:center;
 	border: 10px solid #F88C65; 
 	border-radius:10px;
@@ -94,6 +94,10 @@ a:hover {
 .csReply {
 	display:none;
 }
+.tdBorder{
+	border-right:3px solid #FCBC7E;
+}
+
 </style>
 <script>
 function down(filename) {
@@ -152,28 +156,30 @@ function goCReport(conum,ccr_depth,stopid) {
 				<input type="button" value="신고" onclick="javascript:goRep();" style="float:right;">
 				<%}%></td>
 		 	</tr>
-		    <tr> 
-				<td align="center" bgcolor="#FCBC7E" width="10%" style="color:white; font-weight:bold;" > 닉 네 임</td>
-				<td bgcolor="#FAF8EB" width="10%"><%=id%></td>
-				<td align="center" bgcolor="#FCBC7E" width="10%" style="color:white; font-weight:bold;"> 등록날짜 </td>
-				<td bgcolor="#FAF8EB" width="15%"><%=regdate%></td>
-				<td align="center" bgcolor="#FCBC7E" width="10%" style="color:white; font-weight:bold;">조회수</td>
-				<td bgcolor="#FAF8EB" colspan="3"><%=count%></td>
+		    <tr height="20"> 
+				<td class="tdBorder" width="6%" > 닉 네 임</td>
+				<td  width="10%">&nbsp;<%=id%></td>
+				<td class="tdBorder" width="6%" > 등록날짜 </td>
+				<td width="10%">&nbsp;<%=regdate%></td>
+				<td class="tdBorder" width="6%" > 조 회 수</td>
+				<td  >&nbsp;<%=count%></td>
 			</tr>
+			<tr height="5"></tr>
 		   <tr> 
-		     <td align="center" bgcolor="#FCBC7E" style="color:white; font-weight:bold;" > 첨부파일</td>
-		     <td bgcolor="#FFFFE8" colspan="5">
+		     <td class="tdBorder" >첨부파일</td>
+		     <td  colspan="5" >
 		    	<%
 		    		if(filename!=null&&!filename.equals("")){
 		    	%>
-		    		<a href="javascript:down('<%=filename%>')"><%=filename%></a>
-		    		<font color="blue">(<%=UtilMgr.intFormat(filesize)%>bytes)</font>
+		    		<a href="javascript:down('<%=filename%>')" style="margin-right:15px;">&nbsp;<%=filename%></a>
+		    		<font color="lightgray">(<%=UtilMgr.intFormat(filesize)%>bytes)</font>
 		    	<%
 		    		} else {
-		    			out.println("첨부된 파일이 없습니다.");
+		    			out.println(" 첨부된 파일이 없습니다.");
 		    		}
 		    	%>
 		     </td>
+		   </tr>
 		   </tr>
 		   <tr> 
 		    <td colspan="6" height="200"><span><%=content%></span></td>
