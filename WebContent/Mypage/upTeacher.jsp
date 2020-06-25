@@ -1,9 +1,10 @@
-<%@page import="alcinfo.LeteaBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> 
 <jsp:useBean id="mpbean" class="alcinfo.LeteaBean"/>
 <jsp:setProperty property="*" name="mpbean"/>
 <jsp:useBean id="mgr" class="alcinfo.LeteaMgr"/>
-    
+<jsp:useBean id="aMgr" class="alcinfo.AcademyMgr" />
+<%@page import="alcinfo.LeteaBean"%>
+
 <%
 if(session.getAttribute("idKey")==null||session.getAttribute("idKey").equals("")){
 	response.sendRedirect("../alcinfo/cards-gallery.jsp");
@@ -11,13 +12,11 @@ if(session.getAttribute("idKey")==null||session.getAttribute("idKey").equals("")
 	else{
 	String id=(String)session.getAttribute("idKey");
 	LeteaBean bean=mgr.getUpTeacher(id);
-	int grade=(Integer)session.getAttribute("idgrade");
-
+	LeteaBean gbean=mgr.getgrade(id);
+	int grade=gbean.getGrade();
+	
 	int to=Integer.parseInt(bean.getBirth().substring(4,6)); 
-	int to2=Integer.parseInt(bean.getBirth().substring(6,8));
-	
-	System.out.println("pic"+bean.getImgname());
-	
+	int to2=Integer.parseInt(bean.getBirth().substring(6,8));	
 %>
 <html>
 <head>
@@ -133,8 +132,21 @@ function win_close(){
 	}
 
 	function imgcheck(){
-		url = "../Mypage/ImgProc.jsp";
+		url = "../Mypage/ImgProc2.jsp";
 		window.open(url, "imggo", "width=500, height=500, top=200, left=200");
+	}
+	
+	function acquestion(id){
+		msg="선생님으로 권한을 변경하시겠습니까?";
+		if(confirm(msg)){
+			<%
+			aMgr.Uptea(id);
+			%>
+			alert("변경되셨습니다.");
+			window.location.reload();
+		}else{
+			
+		}
 	}
 </script>
 <style>
@@ -142,7 +154,7 @@ function win_close(){
 	background-color:#FAF8EB;
 	display:flex;
 	width:96.5%;
-	height:100%;
+	height:110%;
 	padding:30px;
 	
 }
@@ -241,16 +253,24 @@ function win_close(){
 <div id="totalframe">
 <div id="categoryframe">
 	<h3 style="margin-left:50px;">마이 페이지</h3>
-	<div id="atag"><a href="../Mypage/upTeachar.jsp">&#149; 개인 정보 수정</a></div>
+	<div id="atag"><a href="../Mypage/upTeacher.jsp">&#149; 개인 정보 수정</a></div>
 	<div id="atag"><a href="../Mypage/myBoard.jsp">&#149; 내가 쓴 글</a></div>
 	<div id="atag"><a href="../Mypage/MyReportList.jsp">&#149; 나의 신고</a></div>
 	<div id="atag"><a href="../Mypage/myStudent.jsp">&#149; 내가 신청한 학생</a></div>
 	<div id="atag"><a href="../Mypage/myReceiveStudent.jsp">&#149; 과외 신청함</a></div>
-	<div id="atag"><a href="">&#149; 권한 변경 신청</a></div>
-	
+	<% 
+		if(grade==2){	
+	%>
+		<div id="atag"><a href="../Mypage/academyApply.jsp">&#149; 권한 변경 신청</a></div>
+	<%
+		}
+		else if(grade==3){%>
+		<div id="atag"><a href="javascript:void(0);" onclick="javascript:acquestion();">&#149; 권한 변경 신청</a></div>
+		<%}
+	%>	
 </div>
 <div id="insertMember" class="insertMember1" align="left">
-	<form name="imFrm" class="im-content" method="post" action="../Mypage/upmemberProc.jsp">
+	<form name="imFrm" class="im-content" method="post" action="../Mypage/upmemberProc2.jsp">
 		<table style="width:700px; margin-left:-50px;">
 			<tr>
 				<td colspan="4">

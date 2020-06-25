@@ -23,6 +23,7 @@
 	if(lresult){
 		if(gBean.getMdate()==null||gBean.getMdate().length()==0){
 			session.setAttribute("idKey",lid);
+		   
 		    lmsg = "로그인에 성공 하였습니다.";
 			url=request.getHeader("referer");
 		} else {

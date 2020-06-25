@@ -61,12 +61,13 @@ public class LessonMgr {
 			try {
 				con = pool.getConnection();
 				if(pageValue.equals("top")) {
-					sql = "select le.num,le.id,tea.name,le.class,tea.area,le.star,le.count "
+					sql = "select le.num,tea.imgname,le.id,tea.name,le.class,tea.area,le.star,le.count "
 							+ " from lesson le,letea tea where le.id=tea.id order by le.star desc";
 				pstmt = con.prepareStatement(sql);
 				}
 				else {
-					sql = "select le.num,le.id,tea.name,le.class,tea.area,le.star,le.count "
+					
+					sql = "select le.num,le.id,tea.imgname,tea.name,le.class,tea.area,le.star,le.count "
 							+ " from lesson le,letea tea where le.id=tea.id and le.class like ? order by "+sort+"  desc";
 					
 					pstmt = con.prepareStatement(sql);
@@ -78,6 +79,7 @@ public class LessonMgr {
 				while(rs.next()) {
 					LessonBean bean = new LessonBean();
 					bean.setNum(rs.getInt("le.num"));
+					bean.setImgname(rs.getString("tea.imgname"));
 					bean.setId(rs.getString("le.id"));
 					bean.setName(rs.getString("tea.name"));
 					bean.setLeclass(rs.getString("le.class"));
@@ -106,7 +108,7 @@ public class LessonMgr {
 		Vector<LessonBean> vlist= new Vector<LessonBean>();
 		try {
 			con = pool.getConnection();
-			sql = "select le.num,le.id,tea.name,le.class,tea.area,le.star,le.count "
+			sql = "select le.num,tea.imgname,le.id,tea.name,le.class,tea.area,le.star,le.count "
 					+ " from lesson le,letea tea where le.id=tea.id order by le.count desc";
 			pstmt = con.prepareStatement(sql);
 			
@@ -115,6 +117,7 @@ public class LessonMgr {
 			while(rs.next()) {
 				LessonBean bean = new LessonBean();
 				bean.setNum(rs.getInt("le.num"));
+				bean.setImgname(rs.getString("tea.imgname"));
 				bean.setId(rs.getString("le.id"));
 				bean.setName(rs.getString("tea.name"));
 				bean.setLeclass(rs.getString("le.class"));

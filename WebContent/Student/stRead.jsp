@@ -140,6 +140,7 @@ function goErr(){
 				<td align="center">
 					<table width="100%" style="font-size: 20;">
 						<tr>
+
 							<td>
 								<h1><%=stbean.getName()%> <font style="font-size:25px; color:lightgray;">학생</font></h1>
 							</td>
@@ -156,7 +157,7 @@ function goErr(){
 										<td width="10%">&nbsp;<%=stbean.getStclass() %></td>
 										<td class="tdBorder" width="8%">번호</td>
 										<td colspan="2">&nbsp;<%=stbean.getPhone()%></td>
-										
+
 									</tr>
 									<tr height="5"></tr>
 									<tr height="20">

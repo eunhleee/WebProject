@@ -103,7 +103,7 @@ function openlogoutProc(){
 			<a href="../Mypage/upMember.jsp">마이페이지</a>
 			<%}
 			if(logingrade==2||logingrade==3){ %>
-			<a href="../Mypage/upTeachar.jsp">마이페이지</a>
+			<a href="../Mypage/upTeacher.jsp">마이페이지</a>
 			<%
 				}
 			} %>

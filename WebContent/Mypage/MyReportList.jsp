@@ -6,6 +6,7 @@
 <%@page import="java.util.Vector"%>
 <jsp:useBean id="rMgr" class="alcinfo.ReportMgr"/>
 <jsp:useBean id="HeaderMmgr" class="member.MemberMgr"/>
+<jsp:useBean id="aMgr" class="alcinfo.AcademyMgr" />
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%
 		
@@ -91,6 +92,18 @@ function numPerFn(numPerPage) {
 	document.readFrm.numPerPage.value = numPerPage;
 	document.readFrm.submit();
 }
+function acquestion(id){
+	msg="선생님으로 권한을 변경하시겠습니까?";
+	if(confirm(msg)){
+		<%
+		aMgr.Uptea(reid);
+		%>
+		alert("변경되셨습니다.");
+		window.location.reload();
+	}else{
+		
+	}
+}
 </script>
 <style>
 #totalframe{
@@ -175,13 +188,20 @@ select{
 		<div id="atag"><a href="../Mypage/myLesson.jsp">&#149; 신청한 과외</a></div>
 		<div id="atag"><a href="../Mypage/myReceiveLesson.jsp">&#149; 신청 받은 과외</a></div>
 		<%}else{ %>
-		<div id="atag"><a href="../Mypage/upTeachar.jsp">&#149; 개인 정보 수정</a></div>
+		<div id="atag"><a href="../Mypage/upTeacher.jsp">&#149; 개인 정보 수정</a></div>
 		<div id="atag"><a href="../Mypage/myBoard.jsp">&#149; 내가 쓴 글</a></div>
 		<div id="atag"><a href="../Mypage/MyReportList.jsp">&#149; 나의 신고</a></div>
 		<div id="atag"><a href="../Mypage/myStudent.jsp">&#149; 내가 신청한 학생</a></div>
 		<div id="atag"><a href="../Mypage/myReceiveStudent.jsp">&#149; 과외 신청함</a></div>
-		<div id="atag"><a href="">&#149; 권한 변경 신청</a></div>
-		<%} %>
+	<% 
+		if(logingrade==2){	
+	%>
+		<div id="atag"><a href="../Mypage/academyApply.jsp">&#149; 권한 변경 신청</a></div>
+	<%
+		}
+		else if(logingrade==3){%>
+		<div id="atag"><a href="javascript:void(0);" onclick="javascript:acquestion();">&#149; 권한 변경 신청</a></div>
+		<%}}%>
 	</div>
     <!--nav-->
   <div id="insertMember" class="insertMember1" align="left">

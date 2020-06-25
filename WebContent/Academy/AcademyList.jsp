@@ -121,7 +121,7 @@ input:checked+label {
 					<div class="col-md-6 col-lg-4">
 						<div class="card border-0 transform-on-hover">
 							<a class="lightbox" href="acRead.jsp?num=<%=num%>"> <img
-								src="../img/no_image.jpg" alt="Card Image" class="card-img-top">
+								src="../AcademyImg/<%=img %>" width="350" height="200" alt="Card Image" class="card-img-top">
 							</a>
 							<div class="card-body">
 								<h6>

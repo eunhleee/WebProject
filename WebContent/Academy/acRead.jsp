@@ -76,6 +76,7 @@
 				<td >
 					<table  style="font-size: 20;" >
 						<tr>
+
 						<td width="95%"><h1><%=bean.getAc_name()%></h1>
 						</td>
 						
@@ -97,7 +98,6 @@
 										<td width="15%">&nbsp;<%=bean.getGroup2()%></td>
 										<td class="tdBorder" width="8%">번호</td>
 										<td  colspan="3">&nbsp;<%=bean.getAc_tel()%></td>
-									</tr>
 									<tr height="5"></tr>
 									<tr height="20">
 										<td class="tdBorder">주소</td>
