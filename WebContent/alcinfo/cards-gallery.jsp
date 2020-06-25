@@ -50,7 +50,7 @@
 				<div class="col-md-6 col-lg-4">
 					<div class="card border-0 transform-on-hover">
 						<a class="lightbox" href="../Academy/acRead.jsp?num=<%=num%>"> <img
-							src="../img/no_image.jpg" alt="Card Image" class="card-img-top">
+							src="../AcademyImg/<%=img%>" width="350" height="200" alt="Card Image" class="card-img-top">
 						</a>
 						<div class="card-body">
 							<h6>
@@ -89,6 +89,7 @@
 	        		LessonBean Lbean=Lvlist.get(i);
 	        		//le.num,tea.name,tea.class,tea.area,le.star,le.count
 	        		int num=Lbean.getNum();
+	        		String img=Lbean.getImgname();
 	        		String id=Lbean.getId();
 	        		String name=Lbean.getName();
 	        		String leclass=Lbean.getLeclass();
@@ -99,7 +100,7 @@
 				<div class="col-md-6 col-lg-4">
 					<div class="card border-0 transform-on-hover">
 						<a class="lightbox" href="../Lesson/leRead.jsp?num=<%=num %>&id=<%=id%>"> <img
-							src="../img/no_image.jpg" alt="Card Image" class="card-img-top">
+							src="../TeacherImg/<%=img%>" width="350" height="200" alt="Card Image" class="card-img-top">
 						</a>
 						<div class="card-body">
 							<h6>
