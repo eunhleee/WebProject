@@ -298,5 +298,22 @@ public class LeteaMgr {
 			}
 			return bean;
 		}
-	
+		
+		//등록한 글 삭제하기
+		public void deleteLesson(int num) {
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			String sql = null;
+			try {
+				con = pool.getConnection();
+				sql = "delete from lesson where num=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, num);
+				pstmt.executeUpdate();
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				pool.freeConnection(con, pstmt);
+			}
+		}
 }

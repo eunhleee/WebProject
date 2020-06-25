@@ -18,6 +18,8 @@
 	int num=Integer.parseInt(request.getParameter("stunum"));
 	MemberBean mbean=Rmgr.getStuId(num);
 	//System.out.println("학생의 아이디는"+mbean.getId());
+	String logid = (String)session.getAttribute("idKey");
+	
 
 	if(request.getParameter("stunum") == null) {
 		//response.sendRedirect(url);
@@ -108,6 +110,9 @@ function goErr(){
 	alert("로그인을 해주세요");
 
 }
+function deleteStudent() {
+	location.href = "stDelete.jsp?num=<%=num%>";
+}
 
 </script>
 
@@ -170,7 +175,15 @@ function goErr(){
 									<tr>
 										<td><input type="button" value="취소하기" id="myButton2"
 											style="font-size: 20;" onclick="deleteT();"></td>
-									</tr>								
+									</tr>
+									<% if(session.getAttribute("idKey")!=null) {
+										if(logid.equals(mbean.getId()) || Lmgr.checkM(logid)==0) {
+									%>
+									<tr>
+										<td><input type="button" value="삭제하기" id="myButton3"
+										style="font-size: 20;" onclick="deleteStudent();"></td>
+									</tr>	
+									<% } }%>
 								</table>
 							</td>
 						</tr>

@@ -5,6 +5,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <jsp:useBean id="mgr" class="alcinfo.LessonMgr" />
+<jsp:useBean id="Lmgr" class="alcinfo.LeteaMgr" />
 <jsp:useBean id="Mmgr" class="alcinfo.MemberMgr" />
 
 <%
@@ -13,6 +14,7 @@
 	String url = "LessonMain.jsp?pageValue=top";
 	LessonBean lebean = null;
 	int num = UtilMgr.parseInt(request, "num"); 
+	String logid = (String)session.getAttribute("idKey"); 
 	
 	if(request.getParameter("id") == null) {
 		response.sendRedirect(url);
@@ -108,10 +110,11 @@ function graph(){
 	}
 		
 	function goErr(){
-		alert("로그인을 해주세요");
-
+		alert("로그인 후 이용가능합니다.");
 	}
-
+	function deleteLesson() {
+		location.href = "leDelete.jsp?num=<%=num%>";
+	}
 	
 </script>
 
@@ -186,6 +189,14 @@ function graph(){
 											style="font-size: 20;" onclick="cancel()"></input>
 											</td>
 									</tr>
+									<% if(session.getAttribute("idKey")!=null) {
+										if(logid.equals(lebean.getId()) || Lmgr.checkM(logid)==0) {
+									%>
+									<tr>
+										<td><input type="button" value="삭제하기" id="myButton3"
+										style="font-size: 20;" onclick="deleteLesson();"></td>
+									</tr>	
+									<% } }%>
 								</table>
 							</td>
 						</tr>

@@ -67,8 +67,6 @@ public class LessonMgr {
 				}
 				else {
 					sql = "select le.num,tea.imgname,le.id,tea.name,le.class,tea.area,le.star,le.count "
-							+ " from lesson le,letea tea where le.id=tea.id and le.class like ? order by ?  desc";
-					sql = "select le.num,le.id,tea.name,le.class,tea.area,le.star,le.count "
 							+ " from lesson le,letea tea where le.id=tea.id and le.class like ? order by "+sort+"  desc";
 					
 					pstmt = con.prepareStatement(sql);
