@@ -140,8 +140,16 @@ a:hover {
 	color:White;	
 	border: none;
 	border-radius:20px;
-	font-weight: bold;
-	
+	font-weight: bold;	
+}
+.nulltable{
+border:10px solid #CEF279;
+border-radius:10px;
+padding-bottom:50px;
+padding-top:50px;
+margin-bottom:50px;
+margin-top:50px;
+
 }
 </style>
 </head>
@@ -171,7 +179,13 @@ a:hover {
 	int listStze = mvlist.size();
 	if(mvlist.isEmpty()){
 		%>
-		<input id="novalue" type="text" value="신청된 것이 없습니다." readonly="readonly">
+		<table width="80%" class="nulltable">
+			<tr>
+				<td align="center" colspan="2">
+				 신청된 것이 없습니다.
+				</td>
+			</tr>
+		</table>
 	<%}else{
 		for(int i=0;i<mvlist.size();i++){
 		AcademyBean mbean=mvlist.get(i);
