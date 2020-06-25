@@ -93,12 +93,12 @@ function cDel(conum, cnum, depth) {
 function goRep() {
 	
 	url = "leQReport.jsp?stopid=<%=id%>&renum=<%=num%>";
-	window.open(url, "GoReport", 'width=360, height=300, top=200, left=300');
+	window.open(url, "GoReport", 'width=900, height=560, top=200, left=300');
 }
 
 function goCReport(conum,stuc_depth,stopid) {
 	url = "leQCReport.jsp?conum="+conum+"&stuc_depth="+stuc_depth+"&renum="+<%=num%>+"&stopid="+stopid;
-	window.open(url, "GoReport", "width=360, height=300, top=200, left=300");
+	window.open(url, "GoReport", "width=900, height=560, top=200, left=300");
 	}
 
 
