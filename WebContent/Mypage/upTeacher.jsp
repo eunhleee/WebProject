@@ -133,7 +133,7 @@ function win_close(){
 
 	function imgcheck(){
 		url = "../Mypage/ImgProc2.jsp";
-		window.open(url, "imggo", "width=500, height=500, top=200, left=200");
+		window.open(url, "imggo", "width=350, height=400, top=50, left=50");
 	}
 	
 	function acquestion(id){

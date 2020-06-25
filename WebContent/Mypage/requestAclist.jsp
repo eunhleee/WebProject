@@ -19,7 +19,18 @@
 .wrapper{
 display:grid;
   grid-template-columns: 1fr 1fr;
+}
+.pho{
+padding-top:30px;
+}
+.tdmgr{
+margin-top:15px;
+margin-left:10px;
+margin-right:10px;
 
+padding-left:100px;
+border:10px solid #CEF76E; 
+border-radius:10px;
 
 }
 #listtable{
@@ -95,25 +106,6 @@ a:hover {
 	
 }
 </style>
-</head>
-<meta charset="UTF-8">
-
-<jsp:include page="../alcinfo/headerSearch.jsp" />
-	<div id="frame" >
-		<div id="container" align="center">
-			<div id="total" align="center">
-				<table id="nav_table">
-					<tr>
-						<td id="nav_td"><a href="../Mypage/managerPage.jsp?pageValue=salesList">매출 현황</a></td>
-						<td id="nav_td"><a href="../Mypage/managerPage.jsp?pageValue=memberChart">회원 현황</a></td>
-						<td id="nav_td"><a href="../Report/MGMemberControl.jsp">신고 접수건</a></td>
-						<td id="nav_td"><a href="../Report/StateManagement.jsp">회원 관리</a></td>
-						<td id="nav_td"><a href="../Mypage/requestAclist.jsp">학원장 접수 관리</a></td>
-						
-					</tr>
-				</table>
-			</div>
-<title>학원장 신청목록</title>
 <script type="text/javascript">
 function noPermit(aca_id,aca_state,aca_num,name){
 	document.permitFrm.name.value=name;
@@ -133,6 +125,25 @@ function Permit(aca_id,aca_state,aca_num,name){
 	document.permitFrm.submit();
 }
 </script>
+</head>
+<meta charset="UTF-8">
+
+<jsp:include page="../alcinfo/headerSearch.jsp" />
+	<div id="frame" >
+		<div id="container" align="center">
+			<div id="total" align="center">
+				<table id="nav_table">
+					<tr>
+						<td id="nav_td"><a href="../Mypage/managerPage.jsp?pageValue=salesList">매출 현황</a></td>
+						<td id="nav_td"><a href="../Mypage/managerPage.jsp?pageValue=memberChart">회원 현황</a></td>
+						<td id="nav_td"><a href="../Report/MGMemberControl.jsp">신고 접수건</a></td>
+						<td id="nav_td"><a href="../Report/StateManagement.jsp">회원 관리</a></td>
+						<td id="nav_td"><a href="../Mypage/requestAclist.jsp">학원장 접수 관리</a></td>
+						
+					</tr>
+				</table>
+			</div>
+<title>학원장 신청목록</title>
 <body>
 <table>
 <%
@@ -148,25 +159,27 @@ function Permit(aca_id,aca_state,aca_num,name){
 		<tr><%}%>
 			<td>
 				<div>
-		<table style="padding-left:30px;" border="1">
+		<table class="tdmgr" border="1">
 			<tr>
 			<td>
 			<tr>
-				<td>
+			<td style="width:150px; padding-top:20px;"><h2><%=mbean.getNum()%></h2></td>
+			</tr>
+			<tr>
+				<td colspan="2">
+				<div class="wrapper">
+				<div>
 				<img src="../authority/<%=mbean.getAca_business()%>" style="margin-bottom:10px;width:250px; height:200px; "><br>
-				</td>
-				<td>
-				<img src="../authority/<%=mbean.getAca_identity()%>" style="margin-bottom:10px;width:250px; height:200px; "><br>
+				</div>
+				<div>
+				<img src="../authority/<%=mbean.getAca_identity()%>" style="margin-bottom:10px;width:250px; height:200px; padding-right:20px;"><br>
+				</div>
+				</div>
 				</td> 
 			</tr>
-
 			<tr>
-				<td style="width:150px;" name="num">접수번호</td>
-				<td style="width:350px;"><%=mbean.getNum() %></td>
-			</tr>
-			<tr>
-				<td style="width:150px;" name="aca_id">아이디</td>
-				<td style="width:350px;"><%=mbean.getAca_id()%></td>
+				<td style="width:150px; padding-top:20px;" name="aca_id">아이디</td>
+				<td style="width:350px; padding-top:20px;"><%=mbean.getAca_id()%></td>
 			</tr>
 			<tr>
 				<td style="width:150px;" name="aca_num">학원번호</td>
@@ -180,6 +193,7 @@ function Permit(aca_id,aca_state,aca_num,name){
 				<td style="width:150px;" name="aca_state">상태</td>
 				<td style="width:350px;"><%=mbean.getAca_state()%></td>
 			</tr>
+			</div>
 			<tr>
 				<td colspan="2" align="right" style="padding-top:15px; padding-bottom:30px; " >
 				<input type="submit" value="비허가"
@@ -189,7 +203,6 @@ function Permit(aca_id,aca_state,aca_num,name){
 				</td>
 			</tr>
 		</table>
-				</div>
 			</td>
 		<%if(i%2==1){%>
 		</tr>
