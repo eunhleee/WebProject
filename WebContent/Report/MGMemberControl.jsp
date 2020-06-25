@@ -8,6 +8,9 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%
 		request.setCharacterEncoding("UTF-8");
+		if(session.getAttribute("idKey")==null||session.getAttribute("idKey").equals("")){
+			response.sendRedirect("../alcinfo/cards-gallery.jsp");
+		}
 		int totalRecord=0;//총 게시물 수
 		int numPerPage=10;//페이지당 레코드 개수(5,10,15,30)
 		int pagePerBlock=15;//블럭당 페이지 개수

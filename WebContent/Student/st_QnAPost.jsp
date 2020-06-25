@@ -106,6 +106,21 @@ function goReport() {
 
 </script>
 <style>
+.totalFrame{
+	background-color:#FAF8EB;
+	margin-top:-40px;
+	padding:40px 0px;
+}
+.subFrame{
+	width:70%;
+	border:1px solid gray;
+	background-color:white;
+	padding:30px 30px;
+	margin-bottom:40px;
+}
+.tdBorder{
+	border-right:3px solid #F88C65;
+}
 #inputdiv2{
 	margin:10px;
 	width:490px;
@@ -152,50 +167,52 @@ function goReport() {
 	<%@ include file="../alcinfo/headerSearch.jsp"%>
 	<br>
 	<br>
+	<div class="totalFrame" align="center">
+	<div class="subFrame">
 	<form name="cart" action="">
-		<table width="70%" align="center">
+		<table width="100%" >
 			<tr>
 				<td align="center">
-					<table width="100%" style="font-size: 20; background: rgb(250, 248, 235);">
+					<table width="100%" style="font-size: 20;">
 						<tr>
-							<td width="25%" align="center">
-							<img src="../StudentImg/<%=stbean.getImgname() %>" width="100%" height="250"></td>
-							<td width="60%" height="100%">
-								<table width="100%" style="font-size: 20;">
-									<tr height="40">
-										<td width="30%">학생명 / 성별</td>
-										<td width="70%"><%=stbean.getName()%> / <%=stbean.getGender() %></td>
+							<td>
+								<h1><%=stbean.getName()%> <font style="font-size:25px; color:lightgray;">학생</font></h1>
+							</td>
+						</tr>
+						<tr>
+							
+							<td width="70%" height="100%">
+								<table width="70%" style="font-size: 17px;">
+									<tr height="20">
+										<td class="tdBorder" width="8%">성별</td>
+										<td width="10%">&nbsp;<%=stbean.getGender() %></td>
+									
+										<td class="tdBorder" width="8%">과목</td>
+										<td width="10%">&nbsp;<%=stbean.getStclass() %></td>
+										<td class="tdBorder" width="8%">번호</td>
+										<td colspan="2">&nbsp;<%=stbean.getPhone()%></td>
+										
 									</tr>
-									<tr height="40">
-										<td width="30%">원하는지역</td>
-										<td width="70%"><%=stbean.getAddress() %></td>
+									<tr height="5"></tr>
+									<tr height="20">
+										<td class="tdBorder" width="12%">가능 지역</td>
+										<td colspan="5">&nbsp;<%=stbean.getAddress() %></td>
 									</tr>
-									<tr height="40">
-										<td width="30%">전화번호</td>
-										<td width="70%"><%=stbean.getPhone() %></td>
+									<tr height="5"></tr>
+									<tr height="20">
+										<td class="tdBorder" width="12%">학교 /학년</td>
+										<td colspan="5">&nbsp;<%=stbean.getSchool_name() %> / <%=stbean.getSchool_grade() %></td>
 									</tr>
-									<tr height="35">
-										<td width="30%">원하는과목</td>
-										<td width="70%"><%=stbean.getStclass() %></td>
-									</tr>
-									<tr height="40">
-										<td width="30%">재학중인 학교 / 학년</td>
-										<td width="70%"><%=stbean.getSchool_name() %> / <%=stbean.getSchool_grade() %></td>
-									</tr>
-									<tr height="40">
-										<td width="30%">비고</td>
-										<td width="70%"><%=stbean.getEtc() %></td>
+									<tr height="5"></tr>
+									<tr height="20">
+										<td class="tdBorder" width="8%">비고</td>
+										<td colspan="5">&nbsp;<%=stbean.getEtc() %></td>
 									</tr>
 
 								</table>
 							</td>
 							<td width="15%" align="center">
 								<table>
-									
-									<tr>
-										<td><input type="button" value="잘못된정보 신고하기"
-											style="font-size: 20;" onclick="goReport();"></td>
-									</tr>
 									<tr>
 										<td><input type="button" value="신청하기" id="myButton1"
 											style="font-size: 20;" onclick="insert();"></td>
@@ -203,7 +220,14 @@ function goReport() {
 									<tr>
 										<td><input type="button" value="취소하기" id="myButton2"
 											style="font-size: 20;" onclick="deleteT();"></td>
-									</tr>								
+									</tr>		
+									<tr>
+									<%	if(session.getAttribute("idKey")==null||session.getAttribute("idKey").equals("")){ %>
+									<td><input type="button" value="잘못된정보 신고하기"
+											style="font-size: 20;" onclick="goErr();"></td>
+									<%}else{%><td><input type="button" value="잘못된정보 신고하기"
+											style="font-size: 20;" onclick="goReport();"></td><%} %>
+									</tr>						
 								</table>
 							</td>
 						</tr>
@@ -214,24 +238,22 @@ function goReport() {
 	</form>
 		<br>
 		<br>
-		<table width="70%" height="280" align="center" >
+		<table width="90%" height="300" align="center" >
 			<tr>
-				<td width="30%" align="center">
-				<div style="border:10px solid #FCBC7E; border-radius:15px; padding:20px">
-				<button type="button" id="btn" onclick="graph()" >그래프 보기</button>
-				<div id="column_chart_div1" style="height: 440px;"></div>
-				</div>
-				</td>
-				<td width="70%" align="center">
-					<div style="border:10px solid #36ada9; border-radius:15px; padding:20px">
-					
-<!-- 글쓰기 Start -->
+			<td>
+			<div style="padding:20px 30px;">
+				<img src="../StudentImg/<%=stbean.getImgname() %>" width="300" height="250">
+			</div>
+			</td>
+			<td  align="center" rowspan="2">
+			<div style="height:100%;border:10px solid #36ada9; border-radius:15px; padding:20px">
+						<!-- 글쓰기 Start -->
 		<div style="height:480px;">
 			<h2><img src="../img/questionmark2.png" width="40" height="40">&nbsp;문의 하기</h2>	
 			<hr style="border:1px solid #36ada9;">	
 			<br/>
 			<form name="stpostFrm" method="post" action="st_QnAPostProc.jsp">
-			<table width="600" cellpadding="3" align="center">
+			<table width="750" cellpadding="3" align="center">
 				<tr>
 					<td align="center">
 					<table align="center" >
@@ -262,7 +284,7 @@ function goReport() {
 							<td>내 용</td>
 							<td colspan="3">
 							<div id="textareadiv">
-							<textarea name="stqcontent" rows="10" cols="50"></textarea>
+							<textarea name="stqcontent" rows="17" cols="50"></textarea>
 							</div></td>
 						</tr>
 						<tr>
@@ -296,15 +318,25 @@ function goReport() {
 			</form>
 		</div>
 <!-- 글쓰기 End -->
-
-
 					</div>
 				</td>
 			</tr>
+			<tr>
+				<td width="30%" align="center">
+				<div style="border:10px solid #FCBC7E; border-radius:15px; padding:20px">
+				<button type="button" id="btn" onclick="graph()" >그래프 보기</button>
+				<div id="column_chart_div1" style="height: 440px;"></div>
+				</div>
+				</td>
+				
+			</tr>
 		</table>
 		<br>
+		</div>
+		<%@ include file="../alcinfo/footer.jsp"%>
+	</div>
 </body>
-<%@ include file="../alcinfo/footer.jsp"%>
+
 </html>
 <%
 	}

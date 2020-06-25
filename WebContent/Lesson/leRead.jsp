@@ -5,6 +5,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <jsp:useBean id="mgr" class="alcinfo.LessonMgr" />
+<jsp:useBean id="Lmgr" class="alcinfo.LeteaMgr" />
 <jsp:useBean id="Mmgr" class="alcinfo.MemberMgr" />
 
 <%
@@ -13,6 +14,7 @@
 	String url = "LessonMain.jsp?pageValue=top";
 	LessonBean lebean = null;
 	int num = UtilMgr.parseInt(request, "num"); 
+	String logid = (String)session.getAttribute("idKey"); 
 	
 	if(request.getParameter("id") == null) {
 		response.sendRedirect(url);
@@ -108,57 +110,76 @@ function graph(){
 	}
 		
 	function goErr(){
-		alert("로그인을 해주세요");
-
+		alert("로그인 후 이용가능합니다.");
 	}
-
+	function deleteLesson() {
+		location.href = "leDelete.jsp?num=<%=num%>";
+	}
 	
 </script>
-
+<style>
+.totalFrame{
+	background-color:#FAF8EB;
+	margin-top:-40px;
+	padding:40px 0px;
+}
+.subFrame{
+	width:70%;
+	border:1px solid gray;
+	background-color:white;
+	padding:30px 30px;
+	margin-bottom:40px;
+}
+.tdBorder{
+	border-right:3px solid #F88C65;
+}
+</style>
 </head>
 <body>
 
 	<%@ include file="../alcinfo/headerSearch.jsp"%>
+	
 	<br>
 	<br>
+	<div class="totalFrame" align="center">
+	<div class="subFrame">
 	<form name="cart" action="">
-		<table width="70%" align="center">
+		<table width="100%" style="margin-bottom:50px;">
 			<tr>
 				<td align="center">
-					<table width="100%" style="font-size: 20; background: rgb(250, 248, 235);">
+					<table width="100%" style="font-size: 20;">
 						<tr>
-							<td width="25%" align="center">
-							<img src="../TeacherImg/<%=lebean.getImgname() %>"	width="100%" height="250">
+							<td>
+								<h1><%=lebean.getName()%> <font style="font-size:25px; color:lightgray;">선생님</font></h1>
 							</td>
-							<td width="60%" height="100%">
-								<table width="100%"  style="font-size: 20;">
-									<tr height="40">
-										<td width="30%">선생님명 / 성별</td>
-										<td width="70%"><%=lebean.getName()%> / <%=lebean.getGender() %></td>
+						</tr>
+						<tr>
+							
+							<td width="70%" height="100%">
+								<table width="70%" >
+									<tr height="20">
+										<td class="tdBorder" width="8%">성별</td>
+										<td width="10%">&nbsp;<%=lebean.getGender() %></td>
+									
+										<td class="tdBorder" width="8%">가능지역</td>
+										<td width="10%" colspan="4">&nbsp;<%=lebean.getArea() %></td>
+								
 									</tr>
-									<tr height="40">
-										<td width="30%">과외가능지역</td>
-										<td width="70%"><%=lebean.getArea() %></td>
+									<tr height="5"></tr>
+									<tr height="20">
+										<td class="tdBorder">과목</td>
+										<td >&nbsp;<%=lebean.getLeclass() %></td>
+									
+										<td class="tdBorder">학생 수</td>
+										<td width="10%">&nbsp;<%=lebean.getStudent() %>명</td>
+									
+										<td width="8%" class="tdBorder">출신 학교</td>
+										<td width="15%">&nbsp;<%=lebean.getSchool_name() %></td>
 									</tr>
-									<tr height="40">
-										<td width="30%">전화번호</td>
-										<td width="70%"><%=lebean.getPhone() %></td>
-									</tr>
-									<tr height="35">
-										<td width="30%">과외 가능한 과목</td>
-										<td width="70%"><%=lebean.getLeclass() %></td>
-									</tr>
-									<tr height="35">
-										<td width="30%">과외중인 학생 수</td>
-										<td width="70%"><%=lebean.getStudent() %>명</td>
-									</tr>
-									<tr height="40">
-										<td width="30%">재학(졸업)중인 학교</td>
-										<td width="70%"><%=lebean.getSchool_name() %></td>
-									</tr>
-									<tr height="40">
-										<td width="30%">비고</td>
-										<td width="70%"><%=lebean.getEtc() %></td>
+									<tr height="5"></tr>
+									<tr height="20">
+										<td class="tdBorder" width="8%">비고</td>
+										<td width="15%">&nbsp;<%=lebean.getEtc() %></td>
 									</tr>
 
 								</table>
@@ -186,6 +207,14 @@ function graph(){
 											style="font-size: 20;" onclick="cancel()"></input>
 											</td>
 									</tr>
+									<% if(session.getAttribute("idKey")!=null) {
+										if(logid.equals(lebean.getId()) || Lmgr.checkM(logid)==0) {
+									%>
+									<tr>
+										<td><input type="button" value="삭제하기" id="myButton3"
+										style="font-size: 20;" onclick="deleteLesson();"></td>
+									</tr>	
+									<% } }%>
 								</table>
 							</td>
 						</tr>
@@ -195,25 +224,36 @@ function graph(){
 		</table>
 		<br>
 		<br>
-		<table width="70%" height="280" align="center">
-			<tr>
-				<td width="30%" align="center">
-				<div style="border:10px solid #FCBC7E; border-radius:15px; padding:10px">
-				<button type="button" id="btn" onclick="graph()" >그래프 보기</button>
-				<div id="column_chart_div1"  style="height: 440px; width:350px;"></div>
+		<table width="70%" height="300" align="center" >
+		<tr>
+			<td>
+				<div style="padding:20px 30px;">
+				<img src="../TeacherImg/<%=lebean.getImgname() %>"	height="250" width="300">
 				</div>
-				</td>
-				<td width="70%" align="center">
-				<div style="border:10px solid #36ada9; border-radius:15px; padding:20px">
+			</td>
+			<td align="center"  rowspan="2" >
+					<div style="border:10px solid #36ada9; border-radius:15px; padding:20px;height:100%;">
 					<jsp:include page="lessonAskList.jsp"></jsp:include>
 					</div>
 				</td>
+		</tr>
+			<tr>
+				<td  align="center">
+					<div style="border:10px solid #FCBC7E; border-radius:15px; padding:20px;">
+						<button type="button" id="btn" onclick="graph()" >그래프 보기</button>
+						<div id="column_chart_div1"  style="height: 400px; width:300px;"></div>
+					</div>
+				</td>
+				
 			</tr>
 		</table>
 		<br>
 	</form>
+	</div>
+	<%@ include file="../alcinfo/footer.jsp"%>
+</div>
 </body>
-<%@ include file="../alcinfo/footer.jsp"%>
+
 </html>
 <%
 	}

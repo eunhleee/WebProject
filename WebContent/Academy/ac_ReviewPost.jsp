@@ -52,19 +52,22 @@ function moveQnA(){
 }
 </script>
 <style>
-@font-face { 
-font-family: 'Godo'; font-style: normal;
-font-weight: 400;
-src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoM.woff2') format('woff2'), 
-	url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoM.woff') format('woff'); }
-@font-face {
-	font-family: 'Godo'; font-style: normal;
-	font-weight: 700; 
- 	src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoB.woff2') format('woff2'),
-url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoB.woff') format('woff'); } 
- 	.godo * { font-family: 'Godo', sans-serif; }
- body{
- 	font-family:'Godo';}
+
+.totalFrame{
+	background-color:#FAF8EB;
+	margin-top:-40px;
+	padding:40px 0px;
+}
+.subFrame{
+	width:70%;
+	border:1px solid gray;
+	background-color:white;
+	padding:30px 30px;
+	margin-bottom:40px;
+}
+.tdBorder{
+	border-right:3px solid #F88C65;
+}
 #inputdiv2{
 	margin:10px;
 	width:490px;
@@ -135,51 +138,45 @@ url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoB.woff') format('w
 	<%@ include file="../alcinfo/headerSearch.jsp"%>
 	<br>
 	<br>
+	<div class="totalFrame" align="center">
+	<div class="subFrame">
 	<form method="post" action="reportReceipt.jsp">
-		<table width="70%" align="center">
+		<table width="100%" >
 			<tr>
-				<td align="center">
-					<table width="100%" style="font-size: 20; background: rgb(250, 248, 235);">
+				<td >
+					<table  style="font-size: 20;" >
 						<tr>
-							<td width="25%" align="center"><img src="../AcademyImg/<%=bean.getImgname() %>" width="100%" height="250"></td>
-							<td width="60%" height="100%">
-								<table width="100%" style="font-size: 20;">
-									<tr height="50">
-										<td width="30%">학원명</td>
-										<td width="70%"><%=bean.getAc_name()%></td>
+						<td width="95%"><h1><%=bean.getAc_name()%></h1>
+						</td>
+						
+						<td><input type="button" value="문의하기" 	style="font-size: 20;" onclick="moveQnA();"></td>
+						<%	if(session.getAttribute("idKey")==null||session.getAttribute("idKey").equals("")){ %>
+							<td ><input type="button" value="잘못된정보 신고하기" style="font-size: 20;" onclick="goErr();"></td>
+						<%}else{%>
+							<td><input type="submit" value="잘못된정보 신고하기" style="font-size: 20;" onclick="goReport();"></td><%} %>
+						
+						</tr>
+						<tr>
+						<td width="70%">
+						<table width="80%" style="font-size: 17px;"  >
+									
+									<tr height="20">
+										<td class="tdBorder" width="8%">계열</td>
+										<td width="15%">&nbsp;<%=bean.getGroup1()%></td>
+										<td class="tdBorder" width="8%">과정</td>
+										<td width="15%">&nbsp;<%=bean.getGroup2()%></td>
+										<td class="tdBorder" width="8%">번호</td>
+										<td  colspan="3">&nbsp;<%=bean.getAc_tel()%></td>
+
 									</tr>
-									<tr height="50">
-										<td width="30%">교습계열</td>
-										<td width="70%"><%=bean.getGroup1()%></td>
-									</tr>
-									<tr height="50">
-										<td width="30%">교습과정</td>
-										<td width="70%"><%=bean.getGroup2()%></td>
-									</tr>
-									<tr height="50">
-										<td width="30%">학원주소</td>
-										<td width="100%"><a href=""
-											style="color: black; text-decoration: none;"><%=bean.getAc_address()%></a></td>
-									</tr>
-									<tr height="50">
-										<td width="30%">전화번호</td>
-										<td width="70%"><%=bean.getAc_tel()%></td>
-									</tr>
-								</table>
-							</td>
-							<td width="15%" align="center">
-								<table>
-									<tr>
-										<td><input type="button" value="문의하기"
-											style="font-size: 20;" onclick="moveQnA();"></td>
-									</tr>
-									<tr>
-										<td><input type="submit" value="잘못된정보 신고하기"
-											style="font-size: 20;"></td>
-											
+									<tr height="5"></tr>
+									<tr height="20">
+										<td class="tdBorder">주소</td>
+										<td colspan="5">&nbsp;<%=bean.getAc_address()%></td>	
 									</tr>
 								</table>
 							</td>
+							
 						</tr>
 					</table>
 				</td>
@@ -189,29 +186,25 @@ url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoB.woff') format('w
 	</form>
 		<br>
 		<br>
-		<table width="70%" height="300" align="center">
-			<tr>
-				<td width="30%" align="center">
-				<div style="border:10px solid #FCBC7E; border-radius:15px; padding:20px">
-					<jsp:include page="mapJsp.jsp">
-					<jsp:param value="<%=bean.getAc_address()%>" name="address" />
-					</jsp:include>
+		<table width="90%" height="300" align="center" >
+		<tr>
+			<td>
+				<div style="padding:20px">
+						<img src="../img/banner1.jpg" width="350" height="250">
 				</div>
-				</td>
-				<td width="70%" align="center">
-
-<!-- 글쓰기 Start -->
-
-<div style="height:500px; border:10px solid #36ada9; border-radius:15px; padding:20px">
-	<h2><%=bean.getAc_name()%> 리뷰</h2>	
-	<hr style="border:1px solid #36ada9;">	
-	<br/>
-		<form name="acrpostFrm" method="post" action="ac_ReviewPostProc.jsp">
-		<table width="600" cellpadding="3" align="center">
-			<tr>
-				<td align=center>
-				<table align="center">
-					<tr>
+			</td>
+			<td  align="center" rowspan="2" >
+			<!-- 글쓰기 시작 -->
+				<div style="height:100%; border:10px solid #36ada9; border-radius:15px; padding:20px;">
+					<h2><%=bean.getAc_name()%> 리뷰</h2>	
+					<hr style="border:1px solid #36ada9;">	
+					<br/>
+						<form name="acrpostFrm" method="post" action="ac_ReviewPostProc.jsp">
+						<table width="600" cellpadding="3" align="center">
+							<tr>
+								<td align=center>
+								<table align="center">
+									<tr>
 						<td>작성자</td>
 						<td>
 						<div id="inputdiv3">
@@ -257,11 +250,11 @@ url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoB.woff') format('w
 						<td>내 용</td>
 						<td colspan="3">
 						<div id="textareadiv">
-						<textarea name="acrcontent" rows="10" cols="50"></textarea>
+						<textarea name="acrcontent" rows="20" cols="50"></textarea>
 						</div></td>
 					</tr>
 					<tr>
-						<td colspan="4" align="center">
+						<td colspan="4" align="center" valign="bottom">
 							 <input type="submit" value="확인">
 							 <input type="reset" value="다시쓰기">
 							 <input type="button" value="취소"
@@ -287,15 +280,25 @@ url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoB.woff') format('w
 		 %>
 		</form>
 	</div>
-
-<!-- 글쓰기 End -->
-
+	<!-- 글쓰기 끝 -->
+				</td>
+			</tr>
+			<tr>
+				<td align="center">
+				<div style="border:10px solid #FCBC7E; border-radius:15px; padding:20px">
+					<jsp:include page="mapJsp.jsp">
+					<jsp:param value="<%=bean.getAc_address()%>" name="address" />
+					</jsp:include>
+				</div>
 				</td>
 			</tr>
 		</table>
 		<br>
+		</div>
+		<%@ include file="../alcinfo/footer.jsp"%>
+</div>
 </body>
-<%@ include file="../alcinfo/footer.jsp"%>
+
 </html>
 <%
 	}

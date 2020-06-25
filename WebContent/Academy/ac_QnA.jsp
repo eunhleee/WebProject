@@ -217,7 +217,7 @@ div{
 						if (vlist.isEmpty()) {
 					%>
 					<tr>
-						<td align="center" colspan="5" height="200">
+						<td align="center" colspan="5" style="height:190px;">
 							<%
 								out.println("등록된 게시물이 없습니다.");
 							%>

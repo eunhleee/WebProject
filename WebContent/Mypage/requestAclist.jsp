@@ -10,27 +10,39 @@
 <jsp:useBean id="aMgr" class="alcinfo.AcademyMgr" />
 <%
 	request.setCharacterEncoding("UTF-8");
-
+	if(session.getAttribute("idKey")==null||session.getAttribute("idKey").equals("")){
+		response.sendRedirect("../alcinfo/cards-gallery.jsp");
+	}
 %>
 <!DOCTYPE html>
 <html>
 <head>
+<title>학원장 신청목록</title>
+<meta charset="UTF-8">
+<script type="text/javascript">
+function noPermit(aca_id,aca_state,aca_num,name){
+	document.permitFrm.name.value=name;
+    document.permitFrm.aca_state.value=aca_state;
+    document.permitFrm.aca_num.value=aca_num;
+    document.permitFrm.aca_id.value=aca_id;
+	document.permitFrm.action="requestAclistProc.jsp?flag=noPermit&name="+name;
+	document.permitFrm.submit();
+}
+function Permit(aca_id,aca_state,aca_num,name){
+	document.permitFrm.name.value=name;
+
+	document.permitFrm.aca_id.value=aca_id;
+    document.permitFrm.aca_state.value=aca_state;
+    document.permitFrm.aca_num.value=aca_num;
+	document.permitFrm.action="requestAclistProc.jsp?flag=Permit&name="+name;
+	document.permitFrm.submit();
+}
+</script>
 <style>
 .wrapper{
 display:grid;
   grid-template-columns: 1fr 1fr;
-}
-.pho{
-padding-top:30px;
-}
-.tdmgr{
-margin-top:15px;
-margin-left:10px;
-margin-right:10px;
 
-padding-left:100px;
-border:10px solid #CEF76E; 
-border-radius:10px;
 
 }
 #listtable{
@@ -106,27 +118,8 @@ a:hover {
 	
 }
 </style>
-<script type="text/javascript">
-function noPermit(aca_id,aca_state,aca_num,name){
-	document.permitFrm.name.value=name;
-    document.permitFrm.aca_state.value=aca_state;
-    document.permitFrm.aca_num.value=aca_num;
-    document.permitFrm.aca_id.value=aca_id;
-	document.permitFrm.action="requestAclistProc.jsp?flag=noPermit&name="+name;
-	document.permitFrm.submit();
-}
-function Permit(aca_id,aca_state,aca_num,name){
-	document.permitFrm.name.value=name;
-
-	document.permitFrm.aca_id.value=aca_id;
-    document.permitFrm.aca_state.value=aca_state;
-    document.permitFrm.aca_num.value=aca_num;
-	document.permitFrm.action="requestAclistProc.jsp?flag=Permit&name="+name;
-	document.permitFrm.submit();
-}
-</script>
 </head>
-<meta charset="UTF-8">
+<body>
 
 <jsp:include page="../alcinfo/headerSearch.jsp" />
 	<div id="frame" >
@@ -143,8 +136,9 @@ function Permit(aca_id,aca_state,aca_num,name){
 					</tr>
 				</table>
 			</div>
-<title>학원장 신청목록</title>
-<body>
+
+
+
 <table>
 <%
 	Vector<AcademyBean> mvlist=aMgr.mGMList();
@@ -159,27 +153,25 @@ function Permit(aca_id,aca_state,aca_num,name){
 		<tr><%}%>
 			<td>
 				<div>
-		<table class="tdmgr" border="1">
+		<table style="padding-left:30px;" border="1">
 			<tr>
 			<td>
 			<tr>
-			<td style="width:150px; padding-top:20px;"><h2><%=mbean.getNum()%></h2></td>
-			</tr>
-			<tr>
-				<td colspan="2">
-				<div class="wrapper">
-				<div>
+				<td>
 				<img src="../authority/<%=mbean.getAca_business()%>" style="margin-bottom:10px;width:250px; height:200px; "><br>
-				</div>
-				<div>
-				<img src="../authority/<%=mbean.getAca_identity()%>" style="margin-bottom:10px;width:250px; height:200px; padding-right:20px;"><br>
-				</div>
-				</div>
+				</td>
+				<td>
+				<img src="../authority/<%=mbean.getAca_identity()%>" style="margin-bottom:10px;width:250px; height:200px; "><br>
 				</td> 
 			</tr>
+
 			<tr>
-				<td style="width:150px; padding-top:20px;" name="aca_id">아이디</td>
-				<td style="width:350px; padding-top:20px;"><%=mbean.getAca_id()%></td>
+				<td style="width:150px;" name="num">접수번호</td>
+				<td style="width:350px;"><%=mbean.getNum() %></td>
+			</tr>
+			<tr>
+				<td style="width:150px;" name="aca_id">아이디</td>
+				<td style="width:350px;"><%=mbean.getAca_id()%></td>
 			</tr>
 			<tr>
 				<td style="width:150px;" name="aca_num">학원번호</td>
@@ -193,7 +185,6 @@ function Permit(aca_id,aca_state,aca_num,name){
 				<td style="width:150px;" name="aca_state">상태</td>
 				<td style="width:350px;"><%=mbean.getAca_state()%></td>
 			</tr>
-			</div>
 			<tr>
 				<td colspan="2" align="right" style="padding-top:15px; padding-bottom:30px; " >
 				<input type="submit" value="비허가"
@@ -203,17 +194,19 @@ function Permit(aca_id,aca_state,aca_num,name){
 				</td>
 			</tr>
 		</table>
+				</div>
 			</td>
 		<%if(i%2==1){%>
 		</tr>
 <%}}}%>
 </table>
+</div>
 <form name="permitFrm" method="post">
 		<input type="hidden" name="aca_num">
 		<input type="hidden" name="aca_id">
 		<input type="hidden" name="aca_state">
 </form>
 		<jsp:include page="../alcinfo/footer.jsp" />
-
+</div> b
 </body>
 </html>

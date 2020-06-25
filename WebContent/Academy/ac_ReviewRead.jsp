@@ -72,24 +72,18 @@
 <title>우리 학원 어디?-학원 리뷰</title>
 <link href="style.css" rel="stylesheet" type="text/css">
 <style>
-font-family: 'Godo'; font-style: normal;
-font-weight: 400;
-src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoM.woff2') format('woff2'), 
-	url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoM.woff') format('woff'); }
-@font-face {
-	font-family: 'Godo'; font-style: normal;
-	font-weight: 700; 
- 	src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoB.woff2') format('woff2'),
-url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoB.woff') format('woff'); } 
- 	.godo * { font-family: 'Godo', sans-serif; }
- body{
- 	font-family:'Godo';}
+.totalFrame{
+	background-color:#FAF8EB;
+	padding:40px 0px;
+}
+
 #readDiv{
-	margin-top:50px;
-	margin-left:15%;
-	width:65%;
+	margin-left:10%;
+	margin-bottom:40px;
+	width:79%;
 	align:center;
-	border: 10px solid #F88C65; 
+	background-color:white;
+	border: 10px solid #36ada9; 
 	border-radius:10px;
 	padding:20px 40px;
 }
@@ -113,6 +107,10 @@ a:hover {
 .acrReply {
 	display:none;
 }
+.tdBorder{
+	border-right:3px solid #56C8D3;
+}
+
 </style>
 <script>
 	function moveQnA(){
@@ -154,37 +152,37 @@ a:hover {
 		window.open(url, "GoReport", "width=900, height=560, top=200, left=300");
 		}
 </script>
+
 </head>
 <body>
 <jsp:include page="../alcinfo/headerSearch.jsp"></jsp:include>
 	
 <!-- 읽기 Start -->
-
+<div class="totalFrame">
 	<div id="readDiv">
-
 		<table align="center" cellspacing="3" width="100%" bgcolor="white">
 		 <tr>
 		  <td>
 		   <table cellpadding="3" cellspacing="0" width="100%"> 
 		    <tr height="100">
-		    <td colspan="7">
+		    <td colspan="8">
 		    <span style="font-size:30px;"><%=title%></span> 
 		    <% if(loginid!=null) {%>		    
 			 <input type="button" value="신고" onclick="javascript:goRep();" style="float:right;">
 			  <%}%></td>
 			</tr>
-		    <tr height="30"> 
-				<td align="center" bgcolor="#FCBC7E" width="10%" style="color:white; font-weight:bold;" > 닉 네 임</td>
-				<td bgcolor="#FAF8EB" width="10%"><%=id%></td>
-				<td align="center" bgcolor="#FCBC7E" width="10%" style="color:white; font-weight:bold;"> 등록날짜 </td>
-				<td bgcolor="#FAF8EB" width="15%"><%=regdate%></td>
-				<td align="center" bgcolor="#FCBC7E" width="10%" style="color:white; font-weight:bold;">조회수</td>
-				<td bgcolor="#FAF8EB" colspan="3"><%=count%></td>
+		    <tr height="20"> 
+				<td class="tdBorder" width="6%" > 닉 네 임</td>
+				<td  width="10%">&nbsp;<%=id%></td>
+				<td class="tdBorder" width="6%" > 등록날짜 </td>
+				<td width="10%">&nbsp;<%=regdate%></td>
+				<td class="tdBorder" width="6%" > 조 회 수</td>
+				<td  width="10%">&nbsp;<%=count%></td>
+				<td class="tdBorder" width="4%"  > 평 점</td>
+		    <td >&nbsp;<img src="../img/star.png" width="10" height="10"><%=star%></td>
 			</tr>
-		   <tr height="30"> 
-		    <td align="center" bgcolor="#FCBC7E" width="10%" style="color:white; font-weight:bold;" > 평 점</td>
-		    <td bgcolor="#FAF8EB" colspan="5"><%=star%></td>
-		   </tr>
+		   
+		   <tr><td colspan="8"><hr style="border:1px solid lightgray;"></td>
 		   <tr> 
 		    <td colspan="6" height="200"><span><%=content%></span></td>
 		   </tr>
@@ -370,9 +368,9 @@ a:hover {
 			<%}%>
 		</form>
 	</div>
-
-<!-- 읽기 End -->
-
-</body>
 <%@ include file="../alcinfo/footer.jsp"%>
+<!-- 읽기 End -->
+</div>
+</body>
+
 </html>
