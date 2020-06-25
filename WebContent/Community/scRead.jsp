@@ -112,12 +112,19 @@ function goCReport(conum,stuc_depth,stopid) {
 	}
 </script>
 <style>
+.totalFrame{
+	background-color:#FAF8EB;
+	padding:40px 0px;
+}
+
+
 #readDiv{
 	margin-top:50px;
 	margin-bottom:50px;
 	margin-left:10%;
 	width:79%;
 	align:center;
+	background-color:white;
 	border: 10px solid #F88C65; 
 	border-radius:10px;
 	padding:20px 40px;
@@ -144,6 +151,9 @@ a:hover {
 .scReply {
 	display: none;
 }
+.tdBorder{
+	border-right:3px solid #FCBC7E;
+}
 
 </style>
 </head>
@@ -158,25 +168,26 @@ a:hover {
 		
 		 <tr>
 		  <td>
-		   <table cellpadding="3" cellspacing="0" width="100%" >
+		   <table cellpadding="3" cellspacing="0" width="100%">
 		   <tr height="100"> 
-			    <td colspan="7">
+			    <td colspan="6">
 			    <span style="font-size:30px;"><%=title%></span> 
 			    <% if(loginid!=null) {%>		    
 				<input type="button" value="신고" onclick="javascript:goRep();" style="float:right;">
 				<%}%></td>
 		   </tr>
-		    <tr> 
-				<td align="center" bgcolor="#FCBC7E" width="10%" style="color:white; font-weight:bold;" >닉 네 임</td>
-				<td  width="12%">&nbsp;<%=id%></td>
-				<td align="center" bgcolor="#FCBC7E" width="10%" style="color:white; font-weight:bold;">등록날짜 </td>
-				<td  width="10%">&nbsp;<%=regdate%></td>
-				<td align="center" bgcolor="#FCBC7E" width="10%" style="color:white; font-weight:bold;">조회수</td>
-				<td  colspan="3">&nbsp;<%=count%></td>
+		    <tr height="20"> 
+				<td class="tdBorder" width="6%" > 닉 네 임</td>
+				<td  width="5%">&nbsp;<%=id%></td>
+				<td class="tdBorder" width="6%" > 등록날짜 </td>
+				<td width="10%">&nbsp;<%=regdate%></td>
+				<td class="tdBorder" width="6%" > 조 회 수</td>
+				<td  >&nbsp;<%=count%></td>
 			</tr>
+			<tr height="5"></tr>
 		   <tr> 
-		     <td align="center" bgcolor="#FCBC7E" style="color:white; font-weight:bold;">첨부파일</td>
-		     <td  colspan="5" style="border-bottom:3px solid #FCBC7E;">
+		     <td class="tdBorder" >첨부파일</td>
+		     <td  colspan="5" >
 		    	<%
 		    		if(filename!=null&&!filename.equals("")){
 		    	%>

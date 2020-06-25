@@ -299,7 +299,7 @@ public class LeteaMgr {
 			return bean;
 		}
 		
-		//등록한 글 삭제하기
+		////등록한 글 삭제하기
 		public void deleteLesson(int num) {
 			Connection con = null;
 			PreparedStatement pstmt = null;
@@ -315,5 +315,29 @@ public class LeteaMgr {
 			} finally {
 				pool.freeConnection(con, pstmt);
 			}
+		}
+
+		public LeteaBean getgrade(String id) {
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String sql = null;
+			LeteaBean bean = new LeteaBean();
+			String a="";
+			try {
+				con = pool.getConnection();
+				sql = "SELECT grade from letea where id='"+id+"'";
+				pstmt = con.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+
+				if(rs.next()) {
+					bean.setGrade(rs.getInt("grade"));
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				pool.freeConnection(con, pstmt, rs);
+			}
+			return bean;
 		}
 }

@@ -146,6 +146,8 @@
 #list td {
 	border-bottom: 1px solid lightgray;
 	height:30px;
+	padding:10px 0px;
+	
 }
 
 #title td {
@@ -161,13 +163,16 @@ a {
 a:hover {
 	color: gray;
 }
+.reviewTable td{
+	vertical-align: top;
+}
 </style>
 </head>
 <body>
 
 	<!-- 리스트 부분 -->
 
-	<h2>학원 리뷰</h2>
+	<h2 style="color:#36ada9;">REVIEW</h2>
 	<table>
 		<tr>
 			<td width="600">Total : <%=totalRecord%>Articles(<font
@@ -190,24 +195,16 @@ a:hover {
 				</script>
 			</td>
 		</tr>
-	</table>
-	<table>
-		<tr>
-			<td align="center" colspan="2">
-				<table cellspacing="0" height="80">
-					<tr align="center" id="title">
-						<td width="150">평 점</td>
-						<td width="280">제 목</td>
-						<td width="100">닉 네 임</td>
-						
-						<td width="150">날 짜</td>
-						<td width="100">조회수</td>
-					</tr>
+	</table> 
+	<table class="reviewTable" height="75%" >
+		<tr >
+			<td colspan="2"  >
+				<table cellspacing="0" >
 					<%
 						if(grade!=0&&(loginid==null||mpoint==null||mpointnumber<todaynumber)){
 					%>
 					<tr>
-						<td align="center" colspan="5" height="180" style="background-color:gray;  opacity: 0.5;">
+						<td align="center" colspan="5" height="380" style="background-color:gray;  opacity: 0.5;">
 							<p style="color:white;">포인트를 구입하시면 <%=totalRecord%> 개의 후기글을 보실 수 있습니다.</p><br>
 							<input type="button" value="포인트 구입하러 가기" onclick="moveToBuyPoint();">
 						</td>
@@ -219,7 +216,7 @@ a:hover {
 						if (vlist.isEmpty()) {
 					%>
 					<tr>
-						<td align="center" colspan="5" height="180">
+						<td align="center" colspan="5" height="380">
 							<%
 								out.println("등록된 게시물이 없습니다.");
 							%>
@@ -239,17 +236,23 @@ a:hover {
 								int count = acbean.getAc_count();
 								int ccount = mgr.acrccount(num);
 					%>
-						<tr id="list">
-							<td align="center"><%=star%></td>
-						<td align="center">
-						<a href="javascript:read('<%=num%>')"><%=title%></a>
-						<% if(ccount>0) { %>
-							<font color="red">[<%=ccount%>]</font>
-						<% } %>
+					<tr id="list" height="50" >
+					
+						<td width="700">
+						<div >
+							<a href="javascript:read('<%=num%>')">
+								<font style="font-size:18px; font-weight:bold;"><%=title %></font><br>
+								<font style="float:right; font-size:15px; ">
+								<%=nick %>
+								<img src="../img/star.png" width="13" height="13">&nbsp;<%=star %>
+								<%=date %>
+								<img src="../img/eyes.png" width="15" height="15">&nbsp;<%=count %>
+								<img src="../img/message.png" width="15" height="15">&nbsp;<%=ccount %>
+								</font>								
+							</a>
+						</div>
 						</td>
-						<td align="center"><a href=""><%=nick%></a></td>
-						<td align="center"><%=date%></td>
-						<td align="center"><%=count%></td>
+						
 					</tr>
 
 					<%
@@ -263,11 +266,8 @@ a:hover {
 
 			</td>
 		</tr>
-		<tr>
-			<td colspan="2"><br> <br></td>
-		</tr>
-
-		<tr>
+		
+		<tr height="20">
 			<td>
 				<!-- 페이징 및 블럭 Start --> <%
  	if (totalPage > 0) {
@@ -328,7 +328,7 @@ a:hover {
 
 	<hr width="800" align="center">
 	<form name="acsearchFrm">
-		<table width="600" cellpadding="4" cellspacing="0">
+		<table width="600" cellpadding="4" cellspacing="0" style="float:bottom;">
 			<tr>
 				<td align="center" valign="bottom">
 					<div id="inputdiv" style="width:320px; display:flex;">

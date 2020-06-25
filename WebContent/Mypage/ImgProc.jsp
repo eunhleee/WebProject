@@ -12,7 +12,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>PhotoBlog</title>
+<title>프로필 사진 변경</title>
 <%-- <%@include file="js_css.html"%>
  --%><script type="text/javascript">
 	function send() {

@@ -127,7 +127,7 @@ a:hover {
 </style>
 </head>
 <body>
-	<h2>학생 문의 게시판</h2>
+	<h2 style="color:#36ada9;">학생 문의 게시판</h2>
 	<table>
 	<tr>
 		<td width="600">
@@ -154,7 +154,7 @@ a:hover {
 		</td>
 	</tr>
 </table>
-	<table>
+	<table height="75%">
 		<tr>
 			<td align="center" colspan="2">
 				<table cellspacing="0" height="80">
@@ -174,7 +174,7 @@ a:hover {
 						if (vlist.isEmpty()) {
 					%>
 					<tr>
-						<td align="center" colspan="6" height="180">
+						<td align="center" colspan="6" height="480">
 							<p>등록된 게시글이 없습니다.</p>
 						</td>
 					</tr>
@@ -223,7 +223,7 @@ a:hover {
 						if (vlist.isEmpty()) {
 					%>
 					<tr>
-						<td align="center" colspan="6" height="210">
+						<td align="center" colspan="6" height="480">
 							<p>등록된 게시글이 없습니다.</p>
 						</td>
 					</tr>

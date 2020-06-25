@@ -32,7 +32,6 @@
 			<br>  
 			<div class="row">  
 				<%
-			
 	        	Vector<AcademyBean> Avlist=Amgr.getBestBoard("top","le.star",6);
 	        	//int listsize=vlist.size();
 	        	for(int i=0;i<6;i++){

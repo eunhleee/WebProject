@@ -2,6 +2,9 @@
 <%
 		request.setCharacterEncoding("utf-8");
 		String pageValue=request.getParameter("pageValue");
+		if(session.getAttribute("idKey")==null||session.getAttribute("idKey").equals("")){
+			response.sendRedirect("../alcinfo/cards-gallery.jsp");
+		}
 		
 %>
 <html>

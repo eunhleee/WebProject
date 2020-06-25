@@ -148,11 +148,6 @@
 	height:30px;
 }
 
-#title td {
-	color: white;
-	background-color: #36ada9;
-}
-
 a {
 	text-decoration: none;
 	color: black;
@@ -161,11 +156,15 @@ a {
 a:hover {
 	color: gray;
 }
+
+.reviewTable td{
+	vertical-align: top;
+}
 </style>
 </head>
 <body>
 	<!-- 리스트 부분 -->
-	<h2>선생님 리뷰</h2>
+	<h2 style="color:#36ada9;">REVIEW</h2>
 	<table>
 		<tr>
 			<td width="600">Total : <%=totalRecord%>Articles(<font
@@ -188,23 +187,16 @@ a:hover {
 			</td>
 		</tr>
 	</table>
-	<table>
-		<tr>
+	<table class="reviewTable" height="75%">
+		<tr height="500">
 			<td align="center" colspan="2">
-				<table cellspacing="0" height="80">
-					<tr align="center" id="title">
-						<td width="150">평 점</td>
-						<td width="280">제 목</td>
-						<td width="100">닉 네 임</td>
-						
-						<td width="150">날 짜</td>
-						<td width="100">조회수</td>
-					</tr>
+				<table cellspacing="0" >
+					
 					<%
 						if(grade!=0&&(loginid==null||mpoint==null||mpointnumber<todaynumber)){
 					%>
 					<tr>
-						<td align="center" colspan="5" height="170" style="background-color:gray;  opacity: 0.5;">
+						<td align="center" colspan="5" height="380" style="background-color:gray;  opacity: 0.5;">
 							<p style="color:white;">포인트를 구입하시면 <%=totalRecord%> 개의 후기글을 보실 수 있습니다.</p><br>
 							<input type="button" value="포인트 구입하러 가기" onclick="moveToBuyPoint();">
 						</td>
@@ -217,7 +209,7 @@ a:hover {
 						if (vlist.isEmpty()) {
 					%>
 					<tr>
-						<td align="center" colspan="5" height="170">
+						<td align="center" colspan="5" height="480">
 							<p>등록된 게시글이 없습니다.</p>
 						</td>
 					</tr>
@@ -234,17 +226,21 @@ a:hover {
 								int count = le1bean.getLr_count();
 								int ccount = mgr.lerccount(lnum);
 					%>
-					<tr id="list">
-							<td align="center"><%=star%></td>
-						<td align="center">
-						<a href="javascript:read('<%=lnum%>')"><%=title%></a>
-						<% if(ccount>0) { %>
-							<font color="red">[<%=ccount%>]</font>
-						<% } %>
+					<tr id="list" height="50">	
+						<td width="700">
+						<div >
+							<a href="javascript:read('<%=lnum%>')">
+								<font style="font-size:18px; font-weight:bold;"><%=title %></font><br>
+								<font style="float:right; font-size:15px; ">
+								<%=nick %>
+								<img src="../img/star.png" width="13" height="13">&nbsp;<%=star %>
+								<%=date %>
+								<img src="../img/eyes.png" width="15" height="15">&nbsp;<%=count %>
+								<img src="../img/message.png" width="15" height="15">&nbsp;<%=ccount %>
+								</font>								
+							</a>
+						</div>
 						</td>
-						<td align="center"><a href=""><%=nick%></a></td>
-						<td align="center"><%=date%></td>
-						<td align="center"><%=count%></td>
 					</tr>
 
 					<%
@@ -258,10 +254,7 @@ a:hover {
 
 			</td>
 		</tr>
-		<tr>
-			<td colspan="2"><br> <br></td>
-		</tr>
-
+		
 		<tr>
 			<td>
 				<!-- 페이징 및 블럭 Start --> <%
@@ -323,7 +316,7 @@ a:hover {
 
 	<hr width="800" align="center">
 	<form name="lesearchFrm">
-		<table width="600" cellpadding="4" cellspacing="0">
+		<table width="600" cellpadding="4" cellspacing="0" style="float:bottom;">
 			<tr>
 				<td align="center" valign="bottom">
 				<div id="inputdiv" style="width:320px; display:flex;">

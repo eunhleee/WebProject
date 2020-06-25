@@ -5,13 +5,39 @@
 <%@page import="alcinfo.UtilMgr"%>
 <%@page import="alcinfo.AcademyBean"%>
 <%@page import="java.util.Vector"%>
+<%@page import="alcinfo.LeteaBean"%>
+
 <jsp:useBean id="aMgr" class="alcinfo.AcademyMgr" />
 <%
 	request.setCharacterEncoding("UTF-8");
+	if(session.getAttribute("idKey")==null||session.getAttribute("idKey").equals("")){
+		response.sendRedirect("../alcinfo/cards-gallery.jsp");
+	}
 %>
 <!DOCTYPE html>
 <html>
 <head>
+<title>학원장 신청목록</title>
+<meta charset="UTF-8">
+<script type="text/javascript">
+function noPermit(aca_id,aca_state,aca_num,name){
+	document.permitFrm.name.value=name;
+    document.permitFrm.aca_state.value=aca_state;
+    document.permitFrm.aca_num.value=aca_num;
+    document.permitFrm.aca_id.value=aca_id;
+	document.permitFrm.action="requestAclistProc.jsp?flag=noPermit&name="+name;
+	document.permitFrm.submit();
+}
+function Permit(aca_id,aca_state,aca_num,name){
+	document.permitFrm.name.value=name;
+
+	document.permitFrm.aca_id.value=aca_id;
+    document.permitFrm.aca_state.value=aca_state;
+    document.permitFrm.aca_num.value=aca_num;
+	document.permitFrm.action="requestAclistProc.jsp?flag=Permit&name="+name;
+	document.permitFrm.submit();
+}
+</script>
 <style>
 .wrapper{
 display:grid;
@@ -93,7 +119,7 @@ a:hover {
 }
 </style>
 </head>
-<meta charset="UTF-8">
+<body>
 
 <jsp:include page="../alcinfo/headerSearch.jsp" />
 	<div id="frame" >
@@ -110,27 +136,9 @@ a:hover {
 					</tr>
 				</table>
 			</div>
-<title>학원장 신청목록</title>
-<script type="text/javascript">
-function noPermit(aca_id,aca_state,aca_num,name){
-	document.permitFrm.name.value=name;
-    document.permitFrm.aca_state.value=aca_state;
-    document.permitFrm.aca_num.value=aca_num;
-    document.permitFrm.aca_id.value=aca_id;
-	document.permitFrm.action="requestAclistProc.jsp?flag=noPermit&name="+name;
-	document.permitFrm.submit();
-}
-function Permit(aca_id,aca_state,aca_num,name){
-	document.permitFrm.name.value=name;
 
-	document.permitFrm.aca_id.value=aca_id;
-    document.permitFrm.aca_state.value=aca_state;
-    document.permitFrm.aca_num.value=aca_num;
-	document.permitFrm.action="requestAclistProc.jsp?flag=Permit&name="+name;
-	document.permitFrm.submit();
-}
-</script>
-<body>
+
+
 <table>
 <%
 	Vector<AcademyBean> mvlist=aMgr.mGMList();
@@ -192,12 +200,13 @@ function Permit(aca_id,aca_state,aca_num,name){
 		</tr>
 <%}}}%>
 </table>
+</div>
 <form name="permitFrm" method="post">
 		<input type="hidden" name="aca_num">
 		<input type="hidden" name="aca_id">
 		<input type="hidden" name="aca_state">
 </form>
 		<jsp:include page="../alcinfo/footer.jsp" />
-
+</div> b
 </body>
 </html>
