@@ -120,6 +120,7 @@
 <style>
 #list td {
 	border-bottom: 1px solid lightgray;
+	background-color:#FAF8EB;
 }
 
 #title td {
