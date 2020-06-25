@@ -18,6 +18,7 @@
 	int num=Integer.parseInt(request.getParameter("stunum"));
 	MemberBean mbean=Rmgr.getStuId(num);
 	//System.out.println("학생의 아이디는"+mbean.getId());
+	String logid = (String)session.getAttribute("idKey");
 
 	if(request.getParameter("stunum") == null) {
 		//response.sendRedirect(url);
@@ -186,7 +187,15 @@ function goErr(){
 									<tr>
 										<td><input type="button" value="취소하기" id="myButton2"
 											style="font-size: 20;" onclick="deleteT();"></td>
-									</tr>		
+									</tr>
+									<% if(session.getAttribute("idKey")!=null) {
+										if(logid.equals(mbean.getId()) || Lmgr.checkM(logid)==0) {
+									%>
+									<tr>
+										<td><input type="button" value="삭제하기" id="myButton3"
+										style="font-size: 20;" onclick="deleteStudent();"></td>
+									</tr>	
+									<% } }%>		
 									<tr>
 									<%	if(session.getAttribute("idKey")==null||session.getAttribute("idKey").equals("")){ %>
 									<td><input type="button" value="잘못된정보 신고하기"
@@ -207,7 +216,7 @@ function goErr(){
 			<tr>
 			<td>
 			<div style="padding:20px 30px;">
-				<img src="../img/<%=stbean.getImgname() %>" width="300" height="250">
+				<img src="../StudentImg/<%=stbean.getImgname() %>" width="300" height="250">
 			</div>
 			</td>
 			<td  align="center" rowspan="2">

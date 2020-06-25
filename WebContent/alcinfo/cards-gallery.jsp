@@ -9,11 +9,29 @@
 <jsp:setProperty property="*" name="mpbean"/>
 
 <!DOCTYPE html>
+<style>
+
+@font-face 
+{ font-family: 'Godo'; font-style: normal;
+ font-weight: 400;
+  src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoM.woff2') format('woff2'), 
+  url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoM.woff') format('woff'); }
+   @font-face {
+    font-family: 'Godo'; font-style: normal;
+     font-weight: 700; 
+     src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoB.woff2') format('woff2'),
+      url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoB.woff') format('woff'); } 
+      .godo * { font-family: 'Godo', sans-serif; }
+ body{
+ font-family:'Godo';
+ }
+</style>
 <html>
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<div class="godo">
 <title>우리학원 어디?</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
@@ -48,8 +66,8 @@
 	        %>
 				<div class="col-md-6 col-lg-4">
 					<div class="card border-0 transform-on-hover">
-						<a class="lightbox" href="../Academy/acRead.jsp?num=<%=num%>"> <img
-							src="../AcademyImg/<%=img%>" width="350" height="200" alt="Card Image" class="card-img-top">
+						<a class="lightbox" href="../Academy/acRead.jsp?num=<%=num%>"> 
+							<img src="../AcademyImg/<%=img%>" width="350" height="200" alt="Card Image" class="card-img-top">
 						</a>
 						<div class="card-body">
 							<h6>
@@ -98,12 +116,24 @@
 	        %>
 				<div class="col-md-6 col-lg-4">
 					<div class="card border-0 transform-on-hover">
-						<a class="lightbox" href="../Lesson/leRead.jsp?num=<%=num %>&id=<%=id%>"> <img
-							src="../TeacherImg/<%=img%>" width="350" height="200" alt="Card Image" class="card-img-top">
+						<a class="lightbox" 
+						<%if((String)session.getAttribute("idKey")==null) {%>
+						href="javascript:alert('로그인 후 이용가능합니다.');"
+						<%} else { %>
+						href="../Lesson/leRead.jsp?num=<%=num %>&id=<%=id%>"
+						<%} %>
+						>
+							<img src="../TeacherImg/<%=img%>" width="350" height="200" alt="Card Image" class="card-img-top">
 						</a>
 						<div class="card-body">
 							<h6>
-								<a href="../Lesson/leRead.jsp?num=<%=num%>&id=<%=id%>"><%=name %></a>
+								<a 
+								<%if((String)session.getAttribute("idKey")==null) {%>
+								href="javascript:alert('로그인 후 이용가능합니다.');"
+								<%} else { %>
+								href="../Lesson/leRead.jsp?num=<%=num%>&id=<%=id%>"
+								<%} %>
+								><%=name %></a>
 							</h6>
 							<p class="text-muted card-text"><%=leclass %><br>
 								<%=area %></p>
@@ -129,5 +159,6 @@
 		});
 	</script>
 	<jsp:include page="footer.jsp"></jsp:include>
+	</div>
 </body>
 </html>

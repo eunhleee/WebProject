@@ -1,4 +1,5 @@
 <!-- ac_ReviewUpdate.jsp -->
+<%@page import="java.net.URLEncoder"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="alcinfo.UtilMgr"%>
@@ -176,7 +177,7 @@
 				<td width="30%" align="center">
 				<div style="border:10px solid #FCBC7E; border-radius:15px; padding:20px">
 					<jsp:include page="mapJsp.jsp">
-					<jsp:param value="<%=bean.getAc_address()%>" name="address" />
+					<jsp:param value='<%=URLEncoder.encode(bean.getAc_address(),"UTF-8")%>' name="address" />
 					</jsp:include>
 				</div>
 					</td>

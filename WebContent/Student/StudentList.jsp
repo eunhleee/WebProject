@@ -32,12 +32,21 @@
 	        %>
 			<div class="col-md-6 col-lg-4">
 				<div class="card border-0 transform-on-hover">
-					<a class="lightbox" href="stRead.jsp?stunum=<%=num%>"> 
+					<a class="lightbox" 
+					<%if((String)session.getAttribute("idKey")==null) {%>
+					href="javascript:alert('로그인 후 이용가능합니다.');"
+					<%} else { %>				
+					href="stRead.jsp?stunum=<%=num%>"
+					<%} %>> 
 					<img src="../StudentImg/<%=img%>" width="350" height="200" alt="Card Image" class="card-img-top">
 					</a>
 					<div class="card-body">
 						<h6>
-							<a href="stRead.jsp?stunum=<%=num%>"><%=name %></a>
+							<a
+							<%if((String)session.getAttribute("idKey")==null) {%>
+							href="javascript:alert('로그인 후 이용가능합니다.');"
+							<%} else { %> 
+							href="stRead.jsp?stunum=<%=num%>"<%} %>><%=name %></a>
 						</h6>
 						<p class="text-muted card-text"><%=school_name %>
 							&nbsp;	<%=school_grade %><br>

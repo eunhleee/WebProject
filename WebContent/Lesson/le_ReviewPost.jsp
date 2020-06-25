@@ -287,7 +287,7 @@ function graph(){
 		<tr>
 			<td>
 				<div style="padding:20px 30px;">
-				<img src="../img/<%=lebean.getImgname() %>"	height="250" width="300">
+				<img src="../TeacherImg/<%=lebean.getImgname() %>"	height="250" width="300">
 				</div>
 			</td>
 			<td align="center"  rowspan="2" >
