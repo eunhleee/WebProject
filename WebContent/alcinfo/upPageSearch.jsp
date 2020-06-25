@@ -6,6 +6,7 @@
 		int maxPage=UtilMgr.parseInt(request,"maxPage");
 		maxPage+=6;
 %>
+<link href="../alcinfo/fontStyle.css" rel="stylesheet">
 <script>
 location.href="../alcinfo/SearchPage.jsp?keyWord=<%=keyWord%>&maxPage=<%=maxPage%>";
 </script>

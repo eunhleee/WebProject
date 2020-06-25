@@ -42,7 +42,7 @@ function acquestion(id){
 function goAclist() {
     window.name = "parentForm";
  	url = "../Mypage/acSearch.jsp";
-	window.open(url, "childForm", "width=620, height=460, top=200, left=300"); 
+	window.open(url, "childForm", "width=655, height=460, top=200, left=300"); 
 }
 
 </script>

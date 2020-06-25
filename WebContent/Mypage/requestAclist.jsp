@@ -39,6 +39,19 @@ function Permit(aca_id,aca_state,aca_num,name){
 }
 </script>
 <style>
+.tablelist
+{
+	border:10px solid #CEF279;
+	padding-left:50px;
+	padding-right:50px;
+	margin-top:10px;
+	margin-bottom:10px;
+	
+	margin-left:10px;
+	margin-right:10px;
+	border-radius:10px;
+	
+}
 .wrapper{
 display:grid;
   grid-template-columns: 1fr 1fr;
@@ -153,37 +166,39 @@ a:hover {
 		<tr><%}%>
 			<td>
 				<div>
-		<table style="padding-left:30px;" border="1">
+		<table class="tablelist">
 			<tr>
 			<td>
 			<tr>
-				<td>
+				<td style="width:60px; margin-bottom:20px;"><h2><%=mbean.getNum()%></h2></td>
+			</tr>
+			<tr>
+				<td colspan="2">
+				<div class="wrapper" >			
+				<div>
 				<img src="../authority/<%=mbean.getAca_business()%>" style="margin-bottom:10px;width:250px; height:200px; "><br>
-				</td>
-				<td>
+				</div>
+				<div>
 				<img src="../authority/<%=mbean.getAca_identity()%>" style="margin-bottom:10px;width:250px; height:200px; "><br>
+				</div>
+				</div>
 				</td> 
 			</tr>
-
 			<tr>
-				<td style="width:150px;" name="num">접수번호</td>
-				<td style="width:350px;"><%=mbean.getNum() %></td>
+				<td style="width:60px;" name="aca_id">아이디</td>
+				<td style="width:250px;"><%=mbean.getAca_id()%></td>
 			</tr>
 			<tr>
-				<td style="width:150px;" name="aca_id">아이디</td>
-				<td style="width:350px;"><%=mbean.getAca_id()%></td>
+				<td style="width:60px;" name="aca_num">학원번호</td>
+				<td style="width:250px;"><%=mbean.getAca_num()%></td>
 			</tr>
 			<tr>
-				<td style="width:150px;" name="aca_num">학원번호</td>
-				<td style="width:350px;"><%=mbean.getAca_num()%></td>
-			</tr>
-			<tr>
-				<td style="width:150px;" name="aca_name">학원이름</td>
-				<td style="width:350px;"><%=mbean.getAca_name()%></td>
+				<td style="width:60px;" name="aca_name">학원이름</td>
+				<td style="width:250px;"><%=mbean.getAca_name()%></td>
 			</tr> 
 			<tr>
-				<td style="width:150px;" name="aca_state">상태</td>
-				<td style="width:350px;"><%=mbean.getAca_state()%></td>
+				<td style="width:60px;" name="aca_state">상태</td>
+				<td style="width:250px;"><%=mbean.getAca_state()%></td>
 			</tr>
 			<tr>
 				<td colspan="2" align="right" style="padding-top:15px; padding-bottom:30px; " >

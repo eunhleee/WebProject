@@ -55,8 +55,18 @@
 				var result = xhrObject.responseText;
 				var objRes = eval("(" + result + ")");
 				var num = objRes.datas.length;
-				var res = "<table cellpadding='3' cellspacing='0' border='1' width='580'>";
+				var res = "<table cellpadding='3' cellspacing='0' width='580' class='tableq'>";
 				var resDiv = document.getElementById("div_res");
+				res += "<tr>";
+				res += "<td width='100' height='15' align='center' style='font-size:15; background-color:#B2EBF4; padding-bottom:10px; padding-left:10px;'><br>"
+					+ "번호<br></td>";
+				res += "<td width='180' height='15' align='center' style='font-size:15; background-color:#B2EBF4; padding-bottom:10px;'><br>"
+					+"학원이름<br></td>";
+						
+				res += "<td width='500' height='15' align='center' style='font-size:15; background-color:#B2EBF4; padding-bottom:10px;'><br>"
+				 + "주소<br></td>";
+
+				res += "</tr>";
 
 				if (num < 1) {
 					res += "<tr><td width='500' height='30' align='center' style='font-size:20;'>검색 결과가 없습니다.</td></tr>";
@@ -67,14 +77,14 @@
 						var user_num = objRes.datas[i].NUM;
 
 						res += "<tr>";
-						res += "<td width='100' height='15' align='center' style='font-size:15;' bgcolor='#D0E6FC'><br>"
+						res += "<td width='100' height='15' align='center' style='font-size:15;'><br>"
 							+"<a href=\"javascript:sendChildValue(\'"+user_name+"\',\'"+user_num+"\')\">"	
 						+ user_num + "</a><br></td>";
-						res += "<td width='180' height='15' align='center' style='font-size:15;' bgcolor='white'><br>"
+						res += "<td width='180' height='15' align='center' style='font-size:15;'><br>"
 						+"<a href=\"javascript:sendChildValue(\'"+user_name+"\',\'"+user_num+"\')\">"
 								+ user_name + "</a><br></td>";
 								
-						res += "<td width='500' height='15' align='center' style='font-size:15;' bgcolor='#D0E6FC'><br>"
+						res += "<td width='500' height='15' align='center' style='font-size:15;'><br>"
 							+"<a href=\"javascript:sendChildValue(\'"+user_name+"\',\'"+user_num+"\')\">"			
 						+ user_address + "</a><br></td>";
 
@@ -98,7 +108,21 @@
 			window.close()
 			}
 </script>
+<style>
+a {
+	text-decoration: none;
+	color: black;
+}
+.tableq{
+border: 10px solid #36ada9; 
+margin-left:30px;
+	border-radius:10px;
+}
+tr{
+border-bottom:5px solid #36ada9;
 
+}
+</style>
 </head>
 <body>
 	<div id='div_main' width='380' height="300"
@@ -106,15 +130,15 @@
 		<table border='0' width='380' cellpadding='0' cellspacing='0'>
 			<form name="form_main" onSubmit="javascript:return false;">
 				<tr>
-					<td width='145'></td>
-					<td width='145' align='right'>
+					<td width='200'></td>
+					<td width='200' align='right'>
 					<input type='text'  
 						name='txt_user_name' size='15' maxlength='10'
 						style='width: 140px; font-size: 15; text-align: left;'
 						onkeyup='javascript:searchData();'></td>
 					<td width='45'><img src='../img/search.svg' width='45'
-						height='50' onClick='javascript:searchData();' style="margin-left:15px;"></td>
-					<td width='145'></td>
+						height='50' onClick='javascript:searchData();' style="margin-left:15px; "></td>
+					<td width='200'></td>
 				</tr>
 			</form>
 		</table>
@@ -122,10 +146,10 @@
 
 	<div id='div_res' width='380'
 		style="visibility: visible; position: absolute; left: 0px; top: 115px; z-index: 1;">
-		<table border='1' width='580' cellpadding='10' cellspacing='0'>
+		<table width='655' cellpadding='10' cellspacing='0'>
 			<tr>
-				<td align='center' style="width =: 550px; font-size: 20"
-					bgcolor='#FFFFCC'>학원목록</td>
+				<td align='center' style="width:550px; font-size: 20; padding-left:30px;  background-color:#B2EBF4; "
+					>학원목록</td>
 			</tr>
 		</table>
 	</div>
