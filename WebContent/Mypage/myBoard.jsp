@@ -5,12 +5,16 @@
 <%@page import="alcinfo.ReportBean"%>
 <%@page import="java.util.Vector"%>
 <jsp:useBean id="rMgr" class="alcinfo.ReportMgr"/>
+<jsp:useBean id="HeaderMmgr" class="member.MemberMgr"/>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%
 		
 		request.setCharacterEncoding("UTF-8");
+	if(session.getAttribute("idKey")==null||session.getAttribute("idKey").equals("")){
+		response.sendRedirect("../alcinfo/cards-gallery.jsp");
+	}
  		String reid=(String)session.getAttribute("idKey");
- 		int grade=(Integer)session.getAttribute("idgrade");
+ 		int logingrade=HeaderMmgr.checkM(reid);
 
  		int totalRecord = 0;//총게시물수
 		int numPerPage = 10;//페이지당 레코드 개수(5,10,15,30)
@@ -165,7 +169,7 @@ select{
 <div id="totalframe">
 	<div id="categoryframe">
 		<h3 align="center">마이 페이지</h3>
-		<%if(grade==1) {%>
+		<%if(logingrade==1) {%>
 		<div id="atag"><a href="../Mypage/upMember.jsp">&#149; 개인 정보 수정</a></div>
 		<div id="atag"><a href="../Mypage/myBoard.jsp">&#149; 내가 쓴 글</a></div>
 		<div id="atag"><a href="../Mypage/MyReportList.jsp">&#149; 나의 신고</a></div>

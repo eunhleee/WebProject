@@ -1,4 +1,5 @@
 <!-- requestAclist.jsp -->
+<%@page import="alcinfo.LeteaBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="alcinfo.UtilMgr"%>
@@ -11,84 +12,192 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+.wrapper{
+display:grid;
+  grid-template-columns: 1fr 1fr;
+
+
+}
+#listtable{
+	padding:15px; 
+
+	border:5px solid #CEF279;
+	border-radius:10px;
+
+}
+#content{
+	margin : auto;
+  	width: 100%;
+  	border: 10px solid #36ada9; 
+	border-radius:10px;
+	margin-top:50px;
+}
+#list td {
+	border-bottom: 1px solid lightgray;
+	height:30px;
+}
+
+#title td {
+	height:30px;
+	color: white;
+	background-color: #36ada9;
+}
+a {
+	text-decoration: none;
+	color: black;
+}
+a:hover {
+	color: gray;
+}
+#nav_table tr {
+	border:5px solid #56C8D3;
+}
+
+#nav_td {
+	text-align: center;
+	width:330px;
+	height: 100px;
+	border: none;
+	
+}
+
+#nav_td a {
+	color: black;
+	text-decoration: none;
+}
+
+#nav_td a:hover {
+	color: white;
+	font-weight: bold;
+}
+
+#nav_td:hover {
+	background-color: #56C8D3;
+}
+#graphList{
+	width:70%;
+}
+
+#novalue{
+	margin-bottom:50px;
+	margin-top:50px;
+	padding:50px; 
+	text-algin:center; 
+	background-color:#FBC1AD;
+	color:White;	
+	border: none;
+	border-radius:20px;
+	font-weight: bold;
+	
+}
+</style>
+</head>
 <meta charset="UTF-8">
+
+<jsp:include page="../alcinfo/headerSearch.jsp" />
+	<div id="frame" >
+		<div id="container" align="center">
+			<div id="total" align="center">
+				<table id="nav_table">
+					<tr>
+						<td id="nav_td"><a href="../Mypage/managerPage.jsp?pageValue=salesList">매출 현황</a></td>
+						<td id="nav_td"><a href="../Mypage/managerPage.jsp?pageValue=memberChart">회원 현황</a></td>
+						<td id="nav_td"><a href="../Report/MGMemberControl.jsp">신고 접수건</a></td>
+						<td id="nav_td"><a href="../Report/StateManagement.jsp">회원 관리</a></td>
+						<td id="nav_td"><a href="../Mypage/requestAclist.jsp">학원장 접수 관리</a></td>
+						
+					</tr>
+				</table>
+			</div>
 <title>학원장 신청목록</title>
 <script type="text/javascript">
-function noPermit(aca_id,aca_state){
-	document.permitFrm.aca_id.value=aca_id;
+function noPermit(aca_id,aca_state,aca_num,name){
+	document.permitFrm.name.value=name;
     document.permitFrm.aca_state.value=aca_state;
-	document.permitFrm.action="requestAclistProc.jsp?flag=noPermit";
+    document.permitFrm.aca_num.value=aca_num;
+    document.permitFrm.aca_id.value=aca_id;
+	document.permitFrm.action="requestAclistProc.jsp?flag=noPermit&name="+name;
 	document.permitFrm.submit();
 }
-function Permit(aca_id,aca_state){
+function Permit(aca_id,aca_state,aca_num,name){
+	document.permitFrm.name.value=name;
+
 	document.permitFrm.aca_id.value=aca_id;
     document.permitFrm.aca_state.value=aca_state;
-	document.permitFrm.action="requestAclistProc.jsp?flag=Permit";
+    document.permitFrm.aca_num.value=aca_num;
+	document.permitFrm.action="requestAclistProc.jsp?flag=Permit&name="+name;
 	document.permitFrm.submit();
 }
 </script>
-	<%
-						Vector<AcademyBean> mvlist=aMgr.mGMList();
-						int listStze = mvlist.size();
-
-						if(mvlist.isEmpty()){
-						out.println("신청된 것이 없습니다.");
-						}else{
-							for(int i=0;i<mvlist.size();i++){
-								AcademyBean mbean=mvlist.get(i);
-								if(mbean.getAca_state().equals("진행중")){
-					%>
-
-</head>
 <body>
+<table>
+<%
+	Vector<AcademyBean> mvlist=aMgr.mGMList();
+	int listStze = mvlist.size();
+	if(mvlist.isEmpty()){
+		%>
+		<input id="novalue" type="text" value="신청된 것이 없습니다." readonly="readonly">
+	<%}else{
+		for(int i=0;i<mvlist.size();i++){
+		AcademyBean mbean=mvlist.get(i);
+		if(i%2==0){%>
+		<tr><%}%>
+			<td>
+				<div>
+		<table style="padding-left:30px;" border="1">
+			<tr>
+			<td>
+			<tr>
+				<td>
+				<img src="../authority/<%=mbean.getAca_business()%>" style="margin-bottom:10px;width:250px; height:200px; "><br>
+				</td>
+				<td>
+				<img src="../authority/<%=mbean.getAca_identity()%>" style="margin-bottom:10px;width:250px; height:200px; "><br>
+				</td> 
+			</tr>
 
-<table>
-<tr>
-<td>
-<img src="../authority/<%=mbean.getAca_business()%>" style="margin-bottom:10px;width:250px; height:200px; "><br>
-</td>
-<td>
-<img src="../authority/<%=mbean.getAca_identity()%>" style="margin-bottom:10px;width:250px; height:200px; "><br>
-</td> 
-</tr>
-</table>
-<table>
-<tr>
-<td width="100" name="num">접수번호</td>
-<td><%=mbean.getNum() %></td>
-</tr>
-<tr>
-<td width="100" name="aca_id">아이디</td>
-<td><%=mbean.getAca_id()%></td>
-</tr>
-<tr>
-<td width="100" name="aca_num">학원번호</td>
-<td><%=mbean.getAca_num()%></td>
-</tr>
-<tr>
-<td width="100" name="aca_name">학원이름</td>c
-<td><%=mbean.getAca_name()%></td>
-</tr> 
-<tr>
-<td width="100" name="aca_state">상태</td>
-<td><%=mbean.getAca_state()%></td>
-</tr>
-<tr>
-<td colspan="2" align="right">
-	<input type="submit" value="비허가" onclick="noPermit('<%=mbean.getAca_id()%>','<%=mbean.getAca_state()%>')">
-	<input type="submit" value="허가" onclick="Permit('<%=mbean.getAca_id()%>','<%=mbean.getAca_state()%>')">
-	
-</td>
-</tr>
-<%}
-else{i++;}}}
-%>
+			<tr>
+				<td style="width:150px;" name="num">접수번호</td>
+				<td style="width:350px;"><%=mbean.getNum() %></td>
+			</tr>
+			<tr>
+				<td style="width:150px;" name="aca_id">아이디</td>
+				<td style="width:350px;"><%=mbean.getAca_id()%></td>
+			</tr>
+			<tr>
+				<td style="width:150px;" name="aca_num">학원번호</td>
+				<td style="width:350px;"><%=mbean.getAca_num()%></td>
+			</tr>
+			<tr>
+				<td style="width:150px;" name="aca_name">학원이름</td>
+				<td style="width:350px;"><%=mbean.getAca_name()%></td>
+			</tr> 
+			<tr>
+				<td style="width:150px;" name="aca_state">상태</td>
+				<td style="width:350px;"><%=mbean.getAca_state()%></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="right" style="padding-top:15px; padding-bottom:30px; " >
+				<input type="submit" value="비허가"
+				 onclick="noPermit('<%=mbean.getAca_id()%>','<%=mbean.getAca_state()%>','<%=mbean.getAca_num()%>','<%=mbean.getName()%>')">
+				<input style="margin-right:30px;" type="submit" value="허가" 
+				onclick="Permit('<%=mbean.getAca_id()%>','<%=mbean.getAca_state()%>','<%=mbean.getAca_num()%>','<%=mbean.getName()%>')">
+				</td>
+			</tr>
+		</table>
+				</div>
+			</td>
+		<%if(i%2==1){%>
+		</tr>
+<%}}}%>
 </table>
 <form name="permitFrm" method="post">
+		<input type="hidden" name="aca_num">
 		<input type="hidden" name="aca_id">
 		<input type="hidden" name="aca_state">
-
 </form>
+		<jsp:include page="../alcinfo/footer.jsp" />
 
 </body>
 </html>

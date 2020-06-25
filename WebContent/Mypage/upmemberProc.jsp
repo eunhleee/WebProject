@@ -10,17 +10,19 @@
 	String id=request.getParameter("imid");
 	String mon="";
 	String day="";
-	if(request.getParameter("imbirthm").length()>2){
-		mon="0"+request.getParameter("imbirthm");
-	}
-	else{
+	if(request.getParameter("imbirthm").length()==2){
 		mon=request.getParameter("imbirthm");
-	}
-	if(request.getParameter("imbirthd").length()>2){
-		day="0"+request.getParameter("imbirthd");
+
 	}
 	else{
+		mon="0"+request.getParameter("imbirthm");
+
+	}
+	if(request.getParameter("imbirthd").length()==2){
 		day=request.getParameter("imbirthd");
+	}
+	else{
+		day="0"+request.getParameter("imbirthd");
 	}
 	String imbirth = request.getParameter("imbirthy") + mon + day;
 	String imaddress = request.getParameter("imaddress1") + " " + request.getParameter("imaddress2");

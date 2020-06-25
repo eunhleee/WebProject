@@ -114,8 +114,9 @@ function goCReport(conum,stuc_depth,stopid) {
 <style>
 #readDiv{
 	margin-top:50px;
-	margin-left:15%;
-	width:65%;
+	margin-bottom:50px;
+	margin-left:10%;
+	width:79%;
 	align:center;
 	border: 10px solid #F88C65; 
 	border-radius:10px;
@@ -166,24 +167,24 @@ a:hover {
 				<%}%></td>
 		   </tr>
 		    <tr> 
-				<td align="center" bgcolor="#FCBC7E" width="10%" style="color:white; font-weight:bold;" > 닉 네 임</td>
-				<td bgcolor="#FAF8EB" width="10%"><%=id%></td>
-				<td align="center" bgcolor="#FCBC7E" width="10%" style="color:white; font-weight:bold;"> 등록날짜 </td>
-				<td bgcolor="#FAF8EB" width="15%"><%=regdate%></td>
+				<td align="center" bgcolor="#FCBC7E" width="10%" style="color:white; font-weight:bold;" >닉 네 임</td>
+				<td  width="12%">&nbsp;<%=id%></td>
+				<td align="center" bgcolor="#FCBC7E" width="10%" style="color:white; font-weight:bold;">등록날짜 </td>
+				<td  width="10%">&nbsp;<%=regdate%></td>
 				<td align="center" bgcolor="#FCBC7E" width="10%" style="color:white; font-weight:bold;">조회수</td>
-				<td bgcolor="#FAF8EB" colspan="3"><%=count%></td>
+				<td  colspan="3">&nbsp;<%=count%></td>
 			</tr>
 		   <tr> 
 		     <td align="center" bgcolor="#FCBC7E" style="color:white; font-weight:bold;">첨부파일</td>
-		     <td bgcolor="#FAF8EB" colspan="5">
+		     <td  colspan="5" style="border-bottom:3px solid #FCBC7E;">
 		    	<%
 		    		if(filename!=null&&!filename.equals("")){
 		    	%>
-		    		<a href="javascript:down('<%=filename%>')" style="margin-right:15px;"><%=filename%></a>
-		    		<font color="blue">(<%=UtilMgr.intFormat(filesize)%>bytes)</font>
+		    		<a href="javascript:down('<%=filename%>')" style="margin-right:15px;">&nbsp;<%=filename%></a>
+		    		<font color="lightgray">(<%=UtilMgr.intFormat(filesize)%>bytes)</font>
 		    	<%
 		    		} else {
-		    			out.println("첨부된 파일이 없습니다.");
+		    			out.println(" 첨부된 파일이 없습니다.");
 		    		}
 		    	%>
 		     </td>
@@ -319,7 +320,7 @@ a:hover {
 			
 			 <% if(loginid!=null) { %>
 		   <form method="post" name="cFrm">
-			   <div id="inputdiv" style="width:97%; background-color:white;">
+			   <div id="inputdiv" style="width:97%; background-color:white; margin-bottom:30px;">
 					<table width="97%">
 						<tr>
 							<td colspan="4"><%=loginNick%></td>
@@ -355,7 +356,6 @@ a:hover {
 			<% } %>
 			
 		   <!-- 댓글 입력폼 End -->
-			<hr>
 		 [ <a href="javascript:list()" >리스트</a>
 		 <% 
 		 if(loginid!=null) {

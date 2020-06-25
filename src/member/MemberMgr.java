@@ -170,6 +170,31 @@ public class MemberMgr {
 		return flag;
 	}
 	
+	public boolean checkNickname1(String nickname, String membernick) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		boolean flag = false;
+		try {
+			con = pool.getConnection();
+			sql = "select nickname from member where nickname=? and nickname not in (?) union all "
+					+ "select nickname from letea where nickname=? and nickname not in (?)";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, nickname);
+			pstmt.setString(2, membernick);
+			pstmt.setString(3, nickname);
+			pstmt.setString(4, membernick);
+			rs = pstmt.executeQuery();
+			flag = rs.next();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt);
+		}
+		return flag;
+	}
+	
 	
 	public boolean insertMember(MemberBean bean) {
 		Connection con = null;
@@ -328,9 +353,12 @@ public class MemberMgr {
 		int grade = 5;
 		try {
 			con = pool.getConnection();
-			sql = "select grade from member where id=?";
+			sql = "select grade from member where id=? "
+					+ "union "
+					+ "select grade from letea where id=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
+			pstmt.setString(2, id);
 			rs = pstmt.executeQuery();
 			if(rs.next()) grade = rs.getInt(1);
 		} catch (Exception e) {

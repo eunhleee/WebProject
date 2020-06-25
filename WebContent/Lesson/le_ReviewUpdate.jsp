@@ -21,8 +21,8 @@
 	String numPerPage = request.getParameter("numPerPage");	
 	String keyField = request.getParameter("keyField");	
 	String keyWord = request.getParameter("keyWord");
-	String loginid = (String)session.getAttribute("idKey");
-	String loginNick = lermgr.memberNick(loginid);
+	String loginid1 = (String)session.getAttribute("idKey");
+	String loginNick = lermgr.memberNick(loginid1);
 	String prevurl = request.getHeader("referer");
 
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -247,7 +247,7 @@ function graph(){
 </head>
 <body>
 
-	
+	<%@ include file="../alcinfo/headerSearch.jsp"%>
 	<br>
 	<br>
 	<form name="cart" action="">
