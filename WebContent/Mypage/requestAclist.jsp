@@ -8,6 +8,9 @@
 <jsp:useBean id="aMgr" class="alcinfo.AcademyMgr" />
 <%
 	request.setCharacterEncoding("UTF-8");
+	if(session.getAttribute("idKey")==null||session.getAttribute("idKey").equals("")){
+		response.sendRedirect("../alcinfo/cards-gallery.jsp");
+	}
 %>
 <!DOCTYPE html>
 <html>

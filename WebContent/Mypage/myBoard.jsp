@@ -1,10 +1,12 @@
 <!-- 7p 4. 마이페이지 나의 신고 글 창 -->
 <!-- MypeportList.jsp -->
 <!-- 검색까지됨 -->
+<%@page import="alcinfo.MyBoardBean"%>
 <%@page import="alcinfo.UtilMgr"%>
 <%@page import="alcinfo.ReportBean"%>
 <%@page import="java.util.Vector"%>
 <jsp:useBean id="rMgr" class="alcinfo.ReportMgr"/>
+<jsp:useBean id="mbMgr" class="alcinfo.MyBoardMgr"/>
 <jsp:useBean id="HeaderMmgr" class="member.MemberMgr"/>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%
@@ -18,7 +20,7 @@
 
  		int totalRecord = 0;//총게시물수
 		int numPerPage = 10;//페이지당 레코드 개수(5,10,15,30)
-		int pagePerBlock = 15;//블럭당 페이지 개수
+		int pagePerBlock = 10;//블럭당 페이지 개수
 		int totalPage = 0;//총 페이지 개수
 		int totalBlock = 0;//총 블럭 개수
 		int nowPage = 1;//현재 페이지
@@ -30,19 +32,7 @@
 			numPerPage = UtilMgr.parseInt(request, "numPerPage");
 		}
 		
-		//검색에 필요한 변수
-		String keyField="",keyWord="";
-		//검색일때
-		if(request.getParameter("keyWord")!=null){
-			keyField=request.getParameter("keyField");
-			keyWord=request.getParameter("keyWord");}
-		
-		//검색 후에 다시 처음화면 요청
-		if(request.getParameter("reload")!=null&&
-		request.getParameter("reload").equals("true")){
-			keyField ="";keyWord="";
-		}
-		totalRecord = rMgr.getTotalCount(keyField, keyWord,reid);
+		totalRecord = mbMgr.getTotalCount(reid);
 		//out.print("totalRecord : " + totalRecord);
 		
 		//nowPage 요청 처리
@@ -67,14 +57,6 @@
 
 <title>GuestBook</title>
 <script type="text/javascript">
-function mycheck() {
-	if(document.searchF.keyWord.value==""){
-		alert("검색어를 입력하세요.");
-		document.searchF.keyWord.focus();
-		return;
-	}
-	document.searchF.submit();
-}
 function pageing(page) {
 	document.readFrm.nowPage.value = page;
 	document.readFrm.submit();
@@ -85,12 +67,20 @@ function block(block) {
 	document.readFrm.submit();
 }
 function  list() {
-	document.listFrm.action = "MyReportList.jsp";
+	document.listFrm.action = "myBoard.jsp";
 	document.listFrm.submit();
 }
 function numPerFn(numPerPage) {
 	document.readFrm.numPerPage.value = numPerPage;
 	document.readFrm.submit();
+}
+function moveAcQnA(ac_num,num){
+	url = "../Academy/ac_QnARead.jsp?nowPage=1&numPerPage=10&ac_num="+ac_num+"&num="+num;
+	window.open(url, "Ac_QnA", "width=900, height=560, top=200, left=400");
+}
+function moveLeQnA(lq_lnum,num){
+	url = "../Lesson/le_QnARead.jsp?nowPage=1&numPerPage=10&lq_lnum="+lq_lnum+"&num="+num;
+	window.open(url, "Le_QnA", "width=900, height=560, top=200, left=400");
 }
 </script>
 <style>
@@ -145,7 +135,6 @@ function numPerFn(numPerPage) {
 	border-bottom: 1px solid lightgray;
 	background-color:white;
 	height:30px;
-	
 }
 
 #title td {
@@ -160,7 +149,14 @@ select{
 #inputdiv{
 	background-color:white;
 }
+a {
+	text-decoration: none;
+	color: black;
+}
 
+a:hover {
+	color: gray;
+}
 
 </style>
 </head>
@@ -187,32 +183,10 @@ select{
     <!--nav-->
   <div id="insertMember" class="insertMember1" align="left">
   <div><h2>내가 쓴 글</h2></div>
-		<form name="searchF">
-					<table width="800" cellpadding="4" cellspacing="0">
-						<tr>
-							<td align="center" valign="bottom">
-								<div id="inputdiv" style="width:320px; display:flex;">
-									<select name="keyField" size="1" style="flex:1; border:none;"> 
-									<option value="renum">글번호</option>
-									<option value="regroup">글분류</option>
-									<option value="retitle">제목</option>
-									<option value="recontent">내용</option>
-									<option value="restate">상태</option>
-									
-									</select> 
-									
-								
-									<input name="keyWord" style="width:150px;flex:2; ">
-									<input type="button" value="찾기" onClick="javascript:mycheck()" style="flex:1;"> 
-								</div>
-								<input type="hidden" name="nowPage" value="1">
-							</td>
-						</tr>
-					</table>
-				</form>
+	
 	<table >
 		<tr>
-		<td width="600">
+		<td width="700">
 		Total : <%=totalRecord%>Articles(
 		<font color="red"><%=nowPage+"/"+totalPage%>Pages</font>)
 		</td>
@@ -237,51 +211,70 @@ select{
 			<td align="center" colspan="2" width="800">
 				<table cellspacing="0"  width="800" >
 	
-			<tr id="title">
-				<td>신고날짜</td>
-				<td>글번호</td>
+			<tr id="title" align="center">
 				<td>글분류</td>
 				<td>제목</td>
-				<td>내용</td>
-				<td>상태</td>
+				<td>작성날짜</td>
+				<td>조회수</td>
 			</tr>
 			<%
-				Vector<ReportBean> vlist = 
-				rMgr.MRList(keyField, keyWord,reid, start, cnt);
-				int listSize = vlist.size();//브라우저 화면에 표시될 게시물 번호
-				if(vlist.isEmpty()){
+				Vector<MyBoardBean> vlist1 = mbMgr.MBList(reid, start, cnt);
+				int listSize1 = vlist1.size();
+				if(vlist1.isEmpty()) {
 					%>
 					<tr>
 						<td align="center" colspan="6" height="150" style="background-color:white;">
-							<%
-						out.println("등록된 게시물이 없습니다.");
-					%>
+							<% out.println("등록된 게시물이 없습니다."); %>
 						</td>
 					</tr>
-					<%
+			<%
 				} else {
-		//Vector<ReportBean> mvlist=rMgr.MRList(keyField, keyWord,reid);
-		//int listStze =mvlist.size();
-		%>
-	
-		<%for(int i=0;i<numPerPage;i++){
-			if(i==listSize) break;
-			ReportBean mbean=vlist.get(i);
-		%>
-			<tr id="list">
-			<td><%=mbean.getOlddate()%></td>
-			<td><%=mbean.getRenum()%></td>
-			<td><%=mbean.getRegroup()%></td>
-			<td><%=mbean.getRetitle()%></td>
-			<td><%=mbean.getRecontent()%></td>
-			<td><%=mbean.getRestate()%></td>
-			</tr>
-			<%}//for%>
-		</table>
-		<%}//if-else %>
-	</tr>
-		<tr>
-		<td colspan="6"><br><br></td>
+			%> 
+				<% for(int i=0; i<listSize1; i++) {
+					MyBoardBean mbBean = vlist1.get(i); %>
+					<tr id="list">
+					<td align="center">
+					<%if(mbBean.getAc_num()!=null) { %>학원 문의 게시판<%} %>
+					<%if(mbBean.getAc_serialnum()!=null) { %>학원 리뷰 게시판<%} %>
+					<%if(mbBean.getLq_lnum()!=null) { %>과외 문의 게시판<%} %>
+					<%if(mbBean.getLr_lnum()!=null) { %>과외 리뷰 게시판<%} %>
+					<%if(mbBean.getStunum()!=null) { %>학생 문의 게시판<%} %>
+					<%if(mbBean.getSc_group()!=null) { 
+						if(mbBean.getSc_group().equals("free")) {%>커뮤니티 - 자유게시판<%} %>
+						<%if(mbBean.getSc_group().equals("academy")) {%>커뮤니티 - 학원 Q&A<%} %>
+						<%if(mbBean.getSc_group().equals("lesson")) {%>커뮤니티 - 과외 Q&A<%} %>
+						<%if(mbBean.getSc_group().equals("onlyst")) {%>커뮤니티 - 학생 전용 게시판<%} %>
+						<%if(mbBean.getSc_group().equals("onlyte")) {%>커뮤니티 - 선생님 전용 게시판<%} %>
+						
+					<%} %>
+					<%if(mbBean.getCc_group()!=null) { %>고객센터 질문<%} %>
+					</td>
+					<td><a 
+					<%if(mbBean.getAc_num()!=null) {
+					%>href="javascript:moveAcQnA('<%=mbBean.getAc_num()%>','<%=mbBean.getNum()%>');"><%} %>
+					<%if(mbBean.getAc_serialnum()!=null) {
+					%>href="../Academy/ac_ReviewRead.jsp?nowPage=1&numPerPage=10&num=<%=mbBean.getAc_serialnum()%>&acrnum=<%=mbBean.getNum()%>"><%} %>
+					<%if(mbBean.getLq_lnum()!=null) {
+					%>href="javascript:moveLeQnA('<%=mbBean.getLq_lnum()%>','<%=mbBean.getNum()%>');"><%} %>
+					<%if(mbBean.getLr_lnum()!=null) {
+							String leid = mbMgr.checkleid(mbBean.getLr_lnum());
+					%>href="../Lesson/le_ReviewRead.jsp?nowPage=1&numPerPage=10&num=<%=mbBean.getLr_lnum()%>&lernum=<%=mbBean.getNum()%>&id=<%=leid%>"><%} %>
+					<%if(mbBean.getStunum()!=null) {
+					%>href="../Student/st_QnARead.jsp?nowPage=1&numPerPage=10&stunum=<%=mbBean.getStunum()%>&num=<%=mbBean.getNum()%>"><%} %>
+					<%if(mbBean.getSc_group()!=null) {
+					%>href="../Community/scRead.jsp?nowPage=1&numPerPage=10&pageValue=<%=mbBean.getSc_group()%>&num=<%=mbBean.getNum()%>"><%} %>
+					<%if(mbBean.getCc_group()!=null) {
+					%>href="../CS/cs_Read.jsp?nowPage=1&numPerPage=10&cust_page=<%=mbBean.getCc_group()%>&num=<%=mbBean.getNum()%>"><%} %>
+					<%=mbBean.getTitle()%></a>
+					</td>
+					<td align="center"><%=mbBean.getDate()%></td>
+					<td align="center"><%=mbBean.getCount()%></td>
+					</tr>
+				<%} %>
+				<%
+				}%>
+			
+			</table>
 	</tr>
 	<tr>
 	<td>
@@ -289,7 +282,7 @@ select{
 		<%if(totalPage>0){ %>
 	<!-- 이전블럭 (이전페이지로 넘긴다)-->
 	<%if(nowBlock>1){ %>
-	<a href="javascript:block('<%=nowBlock-1%>')">prev...</a>
+	<a href="javascript:block('<%=nowBlock-1%>')">이전</a>
 		<%} %>
 	
 	<!-- 페이징 -->
@@ -301,20 +294,20 @@ select{
 		for(;pageStart<pageEnd;pageStart++){
 	%>
 	<a href="javascript:pageing('<%=pageStart%>')"><!-- 페이징처리(페이지번호 넘기기) -->
-	<%if(nowPage==pageStart){ %><font color="black"><%}%>
+	<%if(nowPage==pageStart){ %><font color="gray"><%}%>
 	[<%=pageStart%>]
 	<%if(nowPage==pageStart){ %></font><%}%>
 	</a>
 	<%}//---for%>
 	<!-- 다음 블럭(다음페이지로 넘긴다) -->
 		<%if(totalBlock>nowBlock){ %>
-			<a href="javascript:block('<%=nowBlock+1%>')">...next</a>
+			<a href="javascript:block('<%=nowBlock+1%>')">다음</a>
 		<%}%>
 	<%}///-if1%>
 		<!-- 페이징 및 블럭 End -->
 		</td>
-		<td align="right" colspan="5">
-			<a href="javascript:list()" style="color:black;">[처음으로]</a>
+		<td align="right">
+			<a href="javascript:list()">[처음으로]</a>
 		</td>
 		</tr>
 	</table>
@@ -327,8 +320,6 @@ select{
 <form name="readFrm">
 	<input type="hidden" name="nowPage" value="<%=nowPage%>">
 	<input type="hidden" name="numPerPage" value="<%=numPerPage%>">
-	<input type="hidden" name="keyField" value="<%=keyField%>">
-	<input type="hidden" name="keyWord" value="<%=keyWord%>">
 	<input type="hidden" name="num">
 	
 </form>

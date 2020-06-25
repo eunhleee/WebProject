@@ -8,6 +8,9 @@
 
 <%
 	request.setCharacterEncoding("UTF-8");
+	if(session.getAttribute("idKey")==null||session.getAttribute("idKey").equals("")){
+		response.sendRedirect("../alcinfo/cards-gallery.jsp");
+	}
 	String pageValue=request.getParameter("pageValue");
 		//검색에 필요한 변수
 		int totalRecord=0;//총 게시물 수
