@@ -17,7 +17,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 public class ReportMgr {
 	private DBConnectionMgr pool;
 	File file = new File("");
-	private final String  SAVEFOLDER = "C:/WerPro4/WebProject/WebContent/img";
+	private final String  SAVEFOLDER = "C:/WerPro4/WebProject/WebContent/img/";
 	private final String ENCTYPE = "UTF-8";
 	private int MAXSIZE = 5*1024*1024;
 	 public ReportMgr() {
@@ -44,6 +44,35 @@ public class ReportMgr {
 				}
 				con = pool.getConnection();
 				sql = "update member set imgname=? where id=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1,photo);
+				pstmt.setString(2,multi.getParameter("id"));
+				pstmt.executeUpdate();
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				pool.freeConnection(con, pstmt);
+			}
+		}
+		public void insertteapho(HttpServletRequest req) {
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			String sql = null;
+			MemberBean bean = new MemberBean();
+
+			try {
+				con = pool.getConnection();
+				MultipartRequest multi = 
+						new MultipartRequest(req, SAVEFOLDER, MAXSIZE, ENCTYPE,
+								new DefaultFileRenamePolicy());
+				//DefaultFileRenamePolicy() -> 
+				String photo = null;
+				//post.jsp
+				if(multi.getFilesystemName("photo")!=null) {
+					photo = multi.getFilesystemName("photo");
+				}
+				con = pool.getConnection();
+				sql = "update letea set imgname=? where id=?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1,photo);
 				pstmt.setString(2,multi.getParameter("id"));

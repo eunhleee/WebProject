@@ -175,7 +175,7 @@ input.btns:hover {
 <div id="totalframe">
 <div id="categoryframe">
 	<h3 style="margin-left:50px;">마이 페이지</h3>
-<div id="atag"><a href="../Mypage/upTeachar.jsp">&#149; 개인 정보 수정</a></div>
+<div id="atag"><a href="../Mypage/upTeacher.jsp">&#149; 개인 정보 수정</a></div>
 	<div id="atag"><a href="../Mypage/myBoard.jsp">&#149; 내가 쓴 글</a></div>
 	<div id="atag"><a href="../Mypage/MyReportList.jsp">&#149; 나의 신고</a></div>
 	<div id="atag"><a href="../Mypage/myStudent.jsp">&#149; 내가 신청한 학생</a></div>

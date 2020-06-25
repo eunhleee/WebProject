@@ -132,7 +132,7 @@ function win_close(){
 	}
 
 	function imgcheck(){
-		url = "../Mypage/ImgProc.jsp";
+		url = "../Mypage/ImgProc2.jsp";
 		window.open(url, "imggo", "width=500, height=500, top=200, left=200");
 	}
 	
@@ -141,7 +141,6 @@ function win_close(){
 		if(confirm(msg)){
 			<%
 			aMgr.Uptea(id);
-		    session.setAttribute("idgrade",bean.getGrade());
 			%>
 			alert("변경되셨습니다.");
 			window.location.reload();
@@ -254,7 +253,7 @@ function win_close(){
 <div id="totalframe">
 <div id="categoryframe">
 	<h3 style="margin-left:50px;">마이 페이지</h3>
-	<div id="atag"><a href="../Mypage/upTeachar.jsp">&#149; 개인 정보 수정</a></div>
+	<div id="atag"><a href="../Mypage/upTeacher.jsp">&#149; 개인 정보 수정</a></div>
 	<div id="atag"><a href="../Mypage/myBoard.jsp">&#149; 내가 쓴 글</a></div>
 	<div id="atag"><a href="../Mypage/MyReportList.jsp">&#149; 나의 신고</a></div>
 	<div id="atag"><a href="../Mypage/myStudent.jsp">&#149; 내가 신청한 학생</a></div>
