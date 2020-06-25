@@ -4,8 +4,13 @@
 <%@page import="alcinfo.UtilMgr"%>
 <%@page import="alcinfo.ReportBean"%>
 <%@page import="java.util.Vector"%>
+<%@page import="alcinfo.LeteaBean"%>
 <jsp:useBean id="mgr" class="alcinfo.LeinsertMgr"/>
 <%@ page contentType="text/html; charset=UTF-8"%>
+<jsp:useBean id="aMgr" class="alcinfo.AcademyMgr" />
+<jsp:useBean id="lmgr" class="alcinfo.LeteaMgr" />
+
+
 <%
 		
 		request.setCharacterEncoding("UTF-8");
@@ -13,7 +18,8 @@
 			response.sendRedirect("../alcinfo/cards-gallery.jsp");
 		}
  		String id=(String)session.getAttribute("idKey");
-
+ 		LeteaBean gbean=lmgr.getgrade(id);
+ 		int grade=gbean.getGrade();
 %>
 
 <html>
@@ -101,12 +107,21 @@ select{
 <div id="totalframe">
 	<div id="categoryframe">
 		<h3 align="center">마이 페이지</h3>
-		<div id="atag"><a href="../Mypage/upTeachar.jsp">&#149; 개인 정보 수정</a></div>
-		<div id="atag"><a href="../Mypage/myBoard.jsp">&#149; 내가 쓴 글</a></div>
-		<div id="atag"><a href="../Mypage/MyReportList.jsp">&#149; 나의 신고</a></div>
-		<div id="atag"><a href="../Mypage/myStudent.jsp">&#149; 내가 신청한 학생</a></div>
-		<div id="atag"><a href="../Mypage/myReceiveStudent.jsp">&#149; 과외 신청함</a></div>
-		<div id="atag"><a href="">&#149; 권한 변경 신청</a></div>
+		<div id="atag"><a href="../Mypage/upTeacher.jsp">&#149; 개인 정보 수정</a></div>
+	<div id="atag"><a href="../Mypage/myBoard.jsp">&#149; 내가 쓴 글</a></div>
+	<div id="atag"><a href="../Mypage/MyReportList.jsp">&#149; 나의 신고</a></div>
+	<div id="atag"><a href="../Mypage/myStudent.jsp">&#149; 내가 신청한 학생</a></div>
+	<div id="atag"><a href="../Mypage/myReceiveStudent.jsp">&#149; 과외 신청함</a></div>
+	<% 
+		if(grade==2){	
+	%>
+		<div id="atag"><a href="../Mypage/academyApply.jsp">&#149; 권한 변경 신청</a></div>
+	<%
+		}
+		else if(grade==3){%>
+		<div id="atag"><a href="javascript:void(0);" onclick="javascript:acquestion();">&#149; 권한 변경 신청</a></div>
+		<%}
+	%>	
 	</div>
     <!--nav-->
   <div id="insertMember" class="insertMember1" align="left">

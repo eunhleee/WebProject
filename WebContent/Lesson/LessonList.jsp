@@ -136,6 +136,7 @@ input:checked+label {
 							//imgname, ac_name,group2, ac_tel,star,count
 
 							int num = Lbean.getNum();
+							String img = Lbean.getImgname();
 							String id = Lbean.getId();
 							String name = Lbean.getName();
 							String leclass = Lbean.getLeclass();
@@ -146,7 +147,7 @@ input:checked+label {
 					<div class="col-md-6 col-lg-4">
 						<div class="card border-0 transform-on-hover">
 							<a class="lightbox" href="leRead.jsp?num=<%=num %>&id=<%=id%>"> <img
-								src="../img/no_image.jpg" alt="Card Image" class="card-img-top">
+								src="../TeacherImg/<%=img %>" width="350" height="200" alt="Card Image" class="card-img-top">
 							</a>
 							<div class="card-body">
 								<h6>

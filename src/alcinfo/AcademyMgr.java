@@ -18,7 +18,7 @@ public class AcademyMgr {
 	private static final String UPLOAD = "C:/WerPro4/WebProject/WebContent/authority/";
 	private static final String ENCTYPE = "UTF-8";
 	private static final int MAXSIZE = 10*1024*1024;
-	
+
 	public AcademyMgr(){
 		pool=DBConnectionMgr.getInstance();
 	}
@@ -122,6 +122,7 @@ public class AcademyMgr {
 					bean.setAc_name(rs.getString("ac_name"));
 					bean.setGroup1(rs.getString("group1"));
 					bean.setGroup2(rs.getString("group2"));
+					bean.setImgname(rs.getString("imgname"));
 					bean.setAc_address(rs.getString("ac_address"));
 					bean.setAc_tel(rs.getString("ac_tel"));
 				}
@@ -449,6 +450,6 @@ public class AcademyMgr {
 						pool.freeConnection(con, pstmt);
 					}
 				}	
-				
+			
 	}
 

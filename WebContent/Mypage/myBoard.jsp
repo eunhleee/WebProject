@@ -1,6 +1,6 @@
-<!-- 7p 4. 마이페이지 나의 신고 글 창 -->
-<!-- MypeportList.jsp -->
-<!-- 검색까지됨 -->
+<!-- 7p 4. 마이페이지 나의 쓴 글 창 -->
+<!-- myBoard.jsp -->
+<%@page import="alcinfo.LeteaBean"%>
 <%@page import="alcinfo.MyBoardBean"%>
 <%@page import="alcinfo.UtilMgr"%>
 <%@page import="alcinfo.ReportBean"%>
@@ -8,6 +8,8 @@
 <jsp:useBean id="rMgr" class="alcinfo.ReportMgr"/>
 <jsp:useBean id="mbMgr" class="alcinfo.MyBoardMgr"/>
 <jsp:useBean id="HeaderMmgr" class="member.MemberMgr"/>
+<jsp:useBean id="mgr" class="alcinfo.LeteaMgr"/>
+<jsp:useBean id="aMgr" class="alcinfo.AcademyMgr"/>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%
 		
@@ -50,6 +52,8 @@
 		 totalBlock = (int)Math.ceil((double)totalPage/pagePerBlock);
 		//현재블럭
 		nowBlock = (int)Math.ceil((double)nowPage/pagePerBlock);
+		LeteaBean gbean=mgr.getgrade(reid);
+		int grade=gbean.getGrade();
 %>
 
 <html>
@@ -81,6 +85,18 @@ function moveAcQnA(ac_num,num){
 function moveLeQnA(lq_lnum,num){
 	url = "../Lesson/le_QnARead.jsp?nowPage=1&numPerPage=10&lq_lnum="+lq_lnum+"&num="+num;
 	window.open(url, "Le_QnA", "width=900, height=560, top=200, left=400");
+}
+function acquestion(id){
+	msg="선생님으로 권한을 변경하시겠습니까?";
+	if(confirm(msg)){
+		<%
+		aMgr.Uptea(reid);
+		%>
+		alert("변경되셨습니다.");
+		window.location.reload();
+	}else{
+		
+	}
 }
 </script>
 <style>
@@ -172,12 +188,16 @@ a:hover {
 		<div id="atag"><a href="../Mypage/myLesson.jsp">&#149; 신청한 과외</a></div>
 		<div id="atag"><a href="../Mypage/myReceiveLesson.jsp">&#149; 신청 받은 과외</a></div>
 		<%}else{ %>
-		<div id="atag"><a href="../Mypage/upTeachar.jsp">&#149; 개인 정보 수정</a></div>
+		<div id="atag"><a href="../Mypage/upTeacher.jsp">&#149; 개인 정보 수정</a></div>
 		<div id="atag"><a href="../Mypage/myBoard.jsp">&#149; 내가 쓴 글</a></div>
 		<div id="atag"><a href="../Mypage/MyReportList.jsp">&#149; 나의 신고</a></div>
 		<div id="atag"><a href="../Mypage/myStudent.jsp">&#149; 내가 신청한 학생</a></div>
 		<div id="atag"><a href="../Mypage/myReceiveStudent.jsp">&#149; 과외 신청함</a></div>
-		<div id="atag"><a href="">&#149; 권한 변경 신청</a></div>
+		<% if(grade==2){ %>
+			<div id="atag"><a href="../Mypage/academyApply.jsp">&#149; 권한 변경 신청</a></div>
+		<% } else if(grade==3){%>
+			<div id="atag"><a href="javascript:void(0);" onclick="javascript:acquestion();">&#149; 권한 변경 신청</a></div>
+		<% }%>	
 		<%} %>
 	</div>
     <!--nav-->
