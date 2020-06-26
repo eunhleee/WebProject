@@ -55,12 +55,12 @@
 	</div>
 	<div align="center">
 		<form name="searchFrm" action="../alcinfo/SearchPage.jsp">
-			<table style="margin-top: 70px;">
+			<table style="margin-top: 60px;">
 				<tr>
 					<td>
 						<div>
-							<a href="../alcinfo/cards-gallery.jsp"><img src="../img/home.png"
-								width="80px" style="margin-right: 30px"></a>
+							<a href="../alcinfo/cards-gallery.jsp"><img src="../img/logo.jpg"
+								width="150px" style="margin-right: 30px"></a>
 						</div>
 					</td>
 					<td>
