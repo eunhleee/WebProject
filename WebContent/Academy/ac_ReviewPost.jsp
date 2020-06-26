@@ -191,7 +191,7 @@ function moveQnA(){
 		<tr>
 			<td>
 				<div style="padding:20px">
-						<img src="../AcademyImg/<%=bean.getImgname()%>" width="350" height="250">
+						<img src="../img/banner1.jpg" width="350" height="250">
 				</div>
 			</td>
 			<td  align="center" rowspan="2" >

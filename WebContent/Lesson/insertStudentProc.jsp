@@ -21,7 +21,7 @@
 		if(ebean.getName()==null){
 			msg="신청 권한이 없습니다.";
 		}
-		else if(mgr.getStudent(ebean,stuid)){
+		else if(!mgr.getStudent(ebean,stuid)){
 			msg="이미 신청된 과외입니다.";
 		}
 		else if(mgr.insertStudent(lebean, ebean)){
