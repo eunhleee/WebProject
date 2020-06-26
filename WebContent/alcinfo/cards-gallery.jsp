@@ -28,6 +28,25 @@
 </style>
 <html>
 <head>
+<<<<<<< HEAD
+<style>
+@font-face 
+{ font-family: 'Godo'; font-style: normal;
+ font-weight: 400;
+  src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoM.woff2') format('woff2'), 
+  url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoM.woff') format('woff'); }
+   @font-face {
+    font-family: 'Godo'; font-style: normal;
+     font-weight: 700; 
+     src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoB.woff2') format('woff2'),
+      url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoB.woff') format('woff'); } 
+      .godo * { font-family: 'Godo', sans-serif; }
+ body{
+ font-family:'Godo';
+ }
+</style>
+=======
+>>>>>>> branch 'master' of https://github.com/eunhleee/WebProject.git
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">

@@ -16,9 +16,10 @@
 	String stopurl="../"+t.substring(count+1);
 	
 	String stopid= request.getParameter("stopid").trim();
-	mgr.reportBoardcom(bean,stopurl);
-	response.sendRedirect("csCReport.jsp?stopid="+stopid+"&renum="+renum+"&conum="+conum+"&ccr_depth="+ccr_depth);
-	
+	mgr.reportBoardcom(bean,stopurl);	
 %>
-
+<script>
+alert("신고하셨습니다.");
+window.close();
+</script>
 

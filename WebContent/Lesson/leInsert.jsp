@@ -53,6 +53,7 @@
 <html>
 <head>
 <title>선생님 등록하기</title>
+<link href="../alcinfo/fontStyle.css" rel="stylesheet">
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="script.js"></script>
 </head>

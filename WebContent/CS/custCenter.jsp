@@ -12,6 +12,19 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>우리학원 어디?-고객센터</title>
 <style>
+@font-face { 
+font-family: 'Godo'; font-style: normal;
+font-weight: 400;
+src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoM.woff2') format('woff2'), 
+	url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoM.woff') format('woff'); }
+@font-face {
+	font-family: 'Godo'; font-style: normal;
+	font-weight: 700; 
+ 	src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoB.woff2') format('woff2'),
+url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoB.woff') format('woff'); } 
+ 	.godo * { font-family: 'Godo', sans-serif; }
+ body{
+ 	font-family:'Godo';}
 #insertMember{
 	float: right;
 	margin-right:350px;

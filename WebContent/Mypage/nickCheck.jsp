@@ -9,8 +9,11 @@
 	boolean ncresult = ncmgr.checkNickname1(ncnick, membernick);
 %>
 <html>
+
 <head>
 <title>닉네임 중복체크</title>
+<link href="../alcinfo/fontStyle.css" rel="stylesheet">
+
 </head>
 <body>
 <div align="center">

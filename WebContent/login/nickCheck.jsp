@@ -8,6 +8,7 @@
 	boolean ncresult = ncmgr.checkNickname(ncnick);
 %>
 <html>
+<link href="../alcinfo/fontStyle.css" rel="stylesheet">
 <head>
 <title>닉네임 중복체크</title>
 </head>

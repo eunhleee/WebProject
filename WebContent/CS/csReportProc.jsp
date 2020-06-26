@@ -17,7 +17,9 @@
 	int count=t.indexOf("/CS");
 	String stopurl="../"+t.substring(count+1);
 	mgr.reportBoard(bean,stopurl);
-	response.sendRedirect("csReport.jsp?stopid="+stopid+"&renum="+renum);
-
 %>
+<script>
+alert("신고하셨습니다.");
+window.close();
+</script>
 

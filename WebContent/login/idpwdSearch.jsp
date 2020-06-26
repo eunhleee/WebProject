@@ -16,6 +16,8 @@
 	}
 	
 </script>
+<link href="../alcinfo/fontStyle.css" rel="stylesheet">
+
 <link href="../login/idpwdstyle.css" rel="stylesheet" type="text/css">
 <div id="idpwdSearch" class="idpwdSearch">
 	<button onclick="closeidpwdSearch()" id="btnExit"><img src="../img/exit.png" width="25" height="25"></button>	

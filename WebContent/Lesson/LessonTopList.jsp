@@ -4,11 +4,12 @@
 <%@ page contentType="text/html; charset=utf-8"%>
 
 <jsp:useBean id="Lmgr" class="alcinfo.LessonMgr"></jsp:useBean>
+<link href="../alcinfo/fontStyle.css" rel="stylesheet">
+
 <%
 	request.setCharacterEncoding("utf-8");
 	String sort = request.getParameter("sort");
 %>
-
 
 
 <section class="gallery-block cards-gallery">

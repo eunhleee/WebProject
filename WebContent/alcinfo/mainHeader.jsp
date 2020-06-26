@@ -50,17 +50,17 @@
 	<div id="top" align="center">
 		<span> ※과도한 사교육은 올바른 교육이 아닙니다.&nbsp;&nbsp; <a
 			href="../CS/custCenter.jsp?cust_page=ccBestBoard"> 고객센터</a>
-		</span>
+		</span> 
 
 	</div>
 	<div align="center">
 		<form name="searchFrm" action="../alcinfo/SearchPage.jsp">
-			<table style="margin-top: 70px;">
+			<table style="margin-top: 60px;">
 				<tr>
 					<td>
 						<div>
-							<a href="../alcinfo/cards-gallery.jsp"><img src="../img/home.png"
-								width="80px" style="margin-right: 30px"></a>
+							<a href="../alcinfo/cards-gallery.jsp"><img src="../img/logo.jpg"
+								width="150px" style="margin-right: 30px"></a>
 						</div>
 					</td>
 					<td>
