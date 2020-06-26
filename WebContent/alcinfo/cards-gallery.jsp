@@ -6,12 +6,13 @@
 	pageEncoding="UTF-8"%>
 <jsp:useBean id="Amgr" class="alcinfo.AcademyMgr"></jsp:useBean>
 <jsp:useBean id="Lmgr" class="alcinfo.LessonMgr"></jsp:useBean>
-<jsp:setProperty property="*" name="mpbean"/>
+
 
 <!DOCTYPE html>
 
 <html>
 <head>
+<<<<<<< HEAD
 <style>
 @font-face 
 { font-family: 'Godo'; font-style: normal;
@@ -28,6 +29,8 @@
  font-family:'Godo';
  }
 </style>
+=======
+>>>>>>> branch 'master' of https://github.com/eunhleee/WebProject.git
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -37,6 +40,24 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css" />
+<style>
+
+@font-face 
+{ font-family: 'Godo'; font-style: normal;
+ font-weight: 400;
+  src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoM.woff2') format('woff2'), 
+  url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoM.woff') format('woff'); 
+  }
+  @font-face {
+    font-family: 'Godo'; font-style: normal;
+     font-weight: 700; 
+     src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoB.woff2') format('woff2'),
+      url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoB.woff') format('woff'); } 
+      .godo * { font-family: 'Godo', sans-serif; }
+ body{
+ font-family:'Godo';
+ }
+</style>
 <link rel="stylesheet" href="cards-gallery.css">
 </head>
 <body>
@@ -147,7 +168,7 @@
 				<%} %>
 			</div>
 			<div>
-				<a href="../Lesson/LessonMain.jsp">과외 더 알아보기</a>
+				<a href="../Lesson/LessonMain.jsp?pageValue=top">과외 더 알아보기</a>
 			</div>
 		</div>
 	</section>
