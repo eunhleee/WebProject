@@ -7,7 +7,7 @@
 <jsp:useBean id="Amgr" class="alcinfo.AcademyMgr"></jsp:useBean>
 <jsp:useBean id="Lmgr" class="alcinfo.LessonMgr"></jsp:useBean>
 <jsp:useBean id="Smgr" class="alcinfo.StudentMgr"></jsp:useBean>
-<%
+<% 
 		request.setCharacterEncoding("utf-8");
 		String keyWord=request.getParameter("keyWord");
 		int maxPage;
