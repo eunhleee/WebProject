@@ -110,6 +110,10 @@ function goErr(){
 
 }
 
+function deleteStudent() {
+	location.href = "stDelete.jsp?num=<%=num%>";
+}
+
 </script>
 <style>
 @font-face { 

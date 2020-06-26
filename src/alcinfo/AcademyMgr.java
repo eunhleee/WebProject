@@ -15,7 +15,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 public class AcademyMgr {
 	private DBConnectionMgr pool;
-	private static final String UPLOAD = "C:/WerPro4/WebProject/WebContent/authority/";
+	private static final String UPLOAD = "C:/Users/admin/git/WebProject/WebContent/authority/";
 	private static final String ENCTYPE = "UTF-8";
 	private static final int MAXSIZE = 10*1024*1024;
 
@@ -234,8 +234,8 @@ public class AcademyMgr {
 								new MultipartRequest(req, UPLOAD, MAXSIZE, ENCTYPE,
 										new DefaultFileRenamePolicy());
 						con = pool.getConnection();
-						sql = "insert acapply(aca_num,aca_name,aca_identity,aca_business,aca_id)"+
-								  "values(?,?,?,?,?)";
+						sql = "insert acapply(aca_num,aca_name,aca_identity,aca_business,aca_id,aca_state)"+
+								  "values(?,?,?,?,?,'진행중')";
 						pstmt = con.prepareStatement(sql);
 						pstmt.setString(1, multi.getParameter("num"));
 						pstmt.setString(2,multi.getParameter("name"));

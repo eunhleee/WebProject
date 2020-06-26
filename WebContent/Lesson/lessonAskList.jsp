@@ -209,7 +209,7 @@ a:hover {
 						if(grade!=0&&(loginid==null||mpoint==null||mpointnumber<todaynumber)){
 					%>
 					<tr>
-						<td align="center" colspan="5" height="380" style="background-color:gray;  opacity: 0.5;">
+						<td align="center" colspan="5" height="380" width="1000" style="background-color:gray;  opacity: 0.5;">
 							<p style="color:white;">포인트를 구입하시면 <%=totalRecord%> 개의 후기글을 보실 수 있습니다.</p><br>
 							<input type="button" value="포인트 구입하러 가기" onclick="moveToBuyPoint();">
 						</td>

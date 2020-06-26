@@ -345,7 +345,7 @@ select{
 	<%}///-if1%>
 		<!-- 페이징 및 블럭 End -->
 		</td>
-		<td align="right" colspan="5">
+		<td align="right">
 			<a href="javascript:list()" style="color:black;">[처음으로]</a>
 		</td>
 		</tr>

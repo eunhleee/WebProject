@@ -42,22 +42,31 @@
 <head>
 <title>학생 등록하기</title>
 <link href="style.css" rel="stylesheet" type="text/css">
-<link href="../alcinfo/fontStyle.css" rel="stylesheet">
 <script src="script.js"></script>
+<style>
+.totalFrame{
+	background-color: #FAF8EB;
+	margin-top:-40px;
+	padding:40px 0px;
+}
+#inputdiv{
+	background-color:white;
+}
+</style>
 </head>
 <body>
-
 <%@ include file="../alcinfo/headerSearch.jsp"%>
 <br>
 <br>
+<div class="totalFrame">
 	<form name="stForm" method="post" action="stInsertProc.jsp">
 		<table width="70%" align="center">
 	<tr> 
 	<td align="center">
-		<table width="100%" style="font-size: 20; background: rgb(250, 248, 235);"> 
+		<table width="100%" style="font-size: 20; background: white; border:1px solid gray;"> 
 		<tr> 
 		<td width="25%" align="center">
-		<img src="../StudentImg/<%=mBean.getImgname() %>" width="100%" height="250"></td>
+		<img src="../StudentImg/<%=mBean.getImgname() %>" width="80%" height="250"></td>
 		</td>
 		<td width="60%" height="100%">
 			<table width="100%">
@@ -75,7 +84,10 @@
 				</tr>
 				<tr height="35">
 					<td width="30%">원하는과목</td>
-					<td width="70%"><input name="stclass" type="text" placeholder="원하는과목을 입력하시오." style="width:300; height:30;"></td>
+					<td width="70%">
+					<div id="inputdiv" style="width:310px;">
+					<input name="stclass" type="text" placeholder="원하는과목을 입력하시오." style="width:300; height:30;">
+					</div></td>
 				</tr>
 				<tr height="40">
 					<td width="30%">재학중인 학교 / 학년</td>
@@ -83,7 +95,10 @@
 				</tr>
 				<tr height="40">
 					<td width="30%">비고</td>
-					<td width="70%"><input name="stetc" type="text" placeholder="비고란을 입력하시오." style="width:300; height:30;"></td>
+					<td width="70%">
+					<div id="inputdiv" style="width:310px;">
+					<input name="stetc" type="text" placeholder="비고란을 입력하시오." style="width:300; height:30;">
+					</div></td>
 				</tr>
 				
 			</table>
@@ -106,6 +121,8 @@
 <input type="hidden" name="id" value="<%=id%>">
 
 </form>
-</body>
 <%@ include file="../alcinfo/footer.jsp" %>
+</div>
+</body>
+
 </html>

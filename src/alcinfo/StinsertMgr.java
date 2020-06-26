@@ -129,9 +129,9 @@ public class StinsertMgr {
 		Vector<StinsertBean> vlist=new Vector<StinsertBean>();
 		try {
 			con = pool.getConnection();
-			sql = "SELECT mem.name,stin.stclass,stin.state,stin.date " + 
+			sql = "SELECT mem.name,mem.phone,stin.stclass,stin.state,stin.date " + 
 					"FROM stinsert stin,student st,member mem " + 
-					"WHERE stin.stid=st.id AND st.id=mem.id and stin.stid=?";
+					"WHERE stin.stid=st.id AND st.id=mem.id and stin.teaid=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 
@@ -140,6 +140,7 @@ public class StinsertMgr {
 				StinsertBean bean=new StinsertBean();
 				bean.setStname(rs.getString("mem.name"));
 				bean.setStclass(rs.getString("stin.stclass"));
+				bean.setTeaphone(rs.getString("mem.phone"));
 				bean.setState(rs.getString("stin.state"));
 				bean.setDate(rs.getString("stin.date"));
 				

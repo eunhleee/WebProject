@@ -224,7 +224,7 @@ input.btns:hover {
 	</tr>
 	<tr>
 	<td width="80">아이디</td>
-	<td width="120"><input id="inputdiv" type="text" name="ac_id" value="<%=session.getAttribute("idKey")%>" readonly="readonly"></td>
+	<td width="120"><input id="inputdiv" type="text" name="aca_id" value="<%=session.getAttribute("idKey")%>" readonly="readonly"></td>
 	</tr>	
 	<tr>
 		<td>학원검색</td>

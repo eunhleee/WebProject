@@ -203,10 +203,10 @@ margin-top:50px;
 				<td colspan="2">
 				<div class="wrapper" >			
 				<div>
-				<img src="../authority/<%=mbean.getAca_business()%>" style="margin-bottom:10px;width:250px; height:200px; "><br>
+				<img src="../authority/<%=mbean.getAca_identity()%>" style="margin-bottom:10px;width:250px; height:200px; "><br>
 				</div>
 				<div>
-				<img src="../authority/<%=mbean.getAca_identity()%>" style="margin-bottom:10px;width:250px; height:200px; "><br>
+				<img src="../authority/<%=mbean.getAca_business()%>" style="margin-bottom:10px;width:250px; height:200px; "><br>
 				</div>
 				</div>
 				</td> 

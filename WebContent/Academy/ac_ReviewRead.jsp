@@ -272,7 +272,7 @@ a:hover {
 										<div id="inputdiv" style="width:500px; display:flex; backgound-color:white;">
 										<input name="comment" size="50" placeholder="댓글을 남겨보세요" style="flex:3;"> 
 										<input type="button" value="등록" onclick="rInsert<%=i%>()" style="flex:1; margin-right:5px;">
-										<input type="button" value="취소" onclick="offscReply<%=i%>()" style="flex:1;">
+										<input type="button" value="취소" onclick="offacrReply<%=i%>()" style="flex:1;">
 										</div>
 										</td>
 									</tr>

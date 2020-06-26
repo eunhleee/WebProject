@@ -184,6 +184,7 @@ select{
 			<tr id="list" align="center">
 			<td><%=bean.getStname()%></td>
 			<td><%=bean.getStclass()%></td>
+			<td><%=bean.getTeaphone()%></td>
 			<td><%=bean.getState()%></td>
 			<td><%=bean.getDate()%></td>
 			</tr>
