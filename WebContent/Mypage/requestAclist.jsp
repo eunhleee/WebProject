@@ -54,7 +54,7 @@ url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoB.woff') format('w
  	font-family:'Godo';}
 .tablelist
 {
-	border:10px solid #CEF279;
+	border:10px solid #36ada9;
 	padding-left:50px;
 	padding-right:50px;
 	margin-top:10px;
@@ -74,7 +74,7 @@ display:grid;
 #listtable{
 	padding:15px; 
 
-	border:5px solid #CEF279;
+	border:5px solid #36ada9;
 	border-radius:10px;
 
 }
@@ -143,7 +143,7 @@ a:hover {
 	font-weight: bold;	
 }
 .nulltable{
-border:10px solid #CEF279;
+border:10px solid #36ada9;
 border-radius:10px;
 padding-bottom:50px;
 padding-top:50px;
@@ -179,7 +179,7 @@ margin-top:50px;
 	int listStze = mvlist.size();
 	if(mvlist.isEmpty()){
 		%>
-		<table width="80%" class="nulltable">
+		<table width="70%" class="nulltable">
 			<tr>
 				<td align="center" colspan="2">
 				 신청된 것이 없습니다.

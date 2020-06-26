@@ -9,8 +9,10 @@
 <jsp:setProperty property="*" name="mpbean"/>
 
 <!DOCTYPE html>
-<style>
 
+<html>
+<head>
+<style>
 @font-face 
 { font-family: 'Godo'; font-style: normal;
  font-weight: 400;
@@ -26,8 +28,6 @@
  font-family:'Godo';
  }
 </style>
-<html>
-<head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
